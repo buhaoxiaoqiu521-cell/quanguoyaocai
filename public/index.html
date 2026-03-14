@@ -944,6 +944,11 @@
         <div class="market-tabs" id="marketTabs"></div>
         <div class="market-summary" id="marketSummary"></div>
         <div class="entry-list" id="marketList"></div>
+        <div class="pager">
+          <button class="pager-button" id="marketPrev">上一页</button>
+          <div class="pager-info" id="marketPageInfo">第 1 页 / 共 1 页</div>
+          <button class="pager-button" id="marketNext">下一页</button>
+        </div>
       </div>
     </section>
 
@@ -957,6 +962,11 @@
       <div class="section-body">
         <div class="hotspot-filters" id="hotspotFilters" style="margin-bottom:16px;"></div>
         <div class="entry-list" id="hotspotList"></div>
+        <div class="pager">
+          <button class="pager-button" id="hotspotPrev">上一页</button>
+          <div class="pager-info" id="hotspotPageInfo">第 1 页 / 共 1 页</div>
+          <button class="pager-button" id="hotspotNext">下一页</button>
+        </div>
       </div>
     </section>
 
@@ -996,6 +1006,10 @@
       dashboard: null,
       originPage: 1,
       originPageSize: 10,
+      marketPage: 1,
+      marketPageSize: 10,
+      hotspotPage: 1,
+      hotspotPageSize: 10,
       searchQuery: "",
       searchDate: "all",
       searchSource: "all",
@@ -1220,6 +1234,7 @@
       document.querySelectorAll(".market-tab").forEach((button) => {
         button.addEventListener("click", () => {
           state.currentMarket = button.dataset.market;
+          state.marketPage = 1;
           renderMarketSection(state.dashboard);
         });
       });
@@ -1231,11 +1246,22 @@
       if (!currentGroup || !currentItems.length) {
         summary.textContent = `${state.currentMarket || "该市场"}市场当前还没有录入到真实记录。`;
         list.innerHTML = `<div class="empty-state">${escapeHtml(String(dashboard.markets.empty_text || "").replace(/天天行情/g, "市场行情"))}</div>`;
+        document.getElementById("marketPageInfo").textContent = "第 1 页 / 共 1 页";
+        document.getElementById("marketPrev").disabled = true;
+        document.getElementById("marketNext").disabled = true;
         return;
       }
 
+      const totalPages = Math.max(1, Math.ceil(currentItems.length / state.marketPageSize));
+      if (state.marketPage > totalPages) state.marketPage = totalPages;
+      const start = (state.marketPage - 1) * state.marketPageSize;
+      const pageItems = currentItems.slice(start, start + state.marketPageSize);
+
       summary.innerHTML = `${escapeHtml(currentGroup.name)}市场当前共 ${escapeHtml(currentItems.length)} 条记录，最新日期为 ${escapeHtml(latestDate(currentItems))}。${uniqueSources(currentItems).length ? ` 来源结构：${escapeHtml(uniqueSources(currentItems).join(" / "))}` : ""}`;
-      list.innerHTML = currentItems.map((item) => renderEntryCard(item, "market")).join("");
+      list.innerHTML = pageItems.map((item) => renderEntryCard(item, "market")).join("");
+      document.getElementById("marketPageInfo").textContent = `第 ${state.marketPage} 页 / 共 ${totalPages} 页`;
+      document.getElementById("marketPrev").disabled = state.marketPage === 1;
+      document.getElementById("marketNext").disabled = state.marketPage === totalPages;
     }
 
     function renderHotspotSection(dashboard) {
@@ -1248,13 +1274,22 @@
         state.hotspotKind,
         (value) => {
           state.hotspotKind = value;
+          state.hotspotPage = 1;
           renderHotspotSection(state.dashboard);
         }
       );
 
+      const totalPages = Math.max(1, Math.ceil(items.length / state.hotspotPageSize));
+      if (state.hotspotPage > totalPages) state.hotspotPage = totalPages;
+      const start = (state.hotspotPage - 1) * state.hotspotPageSize;
+      const pageItems = items.slice(start, start + state.hotspotPageSize);
+
       document.getElementById("hotspotList").innerHTML = items.length
-        ? items.map((item) => renderEntryCard(item, "hotspot")).join("")
+        ? pageItems.map((item) => renderEntryCard(item, "hotspot")).join("")
         : `<div class="empty-state">${escapeHtml(dashboard.hotspots.empty_text)}</div>`;
+      document.getElementById("hotspotPageInfo").textContent = `第 ${state.hotspotPage} 页 / 共 ${totalPages} 页`;
+      document.getElementById("hotspotPrev").disabled = state.hotspotPage === 1;
+      document.getElementById("hotspotNext").disabled = state.hotspotPage === totalPages || items.length === 0;
     }
 
     function renderSearchSection(dashboard) {
@@ -1379,6 +1414,39 @@
           if (state.originPage < totalPages) {
             state.originPage += 1;
             renderOriginSection(state.dashboard);
+          }
+        });
+
+        document.getElementById("marketPrev").addEventListener("click", () => {
+          if (state.marketPage > 1) {
+            state.marketPage -= 1;
+            renderMarketSection(state.dashboard);
+          }
+        });
+
+        document.getElementById("marketNext").addEventListener("click", () => {
+          const groups = state.dashboard.markets.groups || [];
+          const currentGroup = groups.find((group) => group.name === state.currentMarket) || groups[0] || { items: [] };
+          const totalPages = Math.max(1, Math.ceil((currentGroup.items || []).length / state.marketPageSize));
+          if (state.marketPage < totalPages) {
+            state.marketPage += 1;
+            renderMarketSection(state.dashboard);
+          }
+        });
+
+        document.getElementById("hotspotPrev").addEventListener("click", () => {
+          if (state.hotspotPage > 1) {
+            state.hotspotPage -= 1;
+            renderHotspotSection(state.dashboard);
+          }
+        });
+
+        document.getElementById("hotspotNext").addEventListener("click", () => {
+          const items = (state.dashboard.hotspots.items || []).filter((item) => state.hotspotKind === "all" || item.kind === state.hotspotKind);
+          const totalPages = Math.max(1, Math.ceil(items.length / state.hotspotPageSize));
+          if (state.hotspotPage < totalPages) {
+            state.hotspotPage += 1;
+            renderHotspotSection(state.dashboard);
           }
         });
       } catch (error) {
