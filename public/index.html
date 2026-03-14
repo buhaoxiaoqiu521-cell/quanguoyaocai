@@ -160,9 +160,7 @@
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 0;
+      display: block;
       background:
         radial-gradient(circle at 18% 12%, rgba(229, 197, 142, 0.14), transparent 24%),
         linear-gradient(135deg, rgba(18, 42, 33, 0.98), rgba(14, 30, 24, 0.98));
@@ -170,17 +168,9 @@
     }
 
     .hero-copy {
-      padding: 38px 36px 34px;
+      padding: 40px 42px 38px;
       color: #f6eddb;
-      position: relative;
-    }
-
-    .hero-copy::after {
-      content: "";
-      position: absolute;
-      inset: 26px 24px 26px auto;
-      width: 1px;
-      background: linear-gradient(180deg, rgba(229, 197, 142, 0.16), rgba(229, 197, 142, 0));
+      max-width: 980px;
     }
 
     .eyebrow {
@@ -204,7 +194,7 @@
 
     .hero-title {
       margin: 24px 0 16px;
-      max-width: 760px;
+      max-width: 1040px;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
       font-size: clamp(38px, 6vw, 72px);
       line-height: 1.08;
@@ -212,7 +202,7 @@
     }
 
     .hero-lead {
-      max-width: 760px;
+      max-width: 920px;
       margin: 0;
       font-size: 18px;
       line-height: 1.95;
@@ -254,6 +244,12 @@
       border-color: transparent;
     }
 
+    .button.trace {
+      color: #fff3d6;
+      border-color: rgba(229, 197, 142, 0.34);
+      background: rgba(184, 133, 56, 0.16);
+    }
+
     .source-strip {
       display: flex;
       flex-wrap: wrap;
@@ -278,118 +274,6 @@
       color: #eadbbd;
       border-color: rgba(247, 240, 223, 0.12);
       background: rgba(247, 240, 223, 0.05);
-    }
-
-    .hero-side {
-      padding: 34px 32px;
-      background:
-        radial-gradient(circle at 82% 18%, rgba(229, 197, 142, 0.18), transparent 24%),
-        linear-gradient(180deg, rgba(247, 240, 223, 0.06), rgba(247, 240, 223, 0.03));
-      color: #f7efdf;
-    }
-
-    .side-label {
-      color: rgba(247, 240, 223, 0.72);
-      font-size: 13px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .side-big {
-      margin-top: 12px;
-      font-size: clamp(34px, 5vw, 52px);
-      line-height: 1;
-      font-weight: 700;
-      color: #f7dfaf;
-      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-    }
-
-    .side-sub {
-      margin-top: 10px;
-      color: rgba(247, 240, 223, 0.72);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .mini-card {
-      padding: 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(247, 240, 223, 0.1);
-      background: rgba(247, 240, 223, 0.05);
-    }
-
-    .mini-label {
-      font-size: 13px;
-      color: rgba(247, 240, 223, 0.72);
-    }
-
-    .mini-value {
-      margin-top: 8px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #fff2d1;
-    }
-
-    .signal-block {
-      margin-top: 22px;
-      padding: 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(247, 240, 223, 0.1);
-      background: rgba(8, 18, 14, 0.14);
-    }
-
-    .signal-title {
-      margin: 0 0 12px;
-      font-size: 14px;
-      color: rgba(247, 240, 223, 0.72);
-    }
-
-    .signal-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .signal-row {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-    }
-
-    .signal-index {
-      width: 28px;
-      height: 28px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: rgba(247, 240, 223, 0.08);
-      color: #f3dfb1;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .signal-name {
-      min-width: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: #f7efdf;
-    }
-
-    .signal-count {
-      color: rgba(247, 240, 223, 0.7);
-      font-variant-numeric: tabular-nums;
     }
 
     .quick-nav {
@@ -771,14 +655,6 @@
     }
 
     @media (max-width: 1024px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy::after {
-        display: none;
-      }
-
       .control-grid {
         grid-template-columns: 1fr;
       }
@@ -801,7 +677,7 @@
       }
 
       .hero-copy,
-      .hero-side {
+      .hero-copy {
         padding: 28px 20px 24px;
       }
 
@@ -872,10 +748,6 @@
         font-size: 13px;
       }
 
-      .mini-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
       .quick-nav {
         top: 8px;
       }
@@ -907,19 +779,10 @@
           <a class="button primary" href="#originSection">查看产地行情</a>
           <a class="button" href="#marketSection">查看天天行情</a>
           <a class="button" href="#hotspotSection">查看行业热点</a>
+          <a class="button trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
         </div>
         <div class="source-strip" id="sourceStrip"></div>
       </div>
-      <aside class="hero-side">
-        <div class="side-label">Latest Snapshot</div>
-        <div class="side-big" id="latestDateBig">--</div>
-        <div class="side-sub" id="latestDateSub">最新整理日期</div>
-        <div class="mini-grid" id="snapshotGrid"></div>
-        <div class="signal-block">
-          <p class="signal-title">当日高频品种</p>
-          <ul class="signal-list" id="topHerbList"></ul>
-        </div>
-      </aside>
     </section>
 
     <nav class="quick-nav">
@@ -1088,37 +951,10 @@
       document.getElementById("heroLead").textContent = dashboard.hero.lead;
       document.getElementById("footerLeft").textContent = dashboard.footer.left;
       document.getElementById("footerRight").textContent = dashboard.footer.right;
-      document.getElementById("latestDateBig").textContent = dashboard.snapshot.latest_date || "--";
-      document.getElementById("latestDateSub").textContent = dashboard.snapshot.latest_count
-        ? `最新整理日共 ${dashboard.snapshot.latest_count} 条记录`
-        : "当前还没有最新快照";
 
       document.getElementById("sourceStrip").innerHTML = (dashboard.hero.source_strip || [])
         .map((item) => `<span class="source-chip">${escapeHtml(item)}</span>`)
         .join("");
-
-      document.getElementById("snapshotGrid").innerHTML = [
-        { label: "全部记录", value: dashboard.meta.total_records },
-        { label: "产地行情", value: dashboard.meta.origin_records },
-        { label: "市场行情", value: dashboard.meta.market_records },
-        { label: "来源站点", value: dashboard.meta.source_count },
-      ].map((item) => `
-        <div class="mini-card">
-          <div class="mini-label">${escapeHtml(item.label)}</div>
-          <div class="mini-value">${escapeHtml(item.value)}</div>
-        </div>
-      `).join("");
-
-      const topHerbs = dashboard.snapshot.top_herbs || [];
-      document.getElementById("topHerbList").innerHTML = topHerbs.length
-        ? topHerbs.map((item, index) => `
-          <li class="signal-row">
-            <span class="signal-index">${index + 1}</span>
-            <span class="signal-name">${escapeHtml(item.name)}</span>
-            <span class="signal-count">${escapeHtml(item.count)} 条</span>
-          </li>
-        `).join("")
-        : `<li class="signal-row"><span class="signal-name">当前还没有可展示的高频品种。</span></li>`;
     }
 
     function renderChipGroup(rootId, items, activeValue, onClick) {
