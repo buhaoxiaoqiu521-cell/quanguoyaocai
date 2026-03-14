@@ -301,6 +301,13 @@
       margin-bottom: 16px;
     }
 
+    .global-search-filters {
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      margin-bottom: 16px;
+    }
+
     .tag.section-tag {
       color: #fff8eb;
       background: linear-gradient(135deg, var(--green), #47795b);
@@ -857,8 +864,9 @@
 
     <nav class="quick-nav">
       <a class="nav-pill" href="#originSection">1. 产地行情</a>
-      <a class="nav-pill" href="#marketSection">2. 天天行情</a>
+      <a class="nav-pill" href="#marketSection">2. 市场行情</a>
       <a class="nav-pill" href="#hotspotSection">3. 行业热点</a>
+      <a class="nav-pill" href="#searchSection">4. 全站检索</a>
     </nav>
 
     <section class="section panel" id="originSection">
@@ -869,9 +877,6 @@
         <div class="count-chip" id="originCountChip">0 条</div>
       </div>
       <div class="section-body">
-        <div class="filter-group" id="originDateFilters" style="justify-content:flex-start; margin-bottom: 16px;"></div>
-        <div class="filter-group" id="originSourceFilters" style="justify-content:flex-start; margin-bottom: 16px;"></div>
-        <div class="meta-row" id="originMeta"></div>
         <div class="entry-list" id="originList"></div>
         <div class="pager">
           <button class="pager-button" id="originPrev">上一页</button>
@@ -884,7 +889,7 @@
     <section class="section panel" id="marketSection">
       <div class="section-head">
         <div>
-          <h2 class="section-title">天天行情</h2>
+          <h2 class="section-title">市场行情</h2>
         </div>
         <div class="count-chip" id="marketCountChip">0 条</div>
       </div>
@@ -919,9 +924,13 @@
         <div class="global-search-controls">
           <label class="search-box global-search-box">
             <span>检索</span>
-            <input class="search-input" id="globalSearch" type="search" placeholder="搜索产地行情、天天行情、行业热点">
+            <input class="search-input" id="globalSearch" type="search" placeholder="搜索产地行情、市场行情、行业热点">
           </label>
           <button class="button search-submit" id="globalSearchSubmit" type="button">搜索</button>
+        </div>
+        <div class="global-search-filters">
+          <div class="filter-group" id="searchDateFilters"></div>
+          <div class="filter-group" id="searchSourceFilters"></div>
         </div>
         <div class="meta-row global-search-meta" id="searchMeta"></div>
         <div class="entry-list" id="searchList"></div>
@@ -930,7 +939,7 @@
 
     <footer class="footer">
       <div id="footerLeft">数据文件：--</div>
-      <div id="footerRight">站点结构已兼容后续继续补药通网天天行情与行业热点。</div>
+      <div id="footerRight">站点结构已兼容后续继续补药通网市场行情与行业热点。</div>
       <div class="footer-traffic" id="footerTraffic">本站总访问量 -- 次</div>
     </footer>
   </main>
@@ -941,8 +950,8 @@
       originPage: 1,
       originPageSize: 10,
       searchQuery: "",
-      originDate: "all",
-      originSource: "all",
+      searchDate: "all",
+      searchSource: "all",
       currentMarket: "",
       hotspotKind: "all",
     };
@@ -1030,7 +1039,7 @@
     function renderHero(dashboard) {
       document.getElementById("statusPill").textContent = dashboard.status;
       document.getElementById("footerLeft").textContent = dashboard.footer.left;
-      document.getElementById("footerRight").textContent = dashboard.footer.right;
+      document.getElementById("footerRight").textContent = String(dashboard.footer.right || "").replace(/天天行情/g, "市场行情");
     }
 
     function renderChipGroup(rootId, items, activeValue, onClick) {
@@ -1053,11 +1062,7 @@
 
     function filteredOriginItems() {
       if (!state.dashboard) return [];
-      return (state.dashboard.origin.items || []).filter((item) => {
-        const dateMatch = state.originDate === "all" || item.date === state.originDate;
-        const sourceMatch = state.originSource === "all" || item.source === state.originSource;
-        return dateMatch && sourceMatch;
-      });
+      return state.dashboard.origin.items || [];
     }
 
     function latestDate(items) {
@@ -1075,11 +1080,15 @@
     function collectSearchResults() {
       if (!state.dashboard) return [];
       const query = state.searchQuery;
-      if (!query.trim()) return [];
+      const hasFilter = state.searchDate !== "all" || state.searchSource !== "all";
+      if (!query.trim() && !hasFilter) return [];
 
       const results = [];
       const pushMatches = (items, type, sectionLabel) => {
         (items || []).forEach((item) => {
+          const dateMatch = state.searchDate === "all" || item.date === state.searchDate;
+          const sourceMatch = state.searchSource === "all" || item.source === state.searchSource;
+          if (!dateMatch || !sourceMatch) return;
           const matched = matchesSearchQuery(query, [
             item.title,
             item.herb,
@@ -1092,7 +1101,8 @@
             item.tag,
             item.price,
           ]);
-          if (!matched) return;
+          if (!query.trim() && !hasFilter) return;
+          if (query.trim() && !matched) return;
           results.push({
             ...item,
             _searchType: type,
@@ -1103,7 +1113,7 @@
 
       pushMatches(state.dashboard.origin.items, "origin", "产地行情");
       (state.dashboard.markets.groups || []).forEach((group) => {
-        pushMatches(group.items, "market", "天天行情");
+        pushMatches(group.items, "market", "市场行情");
       });
       pushMatches(state.dashboard.hotspots.items, "hotspot", "行业热点");
 
@@ -1123,34 +1133,7 @@
       const start = (state.originPage - 1) * state.originPageSize;
       const pageItems = allItems.slice(start, start + state.originPageSize);
 
-      renderChipGroup(
-        "originDateFilters",
-        [{ value: "all", label: "全部日期" }, ...(dashboard.origin.date_options || []).map((value) => ({ value, label: value }))],
-        state.originDate,
-        (value) => {
-          state.originDate = value;
-          state.originPage = 1;
-          renderOriginSection(state.dashboard);
-        }
-      );
-
-      renderChipGroup(
-        "originSourceFilters",
-        [{ value: "all", label: "全部来源" }, ...(dashboard.origin.source_options || []).map((value) => ({ value, label: value }))],
-        state.originSource,
-        (value) => {
-          state.originSource = value;
-          state.originPage = 1;
-          renderOriginSection(state.dashboard);
-        }
-      );
-
       document.getElementById("originCountChip").textContent = `${allItems.length} 条`;
-      document.getElementById("originMeta").innerHTML = [
-        `<span class="metric-chip active">总产地记录 ${escapeHtml(dashboard.origin.total)} 条</span>`,
-        `<span class="metric-chip">最新日期 ${escapeHtml(dashboard.origin.latest_date || "--")}</span>`,
-        `<span class="metric-chip">本页显示 ${escapeHtml(pageItems.length)} 条</span>`,
-      ].join("");
 
       const root = document.getElementById("originList");
       root.innerHTML = pageItems.length
@@ -1200,7 +1183,7 @@
 
       if (!currentGroup || !currentItems.length) {
         summary.textContent = `${state.currentMarket || "该市场"}市场当前还没有录入到真实记录。`;
-        list.innerHTML = `<div class="empty-state">${escapeHtml(dashboard.markets.empty_text)}</div>`;
+        list.innerHTML = `<div class="empty-state">${escapeHtml(String(dashboard.markets.empty_text || "").replace(/天天行情/g, "市场行情"))}</div>`;
         return;
       }
 
@@ -1233,29 +1216,56 @@
       const root = document.getElementById("searchList");
       const meta = document.getElementById("searchMeta");
       const countChip = document.getElementById("searchCountChip");
+      const allSearchItems = [
+        ...(dashboard.origin.items || []),
+        ...((dashboard.markets.groups || []).flatMap((group) => group.items || [])),
+        ...(dashboard.hotspots.items || []),
+      ];
+      const searchDates = [...new Set(allSearchItems.map((item) => item.date).filter(Boolean))].sort().reverse();
+      const searchSources = [...new Set(allSearchItems.map((item) => item.source).filter(Boolean))].sort();
 
-      if (!query) {
+      renderChipGroup(
+        "searchDateFilters",
+        [{ value: "all", label: "全部日期" }, ...searchDates.map((value) => ({ value, label: value }))],
+        state.searchDate,
+        (value) => {
+          state.searchDate = value;
+          renderSearchSection(state.dashboard);
+        }
+      );
+
+      renderChipGroup(
+        "searchSourceFilters",
+        [{ value: "all", label: "全部来源" }, ...searchSources.map((value) => ({ value, label: value }))],
+        state.searchSource,
+        (value) => {
+          state.searchSource = value;
+          renderSearchSection(state.dashboard);
+        }
+      );
+
+      if (!query && state.searchDate === "all" && state.searchSource === "all") {
         countChip.textContent = "未搜索";
         meta.innerHTML = "";
-        root.innerHTML = `<div class="empty-state">输入关键词后，可在这里集中查看产地行情、天天行情和行业热点的匹配结果。</div>`;
+        root.innerHTML = `<div class="empty-state">输入关键词后，可在这里集中查看产地行情、市场行情和行业热点的匹配结果；也可以先按日期和来源筛选。</div>`;
         return;
       }
 
       const originCount = results.filter((item) => item._searchSection === "产地行情").length;
-      const marketCount = results.filter((item) => item._searchSection === "天天行情").length;
+      const marketCount = results.filter((item) => item._searchSection === "市场行情").length;
       const hotspotCount = results.filter((item) => item._searchSection === "行业热点").length;
 
       countChip.textContent = `${results.length} 条`;
       meta.innerHTML = [
-        `<span class="metric-chip active">关键词：${escapeHtml(query)}</span>`,
+        query ? `<span class="metric-chip active">关键词：${escapeHtml(query)}</span>` : `<span class="metric-chip active">按筛选条件查看</span>`,
         `<span class="metric-chip">产地行情 ${originCount} 条</span>`,
-        `<span class="metric-chip">天天行情 ${marketCount} 条</span>`,
+        `<span class="metric-chip">市场行情 ${marketCount} 条</span>`,
         `<span class="metric-chip">行业热点 ${hotspotCount} 条</span>`,
-      ].join("");
+      ].filter(Boolean).join("");
 
       root.innerHTML = results.length
         ? results.map((item) => renderEntryCard(item, item._searchType, { sectionLabel: item._searchSection })).join("")
-        : `<div class="empty-state">没有找到与“${escapeHtml(query)}”相关的内容。</div>`;
+        : `<div class="empty-state">没有找到符合当前检索条件的内容。</div>`;
     }
 
     function renderFailure(message) {
