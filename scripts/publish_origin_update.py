@@ -40,23 +40,32 @@ def main() -> None:
     parser.add_argument("--no-push", action="store_true", help="只提交不推送")
     args = parser.parse_args()
 
-    updater = root / "scripts" / "update_from_openclaw.py"
+    import_script = root / "scripts" / "import_openclaw_origin.py"
+    build_script = root / "scripts" / "build_dashboard_data.py"
     origin_file = "content/openclaw_origin.json"
     tracked_files = [origin_file, "public/data/dashboard.json"]
 
-    update_cmd = [
+    import_cmd = [
         sys.executable,
-        str(updater),
+        str(import_script),
         "--workspace",
         args.workspace,
+        "--output",
+        str(root / origin_file),
     ]
     if args.input:
-        update_cmd.extend(["--input", args.input])
-    run(update_cmd, cwd=root)
+        import_cmd.extend(["--input", args.input])
+    run(import_cmd, cwd=root)
 
     if not has_relevant_changes(root, [origin_file]):
         print("No origin changes found. Nothing to publish.")
         return
+
+    build_cmd = [
+        sys.executable,
+        str(build_script),
+    ]
+    run(build_cmd, cwd=root)
 
     stage_and_publish(
         root=root,
