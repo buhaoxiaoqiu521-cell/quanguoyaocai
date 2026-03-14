@@ -267,6 +267,7 @@
       position: sticky;
       top: 14px;
       z-index: 4;
+      justify-content: center;
     }
 
     .nav-pill {
@@ -296,7 +297,7 @@
 
     .section-head {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 18px;
       padding: 26px 28px 20px;
@@ -308,14 +309,6 @@
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
       font-size: 30px;
       line-height: 1.2;
-    }
-
-    .section-sub {
-      margin: 10px 0 0;
-      color: var(--ink-soft);
-      font-size: 15px;
-      line-height: 1.85;
-      max-width: 780px;
     }
 
     .count-chip {
@@ -633,6 +626,14 @@
       font-size: 13px;
     }
 
+    .footer-traffic {
+      width: 100%;
+      text-align: center;
+      color: rgba(244, 234, 214, 0.88);
+      font-size: 15px;
+      letter-spacing: 0.02em;
+    }
+
     .muted {
       color: var(--ink-soft);
     }
@@ -778,7 +779,6 @@
       <div class="section-head">
         <div>
           <h2 class="section-title">产地行情</h2>
-          <p class="section-sub">完整读取 Excel 里市场字段为“产地”的记录。支持按关键词检索、按日期和来源筛选，并分页浏览全部条目。</p>
         </div>
         <div class="count-chip" id="originCountChip">0 条</div>
       </div>
@@ -805,7 +805,6 @@
       <div class="section-head">
         <div>
           <h2 class="section-title">天天行情</h2>
-          <p class="section-sub">页面结构已经按药通网天天行情的维护方式预留。当前优先看亳州、安国、玉林，同时兼容补充市场数据继续纳入。</p>
         </div>
         <div class="count-chip" id="marketCountChip">0 / 3</div>
       </div>
@@ -821,7 +820,6 @@
       <div class="section-head">
         <div>
           <h2 class="section-title">行业热点</h2>
-          <p class="section-sub">政策、标准、产业新闻和专题观察单独维护。这个板块读取 content/hotspots.json 生成，后面你补表就能直接显示。</p>
         </div>
         <div class="count-chip" id="hotspotCountChip">0 条</div>
       </div>
@@ -834,6 +832,7 @@
     <footer class="footer">
       <div id="footerLeft">数据文件：--</div>
       <div id="footerRight">站点结构已兼容后续继续补药通网天天行情与行业热点。</div>
+      <div class="footer-traffic" id="footerTraffic">本站总访问量 -- 次</div>
     </footer>
   </main>
 
@@ -1071,6 +1070,26 @@
       document.getElementById("footerRight").textContent = "请确认 public/data/dashboard.json 已生成。";
     }
 
+    async function loadSiteVisits() {
+      const footerTraffic = document.getElementById("footerTraffic");
+      try {
+        const response = await fetch("https://bsz.saop.cc/api", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "x-bsz-referer": `${window.location.origin}/`,
+          },
+        });
+        if (!response.ok) throw new Error(`Failed to load site visits: ${response.status}`);
+        const payload = await response.json();
+        if (!payload.success || !payload.data) throw new Error("Invalid site visits payload");
+        footerTraffic.textContent = `本站总访问量 ${Number(payload.data.site_pv || 0).toLocaleString("zh-CN")} 次`;
+      } catch (error) {
+        console.error(error);
+        footerTraffic.textContent = "本站总访问量 -- 次";
+      }
+    }
+
     async function loadDashboard() {
       try {
         const response = await fetch("./data/dashboard.json");
@@ -1108,6 +1127,7 @@
       }
     }
 
+    loadSiteVisits();
     loadDashboard();
   </script>
 </body>
