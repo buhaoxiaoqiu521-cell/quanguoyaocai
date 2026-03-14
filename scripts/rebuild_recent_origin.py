@@ -60,7 +60,7 @@ def main() -> None:
     parser.add_argument("--workspace", default="/Users/bohao/.openclaw/workspace", help="OpenClaw 工作目录")
     parser.add_argument("--output", default="content/openclaw_origin.json", help="输出路径")
     parser.add_argument("--yt-pages", type=int, default=4, help="药通网分页深度")
-    parser.add_argument("--zy-pages", type=int, default=8, help="天地网分页深度")
+    parser.add_argument("--zy-pages", type=int, default=28, help="天地网分页深度")
     args = parser.parse_args()
 
     workspace = Path(args.workspace).expanduser().resolve()
