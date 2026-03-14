@@ -32,9 +32,16 @@ PRICE_RANGE_RE = re.compile(
 PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
 CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
 PHRASE_SPLIT_RE = re.compile(r"[，,]")
-PRICE_SUFFIX_RE = re.compile(r"(售价|售价格?|要价|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
+PRICE_SUFFIX_RE = re.compile(r"(售价为|收购价格?|收购价|售价|售价格?|要价|价格为|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
 PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
+INVALID_PRICE_LABEL_RE = re.compile(r"(回调|上调|下调|上涨|下滑|下降|下跌|反弹|相比昨日|较昨日|交易走势|上市量|成交约|气温|天气|湿度|体感|能见度|空气质量)")
+GENERIC_PRICE_LABEL_RE = re.compile(r"^(近期|目前|当前|现阶段|近阶段|现|价格|售价|货价|近期价格|当前价格|目前价格|本地|产地|现货|新货)$")
+CHANGE_ONLY_PRICE_RE = re.compile(
+    r"(?:(?:价格|行情)(?:相比昨日|较昨日)?|相比昨日|较昨日)?(?:回调|上调|下调|上涨|下滑|下降|下跌|反弹)"
+    r"\s*\d+(?:\.\d+)?(?:\s*(?:-|~|至|到)\s*\d+(?:\.\d+)?)?\s*元"
+)
 LOCATION_SPLIT_RE = re.compile(r"(?:省|市|州|县|区|旗|镇|乡|村|口岸|地区|盟)")
+NOISE_LOCATION_RE = re.compile(r"^\d{4}年(?:\d{1,2}(?:月(?:\d{1,2}日)?)?)?$|^\d{1,2}月(?:\d{1,2}日)?$|^星期[一二三四五六日天]$")
 PROVINCE_PREFIXES = sorted(
     [
         "内蒙古", "黑龙江",
@@ -125,6 +132,25 @@ def clean_price_point_label(text: str) -> str:
     return label or "主流货"
 
 
+def normalize_price_point_label(text: str) -> str:
+    label = clean_text(text)
+    label = PRICE_PREFIX_RE.sub("", label)
+    label = PRICE_SUFFIX_RE.sub("", label)
+    label = re.sub(r"[：:、，,；;。]+$", "", label)
+    label = clean_text(label)
+    if not label:
+        return "主流报价"
+    if INVALID_PRICE_LABEL_RE.search(label):
+        return ""
+    if GENERIC_PRICE_LABEL_RE.fullmatch(label):
+        return "主流报价"
+    return label
+
+
+def has_change_only_price(summary: str) -> bool:
+    return bool(CHANGE_ONLY_PRICE_RE.search(clean_text(summary)))
+
+
 def extract_price_points(text: str) -> list[dict[str, str]]:
     value = clean_text(text)
     if not value:
@@ -143,7 +169,9 @@ def extract_price_points(text: str) -> list[dict[str, str]]:
             match = range_match or single_match
             if not match:
                 continue
-            label = clean_price_point_label(part[:match.start()])
+            label = normalize_price_point_label(part[:match.start()])
+            if not label:
+                continue
             if range_match:
                 start, end = range_match.groups()
                 price = f"{start}-{end} 元/kg"
@@ -164,7 +192,7 @@ def normalize_price_points(value: Any) -> list[dict[str, str]]:
     for raw in value:
         if not isinstance(raw, dict):
             continue
-        label = clean_text(raw.get("label") or raw.get("spec") or raw.get("name"))
+        label = normalize_price_point_label(raw.get("label") or raw.get("spec") or raw.get("name"))
         price = clean_text(raw.get("price") or raw.get("value"))
         if not label or not price:
             continue
@@ -180,6 +208,15 @@ def detect_province(text: str) -> str:
     return ""
 
 
+def is_noise_location_text(text: str) -> bool:
+    value = clean_text(text)
+    if not value:
+        return False
+    if NOISE_LOCATION_RE.match(value):
+        return True
+    return bool(re.search(r"\d{4}年|\d{1,2}月|\d{1,2}日|星期[一二三四五六日天]", value))
+
+
 def location_keywords(text: str) -> list[str]:
     value = clean_text(text)
     if not value:
@@ -187,7 +224,11 @@ def location_keywords(text: str) -> list[str]:
     province = detect_province(value)
     remainder = value[len(province):] if province and value.startswith(province) else value
     keywords: list[str] = [province] if province else []
-    keywords.extend(clean_text(part) for part in LOCATION_SPLIT_RE.split(remainder) if len(clean_text(part)) >= 2)
+    keywords.extend(
+        clean_text(part)
+        for part in LOCATION_SPLIT_RE.split(remainder)
+        if len(clean_text(part)) >= 2 and not is_noise_location_text(clean_text(part))
+    )
     if not keywords and len(value) >= 2:
         keywords.append(value)
     return keywords
@@ -232,7 +273,11 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
     merged: dict[str, str] = {}
     order: list[str] = []
     for point in points:
-        label = clean_price_point_label(point.get("label"))
+        raw_label = clean_text(point.get("label"))
+        if raw_label in {"主流", "主流货", "主流报价"}:
+            label = "主流报价"
+        else:
+            label = clean_price_point_label(raw_label)
         price = clean_text(point.get("price"))
         if not label or not price:
             continue
@@ -253,7 +298,14 @@ def build_item_price_points(item: dict[str, Any]) -> list[dict[str, str]]:
     price = clean_text(item.get("price"))
     spec = clean_text(item.get("spec"))
     if price and not points:
-        label = clean_price_point_label(spec) if spec and spec not in {"产地快讯", "市场快讯", "待补规格"} else "主流报价"
+        if has_change_only_price(item.get("summary")):
+            return []
+        if spec and spec not in {"产地快讯", "市场快讯", "待补规格"}:
+            label = normalize_price_point_label(spec)
+            if not label:
+                return []
+        else:
+            label = "主流报价"
         points.append({"label": label, "price": price})
     return merge_price_points(points)
 
@@ -317,7 +369,7 @@ def merged_origin_location(items: list[dict[str, Any]]) -> str:
         if not province and current_province:
             province = current_province
         tail = primary_location_token(location)
-        if tail and tail not in PROVINCE_PREFIXES and tail not in tails:
+        if tail and tail not in PROVINCE_PREFIXES and not is_noise_location_text(tail) and tail not in tails:
             tails.append(tail)
     if province and tails:
         return province + "/".join(tails[:2])

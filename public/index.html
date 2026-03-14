@@ -1124,9 +1124,9 @@
 
       if (!points.length && !item.price) return "";
 
-      const rows = points.length > 1
+      const rows = points.length
         ? points
-        : [{ label: "主流报价", price: points[0]?.price || item.price }];
+        : [{ label: "主流报价", price: item.price }];
 
       return `
         <div class="entry-price-breakdown">
@@ -1171,9 +1171,9 @@
       const tag = type === "hotspot" ? (item.kind || "行业热点") : (item.tag || "关注");
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const summary = item.summary ? `<p class="entry-summary">${escapeHtml(item.summary)}</p>` : "";
-      const hasMultiPricePoints = Array.isArray(item.price_points) && item.price_points.length > 1;
-      const price = type === "origin" && item.price && !hasMultiPricePoints ? `<span class="entry-price">${escapeHtml(item.price)}</span>` : "";
-      const priceBreakdown = (type === "market" || (type === "origin" && hasMultiPricePoints)) ? renderPriceBreakdown(item) : "";
+      const hasPricePoints = Array.isArray(item.price_points) && item.price_points.length > 0;
+      const price = type === "origin" && item.price && !hasPricePoints ? `<span class="entry-price">${escapeHtml(item.price)}</span>` : "";
+      const priceBreakdown = (type === "market" || (type === "origin" && hasPricePoints)) ? renderPriceBreakdown(item) : "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
       const related = type === "hotspot" && item.herb ? ` · 关联品种：${escapeHtml(item.herb)}` : "";
       const sourceLinks = renderSourceLinks(item, type);
