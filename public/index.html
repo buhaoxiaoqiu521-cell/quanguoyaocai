@@ -67,48 +67,52 @@
 
     .topbar {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 10px 4px 24px;
+      gap: 18px;
+      padding: 20px 4px 26px;
       color: #f4ead6;
+      text-align: center;
     }
 
     .brand {
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 16px;
       min-width: 0;
+      max-width: 980px;
     }
 
     .brand-mark {
-      width: 52px;
-      height: 52px;
+      width: 74px;
+      height: 74px;
       display: grid;
       place-items: center;
-      border-radius: 18px;
+      border-radius: 26px;
       background:
         linear-gradient(145deg, #f5e9cc, #d6bc80);
       color: var(--green-deep);
       box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: 24px;
+      font-size: 34px;
       font-weight: 700;
     }
 
     .brand h1 {
       margin: 0;
-      font-size: 20px;
+      font-size: clamp(38px, 5vw, 64px);
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      letter-spacing: 0.06em;
+      letter-spacing: -0.04em;
       font-weight: 700;
     }
 
     .brand p {
-      margin: 6px 0 0;
+      margin: 0;
       color: rgba(244, 234, 214, 0.74);
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: clamp(17px, 2.2vw, 22px);
+      line-height: 1.75;
+      max-width: 880px;
     }
 
     .status-pill {
@@ -168,22 +172,17 @@
     }
 
     .hero-copy {
-      padding: 34px 36px 30px;
+      padding: 30px 34px;
       color: #f6eddb;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
     .hero-card {
-      padding: 28px;
-      border-radius: 26px;
+      padding: 30px 32px;
+      border-radius: 28px;
       border: 1px solid rgba(247, 240, 223, 0.1);
       background: rgba(247, 240, 223, 0.04);
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     .eyebrow {
@@ -206,25 +205,26 @@
     }
 
     .hero-title {
-      margin: 22px 0 14px;
+      margin: 18px 0 12px;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: clamp(32px, 4.8vw, 58px);
-      line-height: 1.12;
+      font-size: clamp(30px, 4.2vw, 48px);
+      line-height: 1.18;
       letter-spacing: -0.04em;
     }
 
     .hero-lead {
       margin: 0;
       font-size: 17px;
-      line-height: 1.85;
+      line-height: 1.8;
       color: rgba(246, 237, 219, 0.78);
+      max-width: 920px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 28px;
+      margin-top: 20px;
     }
 
     .button {
@@ -262,7 +262,7 @@
     }
 
     .hero-note-title {
-      margin: 0 0 12px;
+      margin: 14px 0 8px;
       font-size: 18px;
       color: #f6e8c6;
       font-weight: 700;
@@ -272,30 +272,7 @@
       margin: 0;
       color: rgba(246, 237, 219, 0.78);
       font-size: 14px;
-      line-height: 1.85;
-    }
-
-    .hero-note + .hero-note {
-      margin-top: 12px;
-    }
-
-    .hero-bullet-list {
-      margin: 14px 0 0;
-      padding-left: 18px;
-      color: rgba(246, 237, 219, 0.82);
       line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .hero-bullet-list li + li {
-      margin-top: 8px;
-    }
-
-    .source-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
     }
 
     .source-chip,
@@ -696,10 +673,6 @@
     }
 
     @media (max-width: 1024px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
       .control-grid {
         grid-template-columns: 1fr;
       }
@@ -735,7 +708,7 @@
       }
 
       .hero-card {
-        padding: 18px 16px;
+        padding: 20px 16px;
       }
 
       .section-head {
@@ -808,42 +781,27 @@
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark">药</div>
-        <div>
-          <h1>中药材全国追踪</h1>
-          <p>把产地、市场和行业线索放在一张真实数据首页里，先做深，再做宽。</p>
-        </div>
+        <h1>中药材全国追踪</h1>
+        <p>聚合产地行情、市场动态与行业快讯的一站式中药材信息情报中心。</p>
       </div>
       <div class="status-pill" id="statusPill">正在读取数据</div>
     </header>
 
     <section class="hero panel">
       <div class="hero-copy">
-        <div class="hero-grid">
-          <article class="hero-card">
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              溯源入口
-            </div>
-            <h2 class="hero-title">进入中药材溯源平台，查看更正式的追溯信息。</h2>
-            <p class="hero-lead">如果你要看批次、产地、主体、认证或更偏正式的流通信息，请优先进入溯源平台。这个首页更像一个信息整理与快速浏览入口，不替代正式追溯系统。</p>
-            <div class="hero-actions">
-              <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
-              <a class="button" href="#originSection">查看产地行情</a>
-              <a class="button" href="#marketSection">查看天天行情</a>
-            </div>
-          </article>
-          <article class="hero-card">
-            <h3 class="hero-note-title">建设初衷与使用说明</h3>
-            <p class="hero-note">这个网站的建设初衷，是把分散在不同页面里的中药材行情与行业线索先集中整理，方便快速查看、比对与跟踪，不必反复在多个站点之间来回切换。</p>
-            <p class="hero-note">本站内容主要基于公开网页线索、人工整理与阶段性汇总生成，可能存在时间延迟、转述误差、重复记录或缺漏，不保证与原始页面、实际成交或官方口径完全一致。</p>
-            <ul class="hero-bullet-list">
-              <li>本站内容仅供信息参考与内部研判辅助，不构成交易、采购、投资或官方证明依据。</li>
-              <li>如涉及溯源、批次、主体认证、正式流通凭证等事项，请以溯源平台、原始页面和实际业务凭证为准。</li>
-              <li>后续会继续优化数据来源、清洗方式与展示逻辑，尽量把信息做得更完整、更清楚。</li>
-            </ul>
-          </article>
-        </div>
-        <div class="source-strip" id="sourceStrip"></div>
+        <article class="hero-card">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            曹操溯源平台
+          </div>
+          <h2 class="hero-title">欢迎各位药商、加工户入驻，查看更正式的溯源与主体信息。</h2>
+          <p class="hero-lead">曹操溯源平台侧重中药材流通与追溯信息展示，适合查看更规范的主体、产地、批次和相关追溯信息。</p>
+          <div class="hero-actions">
+            <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
+          </div>
+          <h3 class="hero-note-title">建设初衷与使用说明</h3>
+          <p class="hero-note">本站用于集中整理中药材公开行情与行业线索，方便快速查看与跟踪。页面内容仅供信息参考，可能存在延迟、误差或缺漏；如涉及正式追溯与业务凭证，请以溯源平台和原始信息为准。</p>
+        </article>
       </div>
     </section>
 
@@ -1010,10 +968,6 @@
       document.getElementById("statusPill").textContent = dashboard.status;
       document.getElementById("footerLeft").textContent = dashboard.footer.left;
       document.getElementById("footerRight").textContent = dashboard.footer.right;
-
-      document.getElementById("sourceStrip").innerHTML = (dashboard.hero.source_strip || [])
-        .map((item) => `<span class="source-chip">${escapeHtml(item)}</span>`)
-        .join("");
     }
 
     function renderChipGroup(rootId, items, activeValue, onClick) {
