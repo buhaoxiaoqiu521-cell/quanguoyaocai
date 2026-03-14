@@ -32,7 +32,7 @@ PRICE_RANGE_RE = re.compile(
 PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*(?:元|块)(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
 CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
 PHRASE_SPLIT_RE = re.compile(r"[，,]")
-PRICE_SUFFIX_RE = re.compile(r"(售价为|收购价格?|收购价|售价|售价格?|要价|价格为|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
+PRICE_SUFFIX_RE = re.compile(r"(售价为|收购价格?|收购价|售价|售价格?|要价|多要|少要|要|价格维持在|价格维持|价格为|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
 PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
 INVALID_PRICE_LABEL_RE = re.compile(
     r"(回调|上调|下调|上涨|下滑|下降|下跌|反弹|略跌|显跌|显滑|相比昨日|较昨日|交易走势|上市量|成交约|气温|天气|湿度|体感|能见度|空气质量|浏览|评论|作者|分享|昨前天|昨天|前日)"
@@ -46,6 +46,12 @@ LOCATION_SPLIT_RE = re.compile(r"(?:省|市|州|县|区|旗|镇|乡|村|口岸|�
 NOISE_LOCATION_RE = re.compile(r"^\d{4}年(?:\d{1,2}(?:月(?:\d{1,2}日)?)?)?$|^\d{1,2}月(?:\d{1,2}日)?$|^星期[一二三四五六日天]$")
 ENUMERATION_SPLIT_RE = re.compile(r"(?=[①②③④⑤⑥⑦⑧⑨⑩])")
 LIST_MARKER_RE = re.compile(r"^[①②③④⑤⑥⑦⑧⑨⑩\d]+[\.、\)]?\s*")
+TAIL_SPEC_RE = re.compile(
+    r"([一-龥A-Za-z0-9%./+\-]{2,24}"
+    r"(?:统货|饮片货|药厂货|选装货|净货|毛草|鲜货|鲜果|切片货|对开货|圆果货|圆果|包检货|小肉货|色青货|装货|货|片|丝|个|果|穗|枝|壳|仁|草|皮|叶|花|根|段|头|条|连))$"
+)
+NOISY_LABEL_RE = re.compile(r"(走动|行情|市场|货源|商家|近期|近日|目前|当前|价格|售价|报价|要价|多要|可供|库存|关注|稳定|平稳|疲软|走销|交易|略有|继续|依然|产新)")
+GENERIC_PRICE_LABELS = {"主流报价", "主流货", "主流"}
 PROVINCE_PREFIXES = sorted(
     [
         "内蒙古", "黑龙江",
@@ -150,7 +156,67 @@ def normalize_price_point_label(text: str) -> str:
         return ""
     if GENERIC_PRICE_LABEL_RE.fullmatch(label):
         return "主流报价"
-    return label
+    return refine_price_point_label(label)
+
+
+def price_label_candidates(label: str) -> list[str]:
+    text = clean_text(label)
+    if not text:
+        return []
+    candidates = [text]
+    for sep in ("，", ",", "；", ";", "。", "：", ":"):
+        if sep in text:
+            candidates.append(clean_text(text.split(sep)[-1]))
+    if "市场" in text:
+        candidates.append(clean_text(text.split("市场")[-1]))
+    if "的" in text:
+        candidates.append(clean_text(text.split("的")[-1]))
+    for prefix in ("现本地", "现当地", "本地", "当地", "现", "市场", "产地"):
+        if text.startswith(prefix):
+            candidates.append(clean_text(text[len(prefix) :]))
+    match = TAIL_SPEC_RE.search(text)
+    if match:
+        candidates.append(clean_text(match.group(1)))
+    unique: list[str] = []
+    for candidate in candidates:
+        if candidate and candidate not in unique:
+            unique.append(candidate)
+    return unique
+
+
+def price_label_score(label: str) -> int:
+    text = clean_text(label)
+    if not text:
+        return -999
+    score = 0
+    length = len(text)
+    if text in GENERIC_PRICE_LABELS:
+        score -= 2
+    if 2 <= length <= 6:
+        score += 5
+    elif length <= 12:
+        score += 3
+    elif length <= 18:
+        score += 1
+    else:
+        score -= 3
+    if NOISY_LABEL_RE.search(text):
+        score -= 6
+    if any(ch in text for ch in "，,；;。:： "):
+        score -= 4
+    if TAIL_SPEC_RE.search(text):
+        score += 4
+    if re.search(r"\d+%|家种|饮片|药厂|统货|选装|净货|鲜果|鲜货", text):
+        score += 1
+    return score
+
+
+def refine_price_point_label(label: str) -> str:
+    candidates = price_label_candidates(label)
+    if not candidates:
+        return "主流报价"
+    best = max(candidates, key=lambda candidate: (price_label_score(candidate), -len(candidate), candidate))
+    return best or "主流报价"
 
 
 def has_change_only_price(summary: str) -> bool:
@@ -283,15 +349,19 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
 
     merged: dict[str, str] = {}
     order: list[str] = []
+    best_label_by_price: dict[str, str] = {}
     for point in points:
         raw_label = clean_text(point.get("label"))
-        if raw_label in {"主流", "主流货", "主流报价"}:
+        if raw_label in GENERIC_PRICE_LABELS:
             label = "主流报价"
         else:
-            label = clean_price_point_label(raw_label)
+            label = refine_price_point_label(clean_price_point_label(raw_label))
         price = clean_text(point.get("price"))
         if not label or not price:
             continue
+        current_best_label = best_label_by_price.get(price)
+        if current_best_label is None or price_label_score(label) > price_label_score(current_best_label):
+            best_label_by_price[price] = label
         if label not in merged:
             merged[label] = price
             order.append(label)
@@ -299,17 +369,29 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
         if merged[label] == price:
             continue
         merged[label] = prefer_price(merged[label], price)
-    rows = [{"label": label, "price": merged[label]} for label in order]
+    rows: list[dict[str, str]] = []
+    for label in order:
+        price = merged[label]
+        best_label = best_label_by_price.get(price, label)
+        if best_label != label and price_label_score(best_label) >= price_label_score(label):
+            continue
+        rows.append({"label": label, "price": price})
+
     specific_prices = {
         row["price"]
         for row in rows
-        if row["label"] not in {"主流报价", "主流货", "主流"}
+        if row["label"] not in GENERIC_PRICE_LABELS
     }
-    return [
-        row
-        for row in rows
-        if not (row["label"] in {"主流报价", "主流货", "主流"} and row["price"] in specific_prices)
-    ]
+    filtered_rows: list[dict[str, str]] = []
+    for row in rows:
+        if row["label"] not in GENERIC_PRICE_LABELS:
+            filtered_rows.append(row)
+            continue
+        remaining_parts = [part for part in row["price"].split(" / ") if part not in specific_prices]
+        if not remaining_parts:
+            continue
+        filtered_rows.append({"label": row["label"], "price": " / ".join(remaining_parts)})
+    return filtered_rows
 
 
 def build_item_price_points(item: dict[str, Any]) -> list[dict[str, str]]:
