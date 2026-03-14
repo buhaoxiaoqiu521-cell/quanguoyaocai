@@ -1140,18 +1140,19 @@
       `;
     }
 
-    function renderSourceLinks(item) {
+    function renderSourceLinks(item, type) {
       const sourceLinks = Array.isArray(item.source_links)
-        ? item.source_links.filter((entry) => entry && entry.label && safeUrl(entry.url))
+        ? item.source_links.filter((entry) => entry && safeUrl(entry.url))
         : [];
       if (!sourceLinks.length) {
         const url = safeUrl(item.url);
         return url ? `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">查看来源</a>` : "";
       }
+      const useGenericLabel = type === "origin";
       return `
         <span class="entry-link-list">
-          ${sourceLinks.map((entry) => `
-            <a class="entry-link" href="${escapeHtml(safeUrl(entry.url))}" target="_blank" rel="noreferrer">${escapeHtml(entry.label)}</a>
+          ${sourceLinks.map((entry, index) => `
+            <a class="entry-link" href="${escapeHtml(safeUrl(entry.url))}" target="_blank" rel="noreferrer">${escapeHtml(useGenericLabel ? (sourceLinks.length > 1 ? `查看来源 ${index + 1}` : "查看来源") : (entry.label || "查看来源"))}</a>
           `).join("")}
         </span>
       `;
@@ -1163,7 +1164,7 @@
         ? (item.kind || "行业热点")
         : type === "market"
           ? (item.spec || "")
-          : (item.spec || "待补规格");
+          : (item.spec || "");
       const spec = specText ? `<span class="entry-spec">${escapeHtml(specText)}</span>` : "";
       const locationLabel = type === "origin" ? "产区" : type === "market" ? "市场" : "关联";
       const location = type === "origin" ? item.location : type === "market" ? item.market : (item.location || "待补");
@@ -1175,7 +1176,7 @@
       const priceBreakdown = (type === "market" || (type === "origin" && hasMultiPricePoints)) ? renderPriceBreakdown(item) : "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
       const related = type === "hotspot" && item.herb ? ` · 关联品种：${escapeHtml(item.herb)}` : "";
-      const sourceLinks = renderSourceLinks(item);
+      const sourceLinks = renderSourceLinks(item, type);
 
       return `
         <article class="entry-card">

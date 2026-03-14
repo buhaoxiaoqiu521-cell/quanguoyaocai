@@ -642,8 +642,8 @@ def item_sort_key(item: WorkbookRecord) -> tuple[str, str, str]:
 
 def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
     today_num = parse_number(item.today_price)
-    display_spec = item.spec if item.market != "产地" else (item.spec or "待补规格")
-    if display_spec == "市场快讯":
+    display_spec = clean_text(item.spec)
+    if display_spec in {"市场快讯", "待补规格"}:
         display_spec = ""
     price_points = item.price_points or (extract_price_points(item.summary) if item.market != "产地" else [])
     payload = {
