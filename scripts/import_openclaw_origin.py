@@ -105,6 +105,8 @@ def load_payload(path: Path) -> dict[str, Any] | None:
         return None
     if not isinstance(payload, dict):
         return None
+    if isinstance(payload.get("origin_records"), list):
+        return payload
     if not isinstance(payload.get("yt_items", []), list):
         return None
     if not isinstance(payload.get("zy_items", []), list):
@@ -198,6 +200,37 @@ def is_origin_like(title: str, source_text: str) -> bool:
 
 
 def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
+    if isinstance(payload.get("origin_records"), list):
+        records = [item for item in payload["origin_records"] if isinstance(item, dict)]
+        deduped: list[dict[str, str]] = []
+        seen: set[tuple[str, str, str, str, str]] = set()
+        for raw in records:
+            item = {
+                "date": clean_text(raw.get("date")),
+                "herb": clean_text(raw.get("herb")),
+                "spec": clean_text(raw.get("spec")) or "产地快讯",
+                "unit": clean_text(raw.get("unit")) or "元/kg",
+                "market": clean_text(raw.get("market")) or "产地",
+                "location": clean_text(raw.get("location")),
+                "today_price": clean_text(raw.get("today_price")),
+                "yesterday_price": clean_text(raw.get("yesterday_price")),
+                "delta_amount": clean_text(raw.get("delta_amount")),
+                "delta_rate": clean_text(raw.get("delta_rate")),
+                "source": clean_text(raw.get("source")),
+                "url": clean_text(raw.get("url")),
+                "summary": clean_text(raw.get("summary")),
+                "price_label": clean_text(raw.get("price_label")),
+            }
+            if not item["date"] or not item["herb"] or not item["summary"]:
+                continue
+            key = (item["date"], item["herb"], item["location"], item["source"], item["summary"])
+            if key in seen:
+                continue
+            seen.add(key)
+            deduped.append(item)
+        deduped.sort(key=lambda item: (item["date"], item["herb"], item["location"]), reverse=True)
+        return deduped
+
     report_date = clean_text(payload.get("date"))
     records: list[dict[str, str]] = []
 
