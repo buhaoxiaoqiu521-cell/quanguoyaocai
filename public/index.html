@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中药材全国追踪</title>
+  <style>
+    :root {
+      --bg: #10251f;
+      --bg-deep: #0a1915;
+      --paper: rgba(247, 240, 223, 0.95);
+      --paper-strong: rgba(250, 244, 231, 0.98);
+      --paper-soft: rgba(241, 232, 209, 0.8);
+      --ink: #213127;
+      --ink-soft: #5c6d61;
+      --line: rgba(40, 82, 59, 0.16);
+      --line-strong: rgba(40, 82, 59, 0.3);
+      --green: #2f6b4e;
+      --green-deep: #1d4c37;
+      --gold: #b88538;
+      --gold-soft: #e5c58e;
+      --rose: #a85844;
+      --shadow: 0 30px 80px rgba(7, 21, 16, 0.28);
+      --radius-lg: 30px;
+      --radius-md: 22px;
+      --radius-sm: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(229, 197, 142, 0.12), transparent 24%),
+        radial-gradient(circle at 85% 12%, rgba(112, 155, 122, 0.18), transparent 22%),
+        linear-gradient(180deg, #112820 0%, #0d1d18 46%, #09120f 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.25;
+    }
+
+    .shell {
+      width: min(1260px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 4px 24px;
+      color: #f4ead6;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, #f5e9cc, #d6bc80);
+      color: var(--green-deep);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+
+    .brand p {
+      margin: 6px 0 0;
+      color: rgba(244, 234, 214, 0.74);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(229, 197, 142, 0.2);
+      background: rgba(244, 234, 214, 0.08);
+      color: #f8efdb;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #7bb38d;
+      box-shadow: 0 0 0 0 rgba(123, 179, 141, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(123, 179, 141, 0.58); }
+      70% { box-shadow: 0 0 0 14px rgba(123, 179, 141, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(123, 179, 141, 0); }
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 247, 232, 0.14);
+      box-shadow: var(--shadow);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(229, 197, 142, 0.78), transparent);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(229, 197, 142, 0.14), transparent 24%),
+        linear-gradient(135deg, rgba(18, 42, 33, 0.98), rgba(14, 30, 24, 0.98));
+      margin-bottom: 22px;
+    }
+
+    .hero-copy {
+      padding: 38px 36px 34px;
+      color: #f6eddb;
+      position: relative;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      inset: 26px 24px 26px auto;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(229, 197, 142, 0.16), rgba(229, 197, 142, 0));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(247, 240, 223, 0.08);
+      border: 1px solid rgba(247, 240, 223, 0.12);
+      color: #f0dec0;
+      font-size: 14px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+    }
+
+    .hero-title {
+      margin: 24px 0 16px;
+      max-width: 760px;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-lead {
+      max-width: 760px;
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.95;
+      color: rgba(246, 237, 219, 0.78);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 144px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(247, 240, 223, 0.14);
+      color: #f8efdb;
+      text-decoration: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      background: rgba(247, 240, 223, 0.06);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(229, 197, 142, 0.42);
+      background: rgba(247, 240, 223, 0.1);
+    }
+
+    .button.primary {
+      color: #1b3327;
+      background: linear-gradient(135deg, #e7c789, #f6e7c7);
+      border-color: transparent;
+    }
+
+    .source-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .source-chip,
+    .filter-chip,
+    .metric-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .source-chip {
+      color: #eadbbd;
+      border-color: rgba(247, 240, 223, 0.12);
+      background: rgba(247, 240, 223, 0.05);
+    }
+
+    .hero-side {
+      padding: 34px 32px;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(229, 197, 142, 0.18), transparent 24%),
+        linear-gradient(180deg, rgba(247, 240, 223, 0.06), rgba(247, 240, 223, 0.03));
+      color: #f7efdf;
+    }
+
+    .side-label {
+      color: rgba(247, 240, 223, 0.72);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .side-big {
+      margin-top: 12px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1;
+      font-weight: 700;
+      color: #f7dfaf;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+    }
+
+    .side-sub {
+      margin-top: 10px;
+      color: rgba(247, 240, 223, 0.72);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(247, 240, 223, 0.1);
+      background: rgba(247, 240, 223, 0.05);
+    }
+
+    .mini-label {
+      font-size: 13px;
+      color: rgba(247, 240, 223, 0.72);
+    }
+
+    .mini-value {
+      margin-top: 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff2d1;
+    }
+
+    .signal-block {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(247, 240, 223, 0.1);
+      background: rgba(8, 18, 14, 0.14);
+    }
+
+    .signal-title {
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: rgba(247, 240, 223, 0.72);
+    }
+
+    .signal-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .signal-index {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(247, 240, 223, 0.08);
+      color: #f3dfb1;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .signal-name {
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #f7efdf;
+    }
+
+    .signal-count {
+      color: rgba(247, 240, 223, 0.7);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+      position: sticky;
+      top: 14px;
+      z-index: 4;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #f7efdf;
+      border: 1px solid rgba(247, 240, 223, 0.12);
+      background: rgba(9, 19, 15, 0.64);
+      backdrop-filter: blur(12px);
+      transition: transform 0.18s ease, border-color 0.18s ease;
+      font-size: 14px;
+    }
+
+    .nav-pill:hover {
+      transform: translateY(-1px);
+      border-color: rgba(229, 197, 142, 0.36);
+    }
+
+    .section {
+      margin-bottom: 20px;
+      background: var(--paper);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 26px 28px 20px;
+      border-bottom: 1px solid rgba(44, 78, 59, 0.08);
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      margin: 10px 0 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.85;
+      max-width: 780px;
+    }
+
+    .count-chip {
+      flex-shrink: 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(47, 107, 78, 0.08);
+      color: var(--green-deep);
+      border: 1px solid rgba(47, 107, 78, 0.14);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-body {
+      padding: 20px 22px 26px;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: minmax(240px, 1.15fr) 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(44, 78, 59, 0.12);
+      background: rgba(255, 255, 255, 0.58);
+      min-height: 52px;
+    }
+
+    .search-box span {
+      color: var(--green);
+      font-size: 16px;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #89968b;
+    }
+
+    .filter-group,
+    .meta-row,
+    .market-meta,
+    .hotspot-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-group {
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .filter-chip,
+    .metric-chip {
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      user-select: none;
+    }
+
+    .filter-chip:hover,
+    .metric-chip:hover {
+      transform: translateY(-1px);
+      border-color: rgba(47, 107, 78, 0.28);
+    }
+
+    .filter-chip.active,
+    .metric-chip.active {
+      color: var(--green-deep);
+      border-color: rgba(47, 107, 78, 0.28);
+      background: rgba(47, 107, 78, 0.09);
+    }
+
+    .meta-row {
+      margin-bottom: 16px;
+    }
+
+    .entry-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .entry-card {
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(44, 78, 59, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.18)),
+        var(--paper-strong);
+      animation: rise 0.4s ease;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .entry-top,
+    .entry-title-row,
+    .entry-footer,
+    .pager {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .entry-date {
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .entry-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green-deep);
+      background: rgba(47, 107, 78, 0.1);
+    }
+
+    .tag.up {
+      color: #8d4d2e;
+      background: rgba(184, 133, 56, 0.14);
+    }
+
+    .tag.down {
+      color: var(--rose);
+      background: rgba(168, 88, 68, 0.12);
+    }
+
+    .entry-price {
+      color: var(--gold);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .entry-title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.3;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+    }
+
+    .entry-spec {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .entry-meta {
+      margin-top: 10px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .entry-summary {
+      margin: 14px 0 0;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--ink);
+    }
+
+    .entry-footer {
+      margin-top: 16px;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .entry-link {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .entry-link:hover {
+      text-decoration: underline;
+    }
+
+    .delta {
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(47, 107, 78, 0.08);
+      color: var(--green-deep);
+    }
+
+    .delta.up {
+      background: rgba(184, 133, 56, 0.14);
+      color: #8d4d2e;
+    }
+
+    .delta.down {
+      background: rgba(168, 88, 68, 0.12);
+      color: var(--rose);
+    }
+
+    .pager {
+      margin-top: 16px;
+    }
+
+    .pager-info {
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .pager-button {
+      min-width: 112px;
+      padding: 11px 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(44, 78, 59, 0.14);
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
+    }
+
+    .pager-button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(47, 107, 78, 0.28);
+    }
+
+    .pager-button:disabled {
+      opacity: 0.36;
+      cursor: not-allowed;
+    }
+
+    .market-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .market-tab {
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(44, 78, 59, 0.14);
+      background: rgba(255, 255, 255, 0.52);
+      color: var(--ink-soft);
+      cursor: pointer;
+      font: inherit;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .market-tab:hover {
+      transform: translateY(-1px);
+      border-color: rgba(47, 107, 78, 0.28);
+    }
+
+    .market-tab.active {
+      color: #fff8eb;
+      background: linear-gradient(135deg, var(--green), #47795b);
+      border-color: transparent;
+    }
+
+    .market-summary {
+      margin-bottom: 16px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .empty-state {
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px dashed rgba(44, 78, 59, 0.18);
+      color: var(--ink-soft);
+      background: rgba(255, 255, 255, 0.38);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 8px 6px 0;
+      color: rgba(244, 234, 214, 0.8);
+      font-size: 13px;
+    }
+
+    .muted {
+      color: var(--ink-soft);
+    }
+
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy::after {
+        display: none;
+      }
+
+      .control-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-group {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(100%, calc(100% - 18px));
+        padding-top: 18px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-bottom: 18px;
+      }
+
+      .hero-copy,
+      .hero-side {
+        padding: 28px 20px 24px;
+      }
+
+      .hero-title {
+        font-size: clamp(32px, 10vw, 52px);
+      }
+
+      .hero-lead {
+        font-size: 16px;
+      }
+
+      .section-head {
+        padding: 22px 20px 18px;
+      }
+
+      .section-body {
+        padding: 18px 16px 22px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+
+      .entry-title {
+        font-size: 20px;
+      }
+
+      .mini-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .quick-nav {
+        top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">药</div>
+        <div>
+          <h1>中药材全国追踪</h1>
+          <p>把产地、市场和行业线索放在一张真实数据首页里，先做深，再做宽。</p>
+        </div>
+      </div>
+      <div class="status-pill" id="statusPill">正在读取数据</div>
+    </header>
+
+    <section class="hero panel">
+      <div class="hero-copy">
+        <div class="eyebrow" id="heroEyebrow">
+          <span class="eyebrow-dot"></span>
+          中药材情报首页
+        </div>
+        <h2 class="hero-title" id="heroTitle">先把真实记录摊开，再做判断与趋势。</h2>
+        <p class="hero-lead" id="heroLead">首页围绕中药材真实记录来搭建：产地行情完整铺开，天天行情优先补齐亳州、安国、玉林，行业热点单独维护，不和报价信息混在一起。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#originSection">查看产地行情</a>
+          <a class="button" href="#marketSection">查看天天行情</a>
+          <a class="button" href="#hotspotSection">查看行业热点</a>
+        </div>
+        <div class="source-strip" id="sourceStrip"></div>
+      </div>
+      <aside class="hero-side">
+        <div class="side-label">Latest Snapshot</div>
+        <div class="side-big" id="latestDateBig">--</div>
+        <div class="side-sub" id="latestDateSub">最新整理日期</div>
+        <div class="mini-grid" id="snapshotGrid"></div>
+        <div class="signal-block">
+          <p class="signal-title">当日高频品种</p>
+          <ul class="signal-list" id="topHerbList"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <nav class="quick-nav">
+      <a class="nav-pill" href="#originSection">1. 产地行情</a>
+      <a class="nav-pill" href="#marketSection">2. 天天行情</a>
+      <a class="nav-pill" href="#hotspotSection">3. 行业热点</a>
+    </nav>
+
+    <section class="section panel" id="originSection">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">产地行情</h2>
+          <p class="section-sub">完整读取 Excel 里市场字段为“产地”的记录。支持按关键词检索、按日期和来源筛选，并分页浏览全部条目。</p>
+        </div>
+        <div class="count-chip" id="originCountChip">0 条</div>
+      </div>
+      <div class="section-body">
+        <div class="control-grid">
+          <label class="search-box">
+            <span>检索</span>
+            <input class="search-input" id="originSearch" type="search" placeholder="搜索品种、规格、产区、摘要">
+          </label>
+          <div class="filter-group" id="originDateFilters"></div>
+        </div>
+        <div class="filter-group" id="originSourceFilters" style="justify-content:flex-start; margin-bottom: 16px;"></div>
+        <div class="meta-row" id="originMeta"></div>
+        <div class="entry-list" id="originList"></div>
+        <div class="pager">
+          <button class="pager-button" id="originPrev">上一页</button>
+          <div class="pager-info" id="originPageInfo">第 1 页 / 共 1 页</div>
+          <button class="pager-button" id="originNext">下一页</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel" id="marketSection">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">天天行情</h2>
+          <p class="section-sub">页面结构已经按药通网天天行情的维护方式预留。当前优先看亳州、安国、玉林，同时兼容补充市场数据继续纳入。</p>
+        </div>
+        <div class="count-chip" id="marketCountChip">0 / 3</div>
+      </div>
+      <div class="section-body">
+        <div class="market-meta" id="marketTargetChips"></div>
+        <div class="market-tabs" id="marketTabs"></div>
+        <div class="market-summary" id="marketSummary"></div>
+        <div class="entry-list" id="marketList"></div>
+      </div>
+    </section>
+
+    <section class="section panel" id="hotspotSection">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">行业热点</h2>
+          <p class="section-sub">政策、标准、产业新闻和专题观察单独维护。这个板块读取 content/hotspots.json 生成，后面你补表就能直接显示。</p>
+        </div>
+        <div class="count-chip" id="hotspotCountChip">0 条</div>
+      </div>
+      <div class="section-body">
+        <div class="hotspot-filters" id="hotspotFilters" style="margin-bottom:16px;"></div>
+        <div class="entry-list" id="hotspotList"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div id="footerLeft">数据文件：--</div>
+      <div id="footerRight">站点结构已兼容后续继续补药通网天天行情与行业热点。</div>
+    </footer>
+  </main>
+
+  <script>
+    const state = {
+      dashboard: null,
+      originPage: 1,
+      originPageSize: 10,
+      originQuery: "",
+      originDate: "all",
+      originSource: "all",
+      currentMarket: "",
+      hotspotKind: "all",
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function safeUrl(url) {
+      try {
+        const parsed = new URL(url, window.location.href);
+        if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+          return parsed.href;
+        }
+      } catch (error) {
+        return "";
+      }
+      return "";
+    }
+
+    function tagClass(tag) {
+      if (tag === "上扬" || tag === "走快") return "tag up";
+      if (tag === "回落" || tag === "走缓") return "tag down";
+      return "tag";
+    }
+
+    function deltaClass(value) {
+      const number = Number(value);
+      if (Number.isNaN(number) || !value) return "delta";
+      if (number > 0) return "delta up";
+      if (number < 0) return "delta down";
+      return "delta";
+    }
+
+    function formatDelta(item) {
+      if (!item.delta_amount && !item.delta_rate) return "";
+      const amount = item.delta_amount ? `${Number(item.delta_amount) > 0 ? "+" : ""}${escapeHtml(item.delta_amount)}` : "--";
+      const rate = item.delta_rate ? `${Number(item.delta_rate) > 0 ? "+" : ""}${(Number(item.delta_rate) * 100).toFixed(1)}%` : "--";
+      return `<span class="${deltaClass(item.delta_amount)}">涨跌 ${amount} / ${rate}</span>`;
+    }
+
+    function renderEntryCard(item, type) {
+      const title = type === "hotspot" ? item.title : item.herb;
+      const spec = type === "hotspot" ? (item.kind || "行业热点") : (item.spec || "待补规格");
+      const locationLabel = type === "origin" ? "产区" : type === "market" ? "市场" : "关联";
+      const location = type === "origin" ? item.location : type === "market" ? item.market : (item.location || "待补");
+      const tag = type === "hotspot" ? (item.kind || "行业热点") : (item.tag || "关注");
+      const summary = item.summary ? `<p class="entry-summary">${escapeHtml(item.summary)}</p>` : "";
+      const price = type === "hotspot" || !item.price ? "" : `<span class="entry-price">${escapeHtml(item.price)}</span>`;
+      const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
+      const related = type === "hotspot" && item.herb ? ` · 关联品种：${escapeHtml(item.herb)}` : "";
+      const url = safeUrl(item.url);
+
+      return `
+        <article class="entry-card">
+          <div class="entry-top">
+            <span class="entry-date">${escapeHtml(item.date || "--")}</span>
+            <div class="entry-badges">
+              <span class="${type === "hotspot" ? "tag" : tagClass(tag)}">${escapeHtml(tag)}</span>
+              ${price}
+              ${delta}
+            </div>
+          </div>
+          <div class="entry-title-row">
+            <h3 class="entry-title">${escapeHtml(title || "待补标题")}</h3>
+            <span class="entry-spec">${escapeHtml(spec)}</span>
+          </div>
+          <div class="entry-meta">${locationLabel}：${escapeHtml(location)}${related}</div>
+          ${summary}
+          <div class="entry-footer">
+            <span>来源：${escapeHtml(item.source || "待补来源")}</span>
+            ${url ? `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">查看来源</a>` : ""}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderHero(dashboard) {
+      document.getElementById("statusPill").textContent = dashboard.status;
+      document.getElementById("heroEyebrow").innerHTML = `<span class="eyebrow-dot"></span>${escapeHtml(dashboard.hero.eyebrow)}`;
+      document.getElementById("heroTitle").textContent = dashboard.hero.title;
+      document.getElementById("heroLead").textContent = dashboard.hero.lead;
+      document.getElementById("footerLeft").textContent = dashboard.footer.left;
+      document.getElementById("footerRight").textContent = dashboard.footer.right;
+      document.getElementById("latestDateBig").textContent = dashboard.snapshot.latest_date || "--";
+      document.getElementById("latestDateSub").textContent = dashboard.snapshot.latest_count
+        ? `最新整理日共 ${dashboard.snapshot.latest_count} 条记录`
+        : "当前还没有最新快照";
+
+      document.getElementById("sourceStrip").innerHTML = (dashboard.hero.source_strip || [])
+        .map((item) => `<span class="source-chip">${escapeHtml(item)}</span>`)
+        .join("");
+
+      document.getElementById("snapshotGrid").innerHTML = [
+        { label: "全部记录", value: dashboard.meta.total_records },
+        { label: "产地行情", value: dashboard.meta.origin_records },
+        { label: "市场行情", value: dashboard.meta.market_records },
+        { label: "来源站点", value: dashboard.meta.source_count },
+      ].map((item) => `
+        <div class="mini-card">
+          <div class="mini-label">${escapeHtml(item.label)}</div>
+          <div class="mini-value">${escapeHtml(item.value)}</div>
+        </div>
+      `).join("");
+
+      const topHerbs = dashboard.snapshot.top_herbs || [];
+      document.getElementById("topHerbList").innerHTML = topHerbs.length
+        ? topHerbs.map((item, index) => `
+          <li class="signal-row">
+            <span class="signal-index">${index + 1}</span>
+            <span class="signal-name">${escapeHtml(item.name)}</span>
+            <span class="signal-count">${escapeHtml(item.count)} 条</span>
+          </li>
+        `).join("")
+        : `<li class="signal-row"><span class="signal-name">当前还没有可展示的高频品种。</span></li>`;
+    }
+
+    function renderChipGroup(rootId, items, activeValue, onClick) {
+      const root = document.getElementById(rootId);
+      root.innerHTML = items.map((item) => `
+        <button class="filter-chip ${item.value === activeValue ? "active" : ""}" data-value="${escapeHtml(item.value)}" type="button">
+          ${escapeHtml(item.label)}
+        </button>
+      `).join("");
+      root.querySelectorAll(".filter-chip").forEach((button) => {
+        button.addEventListener("click", () => onClick(button.dataset.value));
+      });
+    }
+
+    function filteredOriginItems() {
+      if (!state.dashboard) return [];
+      const query = state.originQuery.trim().toLowerCase();
+      return (state.dashboard.origin.items || []).filter((item) => {
+        const dateMatch = state.originDate === "all" || item.date === state.originDate;
+        const sourceMatch = state.originSource === "all" || item.source === state.originSource;
+        const haystack = [item.herb, item.spec, item.location, item.summary, item.source].join(" ").toLowerCase();
+        const queryMatch = !query || haystack.includes(query);
+        return dateMatch && sourceMatch && queryMatch;
+      });
+    }
+
+    function renderOriginSection(dashboard) {
+      const allItems = filteredOriginItems();
+      const totalPages = Math.max(1, Math.ceil(allItems.length / state.originPageSize));
+      if (state.originPage > totalPages) state.originPage = totalPages;
+      const start = (state.originPage - 1) * state.originPageSize;
+      const pageItems = allItems.slice(start, start + state.originPageSize);
+
+      renderChipGroup(
+        "originDateFilters",
+        [{ value: "all", label: "全部日期" }, ...(dashboard.origin.date_options || []).map((value) => ({ value, label: value }))],
+        state.originDate,
+        (value) => {
+          state.originDate = value;
+          state.originPage = 1;
+          renderOriginSection(state.dashboard);
+        }
+      );
+
+      renderChipGroup(
+        "originSourceFilters",
+        [{ value: "all", label: "全部来源" }, ...(dashboard.origin.source_options || []).map((value) => ({ value, label: value }))],
+        state.originSource,
+        (value) => {
+          state.originSource = value;
+          state.originPage = 1;
+          renderOriginSection(state.dashboard);
+        }
+      );
+
+      document.getElementById("originCountChip").textContent = `${allItems.length} 条`;
+      document.getElementById("originMeta").innerHTML = [
+        `<span class="metric-chip active">总产地记录 ${escapeHtml(dashboard.origin.total)} 条</span>`,
+        `<span class="metric-chip">最新日期 ${escapeHtml(dashboard.origin.latest_date || "--")}</span>`,
+        `<span class="metric-chip">当前页 ${escapeHtml(pageItems.length)} 条</span>`,
+      ].join("");
+
+      const root = document.getElementById("originList");
+      root.innerHTML = pageItems.length
+        ? pageItems.map((item) => renderEntryCard(item, "origin")).join("")
+        : `<div class="empty-state">${escapeHtml(dashboard.origin.empty_text)}</div>`;
+
+      document.getElementById("originPageInfo").textContent = `第 ${state.originPage} 页 / 共 ${totalPages} 页`;
+      document.getElementById("originPrev").disabled = state.originPage === 1;
+      document.getElementById("originNext").disabled = state.originPage === totalPages;
+    }
+
+    function renderMarketSection(dashboard) {
+      const groups = dashboard.markets.groups || [];
+      const tabs = groups.filter((group) => group.count > 0 || dashboard.markets.targets.includes(group.name));
+      if (!tabs.find((group) => group.name === state.currentMarket)) {
+        state.currentMarket = tabs.find((group) => group.count > 0)?.name || tabs[0]?.name || "";
+      }
+
+      document.getElementById("marketCountChip").textContent = `${dashboard.markets.covered_count} / ${dashboard.markets.targets.length}`;
+      document.getElementById("marketTargetChips").innerHTML = [
+        `<span class="metric-chip active">目标市场：${dashboard.markets.targets.join(" / ")}</span>`,
+        `<span class="metric-chip">当前市场记录 ${dashboard.markets.total} 条</span>`,
+        dashboard.markets.extra_market_count ? `<span class="metric-chip">补充市场 ${dashboard.markets.extra_market_count} 个</span>` : "",
+      ].filter(Boolean).join("");
+
+      document.getElementById("marketTabs").innerHTML = tabs.map((group) => `
+        <button class="market-tab ${group.name === state.currentMarket ? "active" : ""}" type="button" data-market="${escapeHtml(group.name)}">
+          ${escapeHtml(group.name)} (${group.count})
+        </button>
+      `).join("");
+
+      document.querySelectorAll(".market-tab").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.currentMarket = button.dataset.market;
+          renderMarketSection(state.dashboard);
+        });
+      });
+
+      const currentGroup = groups.find((group) => group.name === state.currentMarket);
+      const summary = document.getElementById("marketSummary");
+      const list = document.getElementById("marketList");
+
+      if (!currentGroup || !currentGroup.items.length) {
+        summary.textContent = `${state.currentMarket || "该市场"} 当前还没有录入到真实记录，后续补齐数据后会自动展示。`;
+        list.innerHTML = `<div class="empty-state">${escapeHtml(dashboard.markets.empty_text)}</div>`;
+        return;
+      }
+
+      summary.innerHTML = `${escapeHtml(currentGroup.name)} 当前共 ${escapeHtml(currentGroup.count)} 条记录，最新日期为 ${escapeHtml(currentGroup.latest_date || "--")}。${(currentGroup.sources || []).length ? ` 来源结构：${escapeHtml(currentGroup.sources.join(" / "))}` : ""}`;
+      list.innerHTML = currentGroup.items.map((item) => renderEntryCard(item, "market")).join("");
+    }
+
+    function renderHotspotSection(dashboard) {
+      const items = (dashboard.hotspots.items || []).filter((item) => state.hotspotKind === "all" || item.kind === state.hotspotKind);
+      document.getElementById("hotspotCountChip").textContent = `${dashboard.hotspots.total} 条`;
+
+      renderChipGroup(
+        "hotspotFilters",
+        [{ value: "all", label: "全部类型" }, ...(dashboard.hotspots.kind_options || []).map((value) => ({ value, label: value }))],
+        state.hotspotKind,
+        (value) => {
+          state.hotspotKind = value;
+          renderHotspotSection(state.dashboard);
+        }
+      );
+
+      document.getElementById("hotspotList").innerHTML = items.length
+        ? items.map((item) => renderEntryCard(item, "hotspot")).join("")
+        : `<div class="empty-state">${escapeHtml(dashboard.hotspots.empty_text)}</div>`;
+    }
+
+    function renderFailure(message) {
+      document.getElementById("statusPill").textContent = "数据加载失败";
+      document.getElementById("originList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
+      document.getElementById("marketList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
+      document.getElementById("hotspotList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
+      document.getElementById("footerRight").textContent = "请确认 public/data/dashboard.json 已生成。";
+    }
+
+    async function loadDashboard() {
+      try {
+        const response = await fetch("./data/dashboard.json");
+        if (!response.ok) throw new Error(`Failed to load dashboard.json: ${response.status}`);
+        state.dashboard = await response.json();
+        state.currentMarket = (state.dashboard.markets.groups || []).find((group) => group.count > 0)?.name || "";
+        renderHero(state.dashboard);
+        renderOriginSection(state.dashboard);
+        renderMarketSection(state.dashboard);
+        renderHotspotSection(state.dashboard);
+
+        document.getElementById("originSearch").addEventListener("input", (event) => {
+          state.originQuery = event.target.value;
+          state.originPage = 1;
+          renderOriginSection(state.dashboard);
+        });
+
+        document.getElementById("originPrev").addEventListener("click", () => {
+          if (state.originPage > 1) {
+            state.originPage -= 1;
+            renderOriginSection(state.dashboard);
+          }
+        });
+
+        document.getElementById("originNext").addEventListener("click", () => {
+          const totalPages = Math.max(1, Math.ceil(filteredOriginItems().length / state.originPageSize));
+          if (state.originPage < totalPages) {
+            state.originPage += 1;
+            renderOriginSection(state.dashboard);
+          }
+        });
+      } catch (error) {
+        console.error(error);
+        renderFailure("当前没有读到 dashboard.json，请先运行数据生成脚本。");
+      }
+    }
+
+    loadDashboard();
+  </script>
+</body>
+</html>
