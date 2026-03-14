@@ -758,6 +758,7 @@
         align-items: stretch;
         gap: 10px;
         margin-bottom: 14px;
+        max-width: 100%;
       }
 
       .global-search-box {
@@ -765,9 +766,33 @@
         max-width: none;
       }
 
-      .search-submit {
+      .global-search-filters {
+        gap: 10px;
+      }
+
+      .global-search-filters .filter-group {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         width: 100%;
-        min-width: 0;
+        gap: 8px;
+        justify-content: stretch;
+      }
+
+      .global-search-filters .filter-chip {
+        width: 100%;
+        min-height: 42px;
+        justify-content: center;
+        padding: 9px 8px;
+        font-size: 12px;
+      }
+
+      .search-submit {
+        width: 132px;
+        min-width: 132px;
+        min-height: 48px;
+        align-self: center;
+        padding: 0 20px;
+        font-size: 15px;
       }
 
       .hero-title {
@@ -846,6 +871,15 @@
 
       .quick-nav {
         top: 8px;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .nav-pill {
+        width: calc(50% - 4px);
+        justify-content: center;
+        padding: 10px 12px;
+        font-size: 13px;
       }
     }
   </style>
