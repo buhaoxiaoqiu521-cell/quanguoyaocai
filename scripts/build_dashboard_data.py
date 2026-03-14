@@ -239,12 +239,12 @@ def build_hotspot_items(path: Path | None) -> list[dict[str, Any]]:
     return items
 
 
-def load_openclaw_records(path: Path | None) -> list[WorkbookRecord]:
+def load_json_records(path: Path | None, empty_error: str) -> list[WorkbookRecord]:
     if path is None or not path.exists():
         return []
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, list):
-        raise ValueError("OpenClaw origin file must be a JSON array.")
+        raise ValueError(empty_error)
 
     records: list[WorkbookRecord] = []
     for raw in payload:
@@ -430,22 +430,37 @@ def main() -> None:
         default="content/openclaw_origin.json",
         help="OpenClaw 产地 JSON 文件路径；存在时会自动并入产地行情",
     )
+    parser.add_argument(
+        "--market-json",
+        default="content/market_updates.json",
+        help="市场行情 JSON 文件路径；存在时会自动并入市场行情",
+    )
     args = parser.parse_args()
 
     openclaw_path = Path(args.openclaw_origin).expanduser().resolve()
-    openclaw_records = load_openclaw_records(openclaw_path if openclaw_path.exists() else None)
-    source_path = resolve_input_path(args.input, required=not openclaw_records)
+    market_path = Path(args.market_json).expanduser().resolve()
+    openclaw_records = load_json_records(
+        openclaw_path if openclaw_path.exists() else None,
+        "OpenClaw origin file must be a JSON array.",
+    )
+    market_json_records = load_json_records(
+        market_path if market_path.exists() else None,
+        "Market updates file must be a JSON array.",
+    )
+    source_path = resolve_input_path(args.input, required=not (openclaw_records or market_json_records))
     hotspot_path = Path(args.hotspots).expanduser().resolve()
     output_path = Path(args.output).expanduser().resolve()
 
     records = load_workbook_rows(source_path) if source_path else []
-    records = dedupe_records(records + openclaw_records)
+    records = dedupe_records(records + openclaw_records + market_json_records)
 
     source_parts: list[str] = []
     if source_path:
         source_parts.append(source_path.name)
     if openclaw_records:
         source_parts.append(openclaw_path.name)
+    if market_json_records:
+        source_parts.append(market_path.name)
     source_label = " + ".join(source_parts) if source_parts else "无输入文件"
 
     dashboard = build_dashboard(records, source_label, hotspot_path if hotspot_path.exists() else None)

@@ -12,11 +12,13 @@
 - `public/data/dashboard.json`：前端读取的数据文件
 - `scripts/build_dashboard_data.py`：从 Excel 生成 `dashboard.json`
 - `scripts/import_openclaw_origin.py`：把 OpenClaw 抓取缓存转换成网站可用的产地行情 JSON
+- `scripts/fetch_market_updates.py`：直接抓取药通网 + 中药材天地网市场快讯，生成市场行情 JSON
 - `scripts/update_from_openclaw.py`：一键从 OpenClaw 缓存更新网站数据
 - `scripts/publish_openclaw_update.py`：更新产地行情并自动提交、推送到 GitHub
 - `data-source/latest.xlsx`：建议放在仓库里的最新 Excel 数据源
 - `content/hotspots.json`：行业热点输入文件，当前默认为空数组
 - `content/openclaw_origin.json`：OpenClaw 产地行情缓存导入结果
+- `content/market_updates.json`：市场行情抓取结果
 
 ## 更新数据
 
@@ -41,6 +43,19 @@ python3 scripts/update_from_openclaw.py --workspace /Users/bohao/.openclaw/works
 - 生成 `content/openclaw_origin.json`
 - 重建 `public/data/dashboard.json`
 
+如果只更新市场行情，可以运行：
+
+```bash
+python3 scripts/fetch_market_updates.py
+```
+
+这条命令会：
+
+- 抓取药通网 `亳州 / 安国 / 玉林` 三个市场
+- 抓取中药材天地网 `市场快讯` 栏目
+- 优先取当天数据；某市场当天为空时自动回退到最近有效日期
+- 生成 `content/market_updates.json`
+
 如果要继续自动发布到 GitHub，可以运行：
 
 ```bash
@@ -50,6 +65,7 @@ python3 scripts/publish_openclaw_update.py --workspace /Users/bohao/.openclaw/wo
 这条命令会在数据变化时只提交：
 
 - `content/openclaw_origin.json`
+- `content/market_updates.json`
 - `public/data/dashboard.json`
 
 然后推送到 `main`，Cloudflare Pages 会自动重新部署。

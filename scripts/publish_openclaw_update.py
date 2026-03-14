@@ -54,8 +54,13 @@ def main() -> None:
     )
     parser.add_argument(
         "--commit-message",
-        default="更新产地行情数据",
+        default="更新产地与市场行情数据",
         help="git 提交信息",
+    )
+    parser.add_argument(
+        "--target-date",
+        default=None,
+        help="市场行情目标日期；默认今天",
     )
     parser.add_argument(
         "--no-push",
@@ -64,11 +69,18 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    market_fetcher = root / "scripts" / "fetch_market_updates.py"
     updater = root / "scripts" / "update_from_openclaw.py"
     tracked_files = [
         "content/openclaw_origin.json",
+        "content/market_updates.json",
         "public/data/dashboard.json",
     ]
+
+    market_cmd = [sys.executable, str(market_fetcher)]
+    if args.target_date:
+        market_cmd.extend(["--target-date", args.target_date])
+    run(market_cmd, cwd=root)
 
     update_cmd = [
         sys.executable,
