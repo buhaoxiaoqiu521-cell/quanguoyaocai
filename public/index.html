@@ -242,18 +242,86 @@
 
     .global-search {
       margin-bottom: 18px;
-      background: rgba(247, 240, 223, 0.9);
+      background:
+        radial-gradient(circle at 18% 14%, rgba(229, 197, 142, 0.12), transparent 24%),
+        linear-gradient(135deg, rgba(18, 42, 33, 0.98), rgba(14, 30, 24, 0.98));
     }
 
     .global-search-body {
-      padding: 18px 22px;
+      padding: 22px 24px;
+    }
+
+    .global-search-controls {
+      display: flex;
+      gap: 12px;
+      max-width: 980px;
+      margin: 0 auto 18px;
     }
 
     .global-search-box {
-      max-width: 980px;
-      margin: 0 auto;
+      flex: 1 1 auto;
       min-height: 58px;
-      background: rgba(255, 255, 255, 0.72);
+      background: rgba(247, 240, 223, 0.06);
+      border-color: rgba(247, 240, 223, 0.14);
+      padding: 0 18px;
+    }
+
+    .global-search-box span {
+      color: #f0dec0;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .global-search .search-input {
+      color: #f8efdb;
+    }
+
+    .global-search .search-input::placeholder {
+      color: rgba(248, 239, 219, 0.56);
+    }
+
+    .search-submit {
+      min-width: 136px;
+      min-height: 58px;
+      padding: 0 24px;
+      border: 1px solid rgba(229, 197, 142, 0.34);
+      background: linear-gradient(135deg, rgba(184, 133, 56, 0.3), rgba(229, 197, 142, 0.18));
+      color: #fff3d6;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .search-submit:hover {
+      transform: translateY(-1px);
+      border-color: rgba(229, 197, 142, 0.54);
+      background: linear-gradient(135deg, rgba(184, 133, 56, 0.4), rgba(229, 197, 142, 0.22));
+    }
+
+    .global-search-filters {
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+    }
+
+    .global-search .filter-group,
+    .global-search .meta-row {
+      justify-content: center;
+    }
+
+    .global-search .filter-chip,
+    .global-search .metric-chip {
+      color: rgba(248, 239, 219, 0.84);
+      border-color: rgba(247, 240, 223, 0.14);
+      background: rgba(247, 240, 223, 0.06);
+    }
+
+    .global-search .filter-chip.active,
+    .global-search .metric-chip.active {
+      color: #fff3d6;
+      border-color: rgba(229, 197, 142, 0.42);
+      background: rgba(184, 133, 56, 0.22);
     }
 
     .source-chip,
@@ -692,6 +760,16 @@
         padding: 16px 14px;
       }
 
+      .global-search-controls {
+        flex-direction: column;
+        margin-bottom: 14px;
+      }
+
+      .search-submit {
+        width: 100%;
+        min-width: 0;
+      }
+
       .hero-title {
         font-size: clamp(28px, 9vw, 42px);
       }
@@ -797,10 +875,18 @@
 
     <section class="global-search panel">
       <div class="global-search-body">
-        <label class="search-box global-search-box">
-          <span>全站检索</span>
-          <input class="search-input" id="globalSearch" type="search" placeholder="搜索产地行情、天天行情、行业热点">
-        </label>
+        <div class="global-search-controls">
+          <label class="search-box global-search-box">
+            <span>全站检索</span>
+            <input class="search-input" id="globalSearch" type="search" placeholder="搜索产地行情、天天行情、行业热点">
+          </label>
+          <button class="button search-submit" id="globalSearchSubmit" type="button">搜索</button>
+        </div>
+        <div class="global-search-filters">
+          <div class="filter-group" id="originDateFilters"></div>
+          <div class="filter-group" id="originSourceFilters"></div>
+          <div class="meta-row" id="originMeta"></div>
+        </div>
       </div>
     </section>
 
@@ -818,9 +904,6 @@
         <div class="count-chip" id="originCountChip">0 条</div>
       </div>
       <div class="section-body">
-        <div class="filter-group" id="originDateFilters" style="justify-content:flex-start; margin-bottom: 16px;"></div>
-        <div class="filter-group" id="originSourceFilters" style="justify-content:flex-start; margin-bottom: 16px;"></div>
-        <div class="meta-row" id="originMeta"></div>
         <div class="entry-list" id="originList"></div>
         <div class="pager">
           <button class="pager-button" id="originPrev">上一页</button>
@@ -1013,6 +1096,15 @@
       return [...new Set((items || []).map((item) => item.source).filter(Boolean))];
     }
 
+    function applyGlobalSearch() {
+      const input = document.getElementById("globalSearch");
+      state.globalQuery = input ? input.value : "";
+      state.originPage = 1;
+      renderOriginSection(state.dashboard);
+      renderMarketSection(state.dashboard);
+      renderHotspotSection(state.dashboard);
+    }
+
     function renderOriginSection(dashboard) {
       const allItems = filteredOriginItems();
       const totalPages = Math.max(1, Math.ceil(allItems.length / state.originPageSize));
@@ -1169,12 +1261,15 @@
         renderMarketSection(state.dashboard);
         renderHotspotSection(state.dashboard);
 
-        document.getElementById("globalSearch").addEventListener("input", (event) => {
-          state.globalQuery = event.target.value;
-          state.originPage = 1;
-          renderOriginSection(state.dashboard);
-          renderMarketSection(state.dashboard);
-          renderHotspotSection(state.dashboard);
+        document.getElementById("globalSearch").addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            applyGlobalSearch();
+          }
+        });
+
+        document.getElementById("globalSearchSubmit").addEventListener("click", () => {
+          applyGlobalSearch();
         });
 
         document.getElementById("originPrev").addEventListener("click", () => {
