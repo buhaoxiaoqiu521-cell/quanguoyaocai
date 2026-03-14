@@ -79,24 +79,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 10px;
       min-width: 0;
       max-width: 980px;
-    }
-
-    .brand-mark {
-      width: 74px;
-      height: 74px;
-      display: grid;
-      place-items: center;
-      border-radius: 26px;
-      background:
-        linear-gradient(145deg, #f5e9cc, #d6bc80);
-      color: var(--green-deep);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
-      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: 34px;
-      font-weight: 700;
     }
 
     .brand h1 {
@@ -183,41 +168,15 @@
       background: rgba(247, 240, 223, 0.04);
       max-width: 1100px;
       margin: 0 auto;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(247, 240, 223, 0.08);
-      border: 1px solid rgba(247, 240, 223, 0.12);
-      color: #f0dec0;
-      font-size: 14px;
-    }
-
-    .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--gold-soft);
+      text-align: center;
     }
 
     .hero-title {
-      margin: 18px 0 12px;
+      margin: 0 0 12px;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
       font-size: clamp(30px, 4.2vw, 48px);
       line-height: 1.18;
       letter-spacing: -0.04em;
-    }
-
-    .hero-lead {
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.8;
-      color: rgba(246, 237, 219, 0.78);
-      max-width: 920px;
     }
 
     .hero-actions {
@@ -225,6 +184,7 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 20px;
+      justify-content: center;
     }
 
     .button {
@@ -259,6 +219,11 @@
       color: #fff3d6;
       border-color: rgba(229, 197, 142, 0.34);
       background: rgba(184, 133, 56, 0.16);
+      min-width: 260px;
+      min-height: 72px;
+      padding: 18px 30px;
+      font-size: 24px;
+      font-weight: 700;
     }
 
     .hero-note-title {
@@ -689,9 +654,10 @@
       }
 
       .topbar {
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
         padding-bottom: 18px;
+        text-align: center;
       }
 
       .hero-copy,
@@ -703,12 +669,15 @@
         font-size: clamp(28px, 9vw, 42px);
       }
 
-      .hero-lead {
-        font-size: 15px;
-      }
-
       .hero-card {
         padding: 20px 16px;
+      }
+
+      .button.trace {
+        width: 100%;
+        min-width: 0;
+        min-height: 58px;
+        font-size: 19px;
       }
 
       .section-head {
@@ -780,7 +749,6 @@
   <main class="shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark">药</div>
         <h1>中药材全国追踪</h1>
         <p>聚合产地行情、市场动态与行业快讯的一站式中药材信息情报中心。</p>
       </div>
@@ -790,17 +758,12 @@
     <section class="hero panel">
       <div class="hero-copy">
         <article class="hero-card">
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            曹操溯源平台
-          </div>
-          <h2 class="hero-title">欢迎各位药商、加工户入驻，查看更正式的溯源与主体信息。</h2>
-          <p class="hero-lead">曹操溯源平台侧重中药材流通与追溯信息展示，适合查看更规范的主体、产地、批次和相关追溯信息。</p>
+          <h2 class="hero-title">曹操溯源平台</h2>
           <div class="hero-actions">
             <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
           </div>
-          <h3 class="hero-note-title">建设初衷与使用说明</h3>
-          <p class="hero-note">本站用于集中整理中药材公开行情与行业线索，方便快速查看与跟踪。页面内容仅供信息参考，可能存在延迟、误差或缺漏；如涉及正式追溯与业务凭证，请以溯源平台和原始信息为准。</p>
+          <h3 class="hero-note-title">免责说明</h3>
+          <p class="hero-note">本站用于集中整理中药材公开行情与行业线索，方便快速查看与跟踪。页面内容仅供信息参考，可能存在延迟、误差或缺漏。</p>
         </article>
       </div>
     </section>
