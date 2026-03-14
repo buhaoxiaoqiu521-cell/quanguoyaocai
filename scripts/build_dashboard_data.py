@@ -1083,6 +1083,11 @@ def main() -> None:
         action="store_true",
         help="构建时排除 Excel 里的旧产地记录，仅保留市场记录与 JSON 导入数据",
     )
+    parser.add_argument(
+        "--exclude-workbook-market",
+        action="store_true",
+        help="构建时排除 Excel 里的旧市场记录，仅保留产地记录与 JSON 导入数据",
+    )
     args = parser.parse_args()
 
     openclaw_path = Path(args.openclaw_origin).expanduser().resolve()
@@ -1102,6 +1107,8 @@ def main() -> None:
     records = load_workbook_rows(source_path) if source_path else []
     if args.exclude_workbook_origin:
         records = [record for record in records if record.market != "产地"]
+    if args.exclude_workbook_market:
+        records = [record for record in records if record.market == "产地"]
     records = dedupe_records(records + openclaw_records + market_json_records)
     records = backfill_yt1998_urls(records)
 
