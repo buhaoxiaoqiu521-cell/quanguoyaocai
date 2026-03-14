@@ -1029,6 +1029,9 @@
     function safeUrl(url) {
       try {
         const parsed = new URL(url, window.location.href);
+        if (parsed.hostname === "www.yt1998.com" && parsed.pathname === "/ytw/second/marketMgr/detail.jsp") {
+          return "";
+        }
         if (parsed.protocol === "http:" || parsed.protocol === "https:") {
           return parsed.href;
         }

@@ -10,6 +10,8 @@ from datetime import datetime
 import os
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
 
@@ -22,6 +24,8 @@ STEADY_KEYWORDS = ("平稳", "价稳", "稳定", "持稳", "正常走动", "正�
 DOWN_KEYWORDS = ("走缓", "走慢", "走动不快", "交易不畅", "不畅", "观望", "疲软", "货源充足")
 XML_NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"
+YT_QUERY_URL = "https://www.yt1998.com/ytw/second/marketMgr/query.jsp"
+YT_HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 
 @dataclass
@@ -75,6 +79,22 @@ def format_price(value: str, unit: str) -> str:
     return f"{format_number(number)} {unit_text}"
 
 
+def normalize_source_url(source: str, url: str) -> str:
+    source_text = clean_text(source)
+    url_text = clean_text(url)
+    if not url_text:
+        return ""
+    if source_text == "药通网" and "/ytw/second/marketMgr/detail.jsp" in url_text:
+        # 药通网这类旧 detail.jsp 链接已经失效，前端不再展示 404 按钮
+        return ""
+    return url_text
+
+
+def normalize_lookup_text(value: Any) -> str:
+    text = clean_text(value)
+    return re.sub(r"[^\w\u4e00-\u9fff]+", "", text)
+
+
 def normalize_row(record: dict[str, str]) -> WorkbookRecord:
     today_num = parse_number(record["今日价"])
     yesterday_num = parse_number(record["昨日价"])
@@ -99,7 +119,7 @@ def normalize_row(record: dict[str, str]) -> WorkbookRecord:
         delta_amount=clean_text(delta_amount),
         delta_rate=clean_text(delta_rate),
         source=clean_text(record["来源网站"]),
-        url=clean_text(record["来源链接"]),
+        url=normalize_source_url(record["来源网站"], record["来源链接"]),
         summary=clean_text(record["备注"]),
     )
 
@@ -175,6 +195,140 @@ def load_workbook_rows(path: Path) -> list[WorkbookRecord]:
         record = {headers[idx]: clean_text(row.get(col, "")) for idx, col in enumerate(COLS)}
         normalized.append(normalize_row(record))
     return normalized
+
+
+def fetch_yt_items(lmid: str, min_date: str) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for page in range(1, 61):
+        params = {"lmid": lmid, "pageIndex": str(page), "pageSize": "20"}
+        if lmid == "3":
+            params["times"] = "1"
+        else:
+            params["ycnam"] = ""
+        request = Request(f"{YT_QUERY_URL}?{urlencode(params)}", headers=YT_HEADERS)
+        with urlopen(request, timeout=20) as response:
+            payload = json.loads(response.read().decode("utf-8", "ignore"))
+        page_items = payload.get("data") or []
+        if not page_items:
+            break
+        items.extend(page_items)
+        page_dates = [clean_text(item.get("dtm"))[:10] for item in page_items]
+        if min_date and page_dates and all(date and date < min_date for date in page_dates):
+            break
+    return items
+
+
+def yt_detail_url(item: dict[str, Any], is_origin: bool) -> str:
+    accode = clean_text(item.get("accode"))
+    if not accode:
+        return ""
+    if is_origin:
+        return f"https://www.yt1998.com/hqzx/{accode}.html"
+    scid = clean_text(item.get("scid")) or "1"
+    return f"https://www.yt1998.com/hqzx/{accode}_{scid}.html"
+
+
+def score_yt_match(record: WorkbookRecord, item: dict[str, Any]) -> int:
+    record_date = clean_text(record.date)
+    item_date = clean_text(item.get("dtm"))[:10]
+    if not record_date or record_date != item_date:
+        return -1
+
+    record_herb = normalize_lookup_text(record.herb)
+    record_summary = normalize_lookup_text(record.summary)
+    record_location = normalize_lookup_text(record.location)
+    record_market = normalize_lookup_text(record.market)
+
+    item_herb = normalize_lookup_text(item.get("ycnam"))
+    item_title = normalize_lookup_text(item.get("title"))
+    item_content = normalize_lookup_text(item.get("cont"))
+    item_market = normalize_lookup_text(item.get("market"))
+
+    score = 0
+    if record_herb and record_herb == item_herb:
+        score += 3
+    elif record_herb and record_herb in (item_title + item_content):
+        score += 1
+
+    if record_summary and record_summary == item_title:
+        score += 6
+    elif record_summary and record_summary in item_title:
+        score += 5
+    elif record_summary and record_summary in item_content:
+        score += 4
+
+    if record.market == "产地":
+        if record_location and record_location in item_title:
+            score += 3
+        elif record_location and record_location in item_content:
+            score += 2
+    else:
+        if record_market and record_market in item_market:
+            score += 2
+
+    return score
+
+
+def backfill_yt1998_urls(records: list[WorkbookRecord]) -> list[WorkbookRecord]:
+    target_records = [
+        record
+        for record in records
+        if record.source == "药通网" and not clean_text(record.url)
+    ]
+    if not target_records:
+        return records
+
+    origin_targets = [record for record in target_records if record.market == "产地"]
+    market_targets = [record for record in target_records if record.market != "产地"]
+
+    origin_items: list[dict[str, Any]] = []
+    market_items: list[dict[str, Any]] = []
+    if origin_targets:
+        origin_min_date = min(record.date for record in origin_targets if record.date)
+        origin_items = fetch_yt_items("9", origin_min_date)
+    if market_targets:
+        market_min_date = min(record.date for record in market_targets if record.date)
+        market_items = fetch_yt_items("3", market_min_date)
+
+    updated: list[WorkbookRecord] = []
+    for record in records:
+        if record.source != "药通网" or clean_text(record.url):
+            updated.append(record)
+            continue
+
+        candidates = origin_items if record.market == "产地" else market_items
+        best_score = -1
+        best_item: dict[str, Any] | None = None
+        for item in candidates:
+            score = score_yt_match(record, item)
+            if score > best_score:
+                best_score = score
+                best_item = item
+
+        next_url = record.url
+        if best_item is not None and best_score >= 8:
+            next_url = yt_detail_url(best_item, record.market == "产地")
+
+        updated.append(
+            WorkbookRecord(
+                date=record.date,
+                herb=record.herb,
+                spec=record.spec,
+                unit=record.unit,
+                market=record.market,
+                location=record.location,
+                today_price=record.today_price,
+                yesterday_price=record.yesterday_price,
+                delta_amount=record.delta_amount,
+                delta_rate=record.delta_rate,
+                source=record.source,
+                url=next_url,
+                summary=record.summary,
+                price_label=record.price_label,
+            )
+        )
+
+    return updated
 
 
 def date_key(value: str) -> tuple[int, str]:
@@ -263,7 +417,7 @@ def load_json_records(path: Path | None, empty_error: str) -> list[WorkbookRecor
                 delta_amount=clean_text(raw.get("delta_amount")),
                 delta_rate=clean_text(raw.get("delta_rate")),
                 source=clean_text(raw.get("source")),
-                url=clean_text(raw.get("url")),
+                url=normalize_source_url(raw.get("source"), raw.get("url")),
                 summary=clean_text(raw.get("summary")),
                 price_label=clean_text(raw.get("price_label")),
             )
@@ -453,6 +607,7 @@ def main() -> None:
 
     records = load_workbook_rows(source_path) if source_path else []
     records = dedupe_records(records + openclaw_records + market_json_records)
+    records = backfill_yt1998_urls(records)
 
     source_parts: list[str] = []
     if source_path:
