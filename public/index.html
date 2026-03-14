@@ -168,9 +168,22 @@
     }
 
     .hero-copy {
-      padding: 40px 42px 38px;
+      padding: 34px 36px 30px;
       color: #f6eddb;
-      max-width: 980px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-card {
+      padding: 28px;
+      border-radius: 26px;
+      border: 1px solid rgba(247, 240, 223, 0.1);
+      background: rgba(247, 240, 223, 0.04);
     }
 
     .eyebrow {
@@ -193,19 +206,17 @@
     }
 
     .hero-title {
-      margin: 24px 0 16px;
-      max-width: 1040px;
+      margin: 22px 0 14px;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: clamp(38px, 6vw, 72px);
-      line-height: 1.08;
+      font-size: clamp(32px, 4.8vw, 58px);
+      line-height: 1.12;
       letter-spacing: -0.04em;
     }
 
     .hero-lead {
-      max-width: 920px;
       margin: 0;
-      font-size: 18px;
-      line-height: 1.95;
+      font-size: 17px;
+      line-height: 1.85;
       color: rgba(246, 237, 219, 0.78);
     }
 
@@ -250,11 +261,41 @@
       background: rgba(184, 133, 56, 0.16);
     }
 
+    .hero-note-title {
+      margin: 0 0 12px;
+      font-size: 18px;
+      color: #f6e8c6;
+      font-weight: 700;
+    }
+
+    .hero-note {
+      margin: 0;
+      color: rgba(246, 237, 219, 0.78);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .hero-note + .hero-note {
+      margin-top: 12px;
+    }
+
+    .hero-bullet-list {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: rgba(246, 237, 219, 0.82);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .hero-bullet-list li + li {
+      margin-top: 8px;
+    }
+
     .source-strip {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 26px;
+      margin-top: 18px;
     }
 
     .source-chip,
@@ -655,6 +696,10 @@
     }
 
     @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
       .control-grid {
         grid-template-columns: 1fr;
       }
@@ -678,15 +723,19 @@
 
       .hero-copy,
       .hero-copy {
-        padding: 28px 20px 24px;
+        padding: 24px 18px 20px;
       }
 
       .hero-title {
-        font-size: clamp(32px, 10vw, 52px);
+        font-size: clamp(28px, 9vw, 42px);
       }
 
       .hero-lead {
-        font-size: 16px;
+        font-size: 15px;
+      }
+
+      .hero-card {
+        padding: 18px 16px;
       }
 
       .section-head {
@@ -769,17 +818,30 @@
 
     <section class="hero panel">
       <div class="hero-copy">
-        <div class="eyebrow" id="heroEyebrow">
-          <span class="eyebrow-dot"></span>
-          中药材情报首页
-        </div>
-        <h2 class="hero-title" id="heroTitle">先把真实记录摊开，再做判断与趋势。</h2>
-        <p class="hero-lead" id="heroLead">首页围绕中药材真实记录来搭建：产地行情完整铺开，天天行情优先补齐亳州、安国、玉林，行业热点单独维护，不和报价信息混在一起。</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#originSection">查看产地行情</a>
-          <a class="button" href="#marketSection">查看天天行情</a>
-          <a class="button" href="#hotspotSection">查看行业热点</a>
-          <a class="button trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
+        <div class="hero-grid">
+          <article class="hero-card">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              溯源入口
+            </div>
+            <h2 class="hero-title">进入中药材溯源平台，查看更正式的追溯信息。</h2>
+            <p class="hero-lead">如果你要看批次、产地、主体、认证或更偏正式的流通信息，请优先进入溯源平台。这个首页更像一个信息整理与快速浏览入口，不替代正式追溯系统。</p>
+            <div class="hero-actions">
+              <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
+              <a class="button" href="#originSection">查看产地行情</a>
+              <a class="button" href="#marketSection">查看天天行情</a>
+            </div>
+          </article>
+          <article class="hero-card">
+            <h3 class="hero-note-title">建设初衷与使用说明</h3>
+            <p class="hero-note">这个网站的建设初衷，是把分散在不同页面里的中药材行情与行业线索先集中整理，方便快速查看、比对与跟踪，不必反复在多个站点之间来回切换。</p>
+            <p class="hero-note">本站内容主要基于公开网页线索、人工整理与阶段性汇总生成，可能存在时间延迟、转述误差、重复记录或缺漏，不保证与原始页面、实际成交或官方口径完全一致。</p>
+            <ul class="hero-bullet-list">
+              <li>本站内容仅供信息参考与内部研判辅助，不构成交易、采购、投资或官方证明依据。</li>
+              <li>如涉及溯源、批次、主体认证、正式流通凭证等事项，请以溯源平台、原始页面和实际业务凭证为准。</li>
+              <li>后续会继续优化数据来源、清洗方式与展示逻辑，尽量把信息做得更完整、更清楚。</li>
+            </ul>
+          </article>
         </div>
         <div class="source-strip" id="sourceStrip"></div>
       </div>
@@ -946,9 +1008,6 @@
 
     function renderHero(dashboard) {
       document.getElementById("statusPill").textContent = dashboard.status;
-      document.getElementById("heroEyebrow").innerHTML = `<span class="eyebrow-dot"></span>${escapeHtml(dashboard.hero.eyebrow)}`;
-      document.getElementById("heroTitle").textContent = dashboard.hero.title;
-      document.getElementById("heroLead").textContent = dashboard.hero.lead;
       document.getElementById("footerLeft").textContent = dashboard.footer.left;
       document.getElementById("footerRight").textContent = dashboard.footer.right;
 
