@@ -39,6 +39,7 @@ class WorkbookRecord:
     source: str
     url: str
     summary: str
+    price_label: str = ""
 
 
 def clean_text(value: Any) -> str:
@@ -199,7 +200,7 @@ def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
         "spec": item.spec or "待补规格",
         "location": item.location or "待补产区",
         "market": item.market or "产地",
-        "price": format_price(item.today_price, item.unit),
+        "price": item.price_label or format_price(item.today_price, item.unit),
         "price_value": today_num,
         "unit": item.unit or "元/kg",
         "delta_amount": format_number(parse_number(item.delta_amount)),
@@ -238,7 +239,58 @@ def build_hotspot_items(path: Path | None) -> list[dict[str, Any]]:
     return items
 
 
-def build_dashboard(records: list[WorkbookRecord], source_path: Path, hotspot_path: Path | None) -> dict[str, Any]:
+def load_openclaw_records(path: Path | None) -> list[WorkbookRecord]:
+    if path is None or not path.exists():
+        return []
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        raise ValueError("OpenClaw origin file must be a JSON array.")
+
+    records: list[WorkbookRecord] = []
+    for raw in payload:
+        if not isinstance(raw, dict):
+            continue
+        records.append(
+            WorkbookRecord(
+                date=clean_text(raw.get("date")),
+                herb=clean_text(raw.get("herb")),
+                spec=clean_text(raw.get("spec")) or "产地快讯",
+                unit=clean_text(raw.get("unit")) or "元/kg",
+                market=clean_text(raw.get("market")) or "产地",
+                location=clean_text(raw.get("location")),
+                today_price=clean_text(raw.get("today_price")),
+                yesterday_price=clean_text(raw.get("yesterday_price")),
+                delta_amount=clean_text(raw.get("delta_amount")),
+                delta_rate=clean_text(raw.get("delta_rate")),
+                source=clean_text(raw.get("source")),
+                url=clean_text(raw.get("url")),
+                summary=clean_text(raw.get("summary")),
+                price_label=clean_text(raw.get("price_label")),
+            )
+        )
+    return records
+
+
+def dedupe_records(records: list[WorkbookRecord]) -> list[WorkbookRecord]:
+    seen: set[tuple[str, str, str, str, str, str]] = set()
+    output: list[WorkbookRecord] = []
+    for record in records:
+        key = (
+            clean_text(record.date),
+            clean_text(record.market),
+            clean_text(record.herb),
+            clean_text(record.location),
+            clean_text(record.source),
+            clean_text(record.summary),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        output.append(record)
+    return output
+
+
+def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_path: Path | None) -> dict[str, Any]:
     records = sorted(records, key=item_sort_key, reverse=True)
     latest_date = records[0].date if records else ""
     dates = sorted({record.date for record in records if record.date}, reverse=True)
@@ -273,7 +325,7 @@ def build_dashboard(records: list[WorkbookRecord], source_path: Path, hotspot_pa
     return {
         "meta": {
             "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "source_file": source_path.name,
+            "source_file": source_label,
             "latest_date": latest_date,
             "available_dates": dates,
             "total_records": len(records),
@@ -326,13 +378,13 @@ def build_dashboard(records: list[WorkbookRecord], source_path: Path, hotspot_pa
             "empty_text": "行业热点表已经预留好，后面补进 JSON 就能直接显示。",
         },
         "footer": {
-            "left": f"数据文件：{source_path.name}",
+            "left": f"数据文件：{source_label}",
             "right": "站点结构已兼容后续继续补药通网天天行情与行业热点。",
         },
     }
 
 
-def resolve_input_path(raw_input: str | None) -> Path:
+def resolve_input_path(raw_input: str | None, required: bool = True) -> Path | None:
     candidates: list[Path] = []
     env_path = os.environ.get("DASHBOARD_INPUT_XLSX")
     if raw_input:
@@ -350,6 +402,8 @@ def resolve_input_path(raw_input: str | None) -> Path:
         resolved = candidate.resolve()
         if resolved.exists():
             return resolved
+    if not required:
+        return None
     searched = "\n".join(f"- {candidate}" for candidate in candidates)
     raise SystemExit(f"Excel file not found. Checked:\n{searched}")
 
@@ -371,14 +425,30 @@ def main() -> None:
         default="public/data/dashboard.json",
         help="输出 dashboard.json 的路径",
     )
+    parser.add_argument(
+        "--openclaw-origin",
+        default="content/openclaw_origin.json",
+        help="OpenClaw 产地 JSON 文件路径；存在时会自动并入产地行情",
+    )
     args = parser.parse_args()
 
-    source_path = resolve_input_path(args.input)
+    openclaw_path = Path(args.openclaw_origin).expanduser().resolve()
+    openclaw_records = load_openclaw_records(openclaw_path if openclaw_path.exists() else None)
+    source_path = resolve_input_path(args.input, required=not openclaw_records)
     hotspot_path = Path(args.hotspots).expanduser().resolve()
     output_path = Path(args.output).expanduser().resolve()
 
-    records = load_workbook_rows(source_path)
-    dashboard = build_dashboard(records, source_path, hotspot_path if hotspot_path.exists() else None)
+    records = load_workbook_rows(source_path) if source_path else []
+    records = dedupe_records(records + openclaw_records)
+
+    source_parts: list[str] = []
+    if source_path:
+        source_parts.append(source_path.name)
+    if openclaw_records:
+        source_parts.append(openclaw_path.name)
+    source_label = " + ".join(source_parts) if source_parts else "无输入文件"
+
+    dashboard = build_dashboard(records, source_label, hotspot_path if hotspot_path.exists() else None)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(dashboard, ensure_ascii=False, indent=2), encoding="utf-8")
