@@ -241,52 +241,50 @@
     }
 
     .global-search {
-      margin-bottom: 18px;
-      background:
-        radial-gradient(circle at 18% 14%, rgba(229, 197, 142, 0.12), transparent 24%),
-        linear-gradient(135deg, rgba(18, 42, 33, 0.98), rgba(14, 30, 24, 0.98));
+      margin-top: 20px;
     }
 
     .global-search-body {
-      padding: 22px 24px;
+      padding: 20px 22px 24px;
     }
 
     .global-search-controls {
       display: flex;
+      justify-content: center;
       gap: 12px;
-      max-width: 980px;
+      max-width: 820px;
       margin: 0 auto 18px;
     }
 
     .global-search-box {
-      flex: 1 1 auto;
+      flex: 0 1 620px;
       min-height: 58px;
-      background: rgba(247, 240, 223, 0.06);
-      border-color: rgba(247, 240, 223, 0.14);
+      background: rgba(255, 255, 255, 0.56);
+      border-color: rgba(44, 78, 59, 0.12);
       padding: 0 18px;
     }
 
     .global-search-box span {
-      color: #f0dec0;
+      color: var(--green);
       font-weight: 700;
       white-space: nowrap;
     }
 
     .global-search .search-input {
-      color: #f8efdb;
+      color: var(--ink);
     }
 
     .global-search .search-input::placeholder {
-      color: rgba(248, 239, 219, 0.56);
+      color: #89968b;
     }
 
     .search-submit {
-      min-width: 136px;
+      min-width: 128px;
       min-height: 58px;
       padding: 0 24px;
-      border: 1px solid rgba(229, 197, 142, 0.34);
-      background: linear-gradient(135deg, rgba(184, 133, 56, 0.3), rgba(229, 197, 142, 0.18));
-      color: #fff3d6;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, var(--green), #47795b);
+      color: #fff8eb;
       font: inherit;
       font-size: 16px;
       font-weight: 700;
@@ -295,33 +293,17 @@
 
     .search-submit:hover {
       transform: translateY(-1px);
-      border-color: rgba(229, 197, 142, 0.54);
-      background: linear-gradient(135deg, rgba(184, 133, 56, 0.4), rgba(229, 197, 142, 0.22));
+      background: linear-gradient(135deg, #356d51, #4f8364);
     }
 
-    .global-search-filters {
-      display: grid;
-      gap: 12px;
-      justify-items: center;
-    }
-
-    .global-search .filter-group,
-    .global-search .meta-row {
+    .global-search-meta {
       justify-content: center;
+      margin-bottom: 16px;
     }
 
-    .global-search .filter-chip,
-    .global-search .metric-chip {
-      color: rgba(248, 239, 219, 0.84);
-      border-color: rgba(247, 240, 223, 0.14);
-      background: rgba(247, 240, 223, 0.06);
-    }
-
-    .global-search .filter-chip.active,
-    .global-search .metric-chip.active {
-      color: #fff3d6;
-      border-color: rgba(229, 197, 142, 0.42);
-      background: rgba(184, 133, 56, 0.22);
+    .tag.section-tag {
+      color: #fff8eb;
+      background: linear-gradient(135deg, var(--green), #47795b);
     }
 
     .source-chip,
@@ -873,23 +855,6 @@
       </div>
     </section>
 
-    <section class="global-search panel">
-      <div class="global-search-body">
-        <div class="global-search-controls">
-          <label class="search-box global-search-box">
-            <span>全站检索</span>
-            <input class="search-input" id="globalSearch" type="search" placeholder="搜索产地行情、天天行情、行业热点">
-          </label>
-          <button class="button search-submit" id="globalSearchSubmit" type="button">搜索</button>
-        </div>
-        <div class="global-search-filters">
-          <div class="filter-group" id="originDateFilters"></div>
-          <div class="filter-group" id="originSourceFilters"></div>
-          <div class="meta-row" id="originMeta"></div>
-        </div>
-      </div>
-    </section>
-
     <nav class="quick-nav">
       <a class="nav-pill" href="#originSection">1. 产地行情</a>
       <a class="nav-pill" href="#marketSection">2. 天天行情</a>
@@ -904,6 +869,9 @@
         <div class="count-chip" id="originCountChip">0 条</div>
       </div>
       <div class="section-body">
+        <div class="filter-group" id="originDateFilters" style="justify-content:flex-start; margin-bottom: 16px;"></div>
+        <div class="filter-group" id="originSourceFilters" style="justify-content:flex-start; margin-bottom: 16px;"></div>
+        <div class="meta-row" id="originMeta"></div>
         <div class="entry-list" id="originList"></div>
         <div class="pager">
           <button class="pager-button" id="originPrev">上一页</button>
@@ -940,6 +908,26 @@
       </div>
     </section>
 
+    <section class="section panel global-search" id="searchSection">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">全站检索</h2>
+        </div>
+        <div class="count-chip" id="searchCountChip">未搜索</div>
+      </div>
+      <div class="section-body global-search-body">
+        <div class="global-search-controls">
+          <label class="search-box global-search-box">
+            <span>检索</span>
+            <input class="search-input" id="globalSearch" type="search" placeholder="搜索产地行情、天天行情、行业热点">
+          </label>
+          <button class="button search-submit" id="globalSearchSubmit" type="button">搜索</button>
+        </div>
+        <div class="meta-row global-search-meta" id="searchMeta"></div>
+        <div class="entry-list" id="searchList"></div>
+      </div>
+    </section>
+
     <footer class="footer">
       <div id="footerLeft">数据文件：--</div>
       <div id="footerRight">站点结构已兼容后续继续补药通网天天行情与行业热点。</div>
@@ -952,7 +940,7 @@
       dashboard: null,
       originPage: 1,
       originPageSize: 10,
-      globalQuery: "",
+      searchQuery: "",
       originDate: "all",
       originSource: "all",
       currentMarket: "",
@@ -1001,12 +989,13 @@
       return `<span class="${deltaClass(item.delta_amount)}">涨跌 ${amount} / ${rate}</span>`;
     }
 
-    function renderEntryCard(item, type) {
+    function renderEntryCard(item, type, options = {}) {
       const title = type === "hotspot" ? item.title : item.herb;
       const spec = type === "hotspot" ? (item.kind || "行业热点") : (item.spec || "待补规格");
       const locationLabel = type === "origin" ? "产区" : type === "market" ? "市场" : "关联";
       const location = type === "origin" ? item.location : type === "market" ? item.market : (item.location || "待补");
       const tag = type === "hotspot" ? (item.kind || "行业热点") : (item.tag || "关注");
+      const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const summary = item.summary ? `<p class="entry-summary">${escapeHtml(item.summary)}</p>` : "";
       const price = type === "hotspot" || !item.price ? "" : `<span class="entry-price">${escapeHtml(item.price)}</span>`;
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
@@ -1018,6 +1007,7 @@
           <div class="entry-top">
             <span class="entry-date">${escapeHtml(item.date || "--")}</span>
             <div class="entry-badges">
+              ${sectionBadge}
               <span class="${type === "hotspot" ? "tag" : tagClass(tag)}">${escapeHtml(tag)}</span>
               ${price}
               ${delta}
@@ -1055,10 +1045,10 @@
       });
     }
 
-    function matchesGlobalQuery(parts) {
-      const query = state.globalQuery.trim().toLowerCase();
-      if (!query) return true;
-      return parts.join(" ").toLowerCase().includes(query);
+    function matchesSearchQuery(query, parts) {
+      const keyword = String(query || "").trim().toLowerCase();
+      if (!keyword) return false;
+      return parts.join(" ").toLowerCase().includes(keyword);
     }
 
     function filteredOriginItems() {
@@ -1066,21 +1056,7 @@
       return (state.dashboard.origin.items || []).filter((item) => {
         const dateMatch = state.originDate === "all" || item.date === state.originDate;
         const sourceMatch = state.originSource === "all" || item.source === state.originSource;
-        const queryMatch = matchesGlobalQuery([item.herb, item.spec, item.location, item.summary, item.source, item.tag, item.price]);
-        return dateMatch && sourceMatch && queryMatch;
-      });
-    }
-
-    function filterMarketItems(items) {
-      return (items || []).filter((item) => matchesGlobalQuery([item.herb, item.spec, item.market, item.summary, item.source, item.tag, item.price]));
-    }
-
-    function filteredHotspotItems() {
-      if (!state.dashboard) return [];
-      return (state.dashboard.hotspots.items || []).filter((item) => {
-        const kindMatch = state.hotspotKind === "all" || item.kind === state.hotspotKind;
-        const queryMatch = matchesGlobalQuery([item.title, item.herb, item.kind, item.location, item.summary, item.source]);
-        return kindMatch && queryMatch;
+        return dateMatch && sourceMatch;
       });
     }
 
@@ -1096,13 +1072,48 @@
       return [...new Set((items || []).map((item) => item.source).filter(Boolean))];
     }
 
-    function applyGlobalSearch() {
+    function collectSearchResults() {
+      if (!state.dashboard) return [];
+      const query = state.searchQuery;
+      if (!query.trim()) return [];
+
+      const results = [];
+      const pushMatches = (items, type, sectionLabel) => {
+        (items || []).forEach((item) => {
+          const matched = matchesSearchQuery(query, [
+            item.title,
+            item.herb,
+            item.spec,
+            item.location,
+            item.market,
+            item.kind,
+            item.summary,
+            item.source,
+            item.tag,
+            item.price,
+          ]);
+          if (!matched) return;
+          results.push({
+            ...item,
+            _searchType: type,
+            _searchSection: sectionLabel,
+          });
+        });
+      };
+
+      pushMatches(state.dashboard.origin.items, "origin", "产地行情");
+      (state.dashboard.markets.groups || []).forEach((group) => {
+        pushMatches(group.items, "market", "天天行情");
+      });
+      pushMatches(state.dashboard.hotspots.items, "hotspot", "行业热点");
+
+      return results.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+    }
+
+    function applySearch() {
       const input = document.getElementById("globalSearch");
-      state.globalQuery = input ? input.value : "";
-      state.originPage = 1;
-      renderOriginSection(state.dashboard);
-      renderMarketSection(state.dashboard);
-      renderHotspotSection(state.dashboard);
+      state.searchQuery = input ? input.value : "";
+      renderSearchSection(state.dashboard);
     }
 
     function renderOriginSection(dashboard) {
@@ -1138,7 +1149,7 @@
       document.getElementById("originMeta").innerHTML = [
         `<span class="metric-chip active">总产地记录 ${escapeHtml(dashboard.origin.total)} 条</span>`,
         `<span class="metric-chip">最新日期 ${escapeHtml(dashboard.origin.latest_date || "--")}</span>`,
-        `<span class="metric-chip">当前页 ${escapeHtml(pageItems.length)} 条</span>`,
+        `<span class="metric-chip">本页显示 ${escapeHtml(pageItems.length)} 条</span>`,
       ].join("");
 
       const root = document.getElementById("originList");
@@ -1161,17 +1172,13 @@
           items: group?.items || [],
         };
       });
-      const totalMatches = tabs.reduce((sum, group) => sum + filterMarketItems(group.items).length, 0);
+      const totalMatches = tabs.reduce((sum, group) => sum + group.items.length, 0);
 
       if (!tabs.find((group) => group.name === state.currentMarket)) {
-        state.currentMarket = tabs[0]?.name || "";
+        state.currentMarket = tabs.find((group) => group.items.length)?.name || tabs[0]?.name || "";
       }
 
-      let currentGroup = tabs.find((group) => group.name === state.currentMarket) || tabs[0];
-      if (currentGroup && !filterMarketItems(currentGroup.items).length) {
-        currentGroup = tabs.find((group) => filterMarketItems(group.items).length) || currentGroup;
-        state.currentMarket = currentGroup?.name || "";
-      }
+      const currentGroup = tabs.find((group) => group.name === state.currentMarket) || tabs[0];
 
       document.getElementById("marketCountChip").textContent = `${totalMatches} 条`;
       document.getElementById("marketTabs").innerHTML = tabs.map((group) => `
@@ -1189,13 +1196,11 @@
 
       const summary = document.getElementById("marketSummary");
       const list = document.getElementById("marketList");
-      const currentItems = filterMarketItems(currentGroup?.items || []);
+      const currentItems = currentGroup?.items || [];
 
       if (!currentGroup || !currentItems.length) {
-        summary.textContent = state.globalQuery.trim()
-          ? `${state.currentMarket || "该市场"}市场暂无匹配“${state.globalQuery}”的记录。`
-          : `${state.currentMarket || "该市场"}市场当前还没有录入到真实记录。`;
-        list.innerHTML = `<div class="empty-state">${escapeHtml(state.globalQuery.trim() ? `没有找到与“${state.globalQuery}”相关的天天行情记录。` : dashboard.markets.empty_text)}</div>`;
+        summary.textContent = `${state.currentMarket || "该市场"}市场当前还没有录入到真实记录。`;
+        list.innerHTML = `<div class="empty-state">${escapeHtml(dashboard.markets.empty_text)}</div>`;
         return;
       }
 
@@ -1204,8 +1209,8 @@
     }
 
     function renderHotspotSection(dashboard) {
-      const items = filteredHotspotItems();
-      document.getElementById("hotspotCountChip").textContent = `${items.length} 条`;
+      const items = (dashboard.hotspots.items || []).filter((item) => state.hotspotKind === "all" || item.kind === state.hotspotKind);
+      document.getElementById("hotspotCountChip").textContent = `${dashboard.hotspots.total} 条`;
 
       renderChipGroup(
         "hotspotFilters",
@@ -1222,11 +1227,43 @@
         : `<div class="empty-state">${escapeHtml(dashboard.hotspots.empty_text)}</div>`;
     }
 
+    function renderSearchSection(dashboard) {
+      const query = state.searchQuery.trim();
+      const results = collectSearchResults();
+      const root = document.getElementById("searchList");
+      const meta = document.getElementById("searchMeta");
+      const countChip = document.getElementById("searchCountChip");
+
+      if (!query) {
+        countChip.textContent = "未搜索";
+        meta.innerHTML = "";
+        root.innerHTML = `<div class="empty-state">输入关键词后，可在这里集中查看产地行情、天天行情和行业热点的匹配结果。</div>`;
+        return;
+      }
+
+      const originCount = results.filter((item) => item._searchSection === "产地行情").length;
+      const marketCount = results.filter((item) => item._searchSection === "天天行情").length;
+      const hotspotCount = results.filter((item) => item._searchSection === "行业热点").length;
+
+      countChip.textContent = `${results.length} 条`;
+      meta.innerHTML = [
+        `<span class="metric-chip active">关键词：${escapeHtml(query)}</span>`,
+        `<span class="metric-chip">产地行情 ${originCount} 条</span>`,
+        `<span class="metric-chip">天天行情 ${marketCount} 条</span>`,
+        `<span class="metric-chip">行业热点 ${hotspotCount} 条</span>`,
+      ].join("");
+
+      root.innerHTML = results.length
+        ? results.map((item) => renderEntryCard(item, item._searchType, { sectionLabel: item._searchSection })).join("")
+        : `<div class="empty-state">没有找到与“${escapeHtml(query)}”相关的内容。</div>`;
+    }
+
     function renderFailure(message) {
       document.getElementById("statusPill").textContent = "数据加载失败";
       document.getElementById("originList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
       document.getElementById("marketList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
       document.getElementById("hotspotList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
+      document.getElementById("searchList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
       document.getElementById("footerRight").textContent = "请确认 public/data/dashboard.json 已生成。";
     }
 
@@ -1260,16 +1297,17 @@
         renderOriginSection(state.dashboard);
         renderMarketSection(state.dashboard);
         renderHotspotSection(state.dashboard);
+        renderSearchSection(state.dashboard);
 
         document.getElementById("globalSearch").addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
-            applyGlobalSearch();
+            applySearch();
           }
         });
 
         document.getElementById("globalSearchSubmit").addEventListener("click", () => {
-          applyGlobalSearch();
+          applySearch();
         });
 
         document.getElementById("originPrev").addEventListener("click", () => {
