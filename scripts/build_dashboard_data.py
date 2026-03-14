@@ -27,21 +27,25 @@ REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}i
 YT_QUERY_URL = "https://www.yt1998.com/ytw/second/marketMgr/query.jsp"
 YT_HEADERS = {"User-Agent": "Mozilla/5.0"}
 PRICE_RANGE_RE = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?"
+    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*(?:元|块)(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?"
 )
-PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
+PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*(?:元|块)(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
 CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
 PHRASE_SPLIT_RE = re.compile(r"[，,]")
 PRICE_SUFFIX_RE = re.compile(r"(售价为|收购价格?|收购价|售价|售价格?|要价|价格为|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
 PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
-INVALID_PRICE_LABEL_RE = re.compile(r"(回调|上调|下调|上涨|下滑|下降|下跌|反弹|相比昨日|较昨日|交易走势|上市量|成交约|气温|天气|湿度|体感|能见度|空气质量)")
+INVALID_PRICE_LABEL_RE = re.compile(
+    r"(回调|上调|下调|上涨|下滑|下降|下跌|反弹|略跌|显跌|显滑|相比昨日|较昨日|交易走势|上市量|成交约|气温|天气|湿度|体感|能见度|空气质量|浏览|评论|作者|分享|昨前天|昨天|前日)"
+)
 GENERIC_PRICE_LABEL_RE = re.compile(r"^(近期|目前|当前|现阶段|近阶段|现|价格|售价|货价|近期价格|当前价格|目前价格|本地|产地|现货|新货)$")
 CHANGE_ONLY_PRICE_RE = re.compile(
     r"(?:(?:价格|行情)(?:相比昨日|较昨日)?|相比昨日|较昨日)?(?:回调|上调|下调|上涨|下滑|下降|下跌|反弹)"
-    r"\s*\d+(?:\.\d+)?(?:\s*(?:-|~|至|到)\s*\d+(?:\.\d+)?)?\s*元"
+    r"\s*\d+(?:\.\d+)?(?:\s*(?:-|~|至|到)\s*\d+(?:\.\d+)?)?\s*(?:元|块)"
 )
 LOCATION_SPLIT_RE = re.compile(r"(?:省|市|州|县|区|旗|镇|乡|村|口岸|地区|盟)")
 NOISE_LOCATION_RE = re.compile(r"^\d{4}年(?:\d{1,2}(?:月(?:\d{1,2}日)?)?)?$|^\d{1,2}月(?:\d{1,2}日)?$|^星期[一二三四五六日天]$")
+ENUMERATION_SPLIT_RE = re.compile(r"(?=[①②③④⑤⑥⑦⑧⑨⑩])")
+LIST_MARKER_RE = re.compile(r"^[①②③④⑤⑥⑦⑧⑨⑩\d]+[\.、\)]?\s*")
 PROVINCE_PREFIXES = sorted(
     [
         "内蒙古", "黑龙江",
@@ -70,6 +74,7 @@ class WorkbookRecord:
     source: str
     url: str
     summary: str
+    content_full: str = ""
     price_label: str = ""
     price_points: list[dict[str, str]] | None = None
 
@@ -134,6 +139,7 @@ def clean_price_point_label(text: str) -> str:
 
 def normalize_price_point_label(text: str) -> str:
     label = clean_text(text)
+    label = LIST_MARKER_RE.sub("", label)
     label = PRICE_PREFIX_RE.sub("", label)
     label = PRICE_SUFFIX_RE.sub("", label)
     label = re.sub(r"[：:、，,；;。]+$", "", label)
@@ -162,26 +168,31 @@ def extract_price_points(text: str) -> list[dict[str, str]]:
         clause = clean_text(clause)
         if not clause:
             continue
-        parts = [clean_text(part) for part in PHRASE_SPLIT_RE.split(clause) if clean_text(part)]
-        for part in parts:
-            range_match = PRICE_RANGE_RE.search(part)
-            single_match = PRICE_SINGLE_RE.search(part)
-            match = range_match or single_match
-            if not match:
-                continue
-            label = normalize_price_point_label(part[:match.start()])
-            if not label:
-                continue
-            if range_match:
-                start, end = range_match.groups()
-                price = f"{start}-{end} 元/kg"
-            else:
-                price = f"{single_match.group(1)} 元/kg"
-            key = (label, price)
-            if key in seen:
-                continue
-            seen.add(key)
-            points.append({"label": label, "price": price})
+        segments = [clean_text(segment) for segment in ENUMERATION_SPLIT_RE.split(clause) if clean_text(segment)] or [clause]
+        for segment in segments:
+            parts = [clean_text(part) for part in PHRASE_SPLIT_RE.split(segment) if clean_text(part)]
+            candidates = [segment] + [part for part in parts if part != segment]
+            for part in candidates:
+                range_match = PRICE_RANGE_RE.search(part)
+                single_match = PRICE_SINGLE_RE.search(part)
+                match = range_match or single_match
+                if not match:
+                    continue
+                if "斤" in part[match.end() : match.end() + 4]:
+                    continue
+                label = normalize_price_point_label(part[:match.start()])
+                if not label:
+                    continue
+                if range_match:
+                    start, end = range_match.groups()
+                    price = f"{start}-{end} 元/kg"
+                else:
+                    price = f"{single_match.group(1)} 元/kg"
+                key = (label, price)
+                if key in seen:
+                    continue
+                seen.add(key)
+                points.append({"label": label, "price": price})
     return points
 
 
@@ -288,17 +299,28 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
         if merged[label] == price:
             continue
         merged[label] = prefer_price(merged[label], price)
-    return [{"label": label, "price": merged[label]} for label in order]
+    rows = [{"label": label, "price": merged[label]} for label in order]
+    specific_prices = {
+        row["price"]
+        for row in rows
+        if row["label"] not in {"主流报价", "主流货", "主流"}
+    }
+    return [
+        row
+        for row in rows
+        if not (row["label"] in {"主流报价", "主流货", "主流"} and row["price"] in specific_prices)
+    ]
 
 
 def build_item_price_points(item: dict[str, Any]) -> list[dict[str, str]]:
+    detail_text = item.get("content_full") or item.get("summary")
     points = normalize_price_points(item.get("price_points"))
-    if not points:
-        points = extract_price_points(item.get("summary"))
+    extracted_points = extract_price_points(detail_text)
+    points = merge_price_points(points + extracted_points)
     price = clean_text(item.get("price"))
     spec = clean_text(item.get("spec"))
     if price and not points:
-        if has_change_only_price(item.get("summary")):
+        if has_change_only_price(detail_text):
             return []
         if spec and spec not in {"产地快讯", "市场快讯", "待补规格"}:
             label = normalize_price_point_label(spec)
@@ -327,7 +349,7 @@ def source_entry_score(item: dict[str, Any]) -> tuple[int, int]:
     return (
         1 if "/hqzx/" in clean_text(item.get("url")) else 0,
         len(build_item_price_points(item)),
-        len(clean_text(item.get("summary"))),
+        len(clean_text(item.get("content_full") or item.get("summary"))),
     )
 
 
@@ -429,6 +451,7 @@ def merge_origin_items(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "delta_rate": primary.get("delta_rate", ""),
             "tag": max(sorted_group, key=lambda entry: tag_rank(entry.get("tag", ""))).get("tag", "关注"),
             "summary": max(sorted_group, key=lambda entry: len(clean_text(entry.get("summary")))).get("summary", ""),
+            "content_full": max(sorted_group, key=lambda entry: len(clean_text(entry.get("content_full") or entry.get("summary")))).get("content_full") or "",
             "source": "、".join(source_names) if source_names else clean_text(primary.get("source")),
             "url": "",
             "source_links": [{"label": source, "url": url} for source, (_, url) in source_links.items()],
@@ -466,6 +489,7 @@ def normalize_row(record: dict[str, str]) -> WorkbookRecord:
         source=clean_text(record["来源网站"]),
         url=normalize_source_url(record["来源网站"], record["来源链接"]),
         summary=clean_text(record["备注"]),
+        content_full="",
     )
 
 
@@ -669,6 +693,7 @@ def backfill_yt1998_urls(records: list[WorkbookRecord]) -> list[WorkbookRecord]:
                 source=record.source,
                 url=next_url,
                 summary=record.summary,
+                content_full=record.content_full,
                 price_label=record.price_label,
                 price_points=record.price_points,
             )
@@ -697,24 +722,33 @@ def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
     display_spec = clean_text(item.spec)
     if display_spec in {"市场快讯", "待补规格"}:
         display_spec = ""
-    price_points = item.price_points or (extract_price_points(item.summary) if item.market != "产地" else [])
+    detail_text = item.content_full or item.summary
+    price_points = merge_price_points(normalize_price_points(item.price_points) + extract_price_points(detail_text))
+    display_price = ""
+    if len(price_points) == 1:
+        display_price = price_points[0]["price"]
+    elif item.price_label and not has_change_only_price(detail_text):
+        display_price = item.price_label
+    elif not price_points and not has_change_only_price(detail_text):
+        display_price = format_price(item.today_price, item.unit)
     payload = {
         "date": item.date,
         "herb": item.herb,
         "spec": display_spec,
         "location": item.location or "待补产区",
         "market": item.market or "产地",
-        "price": item.price_label or format_price(item.today_price, item.unit),
+        "price": display_price,
         "price_value": today_num,
         "unit": item.unit or "元/kg",
         "delta_amount": format_number(parse_number(item.delta_amount)),
         "delta_rate": format_number(parse_number(item.delta_rate)),
-        "tag": detect_tag(item.summary, item.delta_amount),
+        "tag": detect_tag(detail_text or item.summary, item.delta_amount),
         "summary": item.summary,
+        "content_full": detail_text,
         "source": item.source or "待补来源",
         "url": item.url,
     }
-    if item.market != "产地" and price_points:
+    if price_points:
         payload["price_points"] = price_points
     return payload
 
@@ -772,6 +806,7 @@ def load_json_records(path: Path | None, empty_error: str) -> list[WorkbookRecor
                 source=clean_text(raw.get("source")),
                 url=normalize_source_url(raw.get("source"), raw.get("url")),
                 summary=clean_text(raw.get("summary")),
+                content_full=clean_text(raw.get("content_full")),
                 price_label=clean_text(raw.get("price_label")),
                 price_points=normalize_price_points(raw.get("price_points")),
             )

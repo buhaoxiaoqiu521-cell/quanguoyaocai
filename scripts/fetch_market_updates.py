@@ -28,15 +28,22 @@ MARKET_TARGETS = {
     "3": "玉林",
 }
 PRICE_RANGE_RE = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?"
+    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*(?:元|块)(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?"
 )
-PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
+PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*(?:元|块)(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
 FOOTER_MARKET_RE = re.compile(r"作者[:：]\s*([^\s]+市场)")
 FOOTER_HERB_RE = re.compile(r"品种[:：]\s*([^\s]+)")
 CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
 PHRASE_SPLIT_RE = re.compile(r"[，,]")
 PRICE_SUFFIX_RE = re.compile(r"(售价|售价格?|要价|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
 PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
+DETAIL_PREFIX_RE = re.compile(r"^【[^】]+】")
+COPYRIGHT_RE = re.compile(r"声明：本文是中药材天地网原创资讯.*$")
+DETAIL_DATE_RE = re.compile(r"(20\d{2}-\d{2}-\d{2})\s+\d{2}:\d{2}")
+ENUMERATION_SPLIT_RE = re.compile(r"(?=[①②③④⑤⑥⑦⑧⑨⑩])")
+LIST_MARKER_RE = re.compile(r"^[①②③④⑤⑥⑦⑧⑨⑩\d]+[\.、\)]?\s*")
+DETAIL_SELECTORS = ("div.info-content", ".zx-info-detail .info-content")
+PREVIEW_LIMIT = 140
 
 
 def clean_text(value: Any) -> str:
@@ -46,10 +53,70 @@ def clean_text(value: Any) -> str:
     return text.strip()
 
 
+def normalize_detail_text(text: str) -> str:
+    value = clean_text(text)
+    value = DETAIL_PREFIX_RE.sub("", value)
+    for marker in ("声明：本文是中药材天地网原创资讯", "关联品种", "最新评论", "文明上网理性发言", "发布评论"):
+        value = value.split(marker, 1)[0]
+    value = COPYRIGHT_RE.sub("", value)
+    return clean_text(value)
+
+
+def build_preview_text(text: str, fallback: str = "", limit: int = PREVIEW_LIMIT) -> str:
+    value = normalize_detail_text(text) or clean_text(fallback)
+    if len(value) <= limit:
+        return value
+    window = value[:limit]
+    cut = max(window.rfind("。"), window.rfind("；"), window.rfind("！"), window.rfind("？"))
+    if cut >= 32:
+        return clean_text(window[: cut + 1])
+    cut = max(window.rfind("，"), window.rfind(","), window.rfind(" "))
+    if cut >= 32:
+        return clean_text(window[:cut]) + "..."
+    return clean_text(window) + "..."
+
+
+def extract_zy_detail_payload(session: requests.Session, url: str) -> tuple[str, str]:
+    href = clean_text(url)
+    if not href:
+        return ("", "")
+    try:
+        response = session.get(href, timeout=20)
+        response.raise_for_status()
+    except Exception:
+        return ("", "")
+    soup = BeautifulSoup(response.text, "html.parser")
+    published_date = ""
+    for selector in (".zx-info-detail", ".info-title", "title"):
+        node = soup.select_one(selector)
+        if not node:
+            continue
+        text = clean_text(node.get_text(" ", strip=True))
+        match = DETAIL_DATE_RE.search(text)
+        if match:
+            published_date = match.group(1)
+            break
+    detail_text = ""
+    for selector in DETAIL_SELECTORS:
+        node = soup.select_one(selector)
+        if not node:
+            continue
+        text = normalize_detail_text(node.get_text(" ", strip=True))
+        if len(text) >= 24:
+            detail_text = text
+            break
+    return (detail_text, published_date)
+
+
 def extract_price(text: str) -> tuple[str, str]:
     value = clean_text(text)
     if not value:
         return ("", "")
+    price_points = extract_price_points(value)
+    if price_points:
+        price = clean_text(price_points[0]["price"])
+        first_number = clean_text(price.split(" ")[0]).split("-")[0]
+        return (first_number, price)
     range_match = PRICE_RANGE_RE.search(value)
     if range_match:
         start, end = range_match.groups()
@@ -63,6 +130,7 @@ def extract_price(text: str) -> tuple[str, str]:
 
 def clean_price_label(text: str) -> str:
     label = clean_text(text)
+    label = LIST_MARKER_RE.sub("", label)
     label = PRICE_PREFIX_RE.sub("", label)
     label = PRICE_SUFFIX_RE.sub("", label)
     label = re.sub(r"[：:、，,；;。]+$", "", label)
@@ -81,24 +149,29 @@ def extract_price_points(text: str) -> list[dict[str, str]]:
         clause = clean_text(clause)
         if not clause:
             continue
-        parts = [clean_text(part) for part in PHRASE_SPLIT_RE.split(clause) if clean_text(part)]
-        for part in parts:
-            range_match = PRICE_RANGE_RE.search(part)
-            single_match = PRICE_SINGLE_RE.search(part)
-            match = range_match or single_match
-            if not match:
-                continue
-            label = clean_price_label(part[:match.start()])
-            if range_match:
-                start, end = range_match.groups()
-                price = f"{start}-{end} 元/kg"
-            else:
-                price = f"{single_match.group(1)} 元/kg"
-            key = (label, price)
-            if key in seen:
-                continue
-            seen.add(key)
-            points.append({"label": label, "price": price})
+        segments = [clean_text(segment) for segment in ENUMERATION_SPLIT_RE.split(clause) if clean_text(segment)] or [clause]
+        for segment in segments:
+            parts = [clean_text(part) for part in PHRASE_SPLIT_RE.split(segment) if clean_text(part)]
+            candidates = [segment] + [part for part in parts if part != segment]
+            for part in candidates:
+                range_match = PRICE_RANGE_RE.search(part)
+                single_match = PRICE_SINGLE_RE.search(part)
+                match = range_match or single_match
+                if not match:
+                    continue
+                if "斤" in part[match.end() : match.end() + 4]:
+                    continue
+                label = clean_price_label(part[:match.start()])
+                if range_match:
+                    start, end = range_match.groups()
+                    price = f"{start}-{end} 元/kg"
+                else:
+                    price = f"{single_match.group(1)} 元/kg"
+                key = (label, price)
+                if key in seen:
+                    continue
+                seen.add(key)
+                points.append({"label": label, "price": price})
     return points
 
 
@@ -155,8 +228,9 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
         item_date = clean_text(item.get("dtm")).split(" ")[0]
         if item_date != chosen_date:
             continue
-        today_price, price_label = extract_price(item.get("cont"))
-        price_points = extract_price_points(item.get("cont"))
+        detail_text = clean_text(item.get("cont"))
+        today_price, price_label = extract_price(detail_text)
+        price_points = extract_price_points(detail_text)
         records.append(
             {
                 "date": item_date,
@@ -171,7 +245,8 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
                 "delta_rate": "",
                 "source": "药通网",
                 "url": f"https://www.yt1998.com/hqzx/{clean_text(item.get('accode'))}_{clean_text(item.get('scid'))}.html",
-                "summary": clean_text(item.get("cont")),
+                "summary": build_preview_text(detail_text, fallback=item.get("cont")),
+                "content_full": detail_text,
                 "price_label": price_label,
                 "price_points": price_points,
             }
@@ -213,11 +288,13 @@ def fetch_zy_market(target_date: str, max_pages: int = 5) -> tuple[dict[str, str
                 market = normalize_market(market_match.group(1) if market_match else title)
                 if market not in MARKET_TARGETS.values():
                     continue
-                price_value, price_label = extract_price(summary)
-                price_points = extract_price_points(summary)
+                detail_text, published_date = extract_zy_detail_payload(session, href)
+                content_text = detail_text or summary
+                price_value, price_label = extract_price(content_text)
+                price_points = extract_price_points(content_text)
                 parsed_items.append(
                     {
-                        "date": date,
+                        "date": published_date or date,
                         "herb": clean_text(herb_match.group(1) if herb_match else ""),
                         "spec": "",
                         "unit": "元/kg",
@@ -229,7 +306,8 @@ def fetch_zy_market(target_date: str, max_pages: int = 5) -> tuple[dict[str, str
                         "delta_rate": "",
                         "source": "中药材天地网",
                         "url": href,
-                        "summary": summary,
+                        "summary": build_preview_text(content_text, fallback=summary),
+                        "content_full": content_text,
                         "price_label": price_label,
                         "price_points": price_points,
                     }

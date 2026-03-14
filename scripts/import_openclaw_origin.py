@@ -219,7 +219,9 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "source": clean_text(raw.get("source")),
                 "url": clean_text(raw.get("url")),
                 "summary": clean_text(raw.get("summary")),
+                "content_full": clean_text(raw.get("content_full")),
                 "price_label": clean_text(raw.get("price_label")),
+                "price_points": raw.get("price_points") if isinstance(raw.get("price_points"), list) else [],
             }
             if not item["date"] or not item["herb"] or not item["summary"]:
                 continue
@@ -242,6 +244,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         if not is_origin_like(title, source_text):
             continue
         today_price, price_label = extract_price(item.get("desc"))
+        detail_text = clean_text(item.get("content_full") or item.get("desc"))
         records.append(
             {
                 "date": clean_text(item.get("dtm")).split(" ")[0] or report_date,
@@ -256,8 +259,10 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "delta_rate": "",
                 "source": "药通网",
                 "url": build_yt_url(item.get("acid", "")),
-                "summary": clean_text(item.get("desc")),
+                "summary": clean_text(item.get("summary") or detail_text),
+                "content_full": detail_text,
                 "price_label": price_label,
+                "price_points": item.get("price_points") if isinstance(item.get("price_points"), list) else [],
             }
         )
 
@@ -267,7 +272,8 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         title = clean_text(item.get("title"))
         if not is_origin_like(title, title):
             continue
-        today_price, price_label = extract_price(item.get("summary"))
+        detail_text = clean_text(item.get("detail") or item.get("content_full") or item.get("summary"))
+        today_price, price_label = extract_price(detail_text)
         records.append(
             {
                 "date": extract_date_from_time_text(item.get("time_text", ""), report_date),
@@ -282,8 +288,10 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "delta_rate": "",
                 "source": "中药材天地网",
                 "url": clean_text(item.get("url")),
-                "summary": clean_text(item.get("summary")),
+                "summary": clean_text(item.get("summary") or detail_text),
+                "content_full": detail_text,
                 "price_label": price_label,
+                "price_points": item.get("price_points") if isinstance(item.get("price_points"), list) else [],
             }
         )
 
