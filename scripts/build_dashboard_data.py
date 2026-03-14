@@ -26,6 +26,14 @@ XML_NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"
 YT_QUERY_URL = "https://www.yt1998.com/ytw/second/marketMgr/query.jsp"
 YT_HEADERS = {"User-Agent": "Mozilla/5.0"}
+PRICE_RANGE_RE = re.compile(
+    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?"
+)
+PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
+CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
+PHRASE_SPLIT_RE = re.compile(r"[，,]")
+PRICE_SUFFIX_RE = re.compile(r"(售价|售价格?|要价|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
+PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
 
 
 @dataclass
@@ -44,6 +52,7 @@ class WorkbookRecord:
     url: str
     summary: str
     price_label: str = ""
+    price_points: list[dict[str, str]] | None = None
 
 
 def clean_text(value: Any) -> str:
@@ -93,6 +102,62 @@ def normalize_source_url(source: str, url: str) -> str:
 def normalize_lookup_text(value: Any) -> str:
     text = clean_text(value)
     return re.sub(r"[^\w\u4e00-\u9fff]+", "", text)
+
+
+def clean_price_point_label(text: str) -> str:
+    label = clean_text(text)
+    label = PRICE_PREFIX_RE.sub("", label)
+    label = PRICE_SUFFIX_RE.sub("", label)
+    label = re.sub(r"[：:、，,；;。]+$", "", label)
+    label = clean_text(label)
+    return label or "主流货"
+
+
+def extract_price_points(text: str) -> list[dict[str, str]]:
+    value = clean_text(text)
+    if not value:
+        return []
+
+    points: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for clause in CLAUSE_SPLIT_RE.split(value):
+        clause = clean_text(clause)
+        if not clause:
+            continue
+        parts = [clean_text(part) for part in PHRASE_SPLIT_RE.split(clause) if clean_text(part)]
+        for part in parts:
+            range_match = PRICE_RANGE_RE.search(part)
+            single_match = PRICE_SINGLE_RE.search(part)
+            match = range_match or single_match
+            if not match:
+                continue
+            label = clean_price_point_label(part[:match.start()])
+            if range_match:
+                start, end = range_match.groups()
+                price = f"{start}-{end} 元/kg"
+            else:
+                price = f"{single_match.group(1)} 元/kg"
+            key = (label, price)
+            if key in seen:
+                continue
+            seen.add(key)
+            points.append({"label": label, "price": price})
+    return points
+
+
+def normalize_price_points(value: Any) -> list[dict[str, str]]:
+    if not isinstance(value, list):
+        return []
+    points: list[dict[str, str]] = []
+    for raw in value:
+        if not isinstance(raw, dict):
+            continue
+        label = clean_text(raw.get("label") or raw.get("spec") or raw.get("name"))
+        price = clean_text(raw.get("price") or raw.get("value"))
+        if not label or not price:
+            continue
+        points.append({"label": label, "price": price})
+    return points
 
 
 def normalize_row(record: dict[str, str]) -> WorkbookRecord:
@@ -325,6 +390,7 @@ def backfill_yt1998_urls(records: list[WorkbookRecord]) -> list[WorkbookRecord]:
                 url=next_url,
                 summary=record.summary,
                 price_label=record.price_label,
+                price_points=record.price_points,
             )
         )
 
@@ -348,10 +414,14 @@ def item_sort_key(item: WorkbookRecord) -> tuple[str, str, str]:
 
 def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
     today_num = parse_number(item.today_price)
-    return {
+    display_spec = item.spec if item.market != "产地" else (item.spec or "待补规格")
+    if display_spec == "市场快讯":
+        display_spec = ""
+    price_points = item.price_points or (extract_price_points(item.summary) if item.market != "产地" else [])
+    payload = {
         "date": item.date,
         "herb": item.herb,
-        "spec": item.spec or "待补规格",
+        "spec": display_spec,
         "location": item.location or "待补产区",
         "market": item.market or "产地",
         "price": item.price_label or format_price(item.today_price, item.unit),
@@ -364,6 +434,9 @@ def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
         "source": item.source or "待补来源",
         "url": item.url,
     }
+    if item.market != "产地" and price_points:
+        payload["price_points"] = price_points
+    return payload
 
 
 def build_hotspot_items(path: Path | None) -> list[dict[str, Any]]:
@@ -408,7 +481,7 @@ def load_json_records(path: Path | None, empty_error: str) -> list[WorkbookRecor
             WorkbookRecord(
                 date=clean_text(raw.get("date")),
                 herb=clean_text(raw.get("herb")),
-                spec=clean_text(raw.get("spec")) or "产地快讯",
+                spec=clean_text(raw.get("spec")) or ("产地快讯" if clean_text(raw.get("market")) in ("", "产地") else ""),
                 unit=clean_text(raw.get("unit")) or "元/kg",
                 market=clean_text(raw.get("market")) or "产地",
                 location=clean_text(raw.get("location")),
@@ -420,14 +493,31 @@ def load_json_records(path: Path | None, empty_error: str) -> list[WorkbookRecor
                 url=normalize_source_url(raw.get("source"), raw.get("url")),
                 summary=clean_text(raw.get("summary")),
                 price_label=clean_text(raw.get("price_label")),
+                price_points=normalize_price_points(raw.get("price_points")),
             )
         )
     return records
 
 
 def dedupe_records(records: list[WorkbookRecord]) -> list[WorkbookRecord]:
-    seen: set[tuple[str, str, str, str, str, str]] = set()
-    output: list[WorkbookRecord] = []
+    def record_quality(record: WorkbookRecord) -> int:
+        score = 0
+        if clean_text(record.url):
+            score += 2
+        if clean_text(record.price_label):
+            score += 1
+        if record.price_points:
+            score += 4 + len(record.price_points)
+        if clean_text(record.today_price):
+            score += 1
+        if clean_text(record.location):
+            score += 1
+        if clean_text(record.spec) and clean_text(record.spec) not in {"市场快讯", "产地快讯"}:
+            score += 1
+        return score
+
+    seen: dict[tuple[str, str, str, str, str, str], WorkbookRecord] = {}
+    order: list[tuple[str, str, str, str, str, str]] = []
     for record in records:
         key = (
             clean_text(record.date),
@@ -437,11 +527,13 @@ def dedupe_records(records: list[WorkbookRecord]) -> list[WorkbookRecord]:
             clean_text(record.source),
             clean_text(record.summary),
         )
-        if key in seen:
+        if key not in seen:
+            seen[key] = record
+            order.append(key)
             continue
-        seen.add(key)
-        output.append(record)
-    return output
+        if record_quality(record) > record_quality(seen[key]):
+            seen[key] = record
+    return [seen[key] for key in order]
 
 
 def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_path: Path | None) -> dict[str, Any]:

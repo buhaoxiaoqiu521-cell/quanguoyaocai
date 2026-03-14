@@ -581,6 +581,38 @@
       color: var(--ink);
     }
 
+    .entry-price-breakdown {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .price-point {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(47, 107, 78, 0.05);
+      border: 1px solid rgba(44, 78, 59, 0.1);
+    }
+
+    .price-point-label {
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .price-point-value {
+      color: var(--gold);
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
     .entry-footer {
       margin-top: 10px;
       color: var(--ink-soft);
@@ -856,6 +888,22 @@
         line-height: 1.55;
       }
 
+      .entry-price-breakdown {
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .price-point {
+        padding: 8px 10px;
+        border-radius: 12px;
+        gap: 10px;
+      }
+
+      .price-point-label,
+      .price-point-value {
+        font-size: 12px;
+      }
+
       .entry-meta {
         margin-top: 6px;
         line-height: 1.5;
@@ -1062,15 +1110,44 @@
       return `<span class="${deltaClass(item.delta_amount)}">涨跌 ${amount} / ${rate}</span>`;
     }
 
+    function renderPriceBreakdown(item) {
+      const points = Array.isArray(item.price_points)
+        ? item.price_points.filter((point) => point && point.label && point.price)
+        : [];
+
+      if (!points.length && !item.price) return "";
+
+      const rows = points.length > 1
+        ? points
+        : [{ label: "主流报价", price: points[0]?.price || item.price }];
+
+      return `
+        <div class="entry-price-breakdown">
+          ${rows.map((point) => `
+            <div class="price-point">
+              <span class="price-point-label">${escapeHtml(point.label)}</span>
+              <span class="price-point-value">${escapeHtml(point.price)}</span>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
     function renderEntryCard(item, type, options = {}) {
       const title = type === "hotspot" ? item.title : item.herb;
-      const spec = type === "hotspot" ? (item.kind || "行业热点") : (item.spec || "待补规格");
+      const specText = type === "hotspot"
+        ? (item.kind || "行业热点")
+        : type === "market"
+          ? (item.spec || "")
+          : (item.spec || "待补规格");
+      const spec = specText ? `<span class="entry-spec">${escapeHtml(specText)}</span>` : "";
       const locationLabel = type === "origin" ? "产区" : type === "market" ? "市场" : "关联";
       const location = type === "origin" ? item.location : type === "market" ? item.market : (item.location || "待补");
       const tag = type === "hotspot" ? (item.kind || "行业热点") : (item.tag || "关注");
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const summary = item.summary ? `<p class="entry-summary">${escapeHtml(item.summary)}</p>` : "";
-      const price = type === "hotspot" || !item.price ? "" : `<span class="entry-price">${escapeHtml(item.price)}</span>`;
+      const price = type === "origin" && item.price ? `<span class="entry-price">${escapeHtml(item.price)}</span>` : "";
+      const priceBreakdown = type === "market" ? renderPriceBreakdown(item) : "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
       const related = type === "hotspot" && item.herb ? ` · 关联品种：${escapeHtml(item.herb)}` : "";
       const url = safeUrl(item.url);
@@ -1088,9 +1165,10 @@
           </div>
           <div class="entry-title-row">
             <h3 class="entry-title">${escapeHtml(title || "待补标题")}</h3>
-            <span class="entry-spec">${escapeHtml(spec)}</span>
+            ${spec}
           </div>
           <div class="entry-meta">${locationLabel}：${escapeHtml(location)}${related}</div>
+          ${priceBreakdown}
           ${summary}
           <div class="entry-footer">
             <span>来源：${escapeHtml(item.source || "待补来源")}</span>

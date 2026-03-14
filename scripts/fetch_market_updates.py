@@ -33,6 +33,10 @@ PRICE_RANGE_RE = re.compile(
 PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
 FOOTER_MARKET_RE = re.compile(r"作者[:：]\s*([^\s]+市场)")
 FOOTER_HERB_RE = re.compile(r"品种[:：]\s*([^\s]+)")
+CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
+PHRASE_SPLIT_RE = re.compile(r"[，,]")
+PRICE_SUFFIX_RE = re.compile(r"(售价|售价格?|要价|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
+PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
 
 
 def clean_text(value: Any) -> str:
@@ -55,6 +59,47 @@ def extract_price(text: str) -> tuple[str, str]:
         price = single_match.group(1)
         return (price, f"{price} 元/kg")
     return ("", "")
+
+
+def clean_price_label(text: str) -> str:
+    label = clean_text(text)
+    label = PRICE_PREFIX_RE.sub("", label)
+    label = PRICE_SUFFIX_RE.sub("", label)
+    label = re.sub(r"[：:、，,；;。]+$", "", label)
+    label = clean_text(label)
+    return label or "主流货"
+
+
+def extract_price_points(text: str) -> list[dict[str, str]]:
+    value = clean_text(text)
+    if not value:
+        return []
+
+    points: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for clause in CLAUSE_SPLIT_RE.split(value):
+        clause = clean_text(clause)
+        if not clause:
+            continue
+        parts = [clean_text(part) for part in PHRASE_SPLIT_RE.split(clause) if clean_text(part)]
+        for part in parts:
+            range_match = PRICE_RANGE_RE.search(part)
+            single_match = PRICE_SINGLE_RE.search(part)
+            match = range_match or single_match
+            if not match:
+                continue
+            label = clean_price_label(part[:match.start()])
+            if range_match:
+                start, end = range_match.groups()
+                price = f"{start}-{end} 元/kg"
+            else:
+                price = f"{single_match.group(1)} 元/kg"
+            key = (label, price)
+            if key in seen:
+                continue
+            seen.add(key)
+            points.append({"label": label, "price": price})
+    return points
 
 
 def normalize_market(value: str) -> str:
@@ -111,11 +156,12 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
         if item_date != chosen_date:
             continue
         today_price, price_label = extract_price(item.get("cont"))
+        price_points = extract_price_points(item.get("cont"))
         records.append(
             {
                 "date": item_date,
                 "herb": clean_text(item.get("ycnam")),
-                "spec": "市场快讯",
+                "spec": "",
                 "unit": "元/kg",
                 "market": normalize_market(item.get("market")),
                 "location": "",
@@ -127,6 +173,7 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
                 "url": f"https://www.yt1998.com/hqzx/{clean_text(item.get('accode'))}_{clean_text(item.get('scid'))}.html",
                 "summary": clean_text(item.get("cont")),
                 "price_label": price_label,
+                "price_points": price_points,
             }
         )
 
@@ -167,11 +214,12 @@ def fetch_zy_market(target_date: str, max_pages: int = 5) -> tuple[dict[str, str
                 if market not in MARKET_TARGETS.values():
                     continue
                 price_value, price_label = extract_price(summary)
+                price_points = extract_price_points(summary)
                 parsed_items.append(
                     {
                         "date": date,
                         "herb": clean_text(herb_match.group(1) if herb_match else ""),
-                        "spec": "市场快讯",
+                        "spec": "",
                         "unit": "元/kg",
                         "market": market,
                         "location": "",
@@ -183,6 +231,7 @@ def fetch_zy_market(target_date: str, max_pages: int = 5) -> tuple[dict[str, str
                         "url": href,
                         "summary": summary,
                         "price_label": price_label,
+                        "price_points": price_points,
                     }
                 )
 
