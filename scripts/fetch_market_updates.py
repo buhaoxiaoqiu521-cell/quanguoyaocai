@@ -22,6 +22,8 @@ ZY_HEADERS = {
     "User-Agent": "Mozilla/5.0",
     "Referer": "https://www.zyctd.com/",
 }
+YT_VERIFY_URL = "https://www.yt1998.com/ytw/yanzheng/yy.jsp"
+YT_VERIFY_COOKIE = "zshcookiename"
 MARKET_TARGETS = {
     "1": "亳州",
     "2": "安国",
@@ -183,6 +185,20 @@ def normalize_market(value: str) -> str:
     return text.replace("市场", "")
 
 
+def ensure_yt_verified(session: requests.Session, target_path: str = "/ytw/second/marketMgr/query.jsp") -> None:
+    verify_response = session.post(
+        YT_VERIFY_URL,
+        data={"url": target_path},
+        timeout=20,
+    )
+    verify_response.raise_for_status()
+    payload = verify_response.json()
+    uuid = clean_text(payload.get("uuid"))
+    if not uuid:
+        raise RuntimeError("药通网验证未返回 uuid。")
+    session.cookies.set(YT_VERIFY_COOKIE, uuid, domain="www.yt1998.com", path="/")
+
+
 def choose_target_date(items: list[dict[str, Any]], target_date: str) -> str:
     dates = sorted({clean_text(item.get("date")) for item in items if clean_text(item.get("date"))}, reverse=True)
     if target_date in dates:
@@ -196,6 +212,7 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
 
     with requests.Session() as session:
         session.headers.update(UA)
+        ensure_yt_verified(session)
         for page in range(max_pages):
             response = session.post(
                 url,
@@ -210,7 +227,10 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
                 timeout=20,
             )
             response.raise_for_status()
-            data = response.json().get("data", [])
+            try:
+                data = response.json().get("data", [])
+            except Exception as exc:
+                raise RuntimeError(f"药通网市场接口返回了非 JSON 内容（scid={scid}, page={page}）。") from exc
             if not data:
                 break
             payload_items.extend(data)

@@ -21,6 +21,8 @@ ZY_HEADERS = {
     "User-Agent": "Mozilla/5.0",
     "Referer": "https://www.zyctd.com/",
 }
+YT_VERIFY_URL = "https://www.yt1998.com/ytw/yanzheng/yy.jsp"
+YT_VERIFY_COOKIE = "zshcookiename"
 MARKET_TARGETS = {
     "1": "亳州",
     "2": "安国",
@@ -43,6 +45,20 @@ def normalize_market(value: str) -> str:
         if target in text:
             return target
     return text.replace("市场", "")
+
+
+def ensure_yt_verified(session: requests.Session, target_path: str = "/ytw/second/marketMgr/query.jsp") -> None:
+    verify_response = session.post(
+        YT_VERIFY_URL,
+        data={"url": target_path},
+        timeout=20,
+    )
+    verify_response.raise_for_status()
+    payload = verify_response.json()
+    uuid = clean_text(payload.get("uuid"))
+    if not uuid:
+        raise RuntimeError("药通网验证未返回 uuid。")
+    session.cookies.set(YT_VERIFY_COOKIE, uuid, domain="www.yt1998.com", path="/")
 
 
 def dedupe_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -69,6 +85,7 @@ def fetch_yt_history(max_pages: int, page_size: int) -> list[dict[str, Any]]:
     url = "https://www.yt1998.com/ytw/second/marketMgr/query.jsp"
     with requests.Session() as session:
         session.headers.update(UA)
+        ensure_yt_verified(session)
         for scid, market_name in MARKET_TARGETS.items():
             for page in range(max_pages):
                 data: list[dict[str, Any]] | None = None
