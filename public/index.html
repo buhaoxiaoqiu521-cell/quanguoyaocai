@@ -629,6 +629,13 @@
       text-decoration: underline;
     }
 
+    .entry-link-list {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
     .delta {
       padding: 5px 10px;
       border-radius: 999px;
@@ -1133,6 +1140,23 @@
       `;
     }
 
+    function renderSourceLinks(item) {
+      const sourceLinks = Array.isArray(item.source_links)
+        ? item.source_links.filter((entry) => entry && entry.label && safeUrl(entry.url))
+        : [];
+      if (!sourceLinks.length) {
+        const url = safeUrl(item.url);
+        return url ? `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">查看来源</a>` : "";
+      }
+      return `
+        <span class="entry-link-list">
+          ${sourceLinks.map((entry) => `
+            <a class="entry-link" href="${escapeHtml(safeUrl(entry.url))}" target="_blank" rel="noreferrer">${escapeHtml(entry.label)}</a>
+          `).join("")}
+        </span>
+      `;
+    }
+
     function renderEntryCard(item, type, options = {}) {
       const title = type === "hotspot" ? item.title : item.herb;
       const specText = type === "hotspot"
@@ -1146,11 +1170,12 @@
       const tag = type === "hotspot" ? (item.kind || "行业热点") : (item.tag || "关注");
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const summary = item.summary ? `<p class="entry-summary">${escapeHtml(item.summary)}</p>` : "";
-      const price = type === "origin" && item.price ? `<span class="entry-price">${escapeHtml(item.price)}</span>` : "";
-      const priceBreakdown = type === "market" ? renderPriceBreakdown(item) : "";
+      const hasMultiPricePoints = Array.isArray(item.price_points) && item.price_points.length > 1;
+      const price = type === "origin" && item.price && !hasMultiPricePoints ? `<span class="entry-price">${escapeHtml(item.price)}</span>` : "";
+      const priceBreakdown = (type === "market" || (type === "origin" && hasMultiPricePoints)) ? renderPriceBreakdown(item) : "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
       const related = type === "hotspot" && item.herb ? ` · 关联品种：${escapeHtml(item.herb)}` : "";
-      const url = safeUrl(item.url);
+      const sourceLinks = renderSourceLinks(item);
 
       return `
         <article class="entry-card">
@@ -1172,7 +1197,7 @@
           ${summary}
           <div class="entry-footer">
             <span>来源：${escapeHtml(item.source || "待补来源")}</span>
-            ${url ? `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">查看来源</a>` : ""}
+            ${sourceLinks}
           </div>
         </article>
       `;
@@ -1229,7 +1254,10 @@
       const pushMatches = (items, type, sectionLabel) => {
         (items || []).forEach((item) => {
           const dateMatch = state.searchDate === "all" || item.date === state.searchDate;
-          const sourceMatch = state.searchSource === "all" || item.source === state.searchSource;
+          const itemSources = Array.isArray(item.source_links) && item.source_links.length
+            ? item.source_links.map((entry) => entry.label)
+            : String(item.source || "").split("、").map((value) => value.trim()).filter(Boolean);
+          const sourceMatch = state.searchSource === "all" || itemSources.includes(state.searchSource) || item.source === state.searchSource;
           if (!dateMatch || !sourceMatch) return;
           const matched = matchesSearchQuery(query, [
             item.title,

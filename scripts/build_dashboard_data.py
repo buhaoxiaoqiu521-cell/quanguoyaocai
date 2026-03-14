@@ -34,6 +34,18 @@ CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
 PHRASE_SPLIT_RE = re.compile(r"[，,]")
 PRICE_SUFFIX_RE = re.compile(r"(售价|售价格?|要价|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
 PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
+LOCATION_SPLIT_RE = re.compile(r"(?:省|市|州|县|区|旗|镇|乡|村|口岸|地区|盟)")
+PROVINCE_PREFIXES = sorted(
+    [
+        "内蒙古", "黑龙江",
+        "北京", "天津", "上海", "重庆",
+        "河北", "山西", "辽宁", "吉林", "江苏", "浙江", "安徽", "福建", "江西", "山东",
+        "河南", "湖北", "湖南", "广东", "广西", "海南", "四川", "贵州", "云南", "西藏",
+        "陕西", "甘肃", "青海", "宁夏", "新疆", "香港", "澳门", "台湾",
+    ],
+    key=len,
+    reverse=True,
+)
 
 
 @dataclass
@@ -158,6 +170,222 @@ def normalize_price_points(value: Any) -> list[dict[str, str]]:
             continue
         points.append({"label": label, "price": price})
     return points
+
+
+def detect_province(text: str) -> str:
+    value = clean_text(text)
+    for prefix in PROVINCE_PREFIXES:
+        if value.startswith(prefix):
+            return prefix
+    return ""
+
+
+def location_keywords(text: str) -> list[str]:
+    value = clean_text(text)
+    if not value:
+        return []
+    province = detect_province(value)
+    remainder = value[len(province):] if province and value.startswith(province) else value
+    keywords: list[str] = [province] if province else []
+    keywords.extend(clean_text(part) for part in LOCATION_SPLIT_RE.split(remainder) if len(clean_text(part)) >= 2)
+    if not keywords and len(value) >= 2:
+        keywords.append(value)
+    return keywords
+
+
+def primary_location_token(text: str) -> str:
+    keywords = location_keywords(text)
+    if not keywords:
+        return ""
+    province = keywords[0] if keywords[0] in PROVINCE_PREFIXES else ""
+    non_province = [keyword for keyword in keywords if keyword != province]
+    return non_province[-1] if non_province else (province or keywords[-1])
+
+
+def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
+    def price_numbers(text: str) -> list[float]:
+        values: list[float] = []
+        for match in re.findall(r"\d+(?:\.\d+)?", text):
+            try:
+                values.append(float(match))
+            except ValueError:
+                continue
+        return values
+
+    def prefer_price(existing: str, candidate: str) -> str:
+        existing_numbers = price_numbers(existing)
+        candidate_numbers = price_numbers(candidate)
+        if len(existing_numbers) == 2 and len(candidate_numbers) == 1:
+            start, end = sorted(existing_numbers)
+            if start <= candidate_numbers[0] <= end:
+                return existing
+        if len(candidate_numbers) == 2 and len(existing_numbers) == 1:
+            start, end = sorted(candidate_numbers)
+            if start <= existing_numbers[0] <= end:
+                return candidate
+        if existing in candidate or ("-" in candidate and "-" not in existing):
+            return candidate
+        if candidate in existing:
+            return existing
+        return f"{existing} / {candidate}"
+
+    merged: dict[str, str] = {}
+    order: list[str] = []
+    for point in points:
+        label = clean_price_point_label(point.get("label"))
+        price = clean_text(point.get("price"))
+        if not label or not price:
+            continue
+        if label not in merged:
+            merged[label] = price
+            order.append(label)
+            continue
+        if merged[label] == price:
+            continue
+        merged[label] = prefer_price(merged[label], price)
+    return [{"label": label, "price": merged[label]} for label in order]
+
+
+def build_item_price_points(item: dict[str, Any]) -> list[dict[str, str]]:
+    points = normalize_price_points(item.get("price_points"))
+    if not points:
+        points = extract_price_points(item.get("summary"))
+    price = clean_text(item.get("price"))
+    spec = clean_text(item.get("spec"))
+    if price and not points:
+        label = clean_price_point_label(spec) if spec and spec not in {"产地快讯", "市场快讯", "待补规格"} else "主流报价"
+        points.append({"label": label, "price": price})
+    return merge_price_points(points)
+
+
+def tag_rank(tag: str) -> int:
+    value = clean_text(tag)
+    if value in {"走快", "上扬"}:
+        return 4
+    if value in {"平稳"}:
+        return 3
+    if value in {"关注"}:
+        return 2
+    if value in {"走缓", "回落"}:
+        return 1
+    return 0
+
+
+def source_entry_score(item: dict[str, Any]) -> tuple[int, int]:
+    return (
+        1 if "/hqzx/" in clean_text(item.get("url")) else 0,
+        len(build_item_price_points(item)),
+        len(clean_text(item.get("summary"))),
+    )
+
+
+def locations_match(item: dict[str, Any], group_items: list[dict[str, Any]]) -> bool:
+    item_location = clean_text(item.get("location"))
+    item_summary = clean_text(item.get("summary"))
+    item_province = detect_province(item_location or item_summary)
+    item_primary = primary_location_token(item_location or item_summary)
+    item_tokens = [token for token in location_keywords(item_location or item_summary) if token not in PROVINCE_PREFIXES]
+    item_context = normalize_lookup_text(f"{item_location} {item_summary}")
+
+    for current in group_items:
+        current_location = clean_text(current.get("location"))
+        current_summary = clean_text(current.get("summary"))
+        current_province = detect_province(current_location or current_summary)
+        current_primary = primary_location_token(current_location or current_summary)
+        current_tokens = [token for token in location_keywords(current_location or current_summary) if token not in PROVINCE_PREFIXES]
+        current_context = normalize_lookup_text(f"{current_location} {current_summary}")
+
+        if item_province and current_province and item_province != current_province:
+            continue
+        if item_primary and current_primary and item_primary == current_primary:
+            return True
+        if set(item_tokens) & set(current_tokens):
+            return True
+        if any(token and token in current_context for token in item_tokens):
+            return True
+        if any(token and token in item_context for token in current_tokens):
+            return True
+    return False
+
+
+def merged_origin_location(items: list[dict[str, Any]]) -> str:
+    province = ""
+    tails: list[str] = []
+    for item in items:
+        location = clean_text(item.get("location"))
+        current_province = detect_province(location)
+        if not province and current_province:
+            province = current_province
+        tail = primary_location_token(location)
+        if tail and tail not in PROVINCE_PREFIXES and tail not in tails:
+            tails.append(tail)
+    if province and tails:
+        return province + "/".join(tails[:2])
+    if province:
+        return province
+    return clean_text(items[0].get("location")) if items else ""
+
+
+def merge_origin_items(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    groups: list[list[dict[str, Any]]] = []
+    for item in items:
+        if not clean_text(item.get("date")) or not clean_text(item.get("herb")):
+            groups.append([item])
+            continue
+        matched = False
+        for group in groups:
+            sample = group[0]
+            if clean_text(sample.get("date")) != clean_text(item.get("date")):
+                continue
+            if clean_text(sample.get("herb")) != clean_text(item.get("herb")):
+                continue
+            if locations_match(item, group):
+                group.append(item)
+                matched = True
+                break
+        if not matched:
+            groups.append([item])
+
+    merged_items: list[dict[str, Any]] = []
+    for group in groups:
+        sorted_group = sorted(group, key=lambda entry: (source_entry_score(entry), len(clean_text(entry.get("summary")))), reverse=True)
+        primary = sorted_group[0]
+        price_points = merge_price_points([point for entry in sorted_group for point in build_item_price_points(entry)])
+        source_names: list[str] = []
+        source_links: dict[str, tuple[tuple[int, int], str]] = {}
+        for entry in sorted_group:
+            source = clean_text(entry.get("source"))
+            if source and source not in source_names:
+                source_names.append(source)
+            url = clean_text(entry.get("url"))
+            if not source or not url:
+                continue
+            score = source_entry_score(entry)
+            if source not in source_links or score > source_links[source][0]:
+                source_links[source] = (score, url)
+
+        merged = {
+            "date": primary.get("date", ""),
+            "herb": primary.get("herb", ""),
+            "spec": "",
+            "location": merged_origin_location(sorted_group) or primary.get("location", ""),
+            "market": "产地",
+            "price": price_points[0]["price"] if len(price_points) == 1 else "",
+            "price_value": parse_number(price_points[0]["price"].split(" ")[0]) if len(price_points) == 1 else None,
+            "unit": primary.get("unit", "元/kg"),
+            "delta_amount": primary.get("delta_amount", ""),
+            "delta_rate": primary.get("delta_rate", ""),
+            "tag": max(sorted_group, key=lambda entry: tag_rank(entry.get("tag", ""))).get("tag", "关注"),
+            "summary": max(sorted_group, key=lambda entry: len(clean_text(entry.get("summary")))).get("summary", ""),
+            "source": "、".join(source_names) if source_names else clean_text(primary.get("source")),
+            "url": "",
+            "source_links": [{"label": source, "url": url} for source, (_, url) in source_links.items()],
+            "price_points": price_points,
+        }
+        merged_items.append(merged)
+
+    merged_items.sort(key=lambda item: (date_key(item.get("date", ""))[1], item.get("herb", ""), item.get("location", "")), reverse=True)
+    return merged_items
 
 
 def normalize_row(record: dict[str, str]) -> WorkbookRecord:
@@ -545,7 +773,7 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
     origin_records = [record for record in records if record.market == "产地"]
     market_records = [record for record in records if record.market != "产地"]
     origin_sources = Counter(record.source for record in origin_records if record.source)
-    origin_items = [to_origin_item(record) for record in origin_records]
+    origin_items = merge_origin_items([to_origin_item(record) for record in origin_records])
     market_items = [to_origin_item(record) for record in market_records]
 
     market_counter = Counter(record.market for record in market_records if record.market)
