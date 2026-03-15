@@ -174,15 +174,19 @@
     .trace-entry {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 20px;
       min-height: 68px;
+      text-align: center;
     }
 
     .trace-entry-copy {
       display: grid;
       gap: 6px;
       min-width: 0;
+      justify-items: center;
+      text-align: center;
     }
 
     .trace-entry-title {
@@ -1071,14 +1075,16 @@
 
       .trace-entry {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 12px;
-        text-align: left;
+        text-align: center;
         min-height: 0;
       }
 
       .trace-entry-copy {
         width: 100%;
+        justify-items: center;
+        text-align: center;
       }
 
       .trace-entry-title {
@@ -1092,7 +1098,7 @@
       .button.trace {
         min-width: 132px;
         min-height: 44px;
-        width: 100%;
+        width: min(100%, 280px);
         padding: 10px 14px;
         font-size: 14px;
       }
@@ -1262,7 +1268,7 @@
           <h2 class="section-title">产地行情</h2>
         </span>
         <span class="section-head-side">
-          <span class="count-chip" id="originCountChip">0 条</span>
+          <span class="count-chip" id="originCountChip">今日更新 0 条</span>
         </span>
       </button>
       <div class="section-body" id="originBody">
@@ -1282,7 +1288,7 @@
           <h2 class="section-title">市场行情</h2>
         </span>
         <span class="section-head-side">
-          <span class="count-chip" id="marketCountChip">0 条</span>
+          <span class="count-chip" id="marketCountChip">今日更新 0 条</span>
         </span>
       </button>
       <div class="section-body" id="marketBody">
@@ -1304,7 +1310,7 @@
           <h2 class="section-title">行业热点</h2>
         </span>
         <span class="section-head-side">
-          <span class="count-chip" id="hotspotCountChip">0 条</span>
+          <span class="count-chip" id="hotspotCountChip">今日更新 0 条</span>
         </span>
       </button>
       <div class="section-body" id="hotspotBody">
@@ -1803,7 +1809,7 @@
       const start = (state.originPage - 1) * state.originPageSize;
       const pageItems = allItems.slice(start, start + state.originPageSize);
 
-      document.getElementById("originCountChip").textContent = `${allItems.length} 条`;
+      document.getElementById("originCountChip").textContent = `今日更新 ${dashboard.origin.latest_count || 0} 条`;
 
       const root = document.getElementById("originList");
       root.innerHTML = pageItems.length
@@ -1833,7 +1839,7 @@
 
       const currentGroup = tabs.find((group) => group.name === state.currentMarket) || tabs[0];
 
-      document.getElementById("marketCountChip").textContent = `${totalMatches} 条`;
+      document.getElementById("marketCountChip").textContent = `今日更新 ${dashboard.markets.latest_count || 0} 条`;
       document.getElementById("marketTabs").innerHTML = tabs.map((group) => `
         <button class="market-tab ${group.name === state.currentMarket ? "active" : ""}" type="button" data-market="${escapeHtml(group.name)}">
           ${escapeHtml(group.name)}市场
@@ -1875,7 +1881,7 @@
 
     function renderHotspotSection(dashboard) {
       const items = (dashboard.hotspots.items || []).filter((item) => state.hotspotKind === "all" || item.kind === state.hotspotKind);
-      document.getElementById("hotspotCountChip").textContent = `${dashboard.hotspots.total} 条`;
+      document.getElementById("hotspotCountChip").textContent = `今日更新 ${dashboard.hotspots.latest_count || 0} 条`;
 
       const hotspotFilterRoot = document.getElementById("hotspotFilters");
       const kindOptions = dashboard.hotspots.kind_options || [];

@@ -1161,6 +1161,11 @@ def build_dashboard(
     origin_items = origin_items_all[:SECTION_DISPLAY_LIMIT]
     market_items_all = [to_origin_item(record) for record in market_records]
     market_items = market_items_all[:SECTION_DISPLAY_LIMIT]
+    origin_latest_date = origin_items_all[0]["date"] if origin_items_all else ""
+    origin_latest_count = sum(1 for item in origin_items_all if item.get("date") == origin_latest_date) if origin_latest_date else 0
+    target_market_items_all = [item for item in market_items_all if item.get("market") in MARKET_TARGETS]
+    market_latest_date = target_market_items_all[0]["date"] if target_market_items_all else ""
+    market_latest_count = sum(1 for item in target_market_items_all if item.get("date") == market_latest_date) if market_latest_date else 0
 
     market_counter = Counter(record.market for record in market_records if record.market)
     market_order = MARKET_TARGETS + sorted(name for name in market_counter if name not in MARKET_TARGETS)
@@ -1216,7 +1221,8 @@ def build_dashboard(
         "origin": {
             "total": len(origin_items),
             "all_total": len(origin_items_all),
-            "latest_date": origin_items[0]["date"] if origin_items else "",
+            "latest_date": origin_latest_date,
+            "latest_count": origin_latest_count,
             "date_options": dates,
             "source_options": [name for name, _ in origin_sources.most_common()],
             "items": origin_items,
@@ -1227,6 +1233,8 @@ def build_dashboard(
             "targets": MARKET_TARGETS,
             "total": len(market_items),
             "all_total": len(market_items_all),
+            "latest_date": market_latest_date,
+            "latest_count": market_latest_count,
             "covered_count": sum(1 for group in market_groups if group["name"] in MARKET_TARGETS and group["count"] > 0),
             "extra_market_count": sum(1 for group in market_groups if group["name"] not in MARKET_TARGETS and group["count"] > 0),
             "groups": market_groups,
@@ -1235,6 +1243,7 @@ def build_dashboard(
         "hotspots": {
             "total": len(hotspots),
             "latest_date": hotspots[0]["date"] if hotspots else "",
+            "latest_count": sum(1 for item in hotspots if item.get("date") == (hotspots[0]["date"] if hotspots else "")) if hotspots else 0,
             "kind_options": sorted({item["kind"] for item in hotspots if item["kind"]}),
             "items": hotspots,
             "empty_text": "行业热点表已经预留好，后面补进 JSON 就能直接显示。",
