@@ -1313,20 +1313,22 @@
     }
 
     function renderSourceLinks(item, type) {
+      if (type === "hotspot") {
+        return "";
+      }
       const sourceLinks = Array.isArray(item.source_links)
         ? item.source_links.filter((entry) => entry && safeUrl(entry.url))
         : [];
       if (!sourceLinks.length) {
         const url = safeUrl(item.url);
         if (!url) return "";
-        const label = type === "hotspot" ? "查看原文" : "查看来源";
-        return `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>`;
+        return `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">查看来源</a>`;
       }
       const useGenericLabel = type === "origin";
       return `
         <span class="entry-link-list">
           ${sourceLinks.map((entry, index) => `
-            <a class="entry-link" href="${escapeHtml(safeUrl(entry.url))}" target="_blank" rel="noreferrer">${escapeHtml(type === "hotspot" ? (entry.label || `查看原文${sourceLinks.length > 1 ? ` ${index + 1}` : ""}`) : (useGenericLabel ? (sourceLinks.length > 1 ? `查看来源 ${index + 1}` : "查看来源") : (entry.label || "查看来源")))}</a>
+            <a class="entry-link" href="${escapeHtml(safeUrl(entry.url))}" target="_blank" rel="noreferrer">${escapeHtml(useGenericLabel ? (sourceLinks.length > 1 ? `查看来源 ${index + 1}` : "查看来源") : (entry.label || "查看来源"))}</a>
           `).join("")}
         </span>
       `;
@@ -1336,8 +1338,7 @@
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const title = escapeHtml(item.title || "待补标题");
       const modalId = escapeHtml(item.id || "");
-      const sourceLinks = renderSourceLinks(item, "hotspot");
-      const originalLink = sourceLinks ? `<span class="entry-link-list">${sourceLinks}<button class="entry-link entry-link-button" type="button" data-hotspot-open="${modalId}">查看全文</button></span>` : `<button class="entry-link entry-link-button" type="button" data-hotspot-open="${modalId}">查看全文</button>`;
+      const contentLink = `<button class="entry-link entry-link-button" type="button" data-hotspot-open="${modalId}">查看全文</button>`;
 
       return `
         <article class="entry-card hotspot-card">
@@ -1353,7 +1354,7 @@
           </div>
           <div class="entry-footer">
             <span>来源：${escapeHtml(item.source || "中药材天地网")}</span>
-            ${originalLink}
+            ${contentLink}
           </div>
         </article>
       `;
@@ -1406,7 +1407,8 @@
     }
 
     function renderHero(dashboard) {
-      document.getElementById("statusPill").textContent = dashboard.status;
+      const updatedAt = dashboard?.meta?.generated_at || dashboard?.meta?.latest_date || "";
+      document.getElementById("statusPill").textContent = updatedAt ? `数据更新于 ${updatedAt}` : "数据待补充";
       document.getElementById("footerLeft").textContent = dashboard.footer.left;
       document.getElementById("footerRight").textContent = String(dashboard.footer.right || "").replace(/天天行情/g, "市场行情");
     }
@@ -1447,10 +1449,7 @@
       document.getElementById("hotspotModalTitle").textContent = item.title || "行业热点";
       document.getElementById("hotspotModalMeta").textContent = [item.date, item.source].filter(Boolean).join(" · ");
       document.getElementById("hotspotModalBody").innerHTML = formatHotspotContent(item.content_full || item.summary || "暂无正文");
-      const sourceUrl = safeUrl(item.url);
-      document.getElementById("hotspotModalActions").innerHTML = sourceUrl
-        ? `<a class="button" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">查看原文</a>`
-        : "";
+      document.getElementById("hotspotModalActions").innerHTML = "";
       modal.hidden = false;
       document.body.style.overflow = "hidden";
     }
