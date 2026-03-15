@@ -561,6 +561,25 @@
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
     }
 
+    .entry-title-button {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .entry-title-button:hover {
+      color: var(--green-deep);
+    }
+
     .entry-spec {
       color: var(--green);
       font-size: 13px;
@@ -625,7 +644,19 @@
       font-weight: 700;
     }
 
+    .entry-link-button {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      font: inherit;
+      cursor: pointer;
+    }
+
     .entry-link:hover {
+      text-decoration: underline;
+    }
+
+    .entry-link-button:hover {
       text-decoration: underline;
     }
 
@@ -634,6 +665,108 @@
       flex-wrap: wrap;
       justify-content: flex-end;
       gap: 10px;
+    }
+
+    .hotspot-card {
+      gap: 8px;
+    }
+
+    .hotspot-card .entry-top {
+      margin-bottom: 2px;
+    }
+
+    .hotspot-card .entry-title-row {
+      align-items: flex-start;
+    }
+
+    .hotspot-card .entry-footer {
+      margin-top: 8px;
+    }
+
+    .hotspot-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(8, 19, 15, 0.56);
+      backdrop-filter: blur(6px);
+    }
+
+    .hotspot-modal[hidden] {
+      display: none;
+    }
+
+    .hotspot-modal-panel {
+      width: min(860px, 100%);
+      max-height: min(82vh, 920px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 24px;
+      border: 1px solid rgba(44, 78, 59, 0.14);
+      background: var(--paper-strong);
+      box-shadow: 0 30px 80px rgba(7, 21, 16, 0.34);
+    }
+
+    .hotspot-modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 26px 18px;
+      border-bottom: 1px solid rgba(44, 78, 59, 0.08);
+    }
+
+    .hotspot-modal-title {
+      margin: 0;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .hotspot-modal-meta {
+      margin-top: 10px;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .hotspot-modal-close {
+      min-width: 84px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(44, 78, 59, 0.14);
+      background: rgba(255, 255, 255, 0.55);
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .hotspot-modal-body {
+      padding: 20px 26px 24px;
+      overflow-y: auto;
+    }
+
+    .hotspot-modal-text {
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.95;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .hotspot-modal-text p {
+      margin: 0 0 14px;
+    }
+
+    .hotspot-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 18px;
     }
 
     .delta {
@@ -938,6 +1071,35 @@
         padding: 10px 12px;
         font-size: 13px;
       }
+
+      .hotspot-modal {
+        padding: 10px;
+      }
+
+      .hotspot-modal-panel {
+        max-height: 88vh;
+        border-radius: 18px;
+      }
+
+      .hotspot-modal-head,
+      .hotspot-modal-body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .hotspot-modal-head {
+        padding-top: 18px;
+        padding-bottom: 14px;
+      }
+
+      .hotspot-modal-title {
+        font-size: 22px;
+      }
+
+      .hotspot-modal-text {
+        font-size: 14px;
+        line-height: 1.8;
+      }
     }
   </style>
 </head>
@@ -1045,6 +1207,22 @@
       </div>
     </section>
 
+    <div class="hotspot-modal" id="hotspotModal" hidden>
+      <div class="hotspot-modal-panel" role="dialog" aria-modal="true" aria-labelledby="hotspotModalTitle">
+        <div class="hotspot-modal-head">
+          <div>
+            <h3 class="hotspot-modal-title" id="hotspotModalTitle">行业热点</h3>
+            <div class="hotspot-modal-meta" id="hotspotModalMeta"></div>
+          </div>
+          <button class="hotspot-modal-close" id="hotspotModalClose" type="button">关闭</button>
+        </div>
+        <div class="hotspot-modal-body">
+          <div class="hotspot-modal-text" id="hotspotModalBody"></div>
+          <div class="hotspot-modal-actions" id="hotspotModalActions"></div>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <div id="footerLeft">数据文件：--</div>
       <div id="footerRight">站点结构已兼容后续继续补药通网市场行情与行业热点。</div>
@@ -1140,36 +1318,65 @@
         : [];
       if (!sourceLinks.length) {
         const url = safeUrl(item.url);
-        return url ? `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">查看来源</a>` : "";
+        if (!url) return "";
+        const label = type === "hotspot" ? "查看原文" : "查看来源";
+        return `<a class="entry-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>`;
       }
       const useGenericLabel = type === "origin";
       return `
         <span class="entry-link-list">
           ${sourceLinks.map((entry, index) => `
-            <a class="entry-link" href="${escapeHtml(safeUrl(entry.url))}" target="_blank" rel="noreferrer">${escapeHtml(useGenericLabel ? (sourceLinks.length > 1 ? `查看来源 ${index + 1}` : "查看来源") : (entry.label || "查看来源"))}</a>
+            <a class="entry-link" href="${escapeHtml(safeUrl(entry.url))}" target="_blank" rel="noreferrer">${escapeHtml(type === "hotspot" ? (entry.label || `查看原文${sourceLinks.length > 1 ? ` ${index + 1}` : ""}`) : (useGenericLabel ? (sourceLinks.length > 1 ? `查看来源 ${index + 1}` : "查看来源") : (entry.label || "查看来源")))}</a>
           `).join("")}
         </span>
       `;
     }
 
+    function renderHotspotCard(item, options = {}) {
+      const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
+      const title = escapeHtml(item.title || "待补标题");
+      const modalId = escapeHtml(item.id || "");
+      const sourceLinks = renderSourceLinks(item, "hotspot");
+      const originalLink = sourceLinks ? `<span class="entry-link-list">${sourceLinks}<button class="entry-link entry-link-button" type="button" data-hotspot-open="${modalId}">查看全文</button></span>` : `<button class="entry-link entry-link-button" type="button" data-hotspot-open="${modalId}">查看全文</button>`;
+
+      return `
+        <article class="entry-card hotspot-card">
+          <div class="entry-top">
+            <span class="entry-date">${escapeHtml(item.date || "--")}</span>
+            <div class="entry-badges">
+              ${sectionBadge}
+              <span class="tag">${escapeHtml(item.kind || "行业热点")}</span>
+            </div>
+          </div>
+          <div class="entry-title-row">
+            <button class="entry-title entry-title-button" type="button" data-hotspot-open="${modalId}">${title}</button>
+          </div>
+          <div class="entry-footer">
+            <span>来源：${escapeHtml(item.source || "中药材天地网")}</span>
+            ${originalLink}
+          </div>
+        </article>
+      `;
+    }
+
     function renderEntryCard(item, type, options = {}) {
+      if (type === "hotspot") {
+        return renderHotspotCard(item, options);
+      }
       const title = type === "hotspot" ? item.title : item.herb;
-      const specText = type === "hotspot"
-        ? (item.kind || "行业热点")
-        : type === "market"
+      const specText = type === "market"
           ? (item.spec || "")
           : (item.spec || "");
       const spec = specText ? `<span class="entry-spec">${escapeHtml(specText)}</span>` : "";
-      const locationLabel = type === "origin" ? "产区" : type === "market" ? "市场" : "关联";
-      const location = type === "origin" ? item.location : type === "market" ? item.market : (item.location || "待补");
-      const tag = type === "hotspot" ? (item.kind || "行业热点") : (item.tag || "关注");
+      const locationLabel = type === "origin" ? "产区" : "市场";
+      const location = type === "origin" ? item.location : item.market;
+      const tag = item.tag || "关注";
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const summary = item.summary ? `<p class="entry-summary">${escapeHtml(item.summary)}</p>` : "";
       const hasPricePoints = Array.isArray(item.price_points) && item.price_points.length > 0;
       const price = type === "origin" && item.price && !hasPricePoints ? `<span class="entry-price">${escapeHtml(item.price)}</span>` : "";
       const priceBreakdown = (type === "market" || (type === "origin" && hasPricePoints)) ? renderPriceBreakdown(item) : "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
-      const related = type === "hotspot" && item.herb ? ` · 关联品种：${escapeHtml(item.herb)}` : "";
       const sourceLinks = renderSourceLinks(item, type);
 
       return `
@@ -1187,7 +1394,7 @@
             <h3 class="entry-title">${escapeHtml(title || "待补标题")}</h3>
             ${spec}
           </div>
-          <div class="entry-meta">${locationLabel}：${escapeHtml(location)}${related}</div>
+          <div class="entry-meta">${locationLabel}：${escapeHtml(location)}</div>
           ${priceBreakdown}
           ${summary}
           <div class="entry-footer">
@@ -1222,6 +1429,38 @@
       return parts.join(" ").toLowerCase().includes(keyword);
     }
 
+    function hotspotById(id) {
+      return (state.dashboard?.hotspots?.items || []).find((item) => item.id === id);
+    }
+
+    function formatHotspotContent(text) {
+      return escapeHtml(String(text || "").trim())
+        .replace(/([。！？；])/g, "$1<br>")
+        .replace(/([①②③④⑤⑥⑦⑧⑨⑩])/g, "<br>$1")
+        .replace(/<br><br>/g, "<br>");
+    }
+
+    function openHotspotModal(id) {
+      const item = hotspotById(id);
+      if (!item) return;
+      const modal = document.getElementById("hotspotModal");
+      document.getElementById("hotspotModalTitle").textContent = item.title || "行业热点";
+      document.getElementById("hotspotModalMeta").textContent = [item.date, item.source].filter(Boolean).join(" · ");
+      document.getElementById("hotspotModalBody").innerHTML = formatHotspotContent(item.content_full || item.summary || "暂无正文");
+      const sourceUrl = safeUrl(item.url);
+      document.getElementById("hotspotModalActions").innerHTML = sourceUrl
+        ? `<a class="button" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">查看原文</a>`
+        : "";
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeHotspotModal() {
+      const modal = document.getElementById("hotspotModal");
+      modal.hidden = true;
+      document.body.style.overflow = "";
+    }
+
     function filteredOriginItems() {
       if (!state.dashboard) return [];
       return state.dashboard.origin.items || [];
@@ -1253,12 +1492,13 @@
             item.spec,
             item.location,
             item.market,
-            item.kind,
-            item.summary,
-            item.source,
-            item.tag,
-            item.price,
-          ]);
+          item.kind,
+          item.summary,
+          item.content_full,
+          item.source,
+          item.tag,
+          item.price,
+        ]);
           if (query.trim() && !matched) return;
           results.push({
             ...item,
@@ -1364,16 +1604,25 @@
       const items = (dashboard.hotspots.items || []).filter((item) => state.hotspotKind === "all" || item.kind === state.hotspotKind);
       document.getElementById("hotspotCountChip").textContent = `${dashboard.hotspots.total} 条`;
 
-      renderChipGroup(
-        "hotspotFilters",
-        [{ value: "all", label: "全部类型" }, ...(dashboard.hotspots.kind_options || []).map((value) => ({ value, label: value }))],
-        state.hotspotKind,
-        (value) => {
-          state.hotspotKind = value;
-          state.hotspotPage = 1;
-          renderHotspotSection(state.dashboard);
-        }
-      );
+      const hotspotFilterRoot = document.getElementById("hotspotFilters");
+      const kindOptions = dashboard.hotspots.kind_options || [];
+      if (kindOptions.length > 1) {
+        hotspotFilterRoot.style.display = "";
+        renderChipGroup(
+          "hotspotFilters",
+          [{ value: "all", label: "全部类型" }, ...kindOptions.map((value) => ({ value, label: value }))],
+          state.hotspotKind,
+          (value) => {
+            state.hotspotKind = value;
+            state.hotspotPage = 1;
+            renderHotspotSection(state.dashboard);
+          }
+        );
+      } else {
+        hotspotFilterRoot.style.display = "none";
+        hotspotFilterRoot.innerHTML = "";
+        state.hotspotKind = "all";
+      }
 
       const totalPages = Math.max(1, Math.ceil(items.length / state.hotspotPageSize));
       if (state.hotspotPage > totalPages) state.hotspotPage = totalPages;
@@ -1469,6 +1718,28 @@
 
         document.getElementById("globalSearchSubmit").addEventListener("click", () => {
           applySearch();
+        });
+
+        document.addEventListener("click", (event) => {
+          const trigger = event.target.closest("[data-hotspot-open]");
+          if (trigger) {
+            openHotspotModal(trigger.getAttribute("data-hotspot-open"));
+            return;
+          }
+          const modal = document.getElementById("hotspotModal");
+          if (!modal.hidden && event.target === modal) {
+            closeHotspotModal();
+          }
+        });
+
+        document.getElementById("hotspotModalClose").addEventListener("click", () => {
+          closeHotspotModal();
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !document.getElementById("hotspotModal").hidden) {
+            closeHotspotModal();
+          }
         });
 
         document.getElementById("originPrev").addEventListener("click", () => {

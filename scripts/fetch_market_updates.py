@@ -366,6 +366,18 @@ def dedupe_records(records: list[dict[str, str]]) -> list[dict[str, str]]:
     return output
 
 
+def load_existing_records(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    if not isinstance(payload, list):
+        return []
+    return [item for item in payload if isinstance(item, dict)]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="抓取药通网 + 中药材天地网市场行情，输出网站可用 JSON")
     parser.add_argument(
@@ -378,6 +390,11 @@ def main() -> None:
         default="content/market_updates.json",
         help="输出 JSON 路径",
     )
+    parser.add_argument(
+        "--replace-output",
+        action="store_true",
+        help="覆盖输出文件，不保留历史市场记录",
+    )
     args = parser.parse_args()
 
     yt_records: list[dict[str, str]] = []
@@ -388,17 +405,19 @@ def main() -> None:
         yt_records.extend(records)
 
     zy_dates, zy_records = fetch_zy_market(args.target_date)
-    records = dedupe_records(yt_records + zy_records)
-
     output_path = Path(args.output).expanduser().resolve()
+    existing_records = [] if args.replace_output else load_existing_records(output_path)
+    new_records = dedupe_records(yt_records + zy_records)
+    records = dedupe_records(new_records + existing_records)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    source_breakdown = Counter(item["source"] for item in records)
-    market_breakdown = Counter(item["market"] for item in records)
+    source_breakdown = Counter(item["source"] for item in new_records)
+    market_breakdown = Counter(item["market"] for item in new_records)
     summary = {
         "target_date": args.target_date,
         "output": str(output_path),
+        "new_records": len(new_records),
         "records": len(records),
         "markets": {market: market_breakdown.get(market, 0) for market in MARKET_TARGETS.values()},
         "sources": dict(source_breakdown),

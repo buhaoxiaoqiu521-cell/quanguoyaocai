@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import subprocess
+import sys
+from pathlib import Path
+
+
+def run(cmd: list[str], cwd: Path, capture: bool = False) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        cmd,
+        cwd=str(cwd),
+        check=True,
+        text=True,
+        capture_output=capture,
+    )
+
+
+def has_relevant_changes(root: Path, files: list[str]) -> bool:
+    result = run(["git", "status", "--short", "--", *files], cwd=root, capture=True)
+    return bool(result.stdout.strip())
+
+
+def stage_and_publish(root: Path, files: list[str], message: str, remote: str, branch: str, push: bool) -> None:
+    run(["git", "add", "--", *files], cwd=root)
+    run(["git", "commit", "-m", message], cwd=root)
+    if push:
+        run(["git", "push", remote, branch], cwd=root)
+
+
+def main() -> None:
+    root = Path(__file__).resolve().parents[1]
+    parser = argparse.ArgumentParser(description="发布行业热点更新到 GitHub")
+    parser.add_argument("--limit", type=int, default=30, help="抓取最近多少条热点，默认 30")
+    parser.add_argument("--remote", default="origin", help="git remote 名称")
+    parser.add_argument("--branch", default="main", help="git 分支名称")
+    parser.add_argument("--commit-message", default="更新行业热点数据", help="git 提交信息")
+    parser.add_argument("--no-push", action="store_true", help="只提交不推送")
+    args = parser.parse_args()
+
+    hotspot_fetcher = root / "scripts" / "fetch_hotspots.py"
+    build_script = root / "scripts" / "build_dashboard_data.py"
+    hotspot_file = "content/hotspots.json"
+    tracked_files = [hotspot_file, "public/data/dashboard.json"]
+
+    run([sys.executable, str(hotspot_fetcher), "--limit", str(args.limit)], cwd=root)
+
+    if not has_relevant_changes(root, [hotspot_file]):
+        print("No hotspot changes found. Nothing to publish.")
+        return
+
+    run(
+        [
+            sys.executable,
+            str(build_script),
+            "--exclude-workbook-origin",
+            "--exclude-workbook-market",
+        ],
+        cwd=root,
+    )
+
+    stage_and_publish(
+        root=root,
+        files=tracked_files,
+        message=args.commit_message,
+        remote=args.remote,
+        branch=args.branch,
+        push=not args.no_push,
+    )
+    print("Published hotspot update.")
+
+
+if __name__ == "__main__":
+    main()

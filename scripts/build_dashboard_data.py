@@ -843,15 +843,29 @@ def build_hotspot_items(path: Path | None) -> list[dict[str, Any]]:
         raise ValueError("Hotspot file must be a JSON array.")
 
     items: list[dict[str, Any]] = []
+    used_ids: set[str] = set()
     for raw in payload:
         if not isinstance(raw, dict):
             continue
+        base_id = normalize_lookup_text(
+            raw.get("id")
+            or raw.get("url")
+            or f"{clean_text(raw.get('date'))}-{clean_text(raw.get('title'))}"
+        )[:80] or f"hotspot{len(items) + 1}"
+        hotspot_id = f"hotspot-{base_id}"
+        suffix = 2
+        while hotspot_id in used_ids:
+            hotspot_id = f"hotspot-{base_id}-{suffix}"
+            suffix += 1
+        used_ids.add(hotspot_id)
         items.append(
             {
+                "id": hotspot_id,
                 "date": clean_text(raw.get("date")),
                 "title": clean_text(raw.get("title")),
                 "kind": clean_text(raw.get("kind")) or "行业热点",
                 "summary": clean_text(raw.get("summary")),
+                "content_full": clean_text(raw.get("content_full")),
                 "source": clean_text(raw.get("source")) or "待补来源",
                 "url": clean_text(raw.get("url")),
                 "herb": clean_text(raw.get("herb")),
@@ -980,9 +994,9 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
         },
         "status": f"真实数据版 · 最新整理于 {latest_date}" if latest_date else "数据待补充",
         "hero": {
-            "eyebrow": "产地行情 / 天天行情 / 行业热点",
+            "eyebrow": "产地行情 / 市场行情 / 行业热点",
             "title": "先把真实记录摊开，再做判断与趋势。",
-            "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，天天行情优先补齐亳州、安国、玉林，行业热点单独维护，不和报价信息混在一起。",
+            "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
             "source_strip": [
                 f"总记录：{len(records)} 条",
                 f"产地：{len(origin_records)} 条",
@@ -1005,13 +1019,13 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
             "empty_text": "当前还没有产地行情记录。",
         },
         "markets": {
-            "title": "天天行情",
+            "title": "市场行情",
             "targets": MARKET_TARGETS,
             "total": len(market_items),
             "covered_count": sum(1 for group in market_groups if group["name"] in MARKET_TARGETS and group["count"] > 0),
             "extra_market_count": sum(1 for group in market_groups if group["name"] not in MARKET_TARGETS and group["count"] > 0),
             "groups": market_groups,
-            "empty_text": "当前市场行情记录还不完整，后续会继续补齐药通网天天行情。",
+            "empty_text": "当前市场行情记录还不完整，后续会继续补齐药通网市场行情。",
         },
         "hotspots": {
             "total": len(hotspots),
@@ -1022,7 +1036,7 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
         },
         "footer": {
             "left": f"数据文件：{source_label}",
-            "right": "站点结构已兼容后续继续补药通网天天行情与行业热点。",
+            "right": "站点结构已兼容后续继续补药通网市场行情与行业热点。",
         },
     }
 
