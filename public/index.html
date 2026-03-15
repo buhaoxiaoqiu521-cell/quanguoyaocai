@@ -1224,8 +1224,6 @@
     </div>
 
     <footer class="footer">
-      <div id="footerLeft">数据文件：--</div>
-      <div id="footerRight">站点结构已兼容后续继续补药通网市场行情与行业热点。</div>
       <div class="footer-traffic" id="footerTraffic">本站总访问量 -- 次</div>
     </footer>
   </main>
@@ -1346,7 +1344,6 @@
             <span class="entry-date">${escapeHtml(item.date || "--")}</span>
             <div class="entry-badges">
               ${sectionBadge}
-              <span class="tag">${escapeHtml(item.kind || "行业热点")}</span>
             </div>
           </div>
           <div class="entry-title-row">
@@ -1409,8 +1406,6 @@
     function renderHero(dashboard) {
       const updatedAt = dashboard?.meta?.generated_at || dashboard?.meta?.latest_date || "";
       document.getElementById("statusPill").textContent = updatedAt ? `数据更新于 ${updatedAt}` : "数据待补充";
-      document.getElementById("footerLeft").textContent = dashboard.footer.left;
-      document.getElementById("footerRight").textContent = String(dashboard.footer.right || "").replace(/天天行情/g, "市场行情");
     }
 
     function renderChipGroup(rootId, items, activeValue, onClick) {
@@ -1673,7 +1668,6 @@
       document.getElementById("marketList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
       document.getElementById("hotspotList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
       document.getElementById("searchList").innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
-      document.getElementById("footerRight").textContent = "请确认 public/data/dashboard.json 已生成。";
     }
 
     async function loadSiteVisits() {
