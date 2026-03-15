@@ -1040,10 +1040,6 @@
           </label>
           <button class="button search-submit" id="globalSearchSubmit" type="button">搜索</button>
         </div>
-        <div class="global-search-filters">
-          <div class="filter-group" id="searchDateFilters"></div>
-          <div class="filter-group" id="searchSourceFilters"></div>
-        </div>
         <div class="meta-row global-search-meta" id="searchMeta"></div>
         <div class="entry-list" id="searchList"></div>
       </div>
@@ -1066,8 +1062,6 @@
       hotspotPage: 1,
       hotspotPageSize: 10,
       searchQuery: "",
-      searchDate: "all",
-      searchSource: "all",
       currentMarket: "",
       hotspotKind: "all",
     };
@@ -1248,18 +1242,11 @@
     function collectSearchResults() {
       if (!state.dashboard) return [];
       const query = state.searchQuery;
-      const hasFilter = state.searchDate !== "all" || state.searchSource !== "all";
-      if (!query.trim() && !hasFilter) return [];
+      if (!query.trim()) return [];
 
       const results = [];
       const pushMatches = (items, type, sectionLabel) => {
         (items || []).forEach((item) => {
-          const dateMatch = state.searchDate === "all" || item.date === state.searchDate;
-          const itemSources = Array.isArray(item.source_links) && item.source_links.length
-            ? item.source_links.map((entry) => entry.label)
-            : String(item.source || "").split("、").map((value) => value.trim()).filter(Boolean);
-          const sourceMatch = state.searchSource === "all" || itemSources.includes(state.searchSource) || item.source === state.searchSource;
-          if (!dateMatch || !sourceMatch) return;
           const matched = matchesSearchQuery(query, [
             item.title,
             item.herb,
@@ -1272,7 +1259,6 @@
             item.tag,
             item.price,
           ]);
-          if (!query.trim() && !hasFilter) return;
           if (query.trim() && !matched) return;
           results.push({
             ...item,
@@ -1408,38 +1394,11 @@
       const root = document.getElementById("searchList");
       const meta = document.getElementById("searchMeta");
       const countChip = document.getElementById("searchCountChip");
-      const allSearchItems = [
-        ...(dashboard.origin.items || []),
-        ...((dashboard.markets.groups || []).flatMap((group) => group.items || [])),
-        ...(dashboard.hotspots.items || []),
-      ];
-      const searchDates = [...new Set(allSearchItems.map((item) => item.date).filter(Boolean))].sort().reverse();
-      const searchSources = [...new Set(allSearchItems.map((item) => item.source).filter(Boolean))].sort();
 
-      renderChipGroup(
-        "searchDateFilters",
-        [{ value: "all", label: "全部日期" }, ...searchDates.map((value) => ({ value, label: value }))],
-        state.searchDate,
-        (value) => {
-          state.searchDate = value;
-          renderSearchSection(state.dashboard);
-        }
-      );
-
-      renderChipGroup(
-        "searchSourceFilters",
-        [{ value: "all", label: "全部来源" }, ...searchSources.map((value) => ({ value, label: value }))],
-        state.searchSource,
-        (value) => {
-          state.searchSource = value;
-          renderSearchSection(state.dashboard);
-        }
-      );
-
-      if (!query && state.searchDate === "all" && state.searchSource === "all") {
+      if (!query) {
         countChip.textContent = "未搜索";
         meta.innerHTML = "";
-        root.innerHTML = `<div class="empty-state">输入关键词后，可在这里集中查看产地行情、市场行情和行业热点的匹配结果；也可以先按日期和来源筛选。</div>`;
+        root.innerHTML = `<div class="empty-state">输入关键词后，可在这里集中查看产地行情、市场行情和行业热点的匹配结果。</div>`;
         return;
       }
 
@@ -1449,7 +1408,7 @@
 
       countChip.textContent = `${results.length} 条`;
       meta.innerHTML = [
-        query ? `<span class="metric-chip active">关键词：${escapeHtml(query)}</span>` : `<span class="metric-chip active">按筛选条件查看</span>`,
+        `<span class="metric-chip active">关键词：${escapeHtml(query)}</span>`,
         `<span class="metric-chip">产地行情 ${originCount} 条</span>`,
         `<span class="metric-chip">市场行情 ${marketCount} 条</span>`,
         `<span class="metric-chip">行业热点 ${hotspotCount} 条</span>`,
