@@ -128,6 +128,18 @@ def find_latest_payload(workspace: Path) -> Path:
     return usable[-1][2]
 
 
+def load_existing_records(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    if not isinstance(payload, list):
+        return []
+    return [item for item in payload if isinstance(item, dict)]
+
+
 def normalize_location(text: str) -> str:
     raw = clean_text(text)
     if not raw:
@@ -310,6 +322,39 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
     return deduped
 
 
+def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    merged: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, str, str]] = set()
+    for item in new_records + existing_records:
+        record = {
+            "date": clean_text(item.get("date")),
+            "herb": clean_text(item.get("herb")),
+            "spec": clean_text(item.get("spec")) or "产地快讯",
+            "unit": clean_text(item.get("unit")) or "元/kg",
+            "market": clean_text(item.get("market")) or "产地",
+            "location": clean_text(item.get("location")),
+            "today_price": clean_text(item.get("today_price")),
+            "yesterday_price": clean_text(item.get("yesterday_price")),
+            "delta_amount": clean_text(item.get("delta_amount")),
+            "delta_rate": clean_text(item.get("delta_rate")),
+            "source": clean_text(item.get("source")),
+            "url": clean_text(item.get("url")),
+            "summary": clean_text(item.get("summary")),
+            "content_full": clean_text(item.get("content_full")),
+            "price_label": clean_text(item.get("price_label")),
+            "price_points": item.get("price_points") if isinstance(item.get("price_points"), list) else [],
+        }
+        if not record["date"] or not record["herb"] or not record["summary"]:
+            continue
+        key = (record["date"], record["herb"], record["location"], record["source"], record["summary"])
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(record)
+    merged.sort(key=lambda item: (item["date"], item["herb"], item["location"]), reverse=True)
+    return merged
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="把 OpenClaw 的中药材抓取 JSON 转成网站可用的产地行情 JSON")
     parser.add_argument(
@@ -327,6 +372,11 @@ def main() -> None:
         default="content/openclaw_origin.json",
         help="输出给网站使用的产地行情 JSON 文件",
     )
+    parser.add_argument(
+        "--replace-output",
+        action="store_true",
+        help="覆盖输出文件，不保留已有产地历史记录",
+    )
     args = parser.parse_args()
 
     workspace = Path(args.workspace).expanduser().resolve()
@@ -335,8 +385,10 @@ def main() -> None:
     if payload is None:
         raise SystemExit(f"OpenClaw JSON is not usable: {input_path}")
 
-    records = normalize_payload(payload)
     output_path = Path(args.output).expanduser().resolve()
+    records = normalize_payload(payload)
+    existing_records = [] if args.replace_output else load_existing_records(output_path)
+    records = merge_records(records, existing_records)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
 
