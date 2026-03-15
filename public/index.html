@@ -157,56 +157,57 @@
     }
 
     .hero-copy {
-      padding: 26px 34px;
+      padding: 16px 24px 20px;
       color: #f6eddb;
     }
 
     .hero-card {
-      padding: 26px 28px;
-      border-radius: 28px;
-      border: 1px solid rgba(247, 240, 223, 0.1);
-      background: rgba(247, 240, 223, 0.04);
-      max-width: 1040px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(247, 240, 223, 0.12);
+      background: rgba(247, 240, 223, 0.05);
+      max-width: 960px;
       margin: 0 auto;
-      text-align: left;
+      text-align: center;
+      backdrop-filter: blur(10px);
     }
 
     .trace-entry {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      display: flex;
       align-items: center;
-      gap: 26px;
+      justify-content: center;
+      flex-wrap: wrap;
+      row-gap: 10px;
+      column-gap: 14px;
+      min-height: 56px;
     }
 
-    .trace-entry-copy {
+    .trace-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(229, 197, 142, 0.28);
+      flex-shrink: 0;
+    }
+
+    .trace-entry-item {
+      display: inline-flex;
+      align-items: center;
       min-width: 0;
     }
 
-    .trace-entry-label {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(229, 197, 142, 0.18);
-      background: rgba(247, 240, 223, 0.06);
-      color: rgba(246, 237, 219, 0.74);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-    }
-
     .trace-entry-title {
-      margin: 14px 0 8px;
+      margin: 0;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: clamp(28px, 3.8vw, 42px);
-      line-height: 1.16;
-      letter-spacing: -0.04em;
+      font-size: clamp(22px, 2.9vw, 30px);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
     }
 
     .trace-entry-text {
       margin: 0;
       color: rgba(244, 234, 214, 0.74);
-      font-size: 16px;
-      line-height: 1.75;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     .button {
@@ -241,10 +242,10 @@
       color: #fff3d6;
       border-color: rgba(229, 197, 142, 0.34);
       background: rgba(184, 133, 56, 0.16);
-      min-width: 248px;
-      min-height: 60px;
-      padding: 16px 28px;
-      font-size: 20px;
+      min-width: 158px;
+      min-height: 46px;
+      padding: 11px 18px;
+      font-size: 16px;
       font-weight: 700;
     }
 
@@ -1037,28 +1038,32 @@
       }
 
       .hero-card {
-        padding: 18px 16px;
+        padding: 14px 14px;
       }
 
       .trace-entry {
-        grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 8px;
         text-align: center;
+        min-height: 0;
       }
 
       .trace-entry-title {
-        font-size: clamp(26px, 8vw, 38px);
+        font-size: 22px;
       }
 
       .trace-entry-text {
-        font-size: 14px;
+        font-size: 13px;
       }
 
       .button.trace {
-        width: 100%;
-        min-width: 0;
-        min-height: 58px;
-        font-size: 18px;
+        min-width: 118px;
+        min-height: 42px;
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+
+      .trace-divider {
+        display: none;
       }
 
       .section-head {
@@ -1202,12 +1207,11 @@
       <div class="hero-copy">
         <article class="hero-card">
           <div class="trace-entry">
-            <div class="trace-entry-copy">
-              <span class="trace-entry-label">溯源入口</span>
-              <h2 class="trace-entry-title">曹操溯源平台</h2>
-              <p class="trace-entry-text">药商、加工户、种植户溯源入口</p>
-            </div>
-            <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
+            <span class="trace-entry-item trace-entry-title">曹操溯源平台</span>
+            <span class="trace-divider" aria-hidden="true"></span>
+            <span class="trace-entry-item trace-entry-text">药商、加工户、种植户溯源入口</span>
+            <span class="trace-divider" aria-hidden="true"></span>
+            <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入平台</a>
           </div>
         </article>
       </div>
