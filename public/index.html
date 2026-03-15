@@ -314,6 +314,11 @@
       margin-bottom: 16px;
     }
 
+    .global-search-mode {
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
     .global-search-filters {
       display: grid;
       gap: 12px;
@@ -1010,6 +1015,10 @@
         gap: 8px;
       }
 
+      .global-search-mode {
+        margin-bottom: 10px;
+      }
+
       .global-search-filters .filter-group {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1305,6 +1314,7 @@
           </label>
           <button class="button search-submit" id="globalSearchSubmit" type="button">搜索</button>
         </div>
+        <div class="meta-row global-search-mode" id="searchModeSwitch"></div>
         <div class="meta-row global-search-meta" id="searchMeta"></div>
         <div class="entry-list" id="searchList"></div>
       </div>
@@ -1334,6 +1344,8 @@
   </main>
 
   <script>
+    const SEARCH_RENDER_LIMIT = 120;
+
     const state = {
       dashboard: null,
       originPage: 1,
@@ -1343,6 +1355,15 @@
       hotspotPage: 1,
       hotspotPageSize: 10,
       searchQuery: "",
+      searchMode: "current",
+      searchHistory: {
+        origin: [],
+        market: [],
+        hotspot: [],
+      },
+      searchHistoryLoaded: false,
+      searchHistoryLoading: false,
+      searchHistoryError: "",
       currentMarket: "",
       hotspotKind: "all",
       collapsedSections: {
@@ -1572,8 +1593,34 @@
       return parts.join(" ").toLowerCase().includes(keyword);
     }
 
+    function itemSearchText(item) {
+      if (item?.search_text) return String(item.search_text);
+      const parts = [
+        item?.title,
+        item?.herb,
+        item?.spec,
+        item?.location,
+        item?.market,
+        item?.kind,
+        item?.summary,
+        item?.content_full,
+        item?.source,
+        item?.tag,
+        item?.price,
+      ];
+      (item?.price_points || []).forEach((point) => {
+        parts.push(point?.label, point?.price);
+      });
+      (item?.source_links || []).forEach((entry) => {
+        parts.push(entry?.label);
+      });
+      return parts.filter(Boolean).join(" ");
+    }
+
     function hotspotById(id) {
-      return (state.dashboard?.hotspots?.items || []).find((item) => item.id === id);
+      const currentMatch = (state.dashboard?.hotspots?.items || []).find((item) => item.id === id);
+      if (currentMatch) return currentMatch;
+      return (state.searchHistory?.hotspot || []).find((item) => item.id === id);
     }
 
     function formatHotspotContent(text) {
@@ -1618,27 +1665,90 @@
       return [...new Set((items || []).map((item) => item.source).filter(Boolean))];
     }
 
+    function renderSearchModeSwitch() {
+      renderChipGroup(
+        "searchModeSwitch",
+        [
+          { value: "current", label: "当前展示数据" },
+          { value: "history", label: "全部历史" },
+        ],
+        state.searchMode,
+        (value) => {
+          void setSearchMode(value);
+        }
+      );
+    }
+
+    async function ensureSearchHistory() {
+      if (state.searchHistoryLoaded || state.searchHistoryLoading) return;
+      state.searchHistoryLoading = true;
+      state.searchHistoryError = "";
+      renderSearchSection(state.dashboard);
+      try {
+        const [originResponse, marketResponse, hotspotResponse] = await Promise.all([
+          fetch("./data/origin-search-index.json"),
+          fetch("./data/market-search-index.json"),
+          fetch("./data/hotspot-search-index.json"),
+        ]);
+        if (!originResponse.ok || !marketResponse.ok || !hotspotResponse.ok) {
+          throw new Error("Failed to load history search indexes.");
+        }
+        const [originPayload, marketPayload, hotspotPayload] = await Promise.all([
+          originResponse.json(),
+          marketResponse.json(),
+          hotspotResponse.json(),
+        ]);
+        state.searchHistory = {
+          origin: originPayload?.items || [],
+          market: marketPayload?.items || [],
+          hotspot: hotspotPayload?.items || [],
+        };
+        state.searchHistoryLoaded = true;
+      } catch (error) {
+        console.error(error);
+        state.searchHistoryError = "历史检索索引加载失败，请稍后重试。";
+      } finally {
+        state.searchHistoryLoading = false;
+        renderSearchSection(state.dashboard);
+      }
+    }
+
+    async function setSearchMode(mode) {
+      if (!mode || state.searchMode === mode) return;
+      state.searchMode = mode;
+      renderSearchSection(state.dashboard);
+      if (mode === "history") {
+        await ensureSearchHistory();
+      }
+    }
+
+    function currentSearchCollections() {
+      return {
+        origin: state.dashboard?.origin?.items || [],
+        market: (state.dashboard?.markets?.groups || []).flatMap((group) => group.items || []),
+        hotspot: state.dashboard?.hotspots?.items || [],
+      };
+    }
+
+    function historySearchCollections() {
+      return {
+        origin: state.searchHistory?.origin || [],
+        market: state.searchHistory?.market || [],
+        hotspot: state.searchHistory?.hotspot || [],
+      };
+    }
+
     function collectSearchResults() {
       if (!state.dashboard) return [];
       const query = state.searchQuery;
       if (!query.trim()) return [];
+      if (state.searchMode === "history" && !state.searchHistoryLoaded) return [];
 
       const results = [];
+      const collections = state.searchMode === "history" ? historySearchCollections() : currentSearchCollections();
       const pushMatches = (items, type, sectionLabel) => {
         (items || []).forEach((item) => {
-          const matched = matchesSearchQuery(query, [
-            item.title,
-            item.herb,
-            item.spec,
-            item.location,
-            item.market,
-          item.kind,
-          item.summary,
-          item.content_full,
-          item.source,
-          item.tag,
-          item.price,
-        ]);
+          const matched = matchesSearchQuery(query, [itemSearchText(item)]);
           if (query.trim() && !matched) return;
           results.push({
             ...item,
@@ -1648,18 +1758,19 @@
         });
       };
 
-      pushMatches(state.dashboard.origin.items, "origin", "产地行情");
-      (state.dashboard.markets.groups || []).forEach((group) => {
-        pushMatches(group.items, "market", "市场行情");
-      });
-      pushMatches(state.dashboard.hotspots.items, "hotspot", "行业热点");
+      pushMatches(collections.origin, "origin", "产地行情");
+      pushMatches(collections.market, "market", "市场行情");
+      pushMatches(collections.hotspot, "hotspot", "行业热点");
 
       return results.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
     }
 
-    function applySearch() {
+    async function applySearch() {
       const input = document.getElementById("globalSearch");
       state.searchQuery = input ? input.value : "";
+      if (state.searchMode === "history") {
+        await ensureSearchHistory();
+      }
       renderSearchSection(state.dashboard);
     }
 
@@ -1783,28 +1894,50 @@
       const root = document.getElementById("searchList");
       const meta = document.getElementById("searchMeta");
       const countChip = document.getElementById("searchCountChip");
+      renderSearchModeSwitch();
+
+      if (state.searchMode === "history" && state.searchHistoryLoading) {
+        countChip.textContent = "加载中";
+        meta.innerHTML = `<span class="metric-chip active">正在加载历史检索索引</span>`;
+        root.innerHTML = `<div class="empty-state">正在加载历史检索索引，请稍候。</div>`;
+        return;
+      }
+
+      if (state.searchMode === "history" && state.searchHistoryError) {
+        countChip.textContent = "加载失败";
+        meta.innerHTML = `<span class="metric-chip active">全部历史</span>`;
+        root.innerHTML = `<div class="empty-state">${escapeHtml(state.searchHistoryError)}</div>`;
+        return;
+      }
 
       if (!query) {
         countChip.textContent = "未搜索";
-        meta.innerHTML = "";
-        root.innerHTML = `<div class="empty-state">输入关键词后，可在这里集中查看产地行情、市场行情和行业热点的匹配结果。</div>`;
+        meta.innerHTML = `<span class="metric-chip active">${state.searchMode === "history" ? "全部历史" : "当前展示数据"}</span>`;
+        root.innerHTML = `<div class="empty-state">${
+          state.searchMode === "history"
+            ? "输入关键词后，可在这里搜索产地行情、市场行情和行业热点的历史数据。"
+            : "输入关键词后，可在这里集中查看当前展示的产地行情、市场行情和行业热点内容。"
+        }</div>`;
         return;
       }
 
       const originCount = results.filter((item) => item._searchSection === "产地行情").length;
       const marketCount = results.filter((item) => item._searchSection === "市场行情").length;
       const hotspotCount = results.filter((item) => item._searchSection === "行业热点").length;
+      const renderedResults = results.slice(0, SEARCH_RENDER_LIMIT);
 
       countChip.textContent = `${results.length} 条`;
       meta.innerHTML = [
+        `<span class="metric-chip active">${state.searchMode === "history" ? "全部历史" : "当前展示数据"}</span>`,
         `<span class="metric-chip active">关键词：${escapeHtml(query)}</span>`,
         `<span class="metric-chip">产地行情 ${originCount} 条</span>`,
         `<span class="metric-chip">市场行情 ${marketCount} 条</span>`,
         `<span class="metric-chip">行业热点 ${hotspotCount} 条</span>`,
+        results.length > SEARCH_RENDER_LIMIT ? `<span class="metric-chip">当前仅显示前 ${SEARCH_RENDER_LIMIT} 条</span>` : "",
       ].filter(Boolean).join("");
 
       root.innerHTML = results.length
-        ? results.map((item) => renderEntryCard(item, item._searchType, { sectionLabel: item._searchSection })).join("")
+        ? renderedResults.map((item) => renderEntryCard(item, item._searchType, { sectionLabel: item._searchSection })).join("")
         : `<div class="empty-state">没有找到符合当前检索条件的内容。</div>`;
     }
 
@@ -1851,12 +1984,12 @@
         document.getElementById("globalSearch").addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
-            applySearch();
+            void applySearch();
           }
         });
 
         document.getElementById("globalSearchSubmit").addEventListener("click", () => {
-          applySearch();
+          void applySearch();
         });
 
         document.addEventListener("click", (event) => {

@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from datetime import datetime
 import os
 from pathlib import Path
+import time
 from typing import Any
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -20,6 +21,7 @@ SHEET_NAME = "报价录入"
 COLS = list("ABCDEFGHIJKLM")
 MARKET_TARGETS = ["亳州", "安国", "玉林"]
 SECTION_DISPLAY_LIMIT = 200
+SEARCH_INDEX_SECTION_LIMIT = {"origin": 5000, "market": 8000, "hotspot": 1500}
 UP_KEYWORDS = ("上涨", "上扬", "走快", "畅快", "走畅", "上浮", "寻货", "走动良好", "偏强")
 STEADY_KEYWORDS = ("平稳", "价稳", "稳定", "持稳", "正常走动", "正常走销", "波动不大", "延续")
 DOWN_KEYWORDS = ("走缓", "走慢", "走动不快", "交易不畅", "不畅", "观望", "疲软", "货源充足")
@@ -717,9 +719,19 @@ def fetch_yt_items(lmid: str, min_date: str) -> list[dict[str, Any]]:
             params["times"] = "1"
         else:
             params["ycnam"] = ""
-        request = Request(f"{YT_QUERY_URL}?{urlencode(params)}", headers=YT_HEADERS)
-        with urlopen(request, timeout=20) as response:
-            payload = json.loads(response.read().decode("utf-8", "ignore"))
+        payload: dict[str, Any] | None = None
+        for attempt in range(3):
+            request = Request(f"{YT_QUERY_URL}?{urlencode(params)}", headers=YT_HEADERS)
+            try:
+                with urlopen(request, timeout=20) as response:
+                    raw_text = response.read().decode("utf-8", "ignore")
+                payload = json.loads(raw_text)
+                break
+            except json.JSONDecodeError:
+                if attempt == 2:
+                    print(f"Skip yt1998 backfill page {page} for lmid={lmid}: non-JSON response.")
+                    return items
+                time.sleep(0.6 * (attempt + 1))
         page_items = payload.get("data") or []
         if not page_items:
             break
@@ -939,6 +951,126 @@ def build_hotspot_items(path: Path | None) -> list[dict[str, Any]]:
     return items
 
 
+def build_search_text(item: dict[str, Any]) -> str:
+    parts: list[str] = [
+        clean_text(item.get("title")),
+        clean_text(item.get("herb")),
+        clean_text(item.get("spec")),
+        clean_text(item.get("location")),
+        clean_text(item.get("market")),
+        clean_text(item.get("kind")),
+        clean_text(item.get("summary")),
+        clean_text(item.get("content_full")),
+        clean_text(item.get("source")),
+        clean_text(item.get("tag")),
+        clean_text(item.get("price")),
+    ]
+    for point in item.get("price_points") or []:
+        if not isinstance(point, dict):
+            continue
+        parts.append(clean_text(point.get("label")))
+        parts.append(clean_text(point.get("price")))
+    for entry in item.get("source_links") or []:
+        if not isinstance(entry, dict):
+            continue
+        parts.append(clean_text(entry.get("label")))
+    return clean_text(" ".join(part for part in parts if part))
+
+
+def build_origin_search_index(items: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+    payload_items: list[dict[str, Any]] = []
+    for item in items[: SEARCH_INDEX_SECTION_LIMIT["origin"]]:
+        payload = {
+            "date": item.get("date", ""),
+            "herb": item.get("herb", ""),
+            "spec": item.get("spec", ""),
+            "location": item.get("location", ""),
+            "market": item.get("market", "产地"),
+            "price": item.get("price", ""),
+            "unit": item.get("unit", ""),
+            "delta_amount": item.get("delta_amount", ""),
+            "delta_rate": item.get("delta_rate", ""),
+            "tag": item.get("tag", ""),
+            "summary": item.get("summary", ""),
+            "source": item.get("source", ""),
+            "url": item.get("url", ""),
+            "search_text": build_search_text(item),
+        }
+        if item.get("price_points"):
+            payload["price_points"] = item["price_points"]
+        if item.get("source_links"):
+            payload["source_links"] = item["source_links"]
+        payload_items.append(payload)
+    return {
+        "meta": {
+            "section": "origin",
+            "generated_at": generated_at,
+            "total": len(payload_items),
+        },
+        "items": payload_items,
+    }
+
+
+def build_market_search_index(items: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+    payload_items: list[dict[str, Any]] = []
+    for item in items[: SEARCH_INDEX_SECTION_LIMIT["market"]]:
+        payload = {
+            "date": item.get("date", ""),
+            "herb": item.get("herb", ""),
+            "spec": item.get("spec", ""),
+            "location": item.get("location", ""),
+            "market": item.get("market", ""),
+            "price": item.get("price", ""),
+            "unit": item.get("unit", ""),
+            "delta_amount": item.get("delta_amount", ""),
+            "delta_rate": item.get("delta_rate", ""),
+            "tag": item.get("tag", ""),
+            "summary": item.get("summary", ""),
+            "source": item.get("source", ""),
+            "url": item.get("url", ""),
+            "search_text": build_search_text(item),
+        }
+        if item.get("price_points"):
+            payload["price_points"] = item["price_points"]
+        payload_items.append(payload)
+    return {
+        "meta": {
+            "section": "market",
+            "generated_at": generated_at,
+            "total": len(payload_items),
+        },
+        "items": payload_items,
+    }
+
+
+def build_hotspot_search_index(items: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+    payload_items: list[dict[str, Any]] = []
+    for item in items[: SEARCH_INDEX_SECTION_LIMIT["hotspot"]]:
+        payload_items.append(
+            {
+                "id": item.get("id", ""),
+                "date": item.get("date", ""),
+                "title": item.get("title", ""),
+                "kind": item.get("kind", "行业热点"),
+                "summary": item.get("summary", ""),
+                "content_full": item.get("content_full", ""),
+                "source": item.get("source", ""),
+                "url": item.get("url", ""),
+                "herb": item.get("herb", ""),
+                "location": item.get("location", ""),
+                "search_text": build_search_text(item),
+            }
+        )
+    return {
+        "meta": {
+            "section": "hotspot",
+            "generated_at": generated_at,
+            "total": len(payload_items),
+        },
+        "items": payload_items,
+    }
+
+
 def load_json_records(path: Path | None, empty_error: str) -> list[WorkbookRecord]:
     if path is None or not path.exists():
         return []
@@ -1010,8 +1142,14 @@ def dedupe_records(records: list[WorkbookRecord]) -> list[WorkbookRecord]:
     return [seen[key] for key in order]
 
 
-def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_path: Path | None) -> dict[str, Any]:
+def build_dashboard(
+    records: list[WorkbookRecord],
+    source_label: str,
+    hotspot_path: Path | None,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
     records = sorted(records, key=item_sort_key, reverse=True)
+    generated_at = generated_at or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     latest_date = records[0].date if records else ""
     dates = sorted({record.date for record in records if record.date}, reverse=True)
     sources = Counter(record.source for record in records if record.source)
@@ -1046,7 +1184,7 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
 
     return {
         "meta": {
-            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "generated_at": generated_at,
             "source_file": source_label,
             "latest_date": latest_date,
             "available_dates": dates,
@@ -1150,6 +1288,21 @@ def main() -> None:
         help="输出 dashboard.json 的路径",
     )
     parser.add_argument(
+        "--origin-search-index-output",
+        default="public/data/origin-search-index.json",
+        help="输出产地历史检索索引 JSON 的路径",
+    )
+    parser.add_argument(
+        "--market-search-index-output",
+        default="public/data/market-search-index.json",
+        help="输出市场历史检索索引 JSON 的路径",
+    )
+    parser.add_argument(
+        "--hotspot-search-index-output",
+        default="public/data/hotspot-search-index.json",
+        help="输出行业热点历史检索索引 JSON 的路径",
+    )
+    parser.add_argument(
         "--openclaw-origin",
         default="content/openclaw_origin.json",
         help="OpenClaw 产地 JSON 文件路径；存在时会自动并入产地行情",
@@ -1184,6 +1337,9 @@ def main() -> None:
     source_path = resolve_input_path(args.input, required=not (openclaw_records or market_json_records))
     hotspot_path = Path(args.hotspots).expanduser().resolve()
     output_path = Path(args.output).expanduser().resolve()
+    origin_search_index_path = Path(args.origin_search_index_output).expanduser().resolve()
+    market_search_index_path = Path(args.market_search_index_output).expanduser().resolve()
+    hotspot_search_index_path = Path(args.hotspot_search_index_output).expanduser().resolve()
 
     records = load_workbook_rows(source_path) if source_path else []
     if args.exclude_workbook_origin:
@@ -1201,12 +1357,35 @@ def main() -> None:
     if market_json_records:
         source_parts.append(market_path.name)
     source_label = " + ".join(source_parts) if source_parts else "无输入文件"
-
-    dashboard = build_dashboard(records, source_label, hotspot_path if hotspot_path.exists() else None)
+    generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    dashboard = build_dashboard(records, source_label, hotspot_path if hotspot_path.exists() else None, generated_at)
+    origin_search_index = build_origin_search_index(
+        merge_origin_items([to_origin_item(record) for record in records if record.market == "产地"]),
+        generated_at,
+    )
+    market_search_index = build_market_search_index(
+        [to_origin_item(record) for record in records if record.market != "产地"],
+        generated_at,
+    )
+    hotspot_search_index = build_hotspot_search_index(
+        build_hotspot_items(hotspot_path if hotspot_path.exists() else None),
+        generated_at,
+    )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    origin_search_index_path.parent.mkdir(parents=True, exist_ok=True)
+    market_search_index_path.parent.mkdir(parents=True, exist_ok=True)
+    hotspot_search_index_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(dashboard, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Wrote {output_path} with {len(records)} records.")
+    origin_search_index_path.write_text(json.dumps(origin_search_index, ensure_ascii=False, indent=2), encoding="utf-8")
+    market_search_index_path.write_text(json.dumps(market_search_index, ensure_ascii=False, indent=2), encoding="utf-8")
+    hotspot_search_index_path.write_text(json.dumps(hotspot_search_index, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(
+        f"Wrote {output_path} with {len(records)} records. "
+        f"Search indexes: origin={origin_search_index['meta']['total']}, "
+        f"market={market_search_index['meta']['total']}, "
+        f"hotspot={hotspot_search_index['meta']['total']}."
+    )
 
 
 if __name__ == "__main__":
