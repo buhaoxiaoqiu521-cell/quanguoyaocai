@@ -20,6 +20,11 @@ DATE_RE = re.compile(r"(20\d{2}-\d{2}-\d{2})\s+\d{2}:\d{2}")
 AUTHOR_RE = re.compile(r"作者[:：]\s*([^\s]+)")
 DETAIL_SELECTORS = ("div.info-content", ".zx-info-detail .info-content")
 COPYRIGHT_RE = re.compile(r"声明：本文是中药材天地网原创资讯.*$")
+NOTICE_START_RE = re.compile(r"声\s*明[:：]\s*转载此文是出于传递更多信息之目的。?")
+NOTICE_KEEP_RE = re.compile(
+    r"(声\s*明[:：]\s*转载此文是出于传递更多信息之目的。?"
+    r"\s*若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。)"
+)
 PREVIEW_LIMIT = 110
 
 
@@ -41,6 +46,12 @@ def normalize_detail_text(text: str) -> str:
     ):
         value = value.split(marker, 1)[0]
     value = COPYRIGHT_RE.sub("", value)
+    notice_match = NOTICE_KEEP_RE.search(value)
+    if notice_match:
+        prefix = value[: notice_match.start()].rstrip()
+        value = f"{prefix} {clean_text(notice_match.group(1))}".strip()
+    elif NOTICE_START_RE.search(value):
+        value = NOTICE_START_RE.split(value, 1)[0].strip()
     return clean_text(value)
 
 

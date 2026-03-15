@@ -19,6 +19,7 @@ from zipfile import ZipFile
 SHEET_NAME = "报价录入"
 COLS = list("ABCDEFGHIJKLM")
 MARKET_TARGETS = ["亳州", "安国", "玉林"]
+SECTION_DISPLAY_LIMIT = 500
 UP_KEYWORDS = ("上涨", "上扬", "走快", "畅快", "走畅", "上浮", "寻货", "走动良好", "偏强")
 STEADY_KEYWORDS = ("平稳", "价稳", "稳定", "持稳", "正常走动", "正常走销", "波动不大", "延续")
 DOWN_KEYWORDS = ("走缓", "走慢", "走动不快", "交易不畅", "不畅", "观望", "疲软", "货源充足")
@@ -956,8 +957,10 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
     origin_records = [record for record in records if record.market == "产地"]
     market_records = [record for record in records if record.market != "产地"]
     origin_sources = Counter(record.source for record in origin_records if record.source)
-    origin_items = merge_origin_items([to_origin_item(record) for record in origin_records])
-    market_items = [to_origin_item(record) for record in market_records]
+    origin_items_all = merge_origin_items([to_origin_item(record) for record in origin_records])
+    origin_items = origin_items_all[:SECTION_DISPLAY_LIMIT]
+    market_items_all = [to_origin_item(record) for record in market_records]
+    market_items = market_items_all[:SECTION_DISPLAY_LIMIT]
 
     market_counter = Counter(record.market for record in market_records if record.market)
     market_order = MARKET_TARGETS + sorted(name for name in market_counter if name not in MARKET_TARGETS)
@@ -1012,6 +1015,7 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
         },
         "origin": {
             "total": len(origin_items),
+            "all_total": len(origin_items_all),
             "latest_date": origin_items[0]["date"] if origin_items else "",
             "date_options": dates,
             "source_options": [name for name, _ in origin_sources.most_common()],
@@ -1022,6 +1026,7 @@ def build_dashboard(records: list[WorkbookRecord], source_label: str, hotspot_pa
             "title": "市场行情",
             "targets": MARKET_TARGETS,
             "total": len(market_items),
+            "all_total": len(market_items_all),
             "covered_count": sum(1 for group in market_groups if group["name"] in MARKET_TARGETS and group["count"] > 0),
             "extra_market_count": sum(1 for group in market_groups if group["name"] not in MARKET_TARGETS and group["count"] > 0),
             "groups": market_groups,
