@@ -199,21 +199,11 @@ def ensure_yt_verified(session: requests.Session, target_path: str = "/ytw/secon
     session.cookies.set(YT_VERIFY_COOKIE, uuid, domain="www.yt1998.com", path="/")
 
 
-def choose_target_dates(items: list[dict[str, Any]], target_date: str, days: int) -> list[str]:
-    filtered_dates = sorted(
-        {
-            clean_text(item.get("date"))
-            for item in items
-            if clean_text(item.get("date")) and clean_text(item.get("date")) <= target_date
-        },
-        reverse=True,
-    )
-    if not filtered_dates:
-        filtered_dates = sorted({clean_text(item.get("date")) for item in items if clean_text(item.get("date"))}, reverse=True)
-    return filtered_dates[:days]
+def choose_target_dates(items: list[dict[str, Any]], target_date: str) -> list[str]:
+    return [target_date] if any(clean_text(item.get("date")) == target_date for item in items) else []
 
 
-def fetch_yt_market(scid: str, target_date: str, days: int = 5, max_pages: int = 5, page_size: int = 20) -> tuple[list[str], list[dict[str, str]]]:
+def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: int = 20) -> tuple[list[str], list[dict[str, str]]]:
     url = "https://www.yt1998.com/ytw/second/marketMgr/query.jsp"
     payload_items: list[dict[str, Any]] = []
 
@@ -248,7 +238,6 @@ def fetch_yt_market(scid: str, target_date: str, days: int = 5, max_pages: int =
     chosen_dates = choose_target_dates(
         [{"date": clean_text(item.get("dtm")).split(" ")[0]} for item in payload_items],
         target_date,
-        days,
     )
     records: list[dict[str, str]] = []
 
@@ -283,7 +272,7 @@ def fetch_yt_market(scid: str, target_date: str, days: int = 5, max_pages: int =
     return chosen_dates, records
 
 
-def fetch_zy_market(target_date: str, days: int = 5, max_pages: int = 20) -> tuple[dict[str, list[str]], list[dict[str, str]]]:
+def fetch_zy_market(target_date: str, max_pages: int = 20) -> tuple[dict[str, list[str]], list[dict[str, str]]]:
     parsed_items: list[dict[str, str]] = []
 
     with requests.Session() as session:
@@ -348,7 +337,7 @@ def fetch_zy_market(target_date: str, days: int = 5, max_pages: int = 20) -> tup
     chosen_dates: dict[str, list[str]] = {}
     for market in MARKET_TARGETS.values():
         items = [item for item in parsed_items if item["market"] == market]
-        chosen_dates[market] = choose_target_dates(items, target_date, days)
+        chosen_dates[market] = choose_target_dates(items, target_date)
 
     records = [
         item
@@ -389,22 +378,16 @@ def main() -> None:
         default="content/market_updates.json",
         help="输出 JSON 路径",
     )
-    parser.add_argument(
-        "--days",
-        type=int,
-        default=5,
-        help="保留最近几日的市场行情，默认 5 日",
-    )
     args = parser.parse_args()
 
     yt_records: list[dict[str, str]] = []
     yt_dates: dict[str, list[str]] = {}
     for scid, market_name in MARKET_TARGETS.items():
-        chosen_dates, records = fetch_yt_market(scid, args.target_date, days=args.days)
+        chosen_dates, records = fetch_yt_market(scid, args.target_date)
         yt_dates[market_name] = chosen_dates
         yt_records.extend(records)
 
-    zy_dates, zy_records = fetch_zy_market(args.target_date, days=args.days)
+    zy_dates, zy_records = fetch_zy_market(args.target_date)
     records = dedupe_records(yt_records + zy_records)
 
     output_path = Path(args.output).expanduser().resolve()

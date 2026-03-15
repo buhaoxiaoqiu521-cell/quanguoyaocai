@@ -64,6 +64,8 @@ def main() -> None:
     build_cmd = [
         sys.executable,
         str(build_script),
+        "--exclude-workbook-origin",
+        "--exclude-workbook-market",
     ]
     run(build_cmd, cwd=root)
 
