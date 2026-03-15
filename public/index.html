@@ -350,34 +350,6 @@
       background: rgba(247, 240, 223, 0.05);
     }
 
-    .quick-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 22px;
-      justify-content: center;
-    }
-
-    .nav-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #f7efdf;
-      border: 1px solid rgba(247, 240, 223, 0.12);
-      background: rgba(9, 19, 15, 0.64);
-      backdrop-filter: blur(12px);
-      transition: transform 0.18s ease, border-color 0.18s ease;
-      font-size: 14px;
-    }
-
-    .nav-pill:hover {
-      transform: translateY(-1px);
-      border-color: rgba(229, 197, 142, 0.36);
-    }
-
     .section {
       margin-bottom: 20px;
       background: var(--paper);
@@ -1187,18 +1159,6 @@
         font-size: 13px;
       }
 
-      .quick-nav {
-        gap: 8px;
-        margin-bottom: 18px;
-      }
-
-      .nav-pill {
-        width: calc(50% - 4px);
-        justify-content: center;
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
       .hotspot-modal {
         padding: 10px;
       }
@@ -1254,15 +1214,8 @@
       </div>
     </section>
 
-    <nav class="quick-nav">
-      <a class="nav-pill" href="#originSection" data-section-jump="origin">1. 产地行情</a>
-      <a class="nav-pill" href="#marketSection" data-section-jump="market">2. 市场行情</a>
-      <a class="nav-pill" href="#hotspotSection" data-section-jump="hotspot">3. 行业热点</a>
-      <a class="nav-pill" href="#searchSection" data-section-jump="search">4. 全站检索</a>
-    </nav>
-
     <section class="section panel" id="originSection">
-      <button class="section-head section-toggle" type="button" data-section-toggle="origin" aria-expanded="true" aria-controls="originBody">
+      <button class="section-head section-toggle" type="button" data-section-toggle="origin" aria-expanded="false" aria-controls="originBody">
         <span class="section-head-main">
           <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">产地行情</h2>
@@ -1271,7 +1224,7 @@
           <span class="count-chip" id="originCountChip">今日更新 0 条</span>
         </span>
       </button>
-      <div class="section-body" id="originBody">
+      <div class="section-body" id="originBody" hidden>
         <div class="entry-list" id="originList"></div>
         <div class="pager">
           <button class="pager-button" id="originPrev">上一页</button>
@@ -1282,7 +1235,7 @@
     </section>
 
     <section class="section panel" id="marketSection">
-      <button class="section-head section-toggle" type="button" data-section-toggle="market" aria-expanded="true" aria-controls="marketBody">
+      <button class="section-head section-toggle" type="button" data-section-toggle="market" aria-expanded="false" aria-controls="marketBody">
         <span class="section-head-main">
           <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">市场行情</h2>
@@ -1291,7 +1244,7 @@
           <span class="count-chip" id="marketCountChip">今日更新 0 条</span>
         </span>
       </button>
-      <div class="section-body" id="marketBody">
+      <div class="section-body" id="marketBody" hidden>
         <div class="market-tabs" id="marketTabs"></div>
         <div class="market-summary" id="marketSummary"></div>
         <div class="entry-list" id="marketList"></div>
@@ -1304,7 +1257,7 @@
     </section>
 
     <section class="section panel" id="hotspotSection">
-      <button class="section-head section-toggle" type="button" data-section-toggle="hotspot" aria-expanded="true" aria-controls="hotspotBody">
+      <button class="section-head section-toggle" type="button" data-section-toggle="hotspot" aria-expanded="false" aria-controls="hotspotBody">
         <span class="section-head-main">
           <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">行业热点</h2>
@@ -1313,7 +1266,7 @@
           <span class="count-chip" id="hotspotCountChip">今日更新 0 条</span>
         </span>
       </button>
-      <div class="section-body" id="hotspotBody">
+      <div class="section-body" id="hotspotBody" hidden>
         <div class="hotspot-filters" id="hotspotFilters" style="margin-bottom:16px;"></div>
         <div class="entry-list" id="hotspotList"></div>
         <div class="pager">
@@ -1325,7 +1278,7 @@
     </section>
 
     <section class="section panel global-search" id="searchSection">
-      <button class="section-head section-toggle" type="button" data-section-toggle="search" aria-expanded="true" aria-controls="searchBody">
+      <button class="section-head section-toggle" type="button" data-section-toggle="search" aria-expanded="false" aria-controls="searchBody">
         <span class="section-head-main">
           <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">全站检索</h2>
@@ -1334,7 +1287,7 @@
           <span class="count-chip" id="searchCountChip">未搜索</span>
         </span>
       </button>
-      <div class="section-body global-search-body" id="searchBody">
+      <div class="section-body global-search-body" id="searchBody" hidden>
         <div class="global-search-controls">
           <label class="search-box global-search-box">
             <span>检索</span>
@@ -1395,10 +1348,10 @@
       currentMarket: "",
       hotspotKind: "all",
       collapsedSections: {
-        origin: false,
-        market: false,
-        hotspot: false,
-        search: false,
+        origin: true,
+        market: true,
+        hotspot: true,
+        search: true,
       },
     };
 
@@ -1453,11 +1406,8 @@
         });
       });
 
-      document.querySelectorAll("[data-section-jump]").forEach((link) => {
-        link.addEventListener("click", () => {
-          const sectionKey = link.dataset.sectionJump;
-          setSectionCollapsed(sectionKey, false);
-        });
+      Object.keys(sectionElements).forEach((sectionKey) => {
+        setSectionCollapsed(sectionKey, state.collapsedSections[sectionKey]);
       });
     }
 
