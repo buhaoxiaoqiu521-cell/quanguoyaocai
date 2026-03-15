@@ -157,34 +157,56 @@
     }
 
     .hero-copy {
-      padding: 30px 34px;
+      padding: 26px 34px;
       color: #f6eddb;
     }
 
     .hero-card {
-      padding: 30px 32px;
+      padding: 26px 28px;
       border-radius: 28px;
       border: 1px solid rgba(247, 240, 223, 0.1);
       background: rgba(247, 240, 223, 0.04);
-      max-width: 1100px;
+      max-width: 1040px;
       margin: 0 auto;
-      text-align: center;
+      text-align: left;
     }
 
-    .hero-title {
-      margin: 0 0 12px;
+    .trace-entry {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .trace-entry-copy {
+      min-width: 0;
+    }
+
+    .trace-entry-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(229, 197, 142, 0.18);
+      background: rgba(247, 240, 223, 0.06);
+      color: rgba(246, 237, 219, 0.74);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .trace-entry-title {
+      margin: 14px 0 8px;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: clamp(30px, 4.2vw, 48px);
-      line-height: 1.18;
+      font-size: clamp(28px, 3.8vw, 42px);
+      line-height: 1.16;
       letter-spacing: -0.04em;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-      justify-content: center;
+    .trace-entry-text {
+      margin: 0;
+      color: rgba(244, 234, 214, 0.74);
+      font-size: 16px;
+      line-height: 1.75;
     }
 
     .button {
@@ -219,25 +241,11 @@
       color: #fff3d6;
       border-color: rgba(229, 197, 142, 0.34);
       background: rgba(184, 133, 56, 0.16);
-      min-width: 260px;
-      min-height: 72px;
-      padding: 18px 30px;
-      font-size: 24px;
+      min-width: 248px;
+      min-height: 60px;
+      padding: 16px 28px;
+      font-size: 20px;
       font-weight: 700;
-    }
-
-    .hero-note-title {
-      margin: 14px 0 8px;
-      font-size: 18px;
-      color: #f6e8c6;
-      font-weight: 700;
-    }
-
-    .hero-note {
-      margin: 0;
-      color: rgba(246, 237, 219, 0.78);
-      font-size: 14px;
-      line-height: 1.8;
     }
 
     .global-search {
@@ -938,6 +946,16 @@
       letter-spacing: 0.02em;
     }
 
+    .footer-disclaimer {
+      width: 100%;
+      margin-top: 10px;
+      text-align: center;
+      color: rgba(244, 234, 214, 0.74);
+      font-size: 13px;
+      line-height: 1.9;
+      white-space: pre-line;
+    }
+
     .muted {
       color: var(--ink-soft);
     }
@@ -1018,19 +1036,29 @@
         font-size: 15px;
       }
 
-      .hero-title {
-        font-size: clamp(28px, 9vw, 42px);
+      .hero-card {
+        padding: 18px 16px;
       }
 
-      .hero-card {
-        padding: 20px 16px;
+      .trace-entry {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        text-align: center;
+      }
+
+      .trace-entry-title {
+        font-size: clamp(26px, 8vw, 38px);
+      }
+
+      .trace-entry-text {
+        font-size: 14px;
       }
 
       .button.trace {
         width: 100%;
         min-width: 0;
         min-height: 58px;
-        font-size: 19px;
+        font-size: 18px;
       }
 
       .section-head {
@@ -1173,12 +1201,14 @@
     <section class="hero panel">
       <div class="hero-copy">
         <article class="hero-card">
-          <h2 class="hero-title">曹操溯源平台</h2>
-          <div class="hero-actions">
+          <div class="trace-entry">
+            <div class="trace-entry-copy">
+              <span class="trace-entry-label">溯源入口</span>
+              <h2 class="trace-entry-title">曹操溯源平台</h2>
+              <p class="trace-entry-text">药商、加工户、种植户溯源入口</p>
+            </div>
             <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入溯源平台</a>
           </div>
-          <h3 class="hero-note-title">免责说明</h3>
-          <p class="hero-note">本站用于集中整理中药材公开行情与行业线索，方便快速查看与跟踪。页面内容仅供信息参考，可能存在延迟、误差或缺漏。</p>
         </article>
       </div>
     </section>
@@ -1294,6 +1324,8 @@
 
     <footer class="footer">
       <div class="footer-traffic" id="footerTraffic">本站总访问量 -- 次</div>
+      <div class="footer-disclaimer">声 明：数据来自各大中药材门户网站，转载是出于传递更多信息之目的。
+若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。</div>
     </footer>
   </main>
 
