@@ -341,9 +341,6 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 22px;
-      position: sticky;
-      top: 14px;
-      z-index: 4;
       justify-content: center;
     }
 
@@ -377,8 +374,42 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
+      width: 100%;
       padding: 26px 28px 20px;
+      border: 0;
       border-bottom: 1px solid rgba(44, 78, 59, 0.08);
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      appearance: none;
+    }
+
+    .section-toggle {
+      cursor: pointer;
+      transition: background 0.18s ease;
+    }
+
+    .section-toggle:hover {
+      background: rgba(47, 107, 78, 0.03);
+    }
+
+    .section-toggle:focus-visible {
+      outline: 2px solid rgba(47, 107, 78, 0.24);
+      outline-offset: -2px;
+    }
+
+    .section-head-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .section-head-side {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
     }
 
     .section-title {
@@ -386,6 +417,20 @@
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
       font-size: 30px;
       line-height: 1.2;
+    }
+
+    .section-caret {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      border-right: 2px solid rgba(47, 107, 78, 0.72);
+      border-bottom: 2px solid rgba(47, 107, 78, 0.72);
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 0.18s ease;
+    }
+
+    .section-toggle[aria-expanded="false"] .section-caret {
+      transform: rotate(-45deg) translateY(2px);
     }
 
     .count-chip {
@@ -401,6 +446,10 @@
 
     .section-body {
       padding: 20px 22px 26px;
+    }
+
+    .section-body[hidden] {
+      display: none;
     }
 
     .control-grid {
@@ -988,12 +1037,21 @@
         padding: 18px 16px 14px;
       }
 
+      .section-head-side {
+        gap: 8px;
+      }
+
       .section-body {
         padding: 14px 12px 18px;
       }
 
       .section-title {
         font-size: 24px;
+      }
+
+      .section-caret {
+        width: 14px;
+        height: 14px;
       }
 
       .entry-title {
@@ -1060,7 +1118,6 @@
       }
 
       .quick-nav {
-        top: 8px;
         gap: 8px;
         margin-bottom: 18px;
       }
@@ -1127,20 +1184,23 @@
     </section>
 
     <nav class="quick-nav">
-      <a class="nav-pill" href="#originSection">1. 产地行情</a>
-      <a class="nav-pill" href="#marketSection">2. 市场行情</a>
-      <a class="nav-pill" href="#hotspotSection">3. 行业热点</a>
-      <a class="nav-pill" href="#searchSection">4. 全站检索</a>
+      <a class="nav-pill" href="#originSection" data-section-jump="origin">1. 产地行情</a>
+      <a class="nav-pill" href="#marketSection" data-section-jump="market">2. 市场行情</a>
+      <a class="nav-pill" href="#hotspotSection" data-section-jump="hotspot">3. 行业热点</a>
+      <a class="nav-pill" href="#searchSection" data-section-jump="search">4. 全站检索</a>
     </nav>
 
     <section class="section panel" id="originSection">
-      <div class="section-head">
-        <div>
+      <button class="section-head section-toggle" type="button" data-section-toggle="origin" aria-expanded="true" aria-controls="originBody">
+        <span class="section-head-main">
+          <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">产地行情</h2>
-        </div>
-        <div class="count-chip" id="originCountChip">0 条</div>
-      </div>
-      <div class="section-body">
+        </span>
+        <span class="section-head-side">
+          <span class="count-chip" id="originCountChip">0 条</span>
+        </span>
+      </button>
+      <div class="section-body" id="originBody">
         <div class="entry-list" id="originList"></div>
         <div class="pager">
           <button class="pager-button" id="originPrev">上一页</button>
@@ -1151,13 +1211,16 @@
     </section>
 
     <section class="section panel" id="marketSection">
-      <div class="section-head">
-        <div>
+      <button class="section-head section-toggle" type="button" data-section-toggle="market" aria-expanded="true" aria-controls="marketBody">
+        <span class="section-head-main">
+          <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">市场行情</h2>
-        </div>
-        <div class="count-chip" id="marketCountChip">0 条</div>
-      </div>
-      <div class="section-body">
+        </span>
+        <span class="section-head-side">
+          <span class="count-chip" id="marketCountChip">0 条</span>
+        </span>
+      </button>
+      <div class="section-body" id="marketBody">
         <div class="market-tabs" id="marketTabs"></div>
         <div class="market-summary" id="marketSummary"></div>
         <div class="entry-list" id="marketList"></div>
@@ -1170,13 +1233,16 @@
     </section>
 
     <section class="section panel" id="hotspotSection">
-      <div class="section-head">
-        <div>
+      <button class="section-head section-toggle" type="button" data-section-toggle="hotspot" aria-expanded="true" aria-controls="hotspotBody">
+        <span class="section-head-main">
+          <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">行业热点</h2>
-        </div>
-        <div class="count-chip" id="hotspotCountChip">0 条</div>
-      </div>
-      <div class="section-body">
+        </span>
+        <span class="section-head-side">
+          <span class="count-chip" id="hotspotCountChip">0 条</span>
+        </span>
+      </button>
+      <div class="section-body" id="hotspotBody">
         <div class="hotspot-filters" id="hotspotFilters" style="margin-bottom:16px;"></div>
         <div class="entry-list" id="hotspotList"></div>
         <div class="pager">
@@ -1188,13 +1254,16 @@
     </section>
 
     <section class="section panel global-search" id="searchSection">
-      <div class="section-head">
-        <div>
+      <button class="section-head section-toggle" type="button" data-section-toggle="search" aria-expanded="true" aria-controls="searchBody">
+        <span class="section-head-main">
+          <span class="section-caret" aria-hidden="true"></span>
           <h2 class="section-title">全站检索</h2>
-        </div>
-        <div class="count-chip" id="searchCountChip">未搜索</div>
-      </div>
-      <div class="section-body global-search-body">
+        </span>
+        <span class="section-head-side">
+          <span class="count-chip" id="searchCountChip">未搜索</span>
+        </span>
+      </button>
+      <div class="section-body global-search-body" id="searchBody">
         <div class="global-search-controls">
           <label class="search-box global-search-box">
             <span>检索</span>
@@ -1240,6 +1309,19 @@
       searchQuery: "",
       currentMarket: "",
       hotspotKind: "all",
+      collapsedSections: {
+        origin: false,
+        market: false,
+        hotspot: false,
+        search: false,
+      },
+    };
+
+    const sectionElements = {
+      origin: { toggleId: "originSection", bodyId: "originBody" },
+      market: { toggleId: "marketSection", bodyId: "marketBody" },
+      hotspot: { toggleId: "hotspotSection", bodyId: "hotspotBody" },
+      search: { toggleId: "searchSection", bodyId: "searchBody" },
     };
 
     function escapeHtml(value) {
@@ -1264,6 +1346,34 @@
         return "";
       }
       return "";
+    }
+
+    function setSectionCollapsed(sectionKey, collapsed) {
+      const body = document.getElementById(sectionElements[sectionKey]?.bodyId || "");
+      const toggle = document.querySelector(`[data-section-toggle="${sectionKey}"]`);
+      if (!body || !toggle) return;
+      state.collapsedSections[sectionKey] = collapsed;
+      body.hidden = collapsed;
+      toggle.setAttribute("aria-expanded", String(!collapsed));
+    }
+
+    function toggleSection(sectionKey) {
+      setSectionCollapsed(sectionKey, !state.collapsedSections[sectionKey]);
+    }
+
+    function initSectionToggles() {
+      document.querySelectorAll("[data-section-toggle]").forEach((button) => {
+        button.addEventListener("click", () => {
+          toggleSection(button.dataset.sectionToggle);
+        });
+      });
+
+      document.querySelectorAll("[data-section-jump]").forEach((link) => {
+        link.addEventListener("click", () => {
+          const sectionKey = link.dataset.sectionJump;
+          setSectionCollapsed(sectionKey, false);
+        });
+      });
     }
 
     function tagClass(tag) {
@@ -1788,6 +1898,7 @@
       }
     }
 
+    initSectionToggles();
     loadSiteVisits();
     loadDashboard();
   </script>
