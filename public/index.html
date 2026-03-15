@@ -315,8 +315,14 @@
     }
 
     .global-search-mode {
+      display: flex;
       justify-content: center;
       margin-bottom: 12px;
+    }
+
+    .global-search-mode .filter-chip {
+      min-width: 140px;
+      justify-content: center;
     }
 
     .global-search-filters {
@@ -1016,7 +1022,18 @@
       }
 
       .global-search-mode {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: min(100%, 300px);
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 10px;
+      }
+
+      .global-search-mode .filter-chip {
+        width: 100%;
+        min-width: 0;
+        justify-content: center;
       }
 
       .global-search-filters .filter-group {
@@ -1044,6 +1061,14 @@
         align-self: center;
         padding: 0 20px;
         font-size: 15px;
+      }
+
+      .footer-disclaimer {
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        line-height: 1.8;
       }
 
       .hero-card {
@@ -1338,8 +1363,8 @@
 
     <footer class="footer">
       <div class="footer-traffic" id="footerTraffic">本站总访问量 -- 次</div>
-      <div class="footer-disclaimer">声 明：数据来自各大中药材门户网站，转载是出于传递更多信息之目的。
-若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。</div>
+      <div class="footer-disclaimer">声 明：数据来自各门户网站，转载是出于传递更多信息之目的。
+若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系188189694@qq.com，我们将及时更正、删除，谢谢。</div>
     </footer>
   </main>
 
@@ -1905,14 +1930,14 @@
 
       if (state.searchMode === "history" && state.searchHistoryError) {
         countChip.textContent = "加载失败";
-        meta.innerHTML = `<span class="metric-chip active">全部历史</span>`;
+        meta.innerHTML = "";
         root.innerHTML = `<div class="empty-state">${escapeHtml(state.searchHistoryError)}</div>`;
         return;
       }
 
       if (!query) {
         countChip.textContent = "未搜索";
-        meta.innerHTML = `<span class="metric-chip active">${state.searchMode === "history" ? "全部历史" : "当前展示数据"}</span>`;
+        meta.innerHTML = "";
         root.innerHTML = `<div class="empty-state">${
           state.searchMode === "history"
             ? "输入关键词后，可在这里搜索产地行情、市场行情和行业热点的历史数据。"
@@ -1928,7 +1953,6 @@
 
       countChip.textContent = `${results.length} 条`;
       meta.innerHTML = [
-        `<span class="metric-chip active">${state.searchMode === "history" ? "全部历史" : "当前展示数据"}</span>`,
         `<span class="metric-chip active">关键词：${escapeHtml(query)}</span>`,
         `<span class="metric-chip">产地行情 ${originCount} 条</span>`,
         `<span class="metric-chip">市场行情 ${marketCount} 条</span>`,
