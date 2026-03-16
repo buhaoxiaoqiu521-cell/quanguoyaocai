@@ -50,10 +50,10 @@ CHANGE_ONLY_PRICE_RE = re.compile(
 LOCATION_SPLIT_RE = re.compile(r"(?:省|市|州|县|区|旗|镇|乡|村|口岸|地区|盟)")
 NOISE_LOCATION_RE = re.compile(r"^\d{4}年(?:\d{1,2}(?:月(?:\d{1,2}日)?)?)?$|^\d{1,2}月(?:\d{1,2}日)?$|^星期[一二三四五六日天]$")
 ENUMERATION_SPLIT_RE = re.compile(r"(?=[①②③④⑤⑥⑦⑧⑨⑩])")
-LIST_MARKER_RE = re.compile(r"^[①②③④⑤⑥⑦⑧⑨⑩\d]+[\.、\)]?\s*")
+LIST_MARKER_RE = re.compile(r"^(?:[①②③④⑤⑥⑦⑧⑨⑩]+|\d{1,2}[\.、\)](?=\s*[^\d]))\s*")
 TAIL_SPEC_RE = re.compile(
-    r"([一-龥A-Za-z0-9%./+\-]{2,24}"
-    r"(?:统货|饮片货|药厂货|选装货|净货|毛草|鲜货|鲜果|切片货|对开货|圆果货|圆果|包检货|小肉货|色青货|装货|货|片|丝|个|果|穗|枝|壳|仁|草|皮|叶|花|根|段|头|条|连))$"
+    r"([一-龥A-Za-z0-9%./+\-]{1,32}"
+    r"(?:统货|饮片货|药厂货|药厂个子|选装货|净货|毛草|鲜货|鲜果|切片货|对开货|圆果货|圆果|包检货|小肉货|色青货|装货|本地货|色选圆片|指甲片|圆片|丁子|丁|净二条|毛二条|二条|尾子|棍棍|货|片|丝|个|果|穗|枝|壳|仁|草|皮|叶|花|根|段|头|条|连))$"
 )
 NOISY_LABEL_RE = re.compile(r"(走动|行情|市场|货源|商家|近期|近日|目前|当前|价格|售价|报价|要价|多要|可供|库存|关注|稳定|平稳|疲软|走销|交易|略有|继续|依然|产新)")
 GENERIC_PRICE_LABELS = {"主流报价", "主流货", "主流"}
@@ -252,6 +252,10 @@ def price_label_score(label: str) -> int:
         score += 4
     if re.search(r"\d+%|家种|饮片|药厂|统货|选装|净货|鲜果|鲜货", text):
         score += 1
+    if re.search(r"^\d", text):
+        score += 3
+    if re.search(r"(丁子|丁|指甲片|圆片|二条|尾子|棍棍|药厂货|个子|色选)", text):
+        score += 2
     return score
 
 
@@ -411,7 +415,6 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
 
     merged: dict[str, str] = {}
     order: list[str] = []
-    best_label_by_price: dict[str, str] = {}
     for point in points:
         raw_label = clean_text(point.get("label"))
         if raw_label in GENERIC_PRICE_LABELS:
@@ -421,9 +424,6 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
         price = clean_text(point.get("price"))
         if not label or not price:
             continue
-        current_best_label = best_label_by_price.get(price)
-        if current_best_label is None or price_label_score(label) > price_label_score(current_best_label):
-            best_label_by_price[price] = label
         if label not in merged:
             merged[label] = price
             order.append(label)
@@ -431,13 +431,42 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
         if merged[label] == price:
             continue
         merged[label] = prefer_price(merged[label], price)
+    def labels_overlap(left: str, right: str) -> bool:
+        left_text = normalize_lookup_text(left)
+        right_text = normalize_lookup_text(right)
+        if not left_text or not right_text:
+            return False
+        shorter, longer = sorted((left_text, right_text), key=len)
+        return len(shorter) >= 1 and shorter in longer
+
+    def prefer_label(left: str, right: str) -> str:
+        left_score = price_label_score(left)
+        right_score = price_label_score(right)
+        if left_score != right_score:
+            return left if left_score > right_score else right
+        if len(left) != len(right):
+            return left if len(left) < len(right) else right
+        return min(left, right)
+
     rows: list[dict[str, str]] = []
     for label in order:
         price = merged[label]
-        best_label = best_label_by_price.get(price, label)
-        if best_label != label and price_label_score(best_label) >= price_label_score(label):
-            continue
-        rows.append({"label": label, "price": price})
+        row = {"label": label, "price": price}
+        inserted = False
+        for idx, current in enumerate(rows):
+            if current["price"] != price:
+                continue
+            if current["label"] == label:
+                inserted = True
+                break
+            if labels_overlap(current["label"], label):
+                better = prefer_label(current["label"], label)
+                if better == label:
+                    rows[idx] = row
+                inserted = True
+                break
+        if not inserted:
+            rows.append(row)
 
     specific_prices = {
         row["price"]
@@ -459,9 +488,9 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
 def build_item_price_points(item: dict[str, Any]) -> list[dict[str, str]]:
     detail_text = item.get("content_full") or item.get("summary")
     preferred_unit = infer_price_unit(detail_text, clean_text(item.get("unit")) or "元/kg")
-    points = normalize_price_points_with_unit(item.get("price_points"), preferred_unit)
     extracted_points = extract_price_points(detail_text)
-    points = merge_price_points(points + extracted_points)
+    normalized_points = normalize_price_points_with_unit(item.get("price_points"), preferred_unit)
+    points = merge_price_points(extracted_points if extracted_points else normalized_points)
     price = clean_text(item.get("price"))
     spec = clean_text(item.get("spec"))
     if price and not points:
