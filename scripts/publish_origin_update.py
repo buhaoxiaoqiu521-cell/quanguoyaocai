@@ -43,7 +43,13 @@ def main() -> None:
     import_script = root / "scripts" / "import_openclaw_origin.py"
     build_script = root / "scripts" / "build_dashboard_data.py"
     origin_file = "content/openclaw_origin.json"
-    tracked_files = [origin_file, "public/data/dashboard.json"]
+    tracked_files = [
+        origin_file,
+        "public/data/dashboard.json",
+        "public/data/origin-search-index.json",
+        "public/data/market-search-index.json",
+        "public/data/hotspot-search-index.json",
+    ]
 
     import_cmd = [
         sys.executable,

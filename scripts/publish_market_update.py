@@ -42,7 +42,13 @@ def main() -> None:
     market_fetcher = root / "scripts" / "fetch_market_updates.py"
     build_script = root / "scripts" / "build_dashboard_data.py"
     market_file = "content/market_updates.json"
-    tracked_files = [market_file, "public/data/dashboard.json"]
+    tracked_files = [
+        market_file,
+        "public/data/dashboard.json",
+        "public/data/origin-search-index.json",
+        "public/data/market-search-index.json",
+        "public/data/hotspot-search-index.json",
+    ]
 
     market_cmd = [sys.executable, str(market_fetcher)]
     if args.target_date:

@@ -42,7 +42,13 @@ def main() -> None:
     hotspot_fetcher = root / "scripts" / "fetch_hotspots.py"
     build_script = root / "scripts" / "build_dashboard_data.py"
     hotspot_file = "content/hotspots.json"
-    tracked_files = [hotspot_file, "public/data/dashboard.json"]
+    tracked_files = [
+        hotspot_file,
+        "public/data/dashboard.json",
+        "public/data/origin-search-index.json",
+        "public/data/market-search-index.json",
+        "public/data/hotspot-search-index.json",
+    ]
 
     run([sys.executable, str(hotspot_fetcher), "--limit", str(args.limit)], cwd=root)
 
