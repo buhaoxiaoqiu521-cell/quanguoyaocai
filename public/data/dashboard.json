@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-18 20:00:20",
+    "generated_at": "2026-03-18 20:00:44",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-03-18",
     "available_dates": [
@@ -259,8 +259,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 4620,
-    "origin_records": 593,
+    "total_records": 4626,
+    "origin_records": 599,
     "market_records": 4027,
     "source_count": 2,
     "herb_count": 737,
@@ -276,34 +276,34 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：4620 条",
-      "产地：593 条",
+      "总记录：4626 条",
+      "产地：599 条",
       "市场：4027 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-03-18",
-    "latest_count": 128,
+    "latest_count": 134,
     "top_herbs": [
       {
         "name": "麦冬",
         "count": 6
       },
       {
+        "name": "猪苓",
+        "count": 4
+      },
+      {
         "name": "玄参",
         "count": 3
       },
       {
-        "name": "猪苓",
+        "name": "山茱萸",
         "count": 3
       },
       {
-        "name": "骨碎补",
-        "count": 3
-      },
-      {
-        "name": "蔓荆子",
+        "name": "金银花",
         "count": 3
       }
     ],
@@ -314,15 +314,15 @@
       },
       {
         "name": "中药材天地网",
-        "count": 687
+        "count": 693
       }
     ]
   },
   "origin": {
     "total": 200,
-    "all_total": 579,
+    "all_total": 585,
     "latest_date": "2026-03-18",
-    "latest_count": 64,
+    "latest_count": 70,
     "date_options": [
       "2026-03-18",
       "2026-03-17",
@@ -2154,6 +2154,74 @@
       {
         "date": "2026-03-18",
         "published_at": "2026-03-18 00:00:00",
+        "herb": "金银花",
+        "spec": "",
+        "location": "陕西丹凤",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "走快",
+        "summary": "陕西省商洛市丹凤县金银花货源供应量一般，近期走动较好，行情相比去年有所上涨，现家种货价格在70-80元之间，野生货50元左右",
+        "content_full": "陕西省商洛市丹凤县金银花货源供应量一般，近期走动较好，行情相比去年有所上涨，现家种货价格在70-80元之间，野生货50元左右",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105206.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "家种货",
+            "price": "70-80 元/kg"
+          },
+          {
+            "label": "野生货",
+            "price": "50 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-18",
+        "published_at": "2026-03-18 00:00:00",
+        "herb": "连翘",
+        "spec": "",
+        "location": "陕西丹凤",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "平稳",
+        "summary": "陕西省商洛市丹凤县连翘货源供应比较稳定，近期商家购进量不大，货源走动一般，行情平淡，现一般货价格在38-40元之间，合格货42-43元",
+        "content_full": "陕西省商洛市丹凤县连翘货源供应比较稳定，近期商家购进量不大，货源走动一般，行情平淡，现一般货价格在38-40元之间，合格货42-43元",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105207.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "一般货",
+            "price": "38-40 元/kg"
+          },
+          {
+            "label": "合格货",
+            "price": "42-43 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-18",
+        "published_at": "2026-03-18 00:00:00",
         "herb": "白及",
         "spec": "",
         "location": "云南",
@@ -2246,6 +2314,40 @@
           {
             "label": "大统货",
             "price": "130 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-18",
+        "published_at": "2026-03-18 00:00:00",
+        "herb": "猪苓",
+        "spec": "",
+        "location": "陕西丹凤",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "走缓",
+        "summary": "陕西省商洛市丹凤县猪苓春节过后货源走动不快，行情和去年相比基本没有变化，现小统货价格在95元左右，中统100元，大个的货少",
+        "content_full": "陕西省商洛市丹凤县猪苓春节过后货源走动不快，行情和去年相比基本没有变化，现小统货价格在95元左右，中统100元，大个的货少",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105208.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "小统货",
+            "price": "95 元/kg"
+          },
+          {
+            "label": "中统",
+            "price": "100 元/kg"
           }
         ]
       },
@@ -2440,6 +2542,40 @@
       {
         "date": "2026-03-18",
         "published_at": "2026-03-18 00:00:00",
+        "herb": "山茱萸",
+        "spec": "",
+        "location": "陕西丹凤",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "关注",
+        "summary": "陕西省商洛市丹凤县山茱萸目前货源不多，但是年后走动一直显缓，行情相比去年几乎没有波动，现饮片货价格在45元上下，药厂货38-39元",
+        "content_full": "陕西省商洛市丹凤县山茱萸目前货源不多，但是年后走动一直显缓，行情相比去年几乎没有波动，现饮片货价格在45元上下，药厂货38-39元",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105210.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "药厂货",
+            "price": "38-39 元/kg"
+          },
+          {
+            "label": "饮片货",
+            "price": "45 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-18",
+        "published_at": "2026-03-18 00:00:00",
         "herb": "山楂",
         "spec": "",
         "location": "山东平邑",
@@ -2457,7 +2593,7 @@
         "source_links": [
           {
             "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1105159.html"
+            "url": "https://www.zyctd.com/zixun/201/1105160.html"
           }
         ],
         "price_points": [
@@ -2530,6 +2666,36 @@
           {
             "label": "（药厂投料）",
             "price": "10 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-18",
+        "published_at": "2026-03-18 00:00:00",
+        "herb": "天麻",
+        "spec": "",
+        "location": "陕西丹凤",
+        "market": "产地",
+        "price": "125-130 元/kg",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "平稳",
+        "summary": "陕西省商洛市丹凤县天麻过完年后货源走动一直不快，目前产地库存稳定，行情相比去年有所下降，现合格片价格在125-130元之间",
+        "content_full": "陕西省商洛市丹凤县天麻过完年后货源走动一直不快，目前产地库存稳定，行情相比去年有所下降，现合格片价格在125-130元之间",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105211.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "合格片",
+            "price": "125-130 元/kg"
           }
         ]
       },
@@ -2620,6 +2786,36 @@
           {
             "label": "统货售",
             "price": "9 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-18",
+        "published_at": "2026-03-18 00:00:00",
+        "herb": "南五味子",
+        "spec": "",
+        "location": "陕西丹凤",
+        "market": "产地",
+        "price": "31-32 元/kg",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "走缓",
+        "summary": "陕西省商洛市丹凤县南五味子货源供应相对稳定，近期商家购进意愿不强，货源走慢，行情平静，现一般统货价格在31-32元之间",
+        "content_full": "陕西省商洛市丹凤县南五味子货源供应相对稳定，近期商家购进意愿不强，货源走慢，行情平静，现一般统货价格在31-32元之间",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105209.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "一般统货",
+            "price": "31-32 元/kg"
           }
         ]
       },
@@ -7052,210 +7248,6 @@
           {
             "label": "优质统货",
             "price": "37 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-16",
-        "published_at": "2026-03-16 00:00:00",
-        "herb": "牡丹皮",
-        "spec": "",
-        "location": "陕西孝义",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "走快",
-        "summary": "牡丹皮产地有货源可供，近期有商前来寻货，货源走动正常，行情暂无明显变化，现切片刮丹成交价在78元左右，90%以上抽芯刮丹小统40元，70%左右抽芯刮丹小统35元，老皮19元，须段15元，油牡",
-        "content_full": "牡丹皮产地有货源可供，近期有商前来寻货，货源走动正常，行情暂无明显变化，现切片刮丹成交价在78元左右，90%以上抽芯刮丹小统40元，70%左右抽芯刮丹小统35元，老皮19元，须段15元，油牡",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/marketInfo--557390.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "切片刮丹成交",
-            "price": "78 元/kg"
-          },
-          {
-            "label": "90%以上抽芯刮丹小统",
-            "price": "40 元/kg"
-          },
-          {
-            "label": "70%左右抽芯刮丹小统",
-            "price": "35 元/kg"
-          },
-          {
-            "label": "老皮",
-            "price": "19 元/kg"
-          },
-          {
-            "label": "须段",
-            "price": "15 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-16",
-        "published_at": "2026-03-16 00:00:00",
-        "herb": "牛蒡子",
-        "spec": "",
-        "location": "吉林闵家",
-        "market": "产地",
-        "price": "14 元/kg",
-        "price_value": 14.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "走缓",
-        "summary": "牛蒡子产地货源充足，近阶段市场人气一般，商家多为以需定购，货源批量走销，行情保持平稳，现过风筛货售价14元左右",
-        "content_full": "牛蒡子产地货源充足，近阶段市场人气一般，商家多为以需定购，货源批量走销，行情保持平稳，现过风筛货售价14元左右",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/marketInfo--557379.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "过风筛货",
-            "price": "14 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-16",
-        "published_at": "2026-03-16 00:00:00",
-        "herb": "海金沙",
-        "spec": "",
-        "location": "江西樟树",
-        "market": "产地",
-        "price": "110 元/kg",
-        "price_value": 110.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "走快",
-        "summary": "海金沙因低价货多已经外走，目前库存的多是前两年的高价货，持货商家售货心理一般，要价略有上扬，现统装货要价在110元，商家购货力度不强，货源成交量不大",
-        "content_full": "海金沙因低价货多已经外走，目前库存的多是前两年的高价货，持货商家售货心理一般，要价略有上扬，现统装货要价在110元，商家购货力度不强，货源成交量不大",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/marketInfo--557372.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统装货",
-            "price": "110 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-16",
-        "published_at": "2026-03-16 00:00:00",
-        "herb": "浙贝母",
-        "spec": "",
-        "location": "最新资讯",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "关注",
-        "summary": "今日行情,浙江省金华市磐安县的浙贝母(大统片)(籽片)浙江省金华市磐安县今日逢集，浙贝母货源上市量40吨左右，收货商家力度大，大统货162元，籽片142元每公斤，后续持续关注",
-        "content_full": "今日行情,浙江省金华市磐安县的浙贝母(大统片)(籽片)浙江省金华市磐安县今日逢集，浙贝母货源上市量40吨左右，收货商家力度大，大统货162元，籽片142元每公斤，后续持续关注",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1104907.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "大统货",
-            "price": "162 元/kg"
-          },
-          {
-            "label": "籽片",
-            "price": "142 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-16",
-        "published_at": "2026-03-16 00:00:00",
-        "herb": "水红花子",
-        "spec": "",
-        "location": "吉林闵家",
-        "market": "产地",
-        "price": "12.5-13 元/kg",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "平稳",
-        "summary": "水红花子当前产地库存尚可，商家多按实际订单采购，近阶段货源走销一般，行情基本保持平稳运行，现家种色选货售价12.5-13元",
-        "content_full": "水红花子当前产地库存尚可，商家多按实际订单采购，近阶段货源走销一般，行情基本保持平稳运行，现家种色选货售价12.5-13元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/marketInfo--557381.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "家种色选货",
-            "price": "12.5-13 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-16",
-        "published_at": "2026-03-16 00:00:00",
-        "herb": "栀子",
-        "spec": "",
-        "location": "江西樟树",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "走快",
-        "summary": "栀子当地库存有量，近期寻货商家依然不多，货源走动不快，商家多持观望态度，行情暂无明显变化，现统装货售价19元左右，饮片货售价24元上下",
-        "content_full": "栀子当地库存有量，近期寻货商家依然不多，货源走动不快，商家多持观望态度，行情暂无明显变化，现统装货售价19元左右，饮片货售价24元上下",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/marketInfo--557403.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统装货",
-            "price": "19 元/kg"
-          },
-          {
-            "label": "饮片货",
-            "price": "24 元/kg"
           }
         ]
       }
