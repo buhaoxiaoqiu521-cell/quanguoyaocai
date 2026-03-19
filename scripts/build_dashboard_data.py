@@ -30,7 +30,7 @@ REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}i
 YT_QUERY_URL = "https://www.yt1998.com/ytw/second/marketMgr/query.jsp"
 YT_HEADERS = {"User-Agent": "Mozilla/5.0"}
 PRICE_RANGE_RE = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*(?:元|块)\s*(?:(?:/|每)?\s*(kg|KG|公斤|千克|市斤|斤|条))?(?:左右|上下|之间)?"
+    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到|一|—|－)\s*(\d+(?:\.\d+)?)\s*(?:元|块)\s*(?:(?:/|每)?\s*(kg|KG|公斤|千克|市斤|斤|条))?(?:左右|上下|之间)?"
 )
 PRICE_SINGLE_RE = re.compile(
     r"(\d+(?:\.\d+)?)\s*(?:元|块)\s*(?:(?:/|每)?\s*(kg|KG|公斤|千克|市斤|斤|条))?(?:左右|上下|之间)?"
