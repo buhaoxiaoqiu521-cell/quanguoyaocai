@@ -267,6 +267,20 @@ def refine_price_point_label(label: str) -> str:
     return best or "主流报价"
 
 
+def infer_contextual_price_label(part: str, segment: str, clause: str, price: str) -> str:
+    price_text = clean_text(price)
+    if "元/斤" not in price_text:
+        return ""
+    context = " ".join(clean_text(value) for value in (part, segment, clause) if clean_text(value))
+    if not context:
+        return ""
+    if "鲜果" in context:
+        return "鲜果"
+    if re.search(r"鲜货|鲜品|鲜果价|鲜果行情|鲜果售价|鲜果收购|鲜麦冬|鲜草|鲜条|鲜个子|鲜药", context):
+        return "鲜货"
+    return ""
+
+
 def has_change_only_price(summary: str) -> bool:
     return bool(CHANGE_ONLY_PRICE_RE.search(clean_text(summary)))
 
@@ -302,6 +316,10 @@ def extract_price_points(text: str) -> list[dict[str, str]]:
                     price = f"{start}-{end} {normalize_price_unit(unit_token)}"
                 else:
                     price = f"{single_match.group(1)} {normalize_price_unit(single_match.group(2))}"
+                if label in GENERIC_PRICE_LABELS:
+                    contextual_label = infer_contextual_price_label(part, segment, clause, price)
+                    if contextual_label:
+                        label = contextual_label
                 key = (label, price)
                 if key in seen:
                     continue
