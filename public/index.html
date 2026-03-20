@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>中药材全国追踪</title>
+  <title>全国中药材信息</title>
   <style>
     :root {
       --bg: #10251f;
@@ -935,6 +935,13 @@
       word-break: break-word;
     }
 
+    .footer-status {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
     .muted {
       color: var(--ink-soft);
     }
@@ -1194,10 +1201,9 @@
   <main class="shell">
     <header class="topbar">
       <div class="brand">
-        <h1>中药材全国追踪</h1>
-        <p>聚合产地行情、市场动态与行业快讯的一站式中药材信息情报中心。</p>
+        <h1>全国中药材信息</h1>
+        <p>产地行情、市场动态、行业快讯每日12点、17点、20点实时更新。</p>
       </div>
-      <div class="status-pill" id="statusPill">正在读取数据</div>
     </header>
 
     <section class="hero panel">
@@ -1321,6 +1327,9 @@
       <div class="footer-traffic" id="footerTraffic">本站总访问量 -- 次</div>
       <div class="footer-disclaimer">声 明：数据来自各门户网站，转载是出于传递更多信息之目的。
 若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系 188189694@qq.com，我们将及时更正、删除，谢谢。</div>
+      <div class="footer-status">
+        <div class="status-pill" id="statusPill">正在读取数据</div>
+      </div>
     </footer>
   </main>
 
