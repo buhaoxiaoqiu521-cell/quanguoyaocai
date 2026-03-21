@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-21 12:06:35",
+    "generated_at": "2026-03-21 17:00:18",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-03-21",
     "available_dates": [
@@ -262,8 +262,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 4955,
-    "origin_records": 795,
+    "total_records": 4957,
+    "origin_records": 797,
     "market_records": 4160,
     "source_count": 2,
     "herb_count": 753,
@@ -279,19 +279,19 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：4955 条",
-      "产地：795 条",
+      "总记录：4957 条",
+      "产地：797 条",
       "市场：4160 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-03-21",
-    "latest_count": 28,
+    "latest_count": 30,
     "top_herbs": [
       {
         "name": "大黄",
-        "count": 2
+        "count": 3
       },
       {
         "name": "天麻",
@@ -313,19 +313,19 @@
     "sources": [
       {
         "name": "药通网",
-        "count": 4105
+        "count": 4106
       },
       {
         "name": "中药材天地网",
-        "count": 850
+        "count": 851
       }
     ]
   },
   "origin": {
     "total": 200,
-    "all_total": 773,
+    "all_total": 774,
     "latest_date": "2026-03-21",
-    "latest_count": 23,
+    "latest_count": 24,
     "date_options": [
       "2026-03-21",
       "2026-03-20",
@@ -1146,7 +1146,7 @@
             "price": "16 元/kg"
           },
           {
-            "label": "统片0.2-0.4mm的",
+            "label": "统片",
             "price": "12 元/kg"
           }
         ]
@@ -1356,6 +1356,36 @@
           {
             "label": "不合格货",
             "price": "37-38 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-21",
+        "published_at": "2026-03-21 00:00:00",
+        "herb": "高良姜",
+        "spec": "",
+        "location": "广东徐闻",
+        "market": "产地",
+        "price": "11 元/kg",
+        "price_value": 11.0,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "关注",
+        "summary": "广东省徐闻县高良姜采挖已有一段时间，但是由于价格不高，种植户的采挖积极性一般，所以产出的货源量暂时不大，目前产地收购价格在11元多点，多商致电询问",
+        "content_full": "广东省徐闻县高良姜采挖已有一段时间，但是由于价格不高，种植户的采挖积极性一般，所以产出的货源量暂时不大，目前产地收购价格在11元多点，多商致电询问",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105462.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "收购",
+            "price": "11 元/kg"
           }
         ]
       },
@@ -7542,36 +7572,6 @@
           {
             "label": "统货",
             "price": "7 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-18",
-        "published_at": "2026-03-18 00:00:00",
-        "herb": "防己",
-        "spec": "",
-        "location": "江西赤水",
-        "market": "产地",
-        "price": "100 元/kg",
-        "price_value": 100.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "走快",
-        "summary": "防己当地库存以加工带皮个子为主，近期前来寻货的商家较少，货源走动不快，交易多为药厂人员按需购买，行情保持稳定，现药厂货交易价在100元上下",
-        "content_full": "防己当地库存以加工带皮个子为主，近期前来寻货的商家较少，货源走动不快，交易多为药厂人员按需购买，行情保持稳定，现药厂货交易价在100元上下",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/marketInfo--557528.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "药厂货交易",
-            "price": "100 元/kg"
           }
         ]
       }
