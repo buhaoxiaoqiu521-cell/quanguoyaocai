@@ -1,0 +1,32 @@
+{
+  "name": "中药材全国追踪",
+  "short_name": "药材追踪",
+  "description": "查看中药材产地行情、天天行情和行业热点的手机安装版首页。",
+  "lang": "zh-CN",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#17362e",
+  "background_color": "#17362e",
+  "icons": [
+    {
+      "src": "/icons/yczz-v20260322-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/yczz-v20260322-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/yczz-v20260322-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

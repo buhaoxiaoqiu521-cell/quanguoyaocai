@@ -4,25 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>全国中药材信息</title>
+  <meta name="description" content="查看中药材产地行情、天天行情和行业热点。">
+  <meta name="theme-color" content="#17362e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="全国中药材信息">
+  <link rel="manifest" href="/manifest.webmanifest?v=yczz-v20260322">
+  <link rel="icon" type="image/png" sizes="64x64" href="/icons/yczz-v20260322-favicon-64.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/yczz-v20260322-192.png">
+  <link rel="shortcut icon" href="/icons/yczz-v20260322-favicon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/yczz-v20260322-apple-touch-180.png">
   <style>
     :root {
-      --bg: #10251f;
-      --bg-deep: #0a1915;
-      --paper: rgba(247, 240, 223, 0.95);
-      --paper-strong: rgba(250, 244, 231, 0.98);
-      --paper-soft: rgba(241, 232, 209, 0.8);
-      --ink: #213127;
-      --ink-soft: #5c6d61;
-      --line: rgba(40, 82, 59, 0.16);
-      --line-strong: rgba(40, 82, 59, 0.3);
-      --green: #2f6b4e;
-      --green-deep: #1d4c37;
-      --gold: #b88538;
-      --gold-soft: #e5c58e;
+      --bg: #17382f;
+      --bg-deep: #10251f;
+      --paper: rgba(249, 245, 236, 0.965);
+      --paper-strong: rgba(254, 250, 243, 0.988);
+      --paper-soft: rgba(240, 234, 220, 0.82);
+      --ink: #223228;
+      --ink-soft: #65786d;
+      --line: rgba(36, 78, 58, 0.12);
+      --line-strong: rgba(36, 78, 58, 0.24);
+      --green: #4f8469;
+      --green-deep: #27483b;
+      --gold: #be9151;
+      --gold-soft: #dcc698;
       --rose: #a85844;
-      --shadow: 0 30px 80px rgba(7, 21, 16, 0.28);
-      --radius-lg: 30px;
-      --radius-md: 22px;
+      --shadow: 0 22px 54px rgba(9, 23, 18, 0.14);
+      --radius-lg: 28px;
+      --radius-md: 20px;
       --radius-sm: 16px;
     }
 
@@ -39,9 +50,10 @@
       color: var(--ink);
       font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(229, 197, 142, 0.12), transparent 24%),
-        radial-gradient(circle at 85% 12%, rgba(112, 155, 122, 0.18), transparent 22%),
-        linear-gradient(180deg, #112820 0%, #0d1d18 46%, #09120f 100%);
+        radial-gradient(circle at 12% 12%, rgba(221, 191, 133, 0.08), transparent 24%),
+        radial-gradient(circle at 82% 10%, rgba(133, 174, 150, 0.12), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(82, 130, 109, 0.14), transparent 34%),
+        linear-gradient(180deg, #183b31 0%, #143128 45%, #0f241e 100%);
       min-height: 100vh;
     }
 
@@ -51,16 +63,16 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 30px 30px;
-      opacity: 0.25;
+        linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.1;
     }
 
     .shell {
-      width: min(1260px, calc(100% - 28px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 24px 0 56px;
+      padding: 34px 0 68px;
       position: relative;
       z-index: 1;
     }
@@ -69,8 +81,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
-      padding: 20px 4px 26px;
+      gap: 14px;
+      padding: 16px 4px 18px;
       color: #f4ead6;
       text-align: center;
     }
@@ -79,44 +91,51 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       min-width: 0;
-      max-width: 980px;
+      max-width: 860px;
     }
 
     .brand h1 {
       margin: 0;
-      font-size: clamp(38px, 5vw, 64px);
+      font-size: clamp(46px, 5vw, 68px);
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.05em;
       font-weight: 700;
+      line-height: 0.96;
+      text-wrap: balance;
+      text-shadow: 0 8px 28px rgba(7, 19, 15, 0.18);
     }
 
     .brand p {
       margin: 0;
-      color: rgba(244, 234, 214, 0.74);
-      font-size: clamp(17px, 2.2vw, 22px);
-      line-height: 1.75;
-      max-width: 880px;
+      color: rgba(244, 234, 214, 0.64);
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 1.82;
+      max-width: 680px;
+      text-wrap: balance;
     }
 
     .status-pill {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 11px 16px;
+      gap: 8px;
+      padding: 9px 15px;
       border-radius: 999px;
-      border: 1px solid rgba(229, 197, 142, 0.2);
-      background: rgba(244, 234, 214, 0.08);
-      color: #f8efdb;
-      font-size: 13px;
+      border: 1px solid rgba(229, 197, 142, 0.16);
+      background: linear-gradient(180deg, rgba(248, 241, 226, 0.07), rgba(240, 231, 211, 0.04));
+      color: rgba(248, 239, 219, 0.88);
+      font-size: 11.5px;
       white-space: nowrap;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 248, 233, 0.06),
+        0 10px 24px rgba(8, 20, 16, 0.1);
     }
 
     .status-pill::before {
       content: "";
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
       background: #7bb38d;
       box-shadow: 0 0 0 0 rgba(123, 179, 141, 0.6);
@@ -133,7 +152,7 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 247, 232, 0.14);
+      border: 1px solid rgba(255, 247, 232, 0.13);
       box-shadow: var(--shadow);
     }
 
@@ -146,62 +165,6 @@
       background: linear-gradient(90deg, transparent, rgba(229, 197, 142, 0.78), transparent);
       opacity: 0.6;
       pointer-events: none;
-    }
-
-    .hero {
-      display: block;
-      background:
-        radial-gradient(circle at 18% 12%, rgba(229, 197, 142, 0.14), transparent 24%),
-        linear-gradient(135deg, rgba(18, 42, 33, 0.98), rgba(14, 30, 24, 0.98));
-      margin-bottom: 22px;
-    }
-
-    .hero-copy {
-      padding: 16px 24px 20px;
-      color: #f6eddb;
-    }
-
-    .hero-card {
-      padding: 18px 24px;
-      border-radius: 28px;
-      border: 1px solid rgba(247, 240, 223, 0.12);
-      background: rgba(247, 240, 223, 0.05);
-      max-width: 960px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-    }
-
-    .trace-entry {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      min-height: 68px;
-      text-align: center;
-    }
-
-    .trace-entry-copy {
-      display: grid;
-      gap: 6px;
-      min-width: 0;
-      justify-items: center;
-      text-align: center;
-    }
-
-    .trace-entry-title {
-      margin: 0;
-      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: clamp(22px, 2.9vw, 30px);
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-    }
-
-    .trace-entry-text {
-      margin: 0;
-      color: rgba(244, 234, 214, 0.74);
-      font-size: 15px;
-      line-height: 1.6;
     }
 
     .button {
@@ -224,23 +187,6 @@
       transform: translateY(-1px);
       border-color: rgba(229, 197, 142, 0.42);
       background: rgba(247, 240, 223, 0.1);
-    }
-
-    .button.primary {
-      color: #1b3327;
-      background: linear-gradient(135deg, #e7c789, #f6e7c7);
-      border-color: transparent;
-    }
-
-    .button.trace {
-      color: #fff3d6;
-      border-color: rgba(229, 197, 142, 0.34);
-      background: rgba(184, 133, 56, 0.16);
-      min-width: 172px;
-      min-height: 46px;
-      padding: 11px 18px;
-      font-size: 16px;
-      font-weight: 700;
     }
 
     .global-search {
@@ -351,19 +297,23 @@
     }
 
     .section {
-      margin-bottom: 20px;
-      background: var(--paper);
+      margin-bottom: 18px;
+      border-color: rgba(214, 202, 177, 0.34);
+      background: linear-gradient(180deg, rgba(253, 249, 241, 0.988), rgba(245, 239, 226, 0.95));
+      box-shadow:
+        0 14px 34px rgba(8, 20, 16, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.76);
     }
 
     .section-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 16px;
       width: 100%;
-      padding: 26px 28px 20px;
+      padding: 20px 24px;
       border: 0;
-      border-bottom: 1px solid rgba(44, 78, 59, 0.08);
+      border-bottom: 1px solid rgba(44, 78, 59, 0.06);
       background: transparent;
       color: inherit;
       text-align: left;
@@ -376,12 +326,156 @@
     }
 
     .section-toggle:hover {
-      background: rgba(47, 107, 78, 0.03);
+      background: rgba(63, 116, 93, 0.02);
     }
 
     .section-toggle:focus-visible {
       outline: 2px solid rgba(47, 107, 78, 0.24);
       outline-offset: -2px;
+    }
+
+    #searchSection {
+      border-color: rgba(181, 200, 187, 0.4);
+      background: linear-gradient(180deg, rgba(246, 248, 242, 0.988), rgba(237, 243, 232, 0.95));
+    }
+
+    .trace-gateway {
+      margin: 2px 0 8px;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(110, 162, 136, 0.11), transparent 28%),
+        linear-gradient(180deg, rgba(246, 250, 247, 0.988), rgba(234, 243, 238, 0.962));
+      border-color: rgba(186, 207, 194, 0.42);
+      box-shadow:
+        0 16px 38px rgba(8, 20, 16, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    }
+
+    .trace-gateway-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+
+    .trace-gateway-link:hover {
+      background: rgba(63, 116, 93, 0.035);
+    }
+
+    .trace-gateway-link:focus-visible {
+      outline: 2px solid rgba(47, 107, 78, 0.24);
+      outline-offset: -2px;
+    }
+
+    .trace-gateway-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .trace-gateway-badge {
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 15px;
+      border: 1px solid rgba(63, 116, 93, 0.12);
+      background: linear-gradient(135deg, rgba(91, 135, 116, 0.12), rgba(255, 255, 255, 0.78));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .trace-gateway-badge svg {
+      width: 23px;
+      height: 23px;
+      stroke: var(--green-deep);
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .trace-gateway-copy {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .trace-gateway-title {
+      margin: 0;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      font-size: clamp(22px, 2.5vw, 26px);
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .trace-gateway-meta {
+      color: rgba(34, 64, 50, 0.62);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .trace-gateway-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex-shrink: 0;
+      min-height: auto;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: rgba(35, 70, 57, 0.74);
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .trace-gateway-action::after {
+      content: "→";
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .download-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 4px 0 20px;
+      color: rgba(244, 234, 214, 0.58);
+    }
+
+    .download-strip::before,
+    .download-strip::after {
+      content: "";
+      flex: 1 1 120px;
+      max-width: 128px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(233, 218, 185, 0.34), transparent);
+    }
+
+    .download-strip-link {
+      color: rgba(244, 234, 214, 0.76);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      white-space: nowrap;
+      transition: color 0.18s ease, text-shadow 0.18s ease;
+    }
+
+    .download-strip-link:hover {
+      color: #fff3d6;
+      text-shadow: 0 0 18px rgba(229, 197, 142, 0.14);
     }
 
     .section-head-main {
@@ -401,8 +495,9 @@
     .section-title {
       margin: 0;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: 30px;
+      font-size: 27px;
       line-height: 1.2;
+      letter-spacing: -0.02em;
     }
 
     .section-caret {
@@ -421,13 +516,14 @@
 
     .count-chip {
       flex-shrink: 0;
-      padding: 10px 14px;
+      padding: 7px 11px;
       border-radius: 999px;
-      background: rgba(47, 107, 78, 0.08);
-      color: var(--green-deep);
-      border: 1px solid rgba(47, 107, 78, 0.14);
-      font-size: 13px;
-      font-weight: 700;
+      background: rgba(47, 107, 78, 0.04);
+      color: rgba(35, 70, 57, 0.7);
+      border: 1px solid rgba(47, 107, 78, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      font-size: 11.5px;
+      font-weight: 620;
     }
 
     .section-body {
@@ -519,13 +615,30 @@
     }
 
     .entry-card {
-      padding: 16px;
-      border-radius: 20px;
-      border: 1px solid rgba(44, 78, 59, 0.08);
+      position: relative;
+      padding: 17px 17px 15px;
+      border-radius: 22px;
+      border: 1px solid rgba(44, 78, 59, 0.075);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.18)),
+        radial-gradient(circle at 100% 0, rgba(227, 200, 148, 0.12), transparent 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.2)),
         var(--paper-strong);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.7),
+        0 10px 26px rgba(16, 34, 27, 0.06);
       animation: rise 0.4s ease;
+    }
+
+    .entry-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 18px;
+      width: 52px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(79, 132, 105, 0.65), rgba(79, 132, 105, 0));
+      opacity: 0.72;
+      pointer-events: none;
     }
 
     @keyframes rise {
@@ -546,54 +659,61 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 11px;
       flex-wrap: wrap;
     }
 
     .entry-date {
-      color: var(--ink-soft);
-      font-size: 12px;
+      color: rgba(101, 120, 109, 0.9);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
     }
 
     .entry-badges {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .tag {
       display: inline-flex;
       align-items: center;
-      padding: 5px 10px;
+      padding: 4px 9px;
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--green-deep);
-      background: rgba(47, 107, 78, 0.1);
+      font-size: 11px;
+      font-weight: 680;
+      color: rgba(39, 72, 59, 0.82);
+      background: rgba(47, 107, 78, 0.075);
+      border: 1px solid rgba(47, 107, 78, 0.06);
     }
 
     .tag.up {
       color: #8d4d2e;
-      background: rgba(184, 133, 56, 0.14);
+      background: rgba(184, 133, 56, 0.12);
+      border-color: rgba(184, 133, 56, 0.08);
     }
 
     .tag.down {
       color: var(--rose);
-      background: rgba(168, 88, 68, 0.12);
+      background: rgba(168, 88, 68, 0.1);
+      border-color: rgba(168, 88, 68, 0.08);
     }
 
     .entry-price {
       color: var(--gold);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
+      letter-spacing: 0.01em;
     }
 
     .entry-title {
       margin: 0;
-      font-size: 22px;
-      line-height: 1.22;
+      font-size: 23px;
+      line-height: 1.17;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      letter-spacing: -0.025em;
     }
 
     .entry-title-button {
@@ -615,62 +735,116 @@
       color: var(--green-deep);
     }
 
+    .entry-title-row {
+      align-items: flex-end;
+      margin-top: 2px;
+    }
+
     .entry-spec {
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 999px;
+      color: rgba(39, 72, 59, 0.78);
+      font-size: 11px;
+      font-weight: 650;
+      background: rgba(79, 132, 105, 0.07);
+      border: 1px solid rgba(79, 132, 105, 0.08);
     }
 
     .entry-meta {
-      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 9px;
       color: var(--ink-soft);
       font-size: 13px;
-      line-height: 1.65;
+      line-height: 1.55;
+      flex-wrap: wrap;
+    }
+
+    .entry-meta-label,
+    .entry-footer-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      color: rgba(39, 72, 59, 0.64);
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      background: rgba(79, 132, 105, 0.06);
+      border: 1px solid rgba(79, 132, 105, 0.06);
+    }
+
+    .entry-meta-value {
+      color: rgba(34, 50, 40, 0.9);
+      font-weight: 600;
     }
 
     .entry-summary {
-      margin: 10px 0 0;
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--ink);
+      margin: 13px 0 0;
+      font-size: 13.5px;
+      line-height: 1.84;
+      color: rgba(33, 49, 39, 0.9);
+      max-width: 72ch;
     }
 
     .entry-price-breakdown {
       display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 8px;
-      margin-top: 12px;
+      margin-top: 13px;
     }
 
     .price-point {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
+      display: grid;
+      gap: 5px;
+      align-content: start;
+      min-height: 68px;
       padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(47, 107, 78, 0.05);
-      border: 1px solid rgba(44, 78, 59, 0.1);
+      border-radius: 15px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(241, 236, 224, 0.84));
+      border: 1px solid rgba(44, 78, 59, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
     }
 
     .price-point-label {
-      color: var(--ink);
-      font-size: 13px;
-      line-height: 1.5;
+      color: rgba(97, 116, 104, 0.88);
+      font-size: 11.5px;
+      line-height: 1.4;
       font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
     .price-point-value {
       color: var(--gold);
-      font-size: 14px;
-      line-height: 1.4;
+      font-size: 15.5px;
+      line-height: 1.26;
       font-weight: 700;
-      white-space: nowrap;
+      white-space: normal;
     }
 
     .entry-footer {
-      margin-top: 10px;
+      margin-top: 13px;
+      padding-top: 11px;
+      border-top: 1px solid rgba(44, 78, 59, 0.07);
       color: var(--ink-soft);
       font-size: 12px;
+    }
+
+    .entry-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .entry-source-name {
+      color: rgba(33, 49, 39, 0.82);
     }
 
     .entry-link {
@@ -685,6 +859,12 @@
       background: transparent;
       font: inherit;
       cursor: pointer;
+    }
+
+    .entry-link::after,
+    .entry-link-button::after {
+      content: " →";
+      font-weight: 700;
     }
 
     .entry-link:hover {
@@ -726,8 +906,8 @@
       align-items: center;
       justify-content: center;
       padding: 22px;
-      background: rgba(8, 19, 15, 0.56);
-      backdrop-filter: blur(6px);
+      background: rgba(7, 18, 14, 0.62);
+      backdrop-filter: blur(10px);
     }
 
     .hotspot-modal[hidden] {
@@ -735,92 +915,251 @@
     }
 
     .hotspot-modal-panel {
-      width: min(860px, 100%);
-      max-height: min(82vh, 920px);
+      position: relative;
+      width: min(980px, 100%);
+      max-height: min(86vh, 980px);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border-radius: 24px;
-      border: 1px solid rgba(44, 78, 59, 0.14);
-      background: var(--paper-strong);
-      box-shadow: 0 30px 80px rgba(7, 21, 16, 0.34);
+      border-radius: 28px;
+      border: 1px solid rgba(44, 78, 59, 0.11);
+      background:
+        radial-gradient(circle at 100% 0, rgba(221, 188, 132, 0.12), transparent 22%),
+        linear-gradient(180deg, rgba(255, 252, 246, 0.988), rgba(248, 243, 233, 0.972));
+      box-shadow:
+        0 34px 88px rgba(7, 21, 16, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    }
+
+    .hotspot-modal-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(229, 197, 142, 0.76), transparent);
+      opacity: 0.9;
+      pointer-events: none;
     }
 
     .hotspot-modal-head {
+      padding: 28px 32px 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(247, 241, 230, 0.78)),
+        linear-gradient(135deg, rgba(109, 153, 127, 0.08), transparent 36%);
+      border-bottom: 1px solid rgba(44, 78, 59, 0.07);
+    }
+
+    .hotspot-modal-shell,
+    .hotspot-article {
+      width: min(100%, 760px);
+      margin: 0 auto;
+    }
+
+    .hotspot-modal-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .hotspot-modal-kicker .tag {
+      padding: 5px 10px;
+      background: rgba(79, 132, 105, 0.08);
+      border-color: rgba(79, 132, 105, 0.08);
+      color: rgba(39, 72, 59, 0.74);
+    }
+
+    .hotspot-modal-topline {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 16px;
-      padding: 24px 26px 18px;
-      border-bottom: 1px solid rgba(44, 78, 59, 0.08);
+      gap: 18px;
+    }
+
+    .hotspot-modal-title-wrap {
+      min-width: 0;
     }
 
     .hotspot-modal-title {
       margin: 0;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: 28px;
-      line-height: 1.35;
+      font-size: clamp(30px, 3.6vw, 42px);
+      line-height: 1.24;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
     }
 
     .hotspot-modal-meta {
-      margin-top: 10px;
-      color: var(--ink-soft);
+      margin-top: 12px;
+      color: rgba(95, 113, 102, 0.92);
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+    }
+
+    .hotspot-modal-lead {
+      margin: 18px 0 0;
+      padding: 0 0 0 16px;
+      border-left: 3px solid rgba(79, 132, 105, 0.26);
+      color: rgba(49, 67, 57, 0.88);
+      font-size: 18px;
+      line-height: 1.92;
+      max-width: 42em;
+      text-wrap: pretty;
+    }
+
+    .hotspot-modal-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .hotspot-detail-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(44, 78, 59, 0.09);
+      background: rgba(255, 255, 255, 0.48);
+      color: rgba(58, 77, 66, 0.84);
+      font-size: 11.5px;
+      font-weight: 620;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .hotspot-detail-chip span {
+      color: rgba(94, 111, 100, 0.7);
     }
 
     .hotspot-modal-close {
-      min-width: 84px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(44, 78, 59, 0.14);
-      background: rgba(255, 255, 255, 0.55);
-      color: var(--ink);
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border-radius: 999px;
+      border: 1px solid rgba(44, 78, 59, 0.12);
+      background: rgba(255, 255, 255, 0.62);
+      color: rgba(39, 72, 59, 0.84);
       font: inherit;
+      font-size: 26px;
+      line-height: 1;
       cursor: pointer;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.76),
+        0 10px 24px rgba(12, 28, 21, 0.08);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .hotspot-modal-close:hover {
+      transform: translateY(-1px);
+      border-color: rgba(47, 107, 78, 0.22);
+      background: rgba(255, 255, 255, 0.78);
     }
 
     .hotspot-modal-body {
-      padding: 20px 26px 24px;
+      padding: 0 32px 30px;
       overflow-y: auto;
+    }
+
+    .hotspot-article {
+      padding-top: 24px;
+      border-top: 1px solid rgba(44, 78, 59, 0.07);
     }
 
     .hotspot-modal-text {
       color: var(--ink);
-      font-size: 16px;
-      line-height: 1.95;
+      font-size: 17px;
+      line-height: 2.02;
       white-space: normal;
       word-break: break-word;
+      text-wrap: pretty;
     }
 
     .hotspot-modal-text p {
-      margin: 0 0 14px;
+      margin: 0 0 18px;
+    }
+
+    .hotspot-section-title {
+      margin: 30px 0 14px;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      font-size: 24px;
+      line-height: 1.42;
+      letter-spacing: -0.02em;
+      color: var(--green-deep);
+    }
+
+    .hotspot-focus-line {
+      margin: 18px 0;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(243, 237, 224, 0.92));
+      border: 1px solid rgba(44, 78, 59, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .hotspot-inline-note {
+      color: rgba(39, 72, 59, 0.88);
+      font-weight: 700;
     }
 
     .hotspot-modal-actions {
       display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      margin-top: 18px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(44, 78, 59, 0.07);
+    }
+
+    .hotspot-modal-action-note {
+      color: rgba(95, 113, 102, 0.9);
+      font-size: 12.5px;
+      line-height: 1.8;
+    }
+
+    .hotspot-source-button {
+      min-width: 136px;
+      padding-left: 18px;
+      padding-right: 18px;
+      border-color: rgba(79, 132, 105, 0.1);
+      background: linear-gradient(135deg, rgba(79, 132, 105, 0.1), rgba(255, 255, 255, 0.7));
+      color: var(--green-deep);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .hotspot-source-button:hover {
+      background: linear-gradient(135deg, rgba(79, 132, 105, 0.16), rgba(255, 255, 255, 0.82));
     }
 
     .delta {
-      padding: 5px 10px;
+      padding: 4px 9px;
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      background: rgba(47, 107, 78, 0.08);
-      color: var(--green-deep);
+      font-size: 11px;
+      font-weight: 680;
+      background: rgba(47, 107, 78, 0.06);
+      color: rgba(39, 72, 59, 0.84);
+      border: 1px solid rgba(47, 107, 78, 0.06);
     }
 
     .delta.up {
-      background: rgba(184, 133, 56, 0.14);
+      background: rgba(184, 133, 56, 0.12);
       color: #8d4d2e;
+      border-color: rgba(184, 133, 56, 0.08);
     }
 
     .delta.down {
-      background: rgba(168, 88, 68, 0.12);
+      background: rgba(168, 88, 68, 0.1);
       color: var(--rose);
+      border-color: rgba(168, 88, 68, 0.08);
     }
 
     .pager {
@@ -857,23 +1196,26 @@
     .market-tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 14px;
-      justify-content: center;
+      gap: 9px;
+      margin-bottom: 16px;
+      justify-content: flex-start;
     }
 
     .market-tab {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 150px;
-      padding: 11px 16px;
+      min-width: 136px;
+      padding: 10px 15px;
       border-radius: 999px;
-      border: 1px solid rgba(44, 78, 59, 0.14);
-      background: rgba(255, 255, 255, 0.52);
-      color: var(--ink-soft);
+      border: 1px solid rgba(44, 78, 59, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(244, 238, 224, 0.9));
+      color: rgba(97, 116, 104, 0.88);
       cursor: pointer;
       font: inherit;
+      font-size: 13px;
+      font-weight: 620;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
       transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
@@ -884,16 +1226,9 @@
 
     .market-tab.active {
       color: #fff8eb;
-      background: linear-gradient(135deg, var(--green), #47795b);
+      background: linear-gradient(135deg, #47795f, #5a8d70);
       border-color: transparent;
-    }
-
-    .market-summary {
-      margin-bottom: 16px;
-      color: var(--ink-soft);
-      font-size: 15px;
-      line-height: 1.85;
-      text-align: center;
+      box-shadow: 0 10px 22px rgba(34, 72, 57, 0.14);
     }
 
     .empty-state {
@@ -911,7 +1246,7 @@
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      padding: 8px 6px 0;
+      padding: 10px 6px 0;
       color: rgba(244, 234, 214, 0.8);
       font-size: 13px;
     }
@@ -919,8 +1254,8 @@
     .footer-traffic {
       width: 100%;
       text-align: center;
-      color: rgba(244, 234, 214, 0.88);
-      font-size: 15px;
+      color: rgba(244, 234, 214, 0.84);
+      font-size: 14px;
       letter-spacing: 0.02em;
     }
 
@@ -929,10 +1264,13 @@
       margin-top: 10px;
       text-align: center;
       color: rgba(244, 234, 214, 0.74);
-      font-size: 13px;
-      line-height: 1.9;
+      font-size: 12px;
+      line-height: 1.88;
       white-space: pre-line;
       word-break: break-word;
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .footer-status {
@@ -940,6 +1278,13 @@
       display: flex;
       justify-content: center;
       margin-top: 6px;
+    }
+
+    .dashboard-status {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 4px 0 18px;
     }
 
     .muted {
@@ -959,19 +1304,41 @@
     @media (max-width: 720px) {
       .shell {
         width: min(100%, calc(100% - 18px));
-        padding-top: 18px;
+        padding-top: 22px;
+        padding-bottom: 44px;
       }
 
       .topbar {
         align-items: center;
         flex-direction: column;
-        padding-bottom: 18px;
+        gap: 10px;
+        padding-bottom: 14px;
         text-align: center;
       }
 
-      .hero-copy,
-      .hero-copy {
-        padding: 24px 18px 20px;
+      .brand {
+        max-width: 314px;
+      }
+
+      .brand h1 {
+        font-size: clamp(28px, 9.8vw, 42px);
+        line-height: 1.02;
+      }
+
+      .brand p {
+        font-size: 13px;
+        line-height: 1.76;
+        max-width: 300px;
+      }
+
+      .dashboard-status {
+        margin: 2px 0 14px;
+      }
+
+      .status-pill {
+        gap: 7px;
+        padding: 8px 12px;
+        font-size: 10.5px;
       }
 
       .global-search-body {
@@ -1039,55 +1406,21 @@
 
       .footer-disclaimer {
         max-width: 100%;
-        padding: 0 18px;
+        padding: 0 14px;
         margin-left: auto;
         margin-right: auto;
         text-align: left;
-        font-size: 12px;
-        line-height: 1.75;
+        font-size: 11px;
+        line-height: 1.8;
         white-space: normal;
       }
 
-      .hero-card {
-        padding: 14px 14px;
-      }
-
-      .trace-entry {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        text-align: center;
-        min-height: 0;
-      }
-
-      .trace-entry-copy {
-        width: 100%;
-        justify-items: center;
-        text-align: center;
-      }
-
-      .trace-entry-title {
-        font-size: 22px;
-      }
-
-      .trace-entry-text {
-        font-size: 13px;
-      }
-
-      .button.trace {
-        min-width: 132px;
-        min-height: 44px;
-        width: min(100%, 280px);
-        padding: 10px 14px;
-        font-size: 14px;
-      }
-
       .section-head {
-        padding: 18px 16px 14px;
+        padding: 15px 13px;
       }
 
       .section-head-side {
-        gap: 8px;
+        gap: 4px;
       }
 
       .section-body {
@@ -1095,31 +1428,99 @@
       }
 
       .section-title {
-        font-size: 24px;
+        font-size: 20px;
       }
 
       .section-caret {
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
       }
 
-      .entry-title {
-        font-size: 18px;
+      .count-chip {
+        padding: 6px 9px;
+        font-size: 9.5px;
+        font-weight: 580;
+        border-color: rgba(47, 107, 78, 0.06);
+        background: rgba(47, 107, 78, 0.032);
+        color: rgba(35, 70, 57, 0.64);
+        box-shadow: none;
+      }
+
+      .trace-gateway-link {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 14px;
+      }
+
+      .trace-gateway-main {
+        flex: 1 1 auto;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .trace-gateway-badge {
+        width: 36px;
+        height: 36px;
+        border-radius: 11px;
+      }
+
+      .trace-gateway-badge svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .trace-gateway-title {
+        font-size: 16px;
+      }
+
+      .trace-gateway-meta {
+        font-size: 10.5px;
+        line-height: 1.35;
+      }
+
+      .trace-gateway-action {
+        position: static;
+        transform: none;
+        margin-left: auto;
+        font-size: 10.5px;
+        color: rgba(35, 70, 57, 0.7);
+      }
+
+      .download-strip {
+        gap: 8px;
+        margin: 6px 0 16px;
+      }
+
+      .download-strip::before,
+      .download-strip::after {
+        flex-basis: 42px;
+        max-width: 48px;
+      }
+
+      .download-strip-link {
+        font-size: 11px;
+        letter-spacing: 0.05em;
+      }
+
+      .footer-traffic {
+        font-size: 12px;
       }
 
       .entry-card {
-        padding: 13px 12px;
-        border-radius: 18px;
+        padding: 12px 11px 12px;
+        border-radius: 17px;
       }
 
       .entry-list {
-        gap: 8px;
+        gap: 7px;
       }
 
       .entry-top,
       .entry-title-row,
       .entry-footer {
-        gap: 8px;
+        gap: 7px;
       }
 
       .entry-date,
@@ -1129,70 +1530,190 @@
         font-size: 12px;
       }
 
+      .entry-title {
+        font-size: 18px;
+        line-height: 1.2;
+      }
+
+      .entry-title-row {
+        align-items: flex-start;
+      }
+
       .entry-summary {
-        margin-top: 8px;
-        font-size: 13px;
-        line-height: 1.55;
+        margin-top: 9px;
+        font-size: 12px;
+        line-height: 1.76;
       }
 
       .entry-price-breakdown {
-        gap: 6px;
-        margin-top: 10px;
+        grid-template-columns: 1fr;
+        gap: 5px;
+        margin-top: 8px;
       }
 
       .price-point {
-        padding: 8px 10px;
-        border-radius: 12px;
-        gap: 10px;
+        min-height: auto;
+        padding: 7px 9px;
+        border-radius: 11px;
+        gap: 2px;
       }
 
       .price-point-label,
       .price-point-value {
-        font-size: 12px;
+        font-size: 11.5px;
       }
 
       .entry-meta {
-        margin-top: 6px;
-        line-height: 1.5;
+        margin-top: 5px;
+        gap: 5px;
+        line-height: 1.4;
+      }
+
+      .entry-meta-label,
+      .entry-footer-label {
+        min-height: 20px;
+        padding: 0 6px;
+        font-size: 9.5px;
       }
 
       .tag,
       .delta {
-        padding: 4px 8px;
-        font-size: 11px;
+        padding: 3px 7px;
+        font-size: 9.5px;
       }
 
       .entry-price {
-        font-size: 13px;
+        font-size: 11px;
+      }
+
+      .entry-footer {
+        margin-top: 10px;
+        padding-top: 9px;
+      }
+
+      .entry-source {
+        gap: 5px;
+      }
+
+      .entry-link-list {
+        gap: 6px;
+      }
+
+      .market-tabs {
+        gap: 7px;
+        margin-bottom: 12px;
+      }
+
+      .market-tab {
+        min-width: 102px;
+        padding: 8px 12px;
+        font-size: 11.5px;
       }
 
       .hotspot-modal {
-        padding: 10px;
+        padding: 8px;
       }
 
       .hotspot-modal-panel {
-        max-height: 88vh;
-        border-radius: 18px;
-      }
-
-      .hotspot-modal-head,
-      .hotspot-modal-body {
-        padding-left: 16px;
-        padding-right: 16px;
+        max-height: calc(100vh - 16px);
+        border-radius: 22px;
       }
 
       .hotspot-modal-head {
-        padding-top: 18px;
-        padding-bottom: 14px;
+        padding: 18px 14px 16px;
+      }
+
+      .hotspot-modal-body {
+        padding: 0 14px 18px;
+      }
+
+      .hotspot-modal-shell,
+      .hotspot-article {
+        width: 100%;
+      }
+
+      .hotspot-modal-kicker {
+        margin-bottom: 11px;
+        gap: 6px;
       }
 
       .hotspot-modal-title {
+        font-size: 24px;
+        line-height: 1.26;
+      }
+
+      .hotspot-modal-topline {
+        gap: 12px;
+      }
+
+      .hotspot-modal-meta {
+        margin-top: 9px;
+        font-size: 11.5px;
+        line-height: 1.65;
+      }
+
+      .hotspot-modal-lead {
+        margin-top: 13px;
+        padding-left: 12px;
+        font-size: 14px;
+        line-height: 1.84;
+      }
+
+      .hotspot-modal-details {
+        gap: 6px;
+        margin-top: 12px;
+      }
+
+      .hotspot-detail-chip {
+        min-height: 26px;
+        padding: 0 9px;
+        font-size: 10px;
+      }
+
+      .hotspot-modal-close {
+        width: 38px;
+        height: 38px;
         font-size: 22px;
+      }
+
+      .hotspot-article {
+        padding-top: 16px;
       }
 
       .hotspot-modal-text {
         font-size: 14px;
-        line-height: 1.8;
+        line-height: 1.86;
+      }
+
+      .hotspot-modal-text p {
+        margin-bottom: 14px;
+      }
+
+      .hotspot-section-title {
+        margin: 22px 0 10px;
+        font-size: 18px;
+      }
+
+      .hotspot-focus-line {
+        margin: 14px 0;
+        padding: 11px 12px;
+        border-radius: 14px;
+      }
+
+      .hotspot-modal-actions {
+        margin-top: 22px;
+        padding-top: 14px;
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hotspot-modal-action-note {
+        font-size: 11px;
+      }
+
+      .hotspot-source-button {
+        width: 100%;
+        min-height: 46px;
       }
     }
   </style>
@@ -1206,19 +1727,9 @@
       </div>
     </header>
 
-    <section class="hero panel">
-      <div class="hero-copy">
-        <article class="hero-card">
-          <div class="trace-entry">
-            <div class="trace-entry-copy">
-              <h2 class="trace-entry-title">中药材溯源平台</h2>
-              <p class="trace-entry-text">药商、加工户、种植户溯源入口</p>
-            </div>
-            <a class="button primary trace" href="https://ahsynl.com" target="_blank" rel="noreferrer">进入平台</a>
-          </div>
-        </article>
-      </div>
-    </section>
+    <div class="dashboard-status">
+      <div class="status-pill" id="statusPill">正在读取数据</div>
+    </div>
 
     <section class="section panel" id="originSection">
       <button class="section-head section-toggle" type="button" data-section-toggle="origin" aria-expanded="false" aria-controls="originBody">
@@ -1252,7 +1763,6 @@
       </button>
       <div class="section-body" id="marketBody" hidden>
         <div class="market-tabs" id="marketTabs"></div>
-        <div class="market-summary" id="marketSummary"></div>
         <div class="entry-list" id="marketList"></div>
         <div class="pager">
           <button class="pager-button" id="marketPrev">上一页</button>
@@ -1307,18 +1817,52 @@
       </div>
     </section>
 
+    <section class="panel trace-gateway" id="traceSection">
+      <a class="trace-gateway-link" href="https://ahsynl.com" target="_blank" rel="noreferrer">
+        <span class="trace-gateway-main">
+          <span class="trace-gateway-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 18V8" />
+              <path d="M12 11c-2.8 0-5-2.2-5-5 2.8 0 5 2.2 5 5Z" />
+              <path d="M12 13c2.8 0 5 2.2 5 5-2.8 0-5-2.2-5-5Z" />
+              <path d="M12 11c2.8 0 5-2.2 5-5-2.8 0-5 2.2-5 5Z" />
+              <path d="M12 13c-2.8 0-5 2.2-5 5 2.8 0 5-2.2 5-5Z" />
+            </svg>
+          </span>
+          <span class="trace-gateway-copy">
+            <span class="trace-gateway-title">中药材溯源平台</span>
+            <span class="trace-gateway-meta">药商、加工户、种植户入口</span>
+          </span>
+        </span>
+        <span class="trace-gateway-action">进入</span>
+      </a>
+    </section>
+
+    <div class="download-strip">
+      <a class="download-strip-link" href="/downloads/qgyc.apk" download="qgyc.apk" aria-label="下载安卓应用 qgyc.apk">安卓APP</a>
+    </div>
+
     <div class="hotspot-modal" id="hotspotModal" hidden>
       <div class="hotspot-modal-panel" role="dialog" aria-modal="true" aria-labelledby="hotspotModalTitle">
         <div class="hotspot-modal-head">
-          <div>
-            <h3 class="hotspot-modal-title" id="hotspotModalTitle">行业热点</h3>
-            <div class="hotspot-modal-meta" id="hotspotModalMeta"></div>
+          <div class="hotspot-modal-shell">
+            <div class="hotspot-modal-kicker" id="hotspotModalKicker"></div>
+            <div class="hotspot-modal-topline">
+              <div class="hotspot-modal-title-wrap">
+                <h3 class="hotspot-modal-title" id="hotspotModalTitle">行业热点</h3>
+                <div class="hotspot-modal-meta" id="hotspotModalMeta"></div>
+              </div>
+              <button class="hotspot-modal-close" id="hotspotModalClose" type="button" aria-label="关闭热点详情">×</button>
+            </div>
+            <p class="hotspot-modal-lead" id="hotspotModalLead" hidden></p>
+            <div class="hotspot-modal-details" id="hotspotModalDetails" hidden></div>
           </div>
-          <button class="hotspot-modal-close" id="hotspotModalClose" type="button">关闭</button>
         </div>
         <div class="hotspot-modal-body">
-          <div class="hotspot-modal-text" id="hotspotModalBody"></div>
-          <div class="hotspot-modal-actions" id="hotspotModalActions"></div>
+          <article class="hotspot-article">
+            <div class="hotspot-modal-text" id="hotspotModalBody"></div>
+            <div class="hotspot-modal-actions" id="hotspotModalActions"></div>
+          </article>
         </div>
       </div>
     </div>
@@ -1327,9 +1871,6 @@
       <div class="footer-traffic" id="footerTraffic">本站总访问量 -- 次</div>
       <div class="footer-disclaimer">声 明：数据来自各门户网站，转载是出于传递更多信息之目的。
 若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系 188189694@qq.com，我们将及时更正、删除，谢谢。</div>
-      <div class="footer-status">
-        <div class="status-pill" id="statusPill">正在读取数据</div>
-      </div>
     </footer>
   </main>
 
@@ -1381,6 +1922,7 @@
     }
 
     function safeUrl(url) {
+      if (!String(url || "").trim()) return "";
       try {
         const parsed = new URL(url, window.location.href);
         if (parsed.hostname === "www.yt1998.com" && parsed.pathname === "/ytw/second/marketMgr/detail.jsp") {
@@ -1504,7 +2046,10 @@
             <button class="entry-title entry-title-button" type="button" data-hotspot-open="${modalId}">${title}</button>
           </div>
           <div class="entry-footer">
-            <span>来源：${escapeHtml(item.source || "中药材天地网")}</span>
+            <span class="entry-source">
+              <span class="entry-footer-label">来源</span>
+              <span class="entry-source-name">${escapeHtml(item.source || "中药材天地网")}</span>
+            </span>
             ${contentLink}
           </div>
         </article>
@@ -1546,11 +2091,17 @@
             <h3 class="entry-title">${escapeHtml(title || "待补标题")}</h3>
             ${spec}
           </div>
-          <div class="entry-meta">${locationLabel}：${escapeHtml(location)}</div>
+          <div class="entry-meta">
+            <span class="entry-meta-label">${escapeHtml(locationLabel)}</span>
+            <span class="entry-meta-value">${escapeHtml(location)}</span>
+          </div>
           ${priceBreakdown}
           ${summary}
           <div class="entry-footer">
-            <span>来源：${escapeHtml(item.source || "待补来源")}</span>
+            <span class="entry-source">
+              <span class="entry-footer-label">来源</span>
+              <span class="entry-source-name">${escapeHtml(item.source || "待补来源")}</span>
+            </span>
             ${sourceLinks}
           </div>
         </article>
@@ -1610,21 +2161,121 @@
       return (state.searchHistory?.hotspot || []).find((item) => item.id === id);
     }
 
+    function normalizeHotspotText(text) {
+      return String(text || "")
+        .replace(/\u00a0/g, " ")
+        .replace(/\r\n?/g, "\n")
+        .replace(/[ \t]+\n/g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .replace(/[ \t]{2,}/g, " ")
+        .trim();
+    }
+
+    function formatHotspotInline(text) {
+      return escapeHtml(String(text || ""))
+        .replace(/\*\*/g, "")
+        .replace(/“([^”]{2,28})”/g, '<span class="hotspot-inline-note">“$1”</span>');
+    }
+
+    function extractHotspotLeadFromContent(text) {
+      const normalized = normalizeHotspotText(text);
+      if (!normalized) return "";
+      const sentences = normalized.match(/[^。！？]+[。！？]?/g) || [normalized];
+      let lead = (sentences[0] || normalized).trim();
+      if (lead.length < 28 && sentences[1]) {
+        lead = `${lead}${sentences[1].trim()}`;
+      }
+      return lead.trim();
+    }
+
+    function buildHotspotLead(item) {
+      const summary = normalizeHotspotText(item.summary || "");
+      const content = normalizeHotspotText(item.content_full || summary);
+      if (summary && !/(?:\.\.\.|…)+$/.test(summary) && summary.length >= 24) {
+        return summary;
+      }
+      return extractHotspotLeadFromContent(content) || summary.replace(/(?:\.\.\.|…)+$/, "").trim();
+    }
+
+    function buildHotspotBodyText(item, lead) {
+      let content = normalizeHotspotText(item.content_full || item.summary || "暂无正文");
+      if (lead) {
+        const normalizedLead = lead.replace(/[。；;，,、\s]+$/, "").trim();
+        if (normalizedLead && content.startsWith(normalizedLead)) {
+          content = content.slice(normalizedLead.length).trim();
+          content = content.replace(/^[。；;，,、\s]+/, "").trim();
+        }
+      }
+      return content || lead || "暂无正文";
+    }
+
     function formatHotspotContent(text) {
-      return escapeHtml(String(text || "").trim())
-        .replace(/([。！？；])/g, "$1<br>")
-        .replace(/([①②③④⑤⑥⑦⑧⑨⑩])/g, "<br>$1")
-        .replace(/<br><br>/g, "<br>");
+      const normalized = normalizeHotspotText(text)
+        .replace(/([。！？])\s*(0?\d{1,2}\s+)/g, "$1\n\n$2")
+        .replace(/\s*\*\*\s*/g, "\n\n** ")
+        .replace(/\s*([①②③④⑤⑥⑦⑧⑨⑩])\s*/g, "\n$1 ");
+
+      const blocks = normalized
+        .split(/\n{2,}/)
+        .map((block) => block.trim())
+        .filter(Boolean);
+
+      return blocks.map((block) => {
+        if (/^0?\d{1,2}\s+/.test(block)) {
+          return `<h4 class="hotspot-section-title">${formatHotspotInline(block)}</h4>`;
+        }
+        if (/^\*\*\s*/.test(block)) {
+          const cleaned = block.replace(/^\*\*\s*/, "");
+          return `<p class="hotspot-focus-line">${formatHotspotInline(cleaned)}</p>`;
+        }
+        return `<p>${formatHotspotInline(block)}</p>`;
+      }).join("");
+    }
+
+    function renderHotspotKicker(item) {
+      const chips = [];
+      if (item.kind) chips.push(`<span class="tag">${escapeHtml(item.kind)}</span>`);
+      if (item.herb) chips.push(`<span class="tag">${escapeHtml(item.herb)}</span>`);
+      if (item.location) chips.push(`<span class="tag">${escapeHtml(item.location)}</span>`);
+      return chips.join("");
+    }
+
+    function renderHotspotDetails(item) {
+      const details = [];
+      if (item.source) details.push(`<span class="hotspot-detail-chip"><span>来源</span>${escapeHtml(item.source)}</span>`);
+      if (item.herb) details.push(`<span class="hotspot-detail-chip"><span>关联药材</span>${escapeHtml(item.herb)}</span>`);
+      if (item.location) details.push(`<span class="hotspot-detail-chip"><span>地域</span>${escapeHtml(item.location)}</span>`);
+      return details.join("");
+    }
+
+    function renderHotspotActions(item) {
+      const note = `<div class="hotspot-modal-action-note">正文按阅读版式整理，原文来源保留在公开链接中。</div>`;
+      if (!item.url) return note;
+      return `
+        ${note}
+        <a class="button hotspot-source-button" href="${safeUrl(item.url)}" target="_blank" rel="noreferrer">查看原文</a>
+      `;
     }
 
     function openHotspotModal(id) {
       const item = hotspotById(id);
       if (!item) return;
       const modal = document.getElementById("hotspotModal");
+      const lead = buildHotspotLead(item);
+      const bodyText = buildHotspotBodyText(item, lead);
+      const kicker = renderHotspotKicker(item);
+      const details = renderHotspotDetails(item);
       document.getElementById("hotspotModalTitle").textContent = item.title || "行业热点";
       document.getElementById("hotspotModalMeta").textContent = [item.date, item.source].filter(Boolean).join(" · ");
-      document.getElementById("hotspotModalBody").innerHTML = formatHotspotContent(item.content_full || item.summary || "暂无正文");
-      document.getElementById("hotspotModalActions").innerHTML = "";
+      document.getElementById("hotspotModalKicker").innerHTML = kicker;
+      const leadNode = document.getElementById("hotspotModalLead");
+      leadNode.textContent = lead;
+      leadNode.hidden = !lead;
+      const detailsNode = document.getElementById("hotspotModalDetails");
+      detailsNode.innerHTML = details;
+      detailsNode.hidden = !details;
+      document.getElementById("hotspotModalBody").innerHTML = formatHotspotContent(bodyText);
+      document.getElementById("hotspotModalActions").innerHTML = renderHotspotActions(item);
       modal.hidden = false;
       document.body.style.overflow = "hidden";
     }
@@ -1646,6 +2297,16 @@
         .filter(Boolean)
         .sort()
         .reverse()[0] || "--";
+    }
+
+    function latestCount(section, items) {
+      const explicit = section?.latest_count;
+      if (explicit !== undefined && explicit !== null && explicit !== "") {
+        return Number(explicit) || 0;
+      }
+      const latest = section?.latest_date || latestDate(items);
+      if (!latest || latest === "--") return 0;
+      return (items || []).filter((item) => item.date === latest).length;
     }
 
     function uniqueSources(items) {
@@ -1768,7 +2429,7 @@
       const start = (state.originPage - 1) * state.originPageSize;
       const pageItems = allItems.slice(start, start + state.originPageSize);
 
-      document.getElementById("originCountChip").textContent = `今日更新 ${dashboard.origin.latest_count || 0} 条`;
+      document.getElementById("originCountChip").textContent = `今日更新 ${latestCount(dashboard.origin, allItems)} 条`;
 
       const root = document.getElementById("originList");
       root.innerHTML = pageItems.length
@@ -1798,7 +2459,7 @@
 
       const currentGroup = tabs.find((group) => group.name === state.currentMarket) || tabs[0];
 
-      document.getElementById("marketCountChip").textContent = `今日更新 ${dashboard.markets.latest_count || 0} 条`;
+      document.getElementById("marketCountChip").textContent = `今日更新 ${latestCount(dashboard.markets, groups.flatMap((group) => group.items || []))} 条`;
       document.getElementById("marketTabs").innerHTML = tabs.map((group) => `
         <button class="market-tab ${group.name === state.currentMarket ? "active" : ""}" type="button" data-market="${escapeHtml(group.name)}">
           ${escapeHtml(group.name)}市场
@@ -1813,12 +2474,10 @@
         });
       });
 
-      const summary = document.getElementById("marketSummary");
       const list = document.getElementById("marketList");
       const currentItems = currentGroup?.items || [];
 
       if (!currentGroup || !currentItems.length) {
-        summary.textContent = `${state.currentMarket || "该市场"}市场当前还没有录入到真实记录。`;
         list.innerHTML = `<div class="empty-state">${escapeHtml(String(dashboard.markets.empty_text || "").replace(/天天行情/g, "市场行情"))}</div>`;
         document.getElementById("marketPageInfo").textContent = "第 1 页 / 共 1 页";
         document.getElementById("marketPrev").disabled = true;
@@ -1831,7 +2490,6 @@
       const start = (state.marketPage - 1) * state.marketPageSize;
       const pageItems = currentItems.slice(start, start + state.marketPageSize);
 
-      summary.innerHTML = `${escapeHtml(currentGroup.name)}市场当前共 ${escapeHtml(currentItems.length)} 条记录，最新日期为 ${escapeHtml(latestDate(currentItems))}。${uniqueSources(currentItems).length ? ` 来源结构：${escapeHtml(uniqueSources(currentItems).join(" / "))}` : ""}`;
       list.innerHTML = pageItems.map((item) => renderEntryCard(item, "market")).join("");
       document.getElementById("marketPageInfo").textContent = `第 ${state.marketPage} 页 / 共 ${totalPages} 页`;
       document.getElementById("marketPrev").disabled = state.marketPage === 1;
@@ -1840,7 +2498,7 @@
 
     function renderHotspotSection(dashboard) {
       const items = (dashboard.hotspots.items || []).filter((item) => state.hotspotKind === "all" || item.kind === state.hotspotKind);
-      document.getElementById("hotspotCountChip").textContent = `今日更新 ${dashboard.hotspots.latest_count || 0} 条`;
+      document.getElementById("hotspotCountChip").textContent = `今日更新 ${latestCount(dashboard.hotspots, items)} 条`;
 
       const hotspotFilterRoot = document.getElementById("hotspotFilters");
       const kindOptions = dashboard.hotspots.kind_options || [];
@@ -2053,9 +2711,19 @@
       }
     }
 
+    async function registerServiceWorker() {
+      if (!("serviceWorker" in navigator) || !window.isSecureContext) return;
+      try {
+        await navigator.serviceWorker.register("/sw.js");
+      } catch (error) {
+        console.warn("Service worker register failed:", error);
+      }
+    }
+
     initSectionToggles();
     loadSiteVisits();
     loadDashboard();
+    registerServiceWorker();
   </script>
 </body>
 </html>
