@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-26 17:10:15",
+    "generated_at": "2026-03-26 20:00:30",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-03-26",
     "available_dates": [
@@ -267,8 +267,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 5626,
-    "origin_records": 1179,
+    "total_records": 5627,
+    "origin_records": 1180,
     "market_records": 4447,
     "source_count": 2,
     "herb_count": 782,
@@ -284,15 +284,15 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：5626 条",
-      "产地：1179 条",
+      "总记录：5627 条",
+      "产地：1180 条",
       "市场：4447 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-03-26",
-    "latest_count": 149,
+    "latest_count": 150,
     "top_herbs": [
       {
         "name": "槐米",
@@ -322,15 +322,15 @@
       },
       {
         "name": "中药材天地网",
-        "count": 1184
+        "count": 1185
       }
     ]
   },
   "origin": {
     "total": 200,
-    "all_total": 1136,
+    "all_total": 1137,
     "latest_date": "2026-03-26",
-    "latest_count": 76,
+    "latest_count": 77,
     "date_options": [
       "2026-03-26",
       "2026-03-25",
@@ -2792,6 +2792,40 @@
           {
             "label": "统货",
             "price": "16 元/kg"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-26",
+        "published_at": "2026-03-26 00:00:00",
+        "herb": "甘草",
+        "spec": "",
+        "location": "新疆伊宁",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "平稳",
+        "summary": "新疆维吾尔自治区伊犁哈萨克自治州伊宁市进口甘草销售以订单为主，口岸基本没有现货，没有多余的库存，最近询货问价客户增多，价格稳定，短节草8.5元/公斤，原草价格8元/每公斤，长条草12.5元/公斤，后期看涨",
+        "content_full": "新疆维吾尔自治区伊犁哈萨克自治州伊宁市进口甘草销售以订单为主，口岸基本没有现货，没有多余的库存，最近询货问价客户增多，价格稳定，短节草8.5元/公斤，原草价格8元/每公斤，长条草12.5元/公斤，后期看涨",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1105962.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "短节草",
+            "price": "8.5 元/kg"
+          },
+          {
+            "label": "长条草",
+            "price": "12.5 元/kg"
           }
         ]
       },
@@ -7679,44 +7713,6 @@
           {
             "label": "野生统货",
             "price": "8 元/kg"
-          }
-        ]
-      },
-      {
-        "date": "2026-03-24",
-        "published_at": "2026-03-24 10:59:52",
-        "herb": "重楼",
-        "spec": "",
-        "location": "云南右所",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "平稳",
-        "summary": "重楼商家关注力度一般，整体交易情况不及年前，当前货源走动以商家按需采购为主，行情波动不大，现投料货价格在40-45元，大统货50元，过20号筛货60元左右",
-        "content_full": "重楼商家关注力度一般，整体交易情况不及年前，当前货源走动以商家按需采购为主，行情波动不大，现投料货价格在40-45元，大统货50元，过20号筛货60元左右",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/marketInfo--557979.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "投料货",
-            "price": "40-45 元/kg"
-          },
-          {
-            "label": "大统货",
-            "price": "50 元/kg"
-          },
-          {
-            "label": "过20号筛货",
-            "price": "60 元/kg"
           }
         ]
       }
