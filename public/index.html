@@ -1083,7 +1083,10 @@
     }
 
     .hotspot-modal-text p {
-      margin: 0 0 18px;
+      margin: 0 0 20px;
+      text-align: justify;
+      text-justify: inter-ideograph;
+      text-indent: 2em;
     }
 
     .hotspot-section-title {
@@ -1093,6 +1096,14 @@
       line-height: 1.42;
       letter-spacing: -0.02em;
       color: var(--green-deep);
+    }
+
+    .hotspot-subsection-title {
+      margin: 22px 0 10px;
+      font-size: 19px;
+      line-height: 1.58;
+      letter-spacing: -0.01em;
+      color: rgba(39, 72, 59, 0.92);
     }
 
     .hotspot-focus-line {
@@ -1682,16 +1693,23 @@
 
       .hotspot-modal-text {
         font-size: 14px;
-        line-height: 1.86;
+        line-height: 1.94;
       }
 
       .hotspot-modal-text p {
-        margin-bottom: 14px;
+        margin-bottom: 16px;
+        text-indent: 2em;
       }
 
       .hotspot-section-title {
         margin: 22px 0 10px;
         font-size: 18px;
+      }
+
+      .hotspot-subsection-title {
+        margin: 16px 0 8px;
+        font-size: 15px;
+        line-height: 1.56;
       }
 
       .hotspot-focus-line {
@@ -2213,20 +2231,126 @@
       return window.matchMedia("(max-width: 720px)").matches;
     }
 
-    function formatHotspotContent(text) {
-      const normalized = normalizeHotspotText(text)
+    function normalizeHotspotParagraphs(text) {
+      return normalizeHotspotText(text)
         .replace(/([。！？])\s*(0?\d{1,2}\s+)/g, "$1\n\n$2")
+        .replace(/([。！？])\s*([一二三四五六七八九十]{1,3}、)/g, "$1\n\n$2")
+        .replace(/([：:])\s*([一二三四五六七八九十]{1,3}、)/g, "$1\n\n$2")
+        .replace(/([。！？])\s*(（[一二三四五六七八九十]{1,3}）)/g, "$1\n\n$2")
+        .replace(/([：:])\s*(（[一二三四五六七八九十]{1,3}）)/g, "$1\n\n$2")
+        .replace(/([一二三四五六七八九十]{1,3}、[^\n]{0,40})\s*(（[一二三四五六七八九十]{1,3}）)/g, "$1\n\n$2")
+        .replace(/([。！？])\s*(附件[:：]?\s*\d*)/g, "$1\n\n$2")
+        .replace(/(附件[:：]?\s*\d*[^\n]{0,56})\s*(附件\d+)/g, "$1\n\n$2")
+        .replace(/(\d{4}年\d{1,2}月\d{1,2}日)\s*(附件\d+)/g, "$1\n\n$2")
+        .replace(/(（征求意见稿）)\s*(为深入贯彻落实)/g, "$1\n\n$2")
+        .replace(/([。！？])\s*(公开征求意见时间\d{4}年\d{1,2}月\d{1,2}日)/g, "$1\n\n$2")
+        .replace(/公开征求意见时间/g, "征求意见时间")
+        .replace(/(征求意见时间\d{4}年\d{1,2}月\d{1,2}日[^\n]{0,80})\s*(有关单位和个人)/g, "$1\n\n$2")
+        .replace(/([。！？])\s*(声明[:：])/g, "$1\n\n$2")
         .replace(/\s*\*\*\s*/g, "\n\n** ")
         .replace(/\s*([①②③④⑤⑥⑦⑧⑨⑩])\s*/g, "\n$1 ");
+    }
 
-      const blocks = normalized
+    function splitHotspotSentence(sentence, maxLength) {
+      const trimmed = sentence.trim();
+      if (!trimmed || trimmed.length <= maxLength) {
+        return trimmed ? [trimmed] : [];
+      }
+
+      const clauses = trimmed.match(/[^，,；;、]+[，,；;、]?/g)?.map((clause) => clause.trim()).filter(Boolean);
+      if (!clauses || clauses.length <= 1) {
+        return [trimmed];
+      }
+
+      const groups = [];
+      let current = "";
+
+      clauses.forEach((clause) => {
+        const candidate = current ? `${current}${clause}` : clause;
+        if (current && candidate.length > maxLength) {
+          groups.push(current.trim());
+          current = clause;
+        } else {
+          current = candidate;
+        }
+      });
+
+      if (current) groups.push(current.trim());
+      return groups;
+    }
+
+    function expandStructuredHotspotBlock(block) {
+      const trimmed = block.trim();
+      if (!trimmed) return [];
+
+      const headingWithSentence = trimmed.match(/^([一二三四五六七八九十]{1,3}、[^。！？\n]{2,28})[。:：]\s*(.+)$/);
+      if (headingWithSentence) {
+        return [headingWithSentence[1].trim(), headingWithSentence[2].trim()];
+      }
+
+      const headingWithGap = trimmed.match(/^([一二三四五六七八九十]{1,3}、[^\s。！？\n]{2,18})\s+(.+)$/);
+      if (headingWithGap) {
+        return [headingWithGap[1].trim(), headingWithGap[2].trim()];
+      }
+
+      const subheadingWithSentence = trimmed.match(/^(（[一二三四五六七八九十]{1,3}）[^。！？\n]{2,32})[。:：]\s*(.+)$/);
+      if (subheadingWithSentence) {
+        return [subheadingWithSentence[1].trim(), subheadingWithSentence[2].trim()];
+      }
+
+      return [trimmed];
+    }
+
+    function splitHotspotLongBlock(block) {
+      const trimmed = block.trim();
+      if (!trimmed) return [];
+
+      const isStructuredBlock = (
+        /^0?\d{1,2}\s+/.test(trimmed) ||
+        /^[一二三四五六七八九十]{1,3}、/.test(trimmed) ||
+        /^（[一二三四五六七八九十]{1,3}）/.test(trimmed) ||
+        /^附件[:：]?\s*\d*/.test(trimmed) ||
+        /^\*\*\s*/.test(trimmed)
+      );
+
+      const maxLength = useCompactHotspotReadingMode() ? 84 : 150;
+      if (isStructuredBlock || trimmed.length <= maxLength) {
+        return [trimmed];
+      }
+
+      const sentences = trimmed.match(/[^。！？；;]+[。！？；;]?/g)?.map((sentence) => sentence.trim()).filter(Boolean) || [trimmed];
+      const splitSentences = sentences.flatMap((sentence) => splitHotspotSentence(sentence, maxLength));
+      const groups = [];
+      let current = "";
+
+      splitSentences.forEach((sentence) => {
+        const candidate = current ? `${current}${sentence}` : sentence;
+        if (current && candidate.length > maxLength) {
+          groups.push(current.trim());
+          current = sentence;
+        } else {
+          current = candidate;
+        }
+      });
+
+      if (current) groups.push(current.trim());
+      return groups;
+    }
+
+    function formatHotspotContent(text) {
+      const blocks = normalizeHotspotParagraphs(text)
         .split(/\n{2,}/)
         .map((block) => block.trim())
-        .filter(Boolean);
+        .filter(Boolean)
+        .flatMap((block) => expandStructuredHotspotBlock(block))
+        .flatMap((block) => splitHotspotLongBlock(block));
 
       return blocks.map((block) => {
         if (/^0?\d{1,2}\s+/.test(block)) {
           return `<h4 class="hotspot-section-title">${formatHotspotInline(block)}</h4>`;
+        }
+        if (/^[一二三四五六七八九十]{1,3}、/.test(block) || /^（[一二三四五六七八九十]{1,3}）/.test(block) || /^附件[:：]?\s*\d*/.test(block)) {
+          return `<h4 class="hotspot-section-title hotspot-subsection-title">${formatHotspotInline(block)}</h4>`;
         }
         if (/^\*\*\s*/.test(block)) {
           const cleaned = block.replace(/^\*\*\s*/, "");
