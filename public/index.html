@@ -2231,6 +2231,10 @@
       return window.matchMedia("(max-width: 720px)").matches;
     }
 
+    function useDirectHotspotReadingMode() {
+      return true;
+    }
+
     function normalizeHotspotParagraphs(text) {
       return normalizeHotspotText(text)
         .replace(/([。！？])\s*(0?\d{1,2}\s+)/g, "$1\n\n$2")
@@ -2390,8 +2394,8 @@
       if (!item) return;
       const modal = document.getElementById("hotspotModal");
       const lead = buildHotspotLead(item);
-      const compactReading = useCompactHotspotReadingMode();
-      const bodyText = buildHotspotBodyText(item, compactReading ? "" : lead);
+      const directReading = useDirectHotspotReadingMode();
+      const bodyText = buildHotspotBodyText(item, directReading ? "" : lead);
       const kicker = renderHotspotKicker(item);
       const details = renderHotspotDetails(item);
       document.getElementById("hotspotModalTitle").textContent = item.title || "行业热点";
@@ -2399,10 +2403,10 @@
       document.getElementById("hotspotModalKicker").innerHTML = kicker;
       const leadNode = document.getElementById("hotspotModalLead");
       leadNode.textContent = lead;
-      leadNode.hidden = compactReading || !lead;
+      leadNode.hidden = directReading || !lead;
       const detailsNode = document.getElementById("hotspotModalDetails");
       detailsNode.innerHTML = details;
-      detailsNode.hidden = compactReading || !details;
+      detailsNode.hidden = directReading || !details;
       document.getElementById("hotspotModalBody").innerHTML = formatHotspotContent(bodyText);
       document.getElementById("hotspotModalActions").innerHTML = renderHotspotActions(item);
       modal.hidden = false;
