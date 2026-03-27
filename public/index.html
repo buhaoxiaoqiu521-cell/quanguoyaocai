@@ -943,11 +943,11 @@
     }
 
     .hotspot-modal-head {
-      padding: 28px 32px 20px;
+      padding: 26px 32px 16px;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(247, 241, 230, 0.78)),
-        linear-gradient(135deg, rgba(109, 153, 127, 0.08), transparent 36%);
-      border-bottom: 1px solid rgba(44, 78, 59, 0.07);
+        linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(247, 241, 230, 0.7)),
+        linear-gradient(135deg, rgba(109, 153, 127, 0.05), transparent 32%);
+      border-bottom: 1px solid rgba(44, 78, 59, 0.06);
     }
 
     .hotspot-modal-shell,
@@ -956,25 +956,11 @@
       margin: 0 auto;
     }
 
-    .hotspot-modal-kicker {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .hotspot-modal-kicker .tag {
-      padding: 5px 10px;
-      background: rgba(79, 132, 105, 0.08);
-      border-color: rgba(79, 132, 105, 0.08);
-      color: rgba(39, 72, 59, 0.74);
-    }
-
     .hotspot-modal-topline {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 18px;
+      gap: 14px;
     }
 
     .hotspot-modal-title-wrap {
@@ -984,60 +970,23 @@
     .hotspot-modal-title {
       margin: 0;
       font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-      font-size: clamp(30px, 3.6vw, 42px);
-      line-height: 1.24;
-      letter-spacing: -0.035em;
+      font-size: clamp(28px, 3vw, 36px);
+      line-height: 1.32;
+      letter-spacing: -0.028em;
       text-wrap: balance;
     }
 
     .hotspot-modal-meta {
-      margin-top: 12px;
-      color: rgba(95, 113, 102, 0.92);
-      font-size: 13px;
-      line-height: 1.75;
+      margin-top: 10px;
+      color: rgba(95, 113, 102, 0.88);
+      font-size: 12.5px;
+      line-height: 1.7;
       letter-spacing: 0.02em;
     }
 
-    .hotspot-modal-lead {
-      margin: 18px 0 0;
-      padding: 0 0 0 16px;
-      border-left: 3px solid rgba(79, 132, 105, 0.26);
-      color: rgba(49, 67, 57, 0.88);
-      font-size: 18px;
-      line-height: 1.92;
-      max-width: 42em;
-      text-wrap: pretty;
-    }
-
-    .hotspot-modal-details {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .hotspot-detail-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 30px;
-      padding: 0 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(44, 78, 59, 0.09);
-      background: rgba(255, 255, 255, 0.48);
-      color: rgba(58, 77, 66, 0.84);
-      font-size: 11.5px;
-      font-weight: 620;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
-    }
-
-    .hotspot-detail-chip span {
-      color: rgba(94, 111, 100, 0.7);
-    }
-
     .hotspot-modal-close {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       flex-shrink: 0;
       display: inline-flex;
       align-items: center;
@@ -1048,7 +997,7 @@
       background: rgba(255, 255, 255, 0.62);
       color: rgba(39, 72, 59, 0.84);
       font: inherit;
-      font-size: 26px;
+      font-size: 24px;
       line-height: 1;
       cursor: pointer;
       box-shadow:
@@ -1064,13 +1013,12 @@
     }
 
     .hotspot-modal-body {
-      padding: 0 32px 30px;
+      padding: 0 32px 28px;
       overflow-y: auto;
     }
 
     .hotspot-article {
-      padding-top: 24px;
-      border-top: 1px solid rgba(44, 78, 59, 0.07);
+      padding-top: 18px;
     }
 
     .hotspot-modal-text {
@@ -1631,7 +1579,7 @@
       }
 
       .hotspot-modal-head {
-        padding: 18px 14px 16px;
+        padding: 16px 14px 12px;
       }
 
       .hotspot-modal-body {
@@ -1643,52 +1591,29 @@
         width: 100%;
       }
 
-      .hotspot-modal-kicker {
-        margin-bottom: 11px;
-        gap: 6px;
-      }
-
       .hotspot-modal-title {
-        font-size: 24px;
-        line-height: 1.26;
+        font-size: 22px;
+        line-height: 1.34;
       }
 
       .hotspot-modal-topline {
-        gap: 12px;
+        gap: 10px;
       }
 
       .hotspot-modal-meta {
-        margin-top: 9px;
-        font-size: 11.5px;
-        line-height: 1.65;
-      }
-
-      .hotspot-modal-lead {
-        margin-top: 13px;
-        padding-left: 12px;
-        font-size: 14px;
-        line-height: 1.84;
-      }
-
-      .hotspot-modal-details {
-        gap: 6px;
-        margin-top: 12px;
-      }
-
-      .hotspot-detail-chip {
-        min-height: 26px;
-        padding: 0 9px;
-        font-size: 10px;
+        margin-top: 7px;
+        font-size: 11px;
+        line-height: 1.6;
       }
 
       .hotspot-modal-close {
-        width: 38px;
-        height: 38px;
-        font-size: 22px;
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
       }
 
       .hotspot-article {
-        padding-top: 16px;
+        padding-top: 14px;
       }
 
       .hotspot-modal-text {
@@ -1864,7 +1789,6 @@
       <div class="hotspot-modal-panel" role="dialog" aria-modal="true" aria-labelledby="hotspotModalTitle">
         <div class="hotspot-modal-head">
           <div class="hotspot-modal-shell">
-            <div class="hotspot-modal-kicker" id="hotspotModalKicker"></div>
             <div class="hotspot-modal-topline">
               <div class="hotspot-modal-title-wrap">
                 <h3 class="hotspot-modal-title" id="hotspotModalTitle">行业热点</h3>
@@ -1872,8 +1796,6 @@
               </div>
               <button class="hotspot-modal-close" id="hotspotModalClose" type="button" aria-label="关闭热点详情">×</button>
             </div>
-            <p class="hotspot-modal-lead" id="hotspotModalLead" hidden></p>
-            <div class="hotspot-modal-details" id="hotspotModalDetails" hidden></div>
           </div>
         </div>
         <div class="hotspot-modal-body">
@@ -2195,44 +2117,13 @@
         .replace(/“([^”]{2,28})”/g, '<span class="hotspot-inline-note">“$1”</span>');
     }
 
-    function extractHotspotLeadFromContent(text) {
-      const normalized = normalizeHotspotText(text);
-      if (!normalized) return "";
-      const sentences = normalized.match(/[^。！？]+[。！？]?/g) || [normalized];
-      let lead = (sentences[0] || normalized).trim();
-      if (lead.length < 28 && sentences[1]) {
-        lead = `${lead}${sentences[1].trim()}`;
-      }
-      return lead.trim();
-    }
-
-    function buildHotspotLead(item) {
-      const summary = normalizeHotspotText(item.summary || "");
-      const content = normalizeHotspotText(item.content_full || summary);
-      if (summary && !/(?:\.\.\.|…)+$/.test(summary) && summary.length >= 24) {
-        return summary;
-      }
-      return extractHotspotLeadFromContent(content) || summary.replace(/(?:\.\.\.|…)+$/, "").trim();
-    }
-
-    function buildHotspotBodyText(item, lead) {
-      let content = normalizeHotspotText(item.content_full || item.summary || "暂无正文");
-      if (lead) {
-        const normalizedLead = lead.replace(/[。；;，,、\s]+$/, "").trim();
-        if (normalizedLead && content.startsWith(normalizedLead)) {
-          content = content.slice(normalizedLead.length).trim();
-          content = content.replace(/^[。；;，,、\s]+/, "").trim();
-        }
-      }
-      return content || lead || "暂无正文";
+    function buildHotspotBodyText(item) {
+      const content = normalizeHotspotText(item.content_full || item.summary || "暂无正文");
+      return content || "暂无正文";
     }
 
     function useCompactHotspotReadingMode() {
       return window.matchMedia("(max-width: 720px)").matches;
-    }
-
-    function useDirectHotspotReadingMode() {
-      return true;
     }
 
     function normalizeHotspotParagraphs(text) {
@@ -2364,22 +2255,6 @@
       }).join("");
     }
 
-    function renderHotspotKicker(item) {
-      const chips = [];
-      if (item.kind) chips.push(`<span class="tag">${escapeHtml(item.kind)}</span>`);
-      if (item.herb) chips.push(`<span class="tag">${escapeHtml(item.herb)}</span>`);
-      if (item.location) chips.push(`<span class="tag">${escapeHtml(item.location)}</span>`);
-      return chips.join("");
-    }
-
-    function renderHotspotDetails(item) {
-      const details = [];
-      if (item.source) details.push(`<span class="hotspot-detail-chip"><span>来源</span>${escapeHtml(item.source)}</span>`);
-      if (item.herb) details.push(`<span class="hotspot-detail-chip"><span>关联药材</span>${escapeHtml(item.herb)}</span>`);
-      if (item.location) details.push(`<span class="hotspot-detail-chip"><span>地域</span>${escapeHtml(item.location)}</span>`);
-      return details.join("");
-    }
-
     function renderHotspotActions(item) {
       const note = `<div class="hotspot-modal-action-note">正文按阅读版式整理，原文来源保留在公开链接中。</div>`;
       if (!item.url) return note;
@@ -2393,20 +2268,9 @@
       const item = hotspotById(id);
       if (!item) return;
       const modal = document.getElementById("hotspotModal");
-      const lead = buildHotspotLead(item);
-      const directReading = useDirectHotspotReadingMode();
-      const bodyText = buildHotspotBodyText(item, directReading ? "" : lead);
-      const kicker = renderHotspotKicker(item);
-      const details = renderHotspotDetails(item);
+      const bodyText = buildHotspotBodyText(item);
       document.getElementById("hotspotModalTitle").textContent = item.title || "行业热点";
       document.getElementById("hotspotModalMeta").textContent = [item.date, item.source].filter(Boolean).join(" · ");
-      document.getElementById("hotspotModalKicker").innerHTML = kicker;
-      const leadNode = document.getElementById("hotspotModalLead");
-      leadNode.textContent = lead;
-      leadNode.hidden = directReading || !lead;
-      const detailsNode = document.getElementById("hotspotModalDetails");
-      detailsNode.innerHTML = details;
-      detailsNode.hidden = directReading || !details;
       document.getElementById("hotspotModalBody").innerHTML = formatHotspotContent(bodyText);
       document.getElementById("hotspotModalActions").innerHTML = renderHotspotActions(item);
       modal.hidden = false;
