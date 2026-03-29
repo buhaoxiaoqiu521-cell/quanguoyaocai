@@ -164,6 +164,16 @@ def seed_herb_candidate(text: str) -> str:
     return ""
 
 
+def split_herb_tokens(text: str) -> list[str]:
+    return [clean_text(part) for part in re.split(r"[、，,/·\s]+", clean_text(text)) if clean_text(part)]
+
+
+def is_invalid_multi_herb_record(record: dict[str, Any]) -> bool:
+    if clean_text(record.get("source")) != "药通网":
+        return False
+    return len(split_herb_tokens(record.get("herb"))) > 1
+
+
 def normalize_origin_herb(herb: str, summary: str, content: str) -> str:
     raw = clean_text(herb)
     if raw.endswith("籽"):
@@ -278,6 +288,13 @@ def choose_best_location(*texts: Any) -> str:
     return max(candidates, key=location_score)
 
 
+def prefer_structured_location(location: Any, *texts: Any) -> str:
+    explicit = normalize_location(location)
+    if explicit:
+        return explicit
+    return choose_best_location(*texts)
+
+
 def extract_price(text: str) -> tuple[str, str]:
     value = clean_text(text)
     if not value:
@@ -368,7 +385,10 @@ def extract_herb_from_text(text: str) -> str:
     return clean_text(match.group(1)) if match else ""
 
 
-def build_yt_url(acid: str) -> str:
+def build_yt_url(acid: str, accode: str = "") -> str:
+    accode_text = clean_text(accode)
+    if accode_text:
+        return f"https://www.yt1998.com/scdt/{accode_text}.html"
     acid_text = clean_text(acid)
     return f"https://www.yt1998.com/marketInfo--{acid_text}.html" if acid_text else ""
 
@@ -388,13 +408,15 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         deduped: list[dict[str, str]] = []
         seen: set[tuple[str, str, str, str, str]] = set()
         for raw in records:
+            if is_invalid_multi_herb_record(raw):
+                continue
             detail_text = clean_text(raw.get("content_full") or raw.get("summary"))
             summary = clean_text(raw.get("summary")) or detail_text
             herb = normalize_origin_herb(raw.get("herb"), summary, detail_text)
             unit = infer_price_unit(detail_text, clean_text(raw.get("unit")) or clean_text(raw.get("price_label")) or "元/kg")
             price_points = rewrite_price_points(raw.get("price_points"), unit)
             unit = select_primary_unit(price_points, unit)
-            location = choose_best_location(raw.get("location"), summary, detail_text)
+            location = prefer_structured_location(raw.get("location"), summary, detail_text)
             item = {
                 "date": clean_text(raw.get("date")),
                 "herb": herb,
@@ -442,7 +464,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         source_text = clean_text(item.get("source"))
         if not is_origin_like(title, source_text):
             continue
-        detail_text = clean_text(item.get("content_full") or item.get("desc"))
+        detail_text = clean_text(item.get("content_full") or item.get("detail") or item.get("desc"))
         today_price, price_label = extract_price(item.get("desc"))
         unit = infer_price_unit(detail_text, price_label)
         price_points = rewrite_price_points(item.get("price_points"), unit)
@@ -461,7 +483,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "delta_amount": "",
                 "delta_rate": "",
                 "source": "药通网",
-                "url": build_yt_url(item.get("acid", "")),
+                "url": clean_text(item.get("url")) or build_yt_url(item.get("acid", ""), item.get("accode", "")),
                 "summary": clean_text(item.get("summary") or detail_text),
                 "published_at": normalize_published_at(item.get("dtm", ""), clean_text(item.get("dtm")).split(" ")[0] or report_date),
                 "content_full": detail_text,
@@ -534,6 +556,8 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
     merged: list[dict[str, Any]] = []
     seen: dict[tuple[str, str, str, str], int] = {}
     for item in new_records + existing_records:
+        if is_invalid_multi_herb_record(item):
+            continue
         record = {
             "date": clean_text(item.get("date")),
             "herb": clean_text(item.get("herb")),
@@ -558,14 +582,14 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
         key = (record["date"], record["herb"], record["source"], record["summary"])
         if key in seen:
             current = merged[seen[key]]
-            current["location"] = choose_best_location(
-                current.get("location", ""),
-                record.get("location", ""),
-                current.get("summary", ""),
-                current.get("content_full", ""),
-                record.get("summary", ""),
-                record.get("content_full", ""),
-            )
+            if not clean_text(current.get("location")):
+                current["location"] = prefer_structured_location(
+                    record.get("location", ""),
+                    current.get("summary", ""),
+                    current.get("content_full", ""),
+                    record.get("summary", ""),
+                    record.get("content_full", ""),
+                )
             if not current.get("url") and record.get("url"):
                 current["url"] = record["url"]
             if not current.get("published_at") and record.get("published_at"):
