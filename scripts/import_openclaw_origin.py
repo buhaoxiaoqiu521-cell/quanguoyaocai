@@ -99,6 +99,8 @@ HERB_PREFIX_RE = re.compile(
     r"^([一-龥A-Za-z0-9·（）()\-]{2,24}?)(?=(?:近阶段|近期|近日|当前|目前|现阶段|现|货源|有商家|有客商|行情|价格|产地|市场|走动|走销|销售|采挖|上市|供应|外销|出售|交易|收购|购进|进入|持续|继续|受|随|因))"
 )
 PLANT_UNIT_CONTEXT_RE = re.compile(r"(每株|每棵|每苗|株价|棵价|苗价)")
+LOCATION_NOISE_RE = re.compile(r"\d{4}年|\d{1,2}月|\d{1,2}日|星期[一二三四五六日天]|今日")
+LOCATION_CONTEXT_NOISE_RE = re.compile(r"寻货|上市|购货|商家|货源|价格|行情|出售|走销|走动|关注|产新|交易|持货|统货")
 
 
 def clean_text(value: Any) -> str:
@@ -106,6 +108,23 @@ def clean_text(value: Any) -> str:
     text = text.replace("\xa0", " ")
     text = re.sub(r"\s+", " ", text)
     return text.strip()
+
+
+def looks_like_compact_location(text: Any) -> bool:
+    value = clean_text(text)
+    if not value:
+        return False
+    if len(value) > 20:
+        return False
+    if re.search(r"[，。；：、“”\"'（）()【】\[\]\d]", value):
+        return False
+    if LOCATION_NOISE_RE.search(value):
+        return False
+    if LOCATION_CONTEXT_NOISE_RE.search(value):
+        return False
+    if any(value.startswith(name) for name in LOCATION_PREFIXES) and len(value) >= 3:
+        return True
+    return 2 <= len(value) <= 8
 
 
 def normalize_price_unit(unit: str) -> str:
@@ -237,7 +256,10 @@ def normalize_location(text: str) -> str:
         return ""
     full_match = FULL_LOCATION_RE.search(raw)
     if full_match:
-        return clean_text(full_match.group(1))
+        candidate = clean_text(full_match.group(1))
+        if LOCATION_NOISE_RE.search(candidate):
+            return ""
+        return candidate
     raw = re.split(r"[，。；：（(: ]", raw, maxsplit=1)[0]
     province = ""
     rest = raw
@@ -261,6 +283,8 @@ def normalize_location(text: str) -> str:
         chosen = clean_text(chosen)
 
     chosen = clean_text(chosen)
+    if LOCATION_NOISE_RE.search(chosen):
+        return ""
     if province and chosen.startswith(province):
         return chosen
     return f"{province}{chosen}" if province else chosen
@@ -269,10 +293,16 @@ def normalize_location(text: str) -> str:
 def location_score(text: str) -> tuple[int, int, int]:
     value = clean_text(text)
     if not value:
-        return (0, 0, 0)
+        return (0, 0, 0, 0, 0)
+    province_only = any(value == alias for _, alias in PROVINCES)
+    compact_non_province = looks_like_compact_location(value) and not province_only and not any(
+        value.startswith(alias) for _, alias in PROVINCES
+    )
     return (
         sum(value.count(token) for token in ("省", "市", "县", "区", "旗", "镇", "乡", "村", "自治州", "地区", "盟", "街道")),
-        1 if any(value.startswith(name) for name in LOCATION_PREFIXES) else 0,
+        1 if any(value.startswith(name) for name in LOCATION_PREFIXES) and not province_only else 0,
+        1 if compact_non_province else 0,
+        0 if province_only else 1,
         len(value),
     )
 
@@ -289,16 +319,33 @@ def choose_best_location(*texts: Any) -> str:
 
 
 def prefer_structured_location(location: Any, *texts: Any) -> str:
-    candidates: list[str] = []
-    explicit = normalize_location(location)
-    if explicit:
-        candidates.append(explicit)
-    inferred = choose_best_location(*texts)
-    if inferred and inferred not in candidates:
-        candidates.append(inferred)
-    if not candidates:
+    def province_alias(value: str) -> str:
+        for _, alias in PROVINCES:
+            if value.startswith(alias):
+                return alias
         return ""
-    return max(candidates, key=location_score)
+
+    raw_explicit = clean_text(location)
+    explicit = normalize_location(location)
+    inferred = choose_best_location(*texts)
+    explicit_candidates = [value for value in [raw_explicit if looks_like_compact_location(raw_explicit) else "", explicit] if value]
+    if not explicit_candidates and not inferred:
+        return ""
+    best_explicit = max(explicit_candidates, key=location_score) if explicit_candidates else ""
+    if not inferred:
+        return best_explicit
+    if not best_explicit:
+        return inferred
+    explicit_score = location_score(best_explicit)
+    inferred_score = location_score(inferred)
+    if looks_like_compact_location(best_explicit) and not province_alias(best_explicit):
+        return best_explicit
+    explicit_province = province_alias(best_explicit)
+    inferred_province = province_alias(inferred)
+    same_scope = not explicit_province or not inferred_province or explicit_province == inferred_province
+    if inferred_score > explicit_score and same_scope:
+        return inferred
+    return best_explicit
 
 
 def extract_price(text: str) -> tuple[str, str]:
@@ -559,6 +606,10 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
 
 
 def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    def province_only(value: Any) -> bool:
+        text = clean_text(value)
+        return any(text == alias for _, alias in PROVINCES)
+
     merged: list[dict[str, Any]] = []
     seen: dict[tuple[str, str, str, str], int] = {}
     for item in new_records + existing_records:
@@ -592,23 +643,22 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
         key = (record["date"], record["herb"], record["source"], record["summary"])
         if key in seen:
             current = merged[seen[key]]
-            candidate_location = prefer_structured_location(
-                record.get("location", ""),
-                current.get("summary", ""),
-                current.get("content_full", ""),
-                record.get("summary", ""),
-                record.get("content_full", ""),
-            )
-            if candidate_location and location_score(candidate_location) > location_score(current.get("location", "")):
-                current["location"] = candidate_location
-            elif not clean_text(current.get("location")):
-                current["location"] = prefer_structured_location(
-                    record.get("location", ""),
-                    current.get("summary", ""),
-                    current.get("content_full", ""),
-                    record.get("summary", ""),
-                    record.get("content_full", ""),
-                )
+            current_location = clean_text(current.get("location"))
+            record_location = clean_text(record.get("location"))
+            if not current_location and record_location:
+                current["location"] = record_location
+            elif record_location:
+                current_noise = LOCATION_NOISE_RE.search(current_location) or LOCATION_CONTEXT_NOISE_RE.search(current_location)
+                record_noise = LOCATION_NOISE_RE.search(record_location) or LOCATION_CONTEXT_NOISE_RE.search(record_location)
+                if current_noise and not record_noise:
+                    current["location"] = record_location
+                elif province_only(current_location) and not province_only(record_location):
+                    current["location"] = record_location
+                elif (
+                    location_score(record_location) > location_score(current_location)
+                    and not looks_like_compact_location(current_location)
+                ):
+                    current["location"] = record_location
             if not current.get("url") and record.get("url"):
                 current["url"] = record["url"]
             if not current.get("published_at") and record.get("published_at"):
@@ -631,7 +681,51 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
         ),
         reverse=True,
     )
-    return merged
+    def location_prefix(text: Any) -> str:
+        value = clean_text(text)
+        for _, alias in PROVINCES:
+            if value.startswith(alias):
+                return alias
+        return ""
+
+    def record_quality(item: dict[str, Any]) -> tuple[int, int, int, int]:
+        url = clean_text(item.get("url"))
+        summary = clean_text(item.get("summary"))
+        return (
+            1 if "/scdt/" in url else 0,
+            location_score(item.get("location", ""))[0] + location_score(item.get("location", ""))[1],
+            len(summary),
+            len(clean_text(item.get("location", ""))),
+        )
+
+    cleaned: list[dict[str, Any]] = []
+    for item in merged:
+        duplicate_index = -1
+        item_summary = clean_text(item.get("summary"))
+        item_prefix = location_prefix(item.get("location", ""))
+        for idx, current in enumerate(cleaned):
+            if clean_text(current.get("date")) != clean_text(item.get("date")):
+                continue
+            if clean_text(current.get("herb")) != clean_text(item.get("herb")):
+                continue
+            if clean_text(current.get("source")) != clean_text(item.get("source")):
+                continue
+            current_prefix = location_prefix(current.get("location", ""))
+            if item_prefix and current_prefix and item_prefix != current_prefix:
+                continue
+            current_summary = clean_text(current.get("summary"))
+            if not item_summary or not current_summary:
+                continue
+            if item_summary in current_summary or current_summary in item_summary:
+                duplicate_index = idx
+                break
+        if duplicate_index < 0:
+            cleaned.append(item)
+            continue
+        current = cleaned[duplicate_index]
+        if record_quality(item) > record_quality(current):
+            cleaned[duplicate_index] = item
+    return cleaned
 
 
 def main() -> None:
