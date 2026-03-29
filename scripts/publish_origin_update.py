@@ -49,6 +49,7 @@ def main() -> None:
         "public/data/origin-search-index.json",
         "public/data/market-search-index.json",
         "public/data/hotspot-search-index.json",
+        "public/data/unit-audit.json",
     ]
 
     import_cmd = [

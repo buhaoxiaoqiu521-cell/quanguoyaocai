@@ -48,6 +48,7 @@ def main() -> None:
         "public/data/origin-search-index.json",
         "public/data/market-search-index.json",
         "public/data/hotspot-search-index.json",
+        "public/data/unit-audit.json",
     ]
 
     run([sys.executable, str(hotspot_fetcher), "--limit", str(args.limit)], cwd=root)

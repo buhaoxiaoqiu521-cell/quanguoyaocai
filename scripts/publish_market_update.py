@@ -48,6 +48,7 @@ def main() -> None:
         "public/data/origin-search-index.json",
         "public/data/market-search-index.json",
         "public/data/hotspot-search-index.json",
+        "public/data/unit-audit.json",
     ]
 
     market_cmd = [sys.executable, str(market_fetcher)]
