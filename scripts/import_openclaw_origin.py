@@ -76,9 +76,16 @@ PROVINCES: list[tuple[str, str]] = [
     ("新疆", "新疆"),
     ("西藏", "西藏"),
 ]
+LOCATION_PREFIXES = sorted({full for full, _ in PROVINCES} | {alias for _, alias in PROVINCES}, key=len, reverse=True)
 
 LOCATION_TOKEN_RE = re.compile(
     r"([一-龥]{1,12}?)(?:自治州|特别行政区|自治区|地区|药市|市场|口岸|办事处|省|市|县|区|旗|盟|州|镇|乡|村)"
+)
+FULL_LOCATION_RE = re.compile(
+    rf"((?:{'|'.join(re.escape(name) for name in LOCATION_PREFIXES)})"
+    r"(?:[一-龥]{1,12}?(?:自治州|特别行政区|自治区|地区|盟|州|市))?"
+    r"(?:[一-龥]{1,12}?(?:县|区|旗|市))?"
+    r"(?:[一-龥]{1,12}?(?:镇|乡|街道|村))?)"
 )
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 PRICE_RANGE_RE = re.compile(
@@ -218,6 +225,9 @@ def normalize_location(text: str) -> str:
     raw = clean_text(text)
     if not raw:
         return ""
+    full_match = FULL_LOCATION_RE.search(raw)
+    if full_match:
+        return clean_text(full_match.group(1))
     raw = re.split(r"[，。；：（(: ]", raw, maxsplit=1)[0]
     province = ""
     rest = raw
@@ -244,6 +254,28 @@ def normalize_location(text: str) -> str:
     if province and chosen.startswith(province):
         return chosen
     return f"{province}{chosen}" if province else chosen
+
+
+def location_score(text: str) -> tuple[int, int, int]:
+    value = clean_text(text)
+    if not value:
+        return (0, 0, 0)
+    return (
+        sum(value.count(token) for token in ("省", "市", "县", "区", "旗", "镇", "乡", "村", "自治州", "地区", "盟", "街道")),
+        1 if any(value.startswith(name) for name in LOCATION_PREFIXES) else 0,
+        len(value),
+    )
+
+
+def choose_best_location(*texts: Any) -> str:
+    candidates: list[str] = []
+    for raw in texts:
+        normalized = normalize_location(raw)
+        if normalized and normalized not in candidates:
+            candidates.append(normalized)
+    if not candidates:
+        return ""
+    return max(candidates, key=location_score)
 
 
 def extract_price(text: str) -> tuple[str, str]:
@@ -362,13 +394,14 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
             unit = infer_price_unit(detail_text, clean_text(raw.get("unit")) or clean_text(raw.get("price_label")) or "元/kg")
             price_points = rewrite_price_points(raw.get("price_points"), unit)
             unit = select_primary_unit(price_points, unit)
+            location = choose_best_location(raw.get("location"), summary, detail_text)
             item = {
                 "date": clean_text(raw.get("date")),
                 "herb": herb,
                 "spec": clean_text(raw.get("spec")) or "产地快讯",
                 "unit": unit,
                 "market": clean_text(raw.get("market")) or "产地",
-                "location": clean_text(raw.get("location")),
+                "location": location,
                 "today_price": clean_text(raw.get("today_price")),
                 "yesterday_price": clean_text(raw.get("yesterday_price")),
                 "delta_amount": clean_text(raw.get("delta_amount")),
@@ -414,6 +447,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         unit = infer_price_unit(detail_text, price_label)
         price_points = rewrite_price_points(item.get("price_points"), unit)
         unit = select_primary_unit(price_points, unit)
+        location = choose_best_location(source_text, title, clean_text(item.get("summary")), detail_text)
         records.append(
             {
                 "date": clean_text(item.get("dtm")).split(" ")[0] or report_date,
@@ -421,7 +455,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "spec": "产地快讯",
                 "unit": unit,
                 "market": "产地",
-                "location": normalize_location(source_text or title),
+                "location": location,
                 "today_price": today_price,
                 "yesterday_price": "",
                 "delta_amount": "",
@@ -447,6 +481,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         unit = infer_price_unit(detail_text, price_label)
         price_points = rewrite_price_points(item.get("price_points"), unit)
         unit = select_primary_unit(price_points, unit)
+        location = choose_best_location(title, clean_text(item.get("summary")), detail_text)
         records.append(
             {
                 "date": extract_date_from_time_text(item.get("time_text", ""), report_date),
@@ -454,7 +489,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "spec": "产地快讯",
                 "unit": unit,
                 "market": "产地",
-                "location": normalize_location(title),
+                "location": location,
                 "today_price": today_price,
                 "yesterday_price": "",
                 "delta_amount": "",
@@ -497,7 +532,7 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
 
 def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     merged: list[dict[str, Any]] = []
-    seen: set[tuple[str, str, str, str, str]] = set()
+    seen: dict[tuple[str, str, str, str], int] = {}
     for item in new_records + existing_records:
         record = {
             "date": clean_text(item.get("date")),
@@ -520,10 +555,29 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
         }
         if not record["date"] or not record["herb"] or not record["summary"]:
             continue
-        key = (record["date"], record["herb"], record["location"], record["source"], record["summary"])
+        key = (record["date"], record["herb"], record["source"], record["summary"])
         if key in seen:
+            current = merged[seen[key]]
+            current["location"] = choose_best_location(
+                current.get("location", ""),
+                record.get("location", ""),
+                current.get("summary", ""),
+                current.get("content_full", ""),
+                record.get("summary", ""),
+                record.get("content_full", ""),
+            )
+            if not current.get("url") and record.get("url"):
+                current["url"] = record["url"]
+            if not current.get("published_at") and record.get("published_at"):
+                current["published_at"] = record["published_at"]
+            if not current.get("price_label") and record.get("price_label"):
+                current["price_label"] = record["price_label"]
+            if not current.get("price_points") and record.get("price_points"):
+                current["price_points"] = record["price_points"]
+            if current.get("unit") == "元/kg" and record.get("unit") and record.get("unit") != "元/kg":
+                current["unit"] = record["unit"]
             continue
-        seen.add(key)
+        seen[key] = len(merged)
         merged.append(record)
     merged.sort(
         key=lambda item: (

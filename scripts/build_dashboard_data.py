@@ -241,6 +241,87 @@ def collect_point_units(price_points: list[dict[str, Any]]) -> list[str]:
     return units
 
 
+def explicit_units_in_text(text: str) -> list[str]:
+    units: list[str] = []
+    value = clean_text(text)
+    if not value:
+        return units
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*条", value):
+        units.append("元/条")
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*单斤", value):
+        units.append("元/单斤")
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:市斤|斤)", value):
+        units.append("元/斤")
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:株|棵|苗)", value):
+        units.append("元/株")
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:kg|KG|公斤|千克)", value):
+        units.append("元/kg")
+    return units
+
+
+def build_unit_audit(items: list[dict[str, Any]]) -> dict[str, Any]:
+    issues: list[dict[str, Any]] = []
+    for item in items:
+        summary = clean_text(item.get("summary"))
+        content = clean_text(item.get("content_full"))
+        text = f"{summary} {content}".strip()
+        point_units = collect_point_units(item.get("price_points") or [])
+        explicit_units = explicit_units_in_text(text)
+        top_unit = normalize_price_unit(item.get("unit", ""))
+
+        if len(point_units) > 1:
+            issues.append(
+                {
+                    "type": "mixed_units",
+                    "level": "review",
+                    "date": item.get("date", ""),
+                    "herb": item.get("herb", ""),
+                    "location": item.get("location", ""),
+                    "top_unit": top_unit,
+                    "point_units": point_units,
+                    "message": "同一条记录同时包含多种计价单位，已保留 price_points 单位，但建议人工复核。",
+                }
+            )
+
+        missing_explicit = [unit for unit in explicit_units if unit not in point_units]
+        if missing_explicit:
+            issues.append(
+                {
+                    "type": "unresolved_explicit_unit",
+                    "level": "review",
+                    "date": item.get("date", ""),
+                    "herb": item.get("herb", ""),
+                    "location": item.get("location", ""),
+                    "top_unit": top_unit,
+                    "point_units": point_units,
+                    "text_units": missing_explicit,
+                    "message": "正文里出现了显式单位，但价格点未完整覆盖，建议人工复核。",
+                }
+            )
+
+        if point_units and len(point_units) == 1 and top_unit != point_units[0]:
+            issues.append(
+                {
+                    "type": "top_level_unit_mismatch",
+                    "level": "review",
+                    "date": item.get("date", ""),
+                    "herb": item.get("herb", ""),
+                    "location": item.get("location", ""),
+                    "top_unit": top_unit,
+                    "point_units": point_units,
+                    "message": "顶层单位与唯一报价点单位不一致，建议人工复核。",
+                }
+            )
+
+    return {
+        "meta": {
+            "total": len(issues),
+            "review_count": sum(1 for issue in issues if issue["level"] == "review"),
+        },
+        "items": issues,
+    }
+
+
 def normalize_source_url(source: str, url: str) -> str:
     source_text = clean_text(source)
     url_text = clean_text(url)
@@ -1571,6 +1652,11 @@ def main() -> None:
         help="输出行业热点历史检索索引 JSON 的路径",
     )
     parser.add_argument(
+        "--unit-audit-output",
+        default="public/data/unit-audit.json",
+        help="输出单位审计清单 JSON 的路径，收集需人工复核的单位记录",
+    )
+    parser.add_argument(
         "--openclaw-origin",
         default="content/openclaw_origin.json",
         help="OpenClaw 产地 JSON 文件路径；存在时会自动并入产地行情",
@@ -1608,6 +1694,7 @@ def main() -> None:
     origin_search_index_path = Path(args.origin_search_index_output).expanduser().resolve()
     market_search_index_path = Path(args.market_search_index_output).expanduser().resolve()
     hotspot_search_index_path = Path(args.hotspot_search_index_output).expanduser().resolve()
+    unit_audit_path = Path(args.unit_audit_output).expanduser().resolve()
 
     records = load_workbook_rows(source_path) if source_path else []
     if args.exclude_workbook_origin:
@@ -1627,8 +1714,9 @@ def main() -> None:
     source_label = " + ".join(source_parts) if source_parts else "无输入文件"
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     dashboard = build_dashboard(records, source_label, hotspot_path if hotspot_path.exists() else None, generated_at)
+    merged_origin_items = merge_origin_items([to_origin_item(record) for record in records if record.market == "产地"])
     origin_search_index = build_origin_search_index(
-        merge_origin_items([to_origin_item(record) for record in records if record.market == "产地"]),
+        merged_origin_items,
         generated_at,
     )
     market_search_index = build_market_search_index(
@@ -1639,20 +1727,24 @@ def main() -> None:
         build_hotspot_items(hotspot_path if hotspot_path.exists() else None),
         generated_at,
     )
+    unit_audit = build_unit_audit(merged_origin_items)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     origin_search_index_path.parent.mkdir(parents=True, exist_ok=True)
     market_search_index_path.parent.mkdir(parents=True, exist_ok=True)
     hotspot_search_index_path.parent.mkdir(parents=True, exist_ok=True)
+    unit_audit_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(dashboard, ensure_ascii=False, indent=2), encoding="utf-8")
     origin_search_index_path.write_text(json.dumps(origin_search_index, ensure_ascii=False, indent=2), encoding="utf-8")
     market_search_index_path.write_text(json.dumps(market_search_index, ensure_ascii=False, indent=2), encoding="utf-8")
     hotspot_search_index_path.write_text(json.dumps(hotspot_search_index, ensure_ascii=False, indent=2), encoding="utf-8")
+    unit_audit_path.write_text(json.dumps(unit_audit, ensure_ascii=False, indent=2), encoding="utf-8")
     print(
         f"Wrote {output_path} with {len(records)} records. "
         f"Search indexes: origin={origin_search_index['meta']['total']}, "
         f"market={market_search_index['meta']['total']}, "
-        f"hotspot={hotspot_search_index['meta']['total']}."
+        f"hotspot={hotspot_search_index['meta']['total']}. "
+        f"Unit audit review items={unit_audit['meta']['review_count']}."
     )
 
 
