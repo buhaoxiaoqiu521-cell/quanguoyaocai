@@ -30,19 +30,22 @@ REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}i
 YT_QUERY_URL = "https://www.yt1998.com/ytw/second/marketMgr/query.jsp"
 YT_HEADERS = {"User-Agent": "Mozilla/5.0"}
 PRICE_RANGE_RE = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到|一|—|－)\s*(\d+(?:\.\d+)?)\s*(?:元|块)\s*(?:(?:/|每)?\s*(kg|KG|公斤|千克|市斤|斤|条))?(?:左右|上下|之间)?"
+    r"(\d+(?:\.\d+)?)\s*(?:-|~|～|至|到|一|—|－)\s*(\d+(?:\.\d+)?)\s*(?:元|块)\s*(?:(?:/|每)?\s*(kg|KG|公斤|千克|单斤|市斤|斤|条))?(?:左右|上下|之间)?"
 )
 PRICE_SINGLE_RE = re.compile(
-    r"(\d+(?:\.\d+)?)\s*(?:元|块)\s*(?:(?:/|每)?\s*(kg|KG|公斤|千克|市斤|斤|条))?(?:左右|上下|之间)?"
+    r"(\d+(?:\.\d+)?)\s*(?:元|块)\s*(?:(?:/|每)?\s*(kg|KG|公斤|千克|单斤|市斤|斤|条))?(?:左右|上下|之间)?"
 )
 CLAUSE_SPLIT_RE = re.compile(r"[；;。]")
 PHRASE_SPLIT_RE = re.compile(r"[，,]")
-PRICE_SUFFIX_RE = re.compile(r"(售价为|收购价格?|收购价|售价|售价格?|要价|多要|少要|要|价格维持在|价格维持|价格为|价格在|价格|价在|价位在|价位|报价在|报价|成交价|货价)$")
-PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现)")
+PRICE_SUFFIX_RE = re.compile(r"(售价为|收购价格?|收购价|售价|售价格?|要价|多要|少要|要|价格维持在|价格维持|价格为|价格在|价格|价在|价位在|价位|报价在|报价|成交价位|成交价|货价)$")
+PRICE_PREFIX_RE = re.compile(r"^(现阶段|近阶段|目前|当前|现|近两日|进两日|近几日|进几日|近日|近来)")
 INVALID_PRICE_LABEL_RE = re.compile(
-    r"(回调|上调|下调|上涨|下滑|下降|下跌|反弹|略跌|显跌|显滑|相比昨日|较昨日|交易走势|上市量|成交约|气温|天气|湿度|体感|能见度|空气质量|浏览|评论|作者|分享|昨前天|昨天|前日)"
+    r"(回调|上调|下调|上涨|涨价|涨幅|价涨|上扬|略涨|小涨|回升|继续回升|下滑|下降|下跌|反弹|略跌|显跌|显滑|相比昨日|相对昨日|较昨日|昨日成交|昨日|昨天|前日|昨前天|交易走势|上市量|成交约|气温|天气|湿度|体感|能见度|空气质量|浏览|评论|作者|分享)"
 )
-GENERIC_PRICE_LABEL_RE = re.compile(r"^(近期|目前|当前|现阶段|近阶段|现|价格|售价|货价|近期价格|当前价格|目前价格|本地|产地|现货|新货)$")
+GENERIC_PRICE_LABEL_RE = re.compile(r"^(近期|目前|当前|现阶段|近阶段|现|价格|售价|货价|近期价格|当前价格|目前价格|本地|产地|现货|新货|成交行情|成交价位|成交)$")
+PRICE_UNIT_TOKEN_RE = re.compile(r"(?:/|每)\s*(单斤|市斤|斤|kg|KG|公斤|千克|条|株|棵|苗)")
+PLANT_UNIT_CONTEXT_RE = re.compile(r"(每株|每棵|每苗|株价|棵价|苗价)")
+RANGE_FALLBACK_UNIT_LABEL_RE = re.compile(r"(公分|厘米|cm|CM|号|头|尾|节)$")
 CHANGE_ONLY_PRICE_RE = re.compile(
     r"(?:(?:价格|行情)(?:相比昨日|较昨日)?|相比昨日|较昨日)?(?:回调|上调|下调|上涨|下滑|下降|下跌|反弹)"
     r"\s*\d+(?:\.\d+)?(?:\s*(?:-|~|至|到)\s*\d+(?:\.\d+)?)?\s*(?:元|块)"
@@ -85,6 +88,7 @@ class WorkbookRecord:
     source: str
     url: str
     summary: str
+    published_at: str = ""
     content_full: str = ""
     price_label: str = ""
     price_points: list[dict[str, str]] | None = None
@@ -129,15 +133,23 @@ def normalize_price_unit(unit: str) -> str:
         return "元/kg"
     if text in {"元/kg", "kg", "公斤", "千克", "元/公斤", "元/千克"}:
         return "元/kg"
+    if text in {"单斤", "元/单斤"}:
+        return "元/单斤"
     if text in {"斤", "市斤", "元/斤", "元/市斤"}:
         return "元/斤"
     if text in {"条", "元/条"}:
         return "元/条"
+    if text in {"株", "棵", "苗", "元/株", "元/棵", "元/苗"}:
+        return "元/株"
     return clean_text(unit) or "元/kg"
 
 
 def infer_price_unit(text: str, fallback: str = "元/kg") -> str:
     value = clean_text(text)
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:株|棵|苗)", value) or PLANT_UNIT_CONTEXT_RE.search(value):
+        return "元/株"
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*单斤", value):
+        return "元/单斤"
     if re.search(r"(?:元|块)\s*(?:/|每)?\s*条", value):
         return "元/条"
     if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:市斤|斤)", value):
@@ -145,6 +157,19 @@ def infer_price_unit(text: str, fallback: str = "元/kg") -> str:
     if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:kg|KG|公斤|千克)", value):
         return "元/kg"
     return normalize_price_unit(fallback)
+
+
+def infer_context_price_unit(*texts: str) -> str:
+    for raw in texts:
+        value = clean_text(raw)
+        if not value:
+            continue
+        token_match = PRICE_UNIT_TOKEN_RE.search(value)
+        if token_match:
+            return normalize_price_unit(token_match.group(1))
+        if PLANT_UNIT_CONTEXT_RE.search(value):
+            return "元/株"
+    return ""
 
 
 def rewrite_price_unit(price: str, preferred_unit: str) -> str:
@@ -160,6 +185,60 @@ def rewrite_price_unit(price: str, preferred_unit: str) -> str:
     if any(sep in text for sep in ("-", "~", "至", "到")) and len(numbers) >= 2:
         return f"{numbers[0]}-{numbers[1]} {unit_text}"
     return f"{numbers[0]} {unit_text}"
+
+
+def enrich_price_point(label: str, price: str) -> dict[str, Any]:
+    payload: dict[str, Any] = {"label": label, "price": price}
+    unit = infer_context_price_unit(price)
+    if unit:
+        payload["unit"] = unit
+    numbers = [parse_number(match) for match in re.findall(r"\d+(?:\.\d+)?", price)]
+    numbers = [value for value in numbers if value is not None]
+    if numbers:
+        payload["price_min"] = numbers[0]
+        payload["price_max"] = numbers[1] if len(numbers) >= 2 else numbers[0]
+    return payload
+
+
+def point_unit(point: dict[str, Any]) -> str:
+    unit = normalize_price_unit(point.get("unit", ""))
+    if unit != "元/kg" or clean_text(point.get("unit", "")):
+        return unit
+    return infer_context_price_unit(point.get("price", ""))
+
+
+def select_primary_unit(price_points: list[dict[str, Any]], fallback: str = "元/kg") -> str:
+    weighted: dict[str, int] = {}
+    first_unit = ""
+    for point in price_points:
+        unit = point_unit(point)
+        if not unit:
+            continue
+        if not first_unit:
+            first_unit = unit
+        label = clean_text(point.get("label"))
+        weight = 1
+        if label in GENERIC_PRICE_LABELS:
+            weight += 4
+        if "主流" in label:
+            weight += 3
+        if "整体" in label:
+            weight += 2
+        if "统货" in label:
+            weight += 1
+        weighted[unit] = weighted.get(unit, 0) + weight
+    if weighted:
+        return max(weighted.items(), key=lambda item: (item[1], 1 if item[0] == first_unit else 0))[0]
+    return normalize_price_unit(fallback)
+
+
+def collect_point_units(price_points: list[dict[str, Any]]) -> list[str]:
+    units: list[str] = []
+    for point in price_points:
+        unit = point_unit(point)
+        if unit and unit not in units:
+            units.append(unit)
+    return units
 
 
 def normalize_source_url(source: str, url: str) -> str:
@@ -178,22 +257,52 @@ def normalize_lookup_text(value: Any) -> str:
     return re.sub(r"[^\w\u4e00-\u9fff]+", "", text)
 
 
+def clean_price_label_noise(text: str) -> str:
+    label = clean_text(text)
+    label = re.sub(r"^(?:近|进)两日", "", label)
+    label = re.sub(r"^(?:近|进)几日", "", label)
+    label = re.sub(r"^(?:近日|近来)", "", label)
+    label = re.sub(
+        r"([一-龥A-Za-z0-9%./+\-]{0,32}(?:统货|水洗统货|药厂货|鲜货|鲜果|鲜麦冬|干麦冬))在$",
+        r"\1",
+        label,
+    )
+    label = re.sub(
+        r"([一-龥A-Za-z0-9%./+\-]{0,32}(?:统货|水洗统货|药厂货|鲜货|鲜果|鲜麦冬|干麦冬))目前$",
+        r"\1",
+        label,
+    )
+    return clean_text(label)
+
+
 def clean_price_point_label(text: str) -> str:
     label = clean_text(text)
+    label = re.sub(r"^[（(【\[]+", "", label)
+    label = re.sub(r"[（(【\[]+$", "", label)
+    label = re.sub(r"[）)】\]]+$", "", label)
+    label = re.sub(r"^(?:今日产地行情|今日行情|市场成交亮点是|市场成交亮点)[，,：:]?", "", label)
+    label = re.sub(r"(成交价位|成交价|价位|价格|报价|售价)元$", r"\1", label)
     label = PRICE_PREFIX_RE.sub("", label)
     label = PRICE_SUFFIX_RE.sub("", label)
+    label = re.sub(r"[（(【\[]+$", "", label)
     label = re.sub(r"[：:、，,；;。]+$", "", label)
-    label = clean_text(label)
+    label = clean_price_label_noise(label)
     return label or "主流货"
 
 
 def normalize_price_point_label(text: str) -> str:
     label = clean_text(text)
     label = LIST_MARKER_RE.sub("", label)
+    label = re.sub(r"^[（(【\[]+", "", label)
+    label = re.sub(r"[（(【\[]+$", "", label)
+    label = re.sub(r"[）)】\]]+$", "", label)
+    label = re.sub(r"^(?:今日产地行情|今日行情|市场成交亮点是|市场成交亮点)[，,：:]?", "", label)
+    label = re.sub(r"(成交价位|成交价|价位|价格|报价|售价)元$", r"\1", label)
     label = PRICE_PREFIX_RE.sub("", label)
     label = PRICE_SUFFIX_RE.sub("", label)
+    label = re.sub(r"[（(【\[]+$", "", label)
     label = re.sub(r"[：:、，,；;。]+$", "", label)
-    label = clean_text(label)
+    label = clean_price_label_noise(label)
     if not label:
         return "主流报价"
     if INVALID_PRICE_LABEL_RE.search(label):
@@ -269,15 +378,19 @@ def refine_price_point_label(label: str) -> str:
 
 def infer_contextual_price_label(part: str, segment: str, clause: str, price: str) -> str:
     price_text = clean_text(price)
-    if "元/斤" not in price_text:
-        return ""
     context = " ".join(clean_text(value) for value in (part, segment, clause) if clean_text(value))
     if not context:
         return ""
-    if "鲜果" in context:
-        return "鲜果"
-    if re.search(r"鲜货|鲜品|鲜果价|鲜果行情|鲜果售价|鲜果收购|鲜麦冬|鲜草|鲜条|鲜个子|鲜药", context):
-        return "鲜货"
+    if "元/斤" in price_text:
+        if "鲜果" in context:
+            return "鲜果"
+        if re.search(r"鲜货|鲜品|鲜果价|鲜果行情|鲜果售价|鲜果收购|鲜麦冬|鲜草|鲜条|鲜个子|鲜药", context):
+            return "鲜货"
+        return ""
+    if re.search(r"(?:市场)?成交主力|主力货", context):
+        return "主流报价"
+    if re.search(r"统货整体(?:成交价位|成交价|成交|价位|价格)?", context):
+        return "统货整体"
     return ""
 
 
@@ -292,12 +405,15 @@ def extract_price_points(text: str) -> list[dict[str, str]]:
 
     points: list[dict[str, str]] = []
     seen: set[tuple[str, str]] = set()
+    recent_explicit_unit = ""
     for clause in CLAUSE_SPLIT_RE.split(value):
         clause = clean_text(clause)
         if not clause:
             continue
+        clause_hint = infer_context_price_unit(clause)
         segments = [clean_text(segment) for segment in ENUMERATION_SPLIT_RE.split(clause) if clean_text(segment)] or [clause]
         for segment in segments:
+            segment_hint = infer_context_price_unit(segment) or clause_hint
             parts = [clean_text(part) for part in PHRASE_SPLIT_RE.split(segment) if clean_text(part)]
             candidates = [segment] + [part for part in parts if part != segment]
             for part in candidates:
@@ -306,6 +422,9 @@ def extract_price_points(text: str) -> list[dict[str, str]]:
                 match = range_match or single_match
                 if not match:
                     continue
+                trailer = clean_text(part[match.end() : match.end() + 4])
+                if trailer.startswith(("以上", "以下")):
+                    continue
                 if "斤" in part[match.end() : match.end() + 4]:
                     continue
                 label = normalize_price_point_label(part[:match.start()])
@@ -313,18 +432,39 @@ def extract_price_points(text: str) -> list[dict[str, str]]:
                     continue
                 if range_match:
                     start, end, unit_token = range_match.groups()
-                    price = f"{start}-{end} {normalize_price_unit(unit_token)}"
+                    explicit_unit = normalize_price_unit(unit_token) if clean_text(unit_token) else ""
+                    resolved_unit = (
+                        explicit_unit
+                        or infer_context_price_unit(label, part[:match.start()], part[max(0, match.start() - 16): match.start()])
+                        or segment_hint
+                        or recent_explicit_unit
+                        or ("元/条" if RANGE_FALLBACK_UNIT_LABEL_RE.search(label) and recent_explicit_unit == "元/条" else "")
+                        or "元/kg"
+                    )
+                    price = f"{start}-{end} {resolved_unit}"
                 else:
-                    price = f"{single_match.group(1)} {normalize_price_unit(single_match.group(2))}"
-                if label in GENERIC_PRICE_LABELS:
-                    contextual_label = infer_contextual_price_label(part, segment, clause, price)
-                    if contextual_label:
-                        label = contextual_label
+                    explicit_unit = normalize_price_unit(single_match.group(2)) if clean_text(single_match.group(2)) else ""
+                    resolved_unit = (
+                        explicit_unit
+                        or infer_context_price_unit(label, part[:match.start()], part[max(0, match.start() - 16): match.start()])
+                        or segment_hint
+                        or recent_explicit_unit
+                        or ("元/条" if RANGE_FALLBACK_UNIT_LABEL_RE.search(label) and recent_explicit_unit == "元/条" else "")
+                        or "元/kg"
+                    )
+                    price = f"{single_match.group(1)} {resolved_unit}"
+                if explicit_unit:
+                    recent_explicit_unit = explicit_unit
+                elif resolved_unit in {"元/条", "元/株", "元/单斤", "元/斤"}:
+                    recent_explicit_unit = resolved_unit
+                contextual_label = infer_contextual_price_label(part, segment, clause, price)
+                if contextual_label and (label in GENERIC_PRICE_LABELS or label == contextual_label or not label):
+                    label = contextual_label
                 key = (label, price)
                 if key in seen:
                     continue
                 seen.add(key)
-                points.append({"label": label, "price": price})
+                points.append(enrich_price_point(label, price))
     return points
 
 
@@ -339,13 +479,13 @@ def normalize_price_points(value: Any) -> list[dict[str, str]]:
         price = clean_text(raw.get("price") or raw.get("value"))
         if not label or not price:
             continue
-        points.append({"label": label, "price": price})
+        points.append(enrich_price_point(label, price))
     return points
 
 
 def normalize_price_points_with_unit(value: Any, preferred_unit: str) -> list[dict[str, str]]:
     points = normalize_price_points(value)
-    if preferred_unit != "元/条":
+    if preferred_unit == "元/kg":
         return points
     normalized: list[dict[str, str]] = []
     for point in points:
@@ -353,10 +493,7 @@ def normalize_price_points_with_unit(value: Any, preferred_unit: str) -> list[di
         if not current_price:
             continue
         normalized.append(
-            {
-                "label": point["label"],
-                "price": rewrite_price_unit(current_price, preferred_unit),
-            }
+            enrich_price_point(point["label"], rewrite_price_unit(current_price, preferred_unit))
         )
     return normalized
 
@@ -500,7 +637,29 @@ def merge_price_points(points: list[dict[str, str]]) -> list[dict[str, str]]:
         if not remaining_parts:
             continue
         filtered_rows.append({"label": row["label"], "price": " / ".join(remaining_parts)})
-    return filtered_rows
+
+    normalized_rows: list[dict[str, str]] = []
+    for idx, row in enumerate(filtered_rows):
+        label = row["label"]
+        if label == "统货":
+            prev_label = filtered_rows[idx - 1]["label"] if idx > 0 else ""
+            next_label = filtered_rows[idx + 1]["label"] if idx + 1 < len(filtered_rows) else ""
+            if prev_label in {"中等统货", "中等略偏下统货", "中等偏下统货"} and next_label in {"优质上等统货", "上等统货"}:
+                label = "中等偏上统货"
+        normalized_rows.append({"label": label, "price": row["price"]})
+
+    final_rows: list[dict[str, str]] = []
+    for row in normalized_rows:
+        for current in final_rows:
+            if current["label"] != row["label"]:
+                continue
+            if current["price"] == row["price"]:
+                break
+            current["price"] = prefer_price(current["price"], row["price"])
+            break
+        else:
+            final_rows.append(row)
+    return [enrich_price_point(row["label"], row["price"]) for row in final_rows]
 
 
 def build_item_price_points(item: dict[str, Any]) -> list[dict[str, str]]:
@@ -575,20 +734,26 @@ def locations_match(item: dict[str, Any], group_items: list[dict[str, Any]]) -> 
 
 
 def merged_origin_location(items: list[dict[str, Any]]) -> str:
-    province = ""
-    tails: list[str] = []
+    best_location = ""
+    best_score: tuple[int, int, int, int, int] = (-1, -1, -1, -1, -1)
     for item in items:
         location = clean_text(item.get("location"))
-        current_province = detect_province(location)
-        if not province and current_province:
-            province = current_province
-        tail = primary_location_token(location)
-        if tail and tail not in PROVINCE_PREFIXES and not is_noise_location_text(tail) and tail not in tails:
-            tails.append(tail)
-    if province and tails:
-        return province + "/".join(tails[:2])
-    if province:
-        return province
+        if not location:
+            continue
+        tokens = [token for token in location_keywords(location) if token not in PROVINCE_PREFIXES]
+        primary = primary_location_token(location)
+        score = (
+            1 if detect_province(location) else 0,
+            len(tokens),
+            1 if primary and primary not in PROVINCE_PREFIXES and not is_noise_location_text(primary) else 0,
+            len(normalize_lookup_text(location)),
+            len(location),
+        )
+        if score > best_score:
+            best_score = score
+            best_location = location
+    if best_location:
+        return best_location
     return clean_text(items[0].get("location")) if items else ""
 
 
@@ -630,15 +795,22 @@ def merge_origin_items(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if source not in source_links or score > source_links[source][0]:
                 source_links[source] = (score, url)
 
+        merged_unit = select_primary_unit(price_points, primary.get("unit", "元/kg"))
+        price_units = collect_point_units(price_points)
         merged = {
             "date": primary.get("date", ""),
+            "published_at": max(
+                (clean_text(entry.get("published_at")) for entry in sorted_group),
+                key=lambda value: datetime_key(value, primary.get("date", "")),
+                default="",
+            ),
             "herb": primary.get("herb", ""),
             "spec": "",
             "location": merged_origin_location(sorted_group) or primary.get("location", ""),
             "market": "产地",
             "price": price_points[0]["price"] if len(price_points) == 1 else "",
             "price_value": parse_number(price_points[0]["price"].split(" ")[0]) if len(price_points) == 1 else None,
-            "unit": primary.get("unit", "元/kg"),
+            "unit": merged_unit,
             "delta_amount": primary.get("delta_amount", ""),
             "delta_rate": primary.get("delta_rate", ""),
             "tag": max(sorted_group, key=lambda entry: tag_rank(entry.get("tag", ""))).get("tag", "关注"),
@@ -649,9 +821,20 @@ def merge_origin_items(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "source_links": [{"label": source, "url": url} for source, (_, url) in source_links.items()],
             "price_points": price_points,
         }
+        if price_units:
+            merged["units"] = price_units
+            merged["unit_mode"] = "mixed" if len(price_units) > 1 else "single"
         merged_items.append(merged)
 
-    merged_items.sort(key=lambda item: (date_key(item.get("date", ""))[1], item.get("herb", ""), item.get("location", "")), reverse=True)
+    merged_items.sort(
+        key=lambda item: (
+            datetime_key(item.get("published_at", ""), item.get("date", ""))[1],
+            date_key(item.get("date", ""))[1],
+            item.get("herb", ""),
+            item.get("location", ""),
+        ),
+        reverse=True,
+    )
     return merged_items
 
 
@@ -914,9 +1097,30 @@ def date_key(value: str) -> tuple[int, str]:
         return (1, text)
 
 
-def item_sort_key(item: WorkbookRecord) -> tuple[str, str, str]:
+def datetime_key(value: str, fallback_date: str = "") -> tuple[int, str]:
+    text = clean_text(value)
+    if text:
+        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M"):
+            try:
+                return (1, datetime.strptime(text, fmt).strftime("%Y%m%d%H%M%S"))
+            except ValueError:
+                continue
+        has_date, normalized_date = date_key(text[:10])
+        if has_date:
+            return (1, f"{normalized_date}000000")
+    has_date, normalized_date = date_key(fallback_date)
+    return (has_date, f"{normalized_date}000000" if has_date else "")
+
+
+def item_sort_key(item: WorkbookRecord) -> tuple[str, str, str, str]:
+    has_time, normalized_time = datetime_key(item.published_at, item.date)
     has_date, normalized_date = date_key(item.date)
-    return (normalized_date if has_date else "", item.herb, item.location)
+    return (
+        normalized_time if has_time else "",
+        normalized_date if has_date else "",
+        item.herb,
+        item.location,
+    )
 
 
 def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
@@ -926,8 +1130,10 @@ def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
         display_spec = ""
     detail_text = item.content_full or item.summary
     inferred_unit = infer_price_unit(detail_text, item.unit)
-    display_unit = inferred_unit if inferred_unit == "元/条" else normalize_price_unit(item.unit)
-    price_points = merge_price_points(normalize_price_points_with_unit(item.price_points, display_unit) + extract_price_points(detail_text))
+    stored_unit = normalize_price_unit(item.unit)
+    initial_unit = inferred_unit if inferred_unit != "元/kg" else stored_unit
+    price_points = merge_price_points(normalize_price_points_with_unit(item.price_points, initial_unit) + extract_price_points(detail_text))
+    display_unit = select_primary_unit(price_points, initial_unit)
     display_price = ""
     if len(price_points) == 1:
         display_price = price_points[0]["price"]
@@ -937,6 +1143,7 @@ def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
         display_price = format_price(item.today_price, display_unit)
     payload = {
         "date": item.date,
+        "published_at": item.published_at,
         "herb": item.herb,
         "spec": display_spec,
         "location": item.location or "待补产区",
@@ -954,6 +1161,10 @@ def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
     }
     if price_points:
         payload["price_points"] = price_points
+        price_units = collect_point_units(price_points)
+        if price_units:
+            payload["units"] = price_units
+            payload["unit_mode"] = "mixed" if len(price_units) > 1 else "single"
     return payload
 
 
@@ -1144,6 +1355,7 @@ def load_json_records(path: Path | None, empty_error: str) -> list[WorkbookRecor
                 source=clean_text(raw.get("source")),
                 url=normalize_source_url(raw.get("source"), raw.get("url")),
                 summary=clean_text(raw.get("summary")),
+                published_at=clean_text(raw.get("published_at")),
                 content_full=clean_text(raw.get("content_full")),
                 price_label=clean_text(raw.get("price_label")),
                 price_points=normalize_price_points(raw.get("price_points")),

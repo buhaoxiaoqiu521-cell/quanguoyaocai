@@ -81,9 +81,17 @@ LOCATION_TOKEN_RE = re.compile(
     r"([一-龥]{1,12}?)(?:自治州|特别行政区|自治区|地区|药市|市场|口岸|办事处|省|市|县|区|旗|盟|州|镇|乡|村)"
 )
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
-PRICE_RANGE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
-PRICE_SINGLE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*元(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?")
+PRICE_RANGE_RE = re.compile(
+    r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*元(?:(/单斤|/市斤|/斤|/公斤|/千克|/条|/株|/棵|/苗|每单斤|每市斤|每斤|每公斤|每千克|每条|每株|每棵|每苗))?(?:左右|上下|之间)?"
+)
+PRICE_SINGLE_RE = re.compile(
+    r"(\d+(?:\.\d+)?)\s*元(?:(/单斤|/市斤|/斤|/公斤|/千克|/条|/株|/棵|/苗|每单斤|每市斤|每斤|每公斤|每千克|每条|每株|每棵|每苗))?(?:左右|上下|之间)?"
+)
 HERB_RE = re.compile(r"品种：\s*([^\s]+)")
+HERB_PREFIX_RE = re.compile(
+    r"^([一-龥A-Za-z0-9·（）()\-]{2,24}?)(?=(?:近阶段|近期|近日|当前|目前|现阶段|现|货源|有商家|有客商|行情|价格|产地|市场|走动|走销|销售|采挖|上市|供应|外销|出售|交易|收购|购进|进入|持续|继续|受|随|因))"
+)
+PLANT_UNIT_CONTEXT_RE = re.compile(r"(每株|每棵|每苗|株价|棵价|苗价)")
 
 
 def clean_text(value: Any) -> str:
@@ -91,6 +99,72 @@ def clean_text(value: Any) -> str:
     text = text.replace("\xa0", " ")
     text = re.sub(r"\s+", " ", text)
     return text.strip()
+
+
+def normalize_price_unit(unit: str) -> str:
+    text = clean_text(unit).lower()
+    if not text:
+        return "元/kg"
+    if text in {"元/kg", "kg", "公斤", "千克", "元/公斤", "元/千克", "/公斤", "/千克", "每公斤", "每千克"}:
+        return "元/kg"
+    if text in {"单斤", "元/单斤", "/单斤", "每单斤"}:
+        return "元/单斤"
+    if text in {"市斤", "斤", "元/斤", "元/市斤", "/斤", "/市斤", "每斤", "每市斤"}:
+        return "元/斤"
+    if text in {"条", "元/条", "/条", "每条"}:
+        return "元/条"
+    if text in {"株", "棵", "苗", "元/株", "元/棵", "元/苗", "/株", "/棵", "/苗", "每株", "每棵", "每苗"}:
+        return "元/株"
+    return clean_text(unit) or "元/kg"
+
+
+def infer_price_unit(text: str, fallback: str = "元/kg") -> str:
+    value = clean_text(text)
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:株|棵|苗)", value) or PLANT_UNIT_CONTEXT_RE.search(value):
+        return "元/株"
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*条", value):
+        return "元/条"
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*单斤", value):
+        return "元/单斤"
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:市斤|斤)", value):
+        return "元/斤"
+    if re.search(r"(?:元|块)\s*(?:/|每)?\s*(?:公斤|千克)", value):
+        return "元/kg"
+    return normalize_price_unit(fallback)
+
+
+def rewrite_price_label(price_label: str, unit: str, today_price: str = "") -> str:
+    text = clean_text(price_label)
+    unit_text = normalize_price_unit(unit)
+    if text:
+        numbers = re.findall(r"\d+(?:\.\d+)?", text)
+        if len(numbers) >= 2 and any(sep in text for sep in ("-", "~", "至", "到", "～", "—", "－")):
+            return f"{numbers[0]}-{numbers[1]} {unit_text}"
+        if numbers:
+            return f"{numbers[0]} {unit_text}"
+    price = clean_text(today_price)
+    return f"{price} {unit_text}" if price else ""
+
+
+def seed_herb_candidate(text: str) -> str:
+    value = clean_text(text)
+    if not value:
+        return ""
+    match = HERB_PREFIX_RE.search(value)
+    candidate = clean_text(match.group(1)) if match else ""
+    if candidate and "籽" in candidate and 2 <= len(candidate) <= 18:
+        return candidate
+    return ""
+
+
+def normalize_origin_herb(herb: str, summary: str, content: str) -> str:
+    raw = clean_text(herb)
+    if raw.endswith("籽"):
+        return raw
+    candidate = seed_herb_candidate(summary) or seed_herb_candidate(content)
+    if candidate and (not raw or raw in candidate):
+        return candidate
+    return raw or candidate
 
 
 def parse_name_date(path: Path) -> str:
@@ -176,20 +250,85 @@ def extract_price(text: str) -> tuple[str, str]:
     value = clean_text(text)
     if not value:
         return ("", "")
+    unit_hint = infer_price_unit(value, "")
     range_match = PRICE_RANGE_RE.search(value)
     if range_match:
-        start, end = range_match.groups()
-        return (start, f"{start}-{end} 元/kg")
+        start, end, unit_token = range_match.groups()
+        unit = normalize_price_unit(unit_token or unit_hint)
+        return (start, f"{start}-{end} {unit}")
     single_match = PRICE_SINGLE_RE.search(value)
     if single_match:
-        price = single_match.group(1)
-        return (price, f"{price} 元/kg")
+        price, unit_token = single_match.groups()
+        unit = normalize_price_unit(unit_token or unit_hint)
+        return (price, f"{price} {unit}")
     return ("", "")
+
+
+def rewrite_price_points(points: Any, preferred_unit: str) -> list[dict[str, str]]:
+    if not isinstance(points, list):
+        return []
+    unit_text = normalize_price_unit(preferred_unit)
+    if unit_text not in {"元/条", "元/株", "元/单斤"}:
+        return [raw for raw in points if isinstance(raw, dict)]
+    rewritten: list[dict[str, str]] = []
+    for raw in points:
+        if not isinstance(raw, dict):
+            continue
+        label = clean_text(raw.get("label") or raw.get("spec") or raw.get("name"))
+        price = rewrite_price_label(raw.get("price", "") or raw.get("value", ""), unit_text)
+        if not label or not price:
+            continue
+        rewritten.append({"label": label, "price": price})
+    return rewritten
+
+
+def point_unit(point: dict[str, Any]) -> str:
+    text = clean_text(point.get("price") or point.get("value"))
+    explicit = infer_price_unit(text, "")
+    if explicit:
+        return explicit
+    return ""
+
+
+def select_primary_unit(points: list[dict[str, str]], fallback: str = "元/kg") -> str:
+    weighted: dict[str, int] = {}
+    first_unit = ""
+    for point in points:
+        if not isinstance(point, dict):
+            continue
+        unit = point_unit(point)
+        if not unit:
+            continue
+        if not first_unit:
+            first_unit = unit
+        label = clean_text(point.get("label"))
+        weight = 1
+        if "主流" in label:
+            weight += 3
+        if "整体" in label:
+            weight += 2
+        if "统货" in label:
+            weight += 1
+        weighted[unit] = weighted.get(unit, 0) + weight
+    if weighted:
+        return max(weighted.items(), key=lambda item: (item[1], 1 if item[0] == first_unit else 0))[0]
+    return normalize_price_unit(fallback)
 
 
 def extract_date_from_time_text(text: str, fallback: str) -> str:
     match = DATE_RE.search(clean_text(text))
     return match.group(1) if match else fallback
+
+
+def normalize_published_at(value: str, fallback_date: str) -> str:
+    text = clean_text(value)
+    if not text:
+        return f"{clean_text(fallback_date)} 00:00:00" if clean_text(fallback_date) else ""
+    if " " in text:
+        return text
+    if DATE_RE.fullmatch(text):
+        return f"{text} 00:00:00"
+    return text
 
 
 def extract_herb_from_text(text: str) -> str:
@@ -217,11 +356,17 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         deduped: list[dict[str, str]] = []
         seen: set[tuple[str, str, str, str, str]] = set()
         for raw in records:
+            detail_text = clean_text(raw.get("content_full") or raw.get("summary"))
+            summary = clean_text(raw.get("summary")) or detail_text
+            herb = normalize_origin_herb(raw.get("herb"), summary, detail_text)
+            unit = infer_price_unit(detail_text, clean_text(raw.get("unit")) or clean_text(raw.get("price_label")) or "元/kg")
+            price_points = rewrite_price_points(raw.get("price_points"), unit)
+            unit = select_primary_unit(price_points, unit)
             item = {
                 "date": clean_text(raw.get("date")),
-                "herb": clean_text(raw.get("herb")),
+                "herb": herb,
                 "spec": clean_text(raw.get("spec")) or "产地快讯",
-                "unit": clean_text(raw.get("unit")) or "元/kg",
+                "unit": unit,
                 "market": clean_text(raw.get("market")) or "产地",
                 "location": clean_text(raw.get("location")),
                 "today_price": clean_text(raw.get("today_price")),
@@ -230,10 +375,11 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "delta_rate": clean_text(raw.get("delta_rate")),
                 "source": clean_text(raw.get("source")),
                 "url": clean_text(raw.get("url")),
-                "summary": clean_text(raw.get("summary")),
-                "content_full": clean_text(raw.get("content_full")),
-                "price_label": clean_text(raw.get("price_label")),
-                "price_points": raw.get("price_points") if isinstance(raw.get("price_points"), list) else [],
+                "summary": summary,
+                "published_at": normalize_published_at(raw.get("published_at", ""), raw.get("date", "")),
+                "content_full": detail_text,
+                "price_label": rewrite_price_label(raw.get("price_label", ""), unit, raw.get("today_price", "")),
+                "price_points": price_points,
             }
             if not item["date"] or not item["herb"] or not item["summary"]:
                 continue
@@ -242,7 +388,15 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 continue
             seen.add(key)
             deduped.append(item)
-        deduped.sort(key=lambda item: (item["date"], item["herb"], item["location"]), reverse=True)
+        deduped.sort(
+            key=lambda item: (
+                normalize_published_at(item.get("published_at", ""), item.get("date", "")),
+                item["date"],
+                item["herb"],
+                item["location"],
+            ),
+            reverse=True,
+        )
         return deduped
 
     report_date = clean_text(payload.get("date"))
@@ -255,14 +409,17 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         source_text = clean_text(item.get("source"))
         if not is_origin_like(title, source_text):
             continue
-        today_price, price_label = extract_price(item.get("desc"))
         detail_text = clean_text(item.get("content_full") or item.get("desc"))
+        today_price, price_label = extract_price(item.get("desc"))
+        unit = infer_price_unit(detail_text, price_label)
+        price_points = rewrite_price_points(item.get("price_points"), unit)
+        unit = select_primary_unit(price_points, unit)
         records.append(
             {
                 "date": clean_text(item.get("dtm")).split(" ")[0] or report_date,
-                "herb": clean_text(item.get("variety")) or extract_herb_from_text(title),
+                "herb": normalize_origin_herb(clean_text(item.get("variety")) or extract_herb_from_text(title), clean_text(item.get("summary") or detail_text), detail_text),
                 "spec": "产地快讯",
-                "unit": "元/kg",
+                "unit": unit,
                 "market": "产地",
                 "location": normalize_location(source_text or title),
                 "today_price": today_price,
@@ -272,9 +429,10 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "source": "药通网",
                 "url": build_yt_url(item.get("acid", "")),
                 "summary": clean_text(item.get("summary") or detail_text),
+                "published_at": normalize_published_at(item.get("dtm", ""), clean_text(item.get("dtm")).split(" ")[0] or report_date),
                 "content_full": detail_text,
-                "price_label": price_label,
-                "price_points": item.get("price_points") if isinstance(item.get("price_points"), list) else [],
+                "price_label": rewrite_price_label(price_label, unit, today_price),
+                "price_points": price_points,
             }
         )
 
@@ -286,12 +444,15 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
             continue
         detail_text = clean_text(item.get("detail") or item.get("content_full") or item.get("summary"))
         today_price, price_label = extract_price(detail_text)
+        unit = infer_price_unit(detail_text, price_label)
+        price_points = rewrite_price_points(item.get("price_points"), unit)
+        unit = select_primary_unit(price_points, unit)
         records.append(
             {
                 "date": extract_date_from_time_text(item.get("time_text", ""), report_date),
-                "herb": extract_herb_from_text(item.get("time_text", "")),
+                "herb": normalize_origin_herb(extract_herb_from_text(item.get("time_text", "")), clean_text(item.get("summary") or detail_text), detail_text),
                 "spec": "产地快讯",
-                "unit": "元/kg",
+                "unit": unit,
                 "market": "产地",
                 "location": normalize_location(title),
                 "today_price": today_price,
@@ -301,9 +462,13 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
                 "source": "中药材天地网",
                 "url": clean_text(item.get("url")),
                 "summary": clean_text(item.get("summary") or detail_text),
+                "published_at": normalize_published_at(
+                    item.get("published_date", "") or extract_date_from_time_text(item.get("time_text", ""), report_date),
+                    extract_date_from_time_text(item.get("time_text", ""), report_date),
+                ),
                 "content_full": detail_text,
-                "price_label": price_label,
-                "price_points": item.get("price_points") if isinstance(item.get("price_points"), list) else [],
+                "price_label": rewrite_price_label(price_label, unit, today_price),
+                "price_points": price_points,
             }
         )
 
@@ -318,7 +483,15 @@ def normalize_payload(payload: dict[str, Any]) -> list[dict[str, str]]:
         seen.add(key)
         deduped.append(item)
 
-    deduped.sort(key=lambda item: (item["date"], item["herb"], item["location"]), reverse=True)
+    deduped.sort(
+        key=lambda item: (
+            normalize_published_at(item.get("published_at", ""), item.get("date", "")),
+            item["date"],
+            item["herb"],
+            item["location"],
+        ),
+        reverse=True,
+    )
     return deduped
 
 
@@ -340,6 +513,7 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
             "source": clean_text(item.get("source")),
             "url": clean_text(item.get("url")),
             "summary": clean_text(item.get("summary")),
+            "published_at": normalize_published_at(item.get("published_at", ""), item.get("date", "")),
             "content_full": clean_text(item.get("content_full")),
             "price_label": clean_text(item.get("price_label")),
             "price_points": item.get("price_points") if isinstance(item.get("price_points"), list) else [],
@@ -351,7 +525,15 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
             continue
         seen.add(key)
         merged.append(record)
-    merged.sort(key=lambda item: (item["date"], item["herb"], item["location"]), reverse=True)
+    merged.sort(
+        key=lambda item: (
+            normalize_published_at(item.get("published_at", ""), item.get("date", "")),
+            item["date"],
+            item["herb"],
+            item["location"],
+        ),
+        reverse=True,
+    )
     return merged
 
 
