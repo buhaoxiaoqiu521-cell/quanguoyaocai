@@ -353,6 +353,9 @@ def clean_price_label_noise(text: str) -> str:
         r"\1",
         label,
     )
+    label = re.sub(r"(?:的)?货售$", "", label)
+    label = re.sub(r"(?:的)?货价$", "", label)
+    label = re.sub(r"(?:的)?货价格?$", "", label)
     return clean_text(label)
 
 

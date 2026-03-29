@@ -258,7 +258,7 @@ def normalize_location(text: str) -> str:
 
     if not chosen:
         chosen = re.sub(r"(办事处|药市|市场|口岸|产地)$", "", rest)
-        chosen = clean_text(chosen)[:6]
+        chosen = clean_text(chosen)
 
     chosen = clean_text(chosen)
     if province and chosen.startswith(province):
@@ -289,10 +289,16 @@ def choose_best_location(*texts: Any) -> str:
 
 
 def prefer_structured_location(location: Any, *texts: Any) -> str:
+    candidates: list[str] = []
     explicit = normalize_location(location)
     if explicit:
-        return explicit
-    return choose_best_location(*texts)
+        candidates.append(explicit)
+    inferred = choose_best_location(*texts)
+    if inferred and inferred not in candidates:
+        candidates.append(inferred)
+    if not candidates:
+        return ""
+    return max(candidates, key=location_score)
 
 
 def extract_price(text: str) -> tuple[str, str]:
@@ -564,7 +570,11 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
             "spec": clean_text(item.get("spec")) or "产地快讯",
             "unit": clean_text(item.get("unit")) or "元/kg",
             "market": clean_text(item.get("market")) or "产地",
-            "location": clean_text(item.get("location")),
+            "location": prefer_structured_location(
+                item.get("location"),
+                item.get("summary"),
+                item.get("content_full"),
+            ),
             "today_price": clean_text(item.get("today_price")),
             "yesterday_price": clean_text(item.get("yesterday_price")),
             "delta_amount": clean_text(item.get("delta_amount")),
@@ -582,7 +592,16 @@ def merge_records(new_records: list[dict[str, Any]], existing_records: list[dict
         key = (record["date"], record["herb"], record["source"], record["summary"])
         if key in seen:
             current = merged[seen[key]]
-            if not clean_text(current.get("location")):
+            candidate_location = prefer_structured_location(
+                record.get("location", ""),
+                current.get("summary", ""),
+                current.get("content_full", ""),
+                record.get("summary", ""),
+                record.get("content_full", ""),
+            )
+            if candidate_location and location_score(candidate_location) > location_score(current.get("location", "")):
+                current["location"] = candidate_location
+            elif not clean_text(current.get("location")):
                 current["location"] = prefer_structured_location(
                     record.get("location", ""),
                     current.get("summary", ""),

@@ -2009,10 +2009,13 @@
       const location = type === "origin" ? item.location : item.market;
       const tag = item.tag || "关注";
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
-      const summary = item.summary ? `<p class="entry-summary">${escapeHtml(item.summary)}</p>` : "";
+      const summaryText = type === "origin"
+        ? (item.summary || item.content_full || "")
+        : (item.summary || "");
+      const summary = summaryText ? `<p class="entry-summary">${escapeHtml(summaryText)}</p>` : "";
       const hasPricePoints = Array.isArray(item.price_points) && item.price_points.length > 0;
-      const price = type === "origin" && item.price && !hasPricePoints ? `<span class="entry-price">${escapeHtml(item.price)}</span>` : "";
-      const priceBreakdown = (type === "market" || (type === "origin" && hasPricePoints)) ? renderPriceBreakdown(item) : "";
+      const price = "";
+      const priceBreakdown = type === "market" ? renderPriceBreakdown(item) : "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
       const sourceLinks = renderSourceLinks(item, type);
 
