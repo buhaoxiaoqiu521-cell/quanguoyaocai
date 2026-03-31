@@ -1972,7 +1972,6 @@
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const title = escapeHtml(item.title || "待补标题");
       const modalId = escapeHtml(item.id || "");
-      const contentLink = `<button class="entry-link entry-link-button" type="button" data-hotspot-open="${modalId}">查看全文</button>`;
 
       return `
         <article class="entry-card hotspot-card">
@@ -1984,13 +1983,6 @@
           </div>
           <div class="entry-title-row">
             <button class="entry-title entry-title-button" type="button" data-hotspot-open="${modalId}">${title}</button>
-          </div>
-          <div class="entry-footer">
-            <span class="entry-source">
-              <span class="entry-footer-label">来源</span>
-              <span class="entry-source-name">${escapeHtml(item.source || "中药材天地网")}</span>
-            </span>
-            ${contentLink}
           </div>
         </article>
       `;
@@ -2017,8 +2009,6 @@
       const price = "";
       const priceBreakdown = type === "market" ? renderPriceBreakdown(item) : "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
-      const sourceLinks = renderSourceLinks(item, type);
-
       return `
         <article class="entry-card">
           <div class="entry-top">
@@ -2040,13 +2030,6 @@
           </div>
           ${priceBreakdown}
           ${summary}
-          <div class="entry-footer">
-            <span class="entry-source">
-              <span class="entry-footer-label">来源</span>
-              <span class="entry-source-name">${escapeHtml(item.source || "待补来源")}</span>
-            </span>
-            ${sourceLinks}
-          </div>
         </article>
       `;
     }
