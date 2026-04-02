@@ -1,9 +1,22 @@
 {
   "meta": {
-    "total": 15,
-    "review_count": 15
+    "total": 16,
+    "review_count": 16
   },
   "items": [
+    {
+      "type": "mixed_units",
+      "level": "review",
+      "date": "2026-04-02",
+      "herb": "高良姜",
+      "location": "广西徐闻县",
+      "top_unit": "元/斤",
+      "point_units": [
+        "元/斤",
+        "元/kg"
+      ],
+      "message": "同一条记录同时包含多种计价单位，已保留 price_points 单位，但建议人工复核。"
+    },
     {
       "type": "mixed_units",
       "level": "review",
