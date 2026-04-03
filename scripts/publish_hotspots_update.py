@@ -22,9 +22,27 @@ def has_relevant_changes(root: Path, files: list[str]) -> bool:
     return bool(result.stdout.strip())
 
 
+def has_staged_changes(root: Path, files: list[str]) -> bool:
+    result = subprocess.run(
+        ["git", "diff", "--cached", "--quiet", "--", *files],
+        cwd=str(root),
+        text=True,
+    )
+    if result.returncode not in (0, 1):
+        raise subprocess.CalledProcessError(result.returncode, result.args)
+    return result.returncode == 1
+
+
+def has_pending_local_commits(root: Path, remote: str, branch: str) -> bool:
+    result = run(["git", "rev-list", "--left-right", "--count", f"{branch}...{remote}/{branch}"], cwd=root, capture=True)
+    ahead, _behind = (int(part) for part in result.stdout.strip().split())
+    return ahead > 0
+
+
 def stage_and_publish(root: Path, files: list[str], message: str, remote: str, branch: str, push: bool) -> None:
     run(["git", "add", "--", *files], cwd=root)
-    run(["git", "commit", "-m", message], cwd=root)
+    if has_staged_changes(root, files):
+        run(["git", "commit", "-m", message], cwd=root)
     if push:
         run(["git", "push", remote, branch], cwd=root)
 
@@ -53,19 +71,23 @@ def main() -> None:
 
     run([sys.executable, str(hotspot_fetcher), "--limit", str(args.limit)], cwd=root)
 
-    if not has_relevant_changes(root, [hotspot_file]):
+    content_changed = has_relevant_changes(root, [hotspot_file])
+    pending_push = has_pending_local_commits(root, args.remote, args.branch)
+
+    if not content_changed and not pending_push:
         print("No hotspot changes found. Nothing to publish.")
         return
 
-    run(
-        [
-            sys.executable,
-            str(build_script),
-            "--exclude-workbook-origin",
-            "--exclude-workbook-market",
-        ],
-        cwd=root,
-    )
+    if content_changed:
+        run(
+            [
+                sys.executable,
+                str(build_script),
+                "--exclude-workbook-origin",
+                "--exclude-workbook-market",
+            ],
+            cwd=root,
+        )
 
     stage_and_publish(
         root=root,
@@ -75,7 +97,10 @@ def main() -> None:
         branch=args.branch,
         push=not args.no_push,
     )
-    print("Published hotspot update.")
+    if content_changed:
+        print("Published hotspot update.")
+    else:
+        print("Pushed pending hotspot update.")
 
 
 if __name__ == "__main__":
