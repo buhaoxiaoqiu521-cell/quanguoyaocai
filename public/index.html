@@ -1903,8 +1903,8 @@
     }
 
     function tagClass(tag) {
-      if (tag === "上扬" || tag === "走快") return "tag up";
-      if (tag === "回落" || tag === "走缓") return "tag down";
+      if (tag === "上涨") return "tag up";
+      if (tag === "回落") return "tag down";
       return "tag";
     }
 
@@ -1999,7 +1999,10 @@
       const spec = specText ? `<span class="entry-spec">${escapeHtml(specText)}</span>` : "";
       const locationLabel = type === "origin" ? "产区" : "市场";
       const location = type === "origin" ? item.location : item.market;
-      const tag = item.tag || "关注";
+      const tag = typeof item.tag === "string" ? item.tag.trim() : "";
+      const tagBadge = type === "market" && tag
+        ? `<span class="${tagClass(tag)}">${escapeHtml(tag)}</span>`
+        : "";
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
       const summaryText = type === "origin"
         ? (item.summary || item.content_full || "")
@@ -2015,7 +2018,7 @@
             <span class="entry-date">${escapeHtml(item.date || "--")}</span>
             <div class="entry-badges">
               ${sectionBadge}
-              <span class="${type === "hotspot" ? "tag" : tagClass(tag)}">${escapeHtml(tag)}</span>
+              ${tagBadge}
               ${price}
               ${delta}
             </div>

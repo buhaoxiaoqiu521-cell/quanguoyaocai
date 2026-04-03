@@ -767,19 +767,6 @@ def build_item_price_points(item: dict[str, Any]) -> list[dict[str, str]]:
     return merge_price_points(points)
 
 
-def tag_rank(tag: str) -> int:
-    value = clean_text(tag)
-    if value in {"走快", "上扬"}:
-        return 4
-    if value in {"平稳"}:
-        return 3
-    if value in {"关注"}:
-        return 2
-    if value in {"走缓", "回落"}:
-        return 1
-    return 0
-
-
 def source_entry_score(item: dict[str, Any]) -> tuple[int, int]:
     return (
         1 if "/hqzx/" in clean_text(item.get("url")) else 0,
@@ -897,7 +884,7 @@ def merge_origin_items(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "unit": merged_unit,
             "delta_amount": primary.get("delta_amount", ""),
             "delta_rate": primary.get("delta_rate", ""),
-            "tag": max(sorted_group, key=lambda entry: tag_rank(entry.get("tag", ""))).get("tag", "关注"),
+            "tag": "",
             "summary": max(sorted_group, key=lambda entry: len(clean_text(entry.get("summary")))).get("summary", ""),
             "content_full": max(sorted_group, key=lambda entry: len(clean_text(entry.get("content_full") or entry.get("summary")))).get("content_full") or "",
             "source": "、".join(source_names) if source_names else clean_text(primary.get("source")),
@@ -952,21 +939,14 @@ def normalize_row(record: dict[str, str]) -> WorkbookRecord:
     )
 
 
-def detect_tag(summary: str, delta_amount: str) -> str:
-    summary_text = clean_text(summary)
+def detect_tag(delta_amount: str) -> str:
     delta_num = parse_number(delta_amount)
     if delta_num is not None:
         if delta_num > 0:
-            return "上扬"
+            return "上涨"
         if delta_num < 0:
             return "回落"
-    if any(keyword in summary_text for keyword in UP_KEYWORDS):
-        return "走快"
-    if any(keyword in summary_text for keyword in DOWN_KEYWORDS):
-        return "走缓"
-    if any(keyword in summary_text for keyword in STEADY_KEYWORDS):
-        return "平稳"
-    return "关注"
+    return ""
 
 
 def value_from_cell(cell: ET.Element, shared_strings: list[str]) -> str:
@@ -1237,7 +1217,7 @@ def to_origin_item(item: WorkbookRecord) -> dict[str, Any]:
         "unit": display_unit,
         "delta_amount": format_number(parse_number(item.delta_amount)),
         "delta_rate": format_number(parse_number(item.delta_rate)),
-        "tag": detect_tag(detail_text or item.summary, item.delta_amount),
+        "tag": detect_tag(item.delta_amount) if (item.market or "产地") != "产地" else "",
         "summary": item.summary,
         "content_full": detail_text,
         "source": item.source or "待补来源",
