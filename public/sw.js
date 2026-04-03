@@ -1,16 +1,16 @@
-const CACHE_VERSION = "pwa-v5-yczz-icon";
+const CACHE_VERSION = "pwa-v6-yczz-icon-20260403";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const DATA_CACHE = `${CACHE_VERSION}-data`;
 const SHELL_URLS = [
   "./",
   "./?source=pwa",
   "./index.html",
-  "./manifest.webmanifest?v=yczz-v20260322",
-  "./icons/yczz-v20260322-favicon-64.png",
-  "./icons/yczz-v20260322-192.png",
-  "./icons/yczz-v20260322-512.png",
-  "./icons/yczz-v20260322-maskable-512.png",
-  "./icons/yczz-v20260322-apple-touch-180.png"
+  "./manifest.webmanifest?v=yczz-v20260403",
+  "./icons/yczz-v20260403-favicon-64.png",
+  "./icons/yczz-v20260403-192.png",
+  "./icons/yczz-v20260403-512.png",
+  "./icons/yczz-v20260403-maskable-512.png",
+  "./icons/yczz-v20260403-apple-touch-180.png"
 ];
 const DATA_URLS = [
   "./data/dashboard.json",
