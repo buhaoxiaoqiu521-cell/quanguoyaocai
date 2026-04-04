@@ -1993,9 +1993,7 @@
         return renderHotspotCard(item, options);
       }
       const title = type === "hotspot" ? item.title : item.herb;
-      const specText = type === "market"
-          ? (item.spec || "")
-          : (item.spec || "");
+      const specText = type === "origin" ? (item.spec || "") : "";
       const spec = specText ? `<span class="entry-spec">${escapeHtml(specText)}</span>` : "";
       const locationLabel = type === "origin" ? "产区" : "市场";
       const location = type === "origin" ? item.location : item.market;
@@ -2004,13 +2002,10 @@
         ? `<span class="${tagClass(tag)}">${escapeHtml(tag)}</span>`
         : "";
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
-      const summaryText = type === "origin"
-        ? (item.summary || item.content_full || "")
-        : (item.summary || "");
+      const summaryText = item.summary || item.content_full || "";
       const summary = summaryText ? `<p class="entry-summary">${escapeHtml(summaryText)}</p>` : "";
-      const hasPricePoints = Array.isArray(item.price_points) && item.price_points.length > 0;
       const price = "";
-      const priceBreakdown = type === "market" ? renderPriceBreakdown(item) : "";
+      const priceBreakdown = "";
       const delta = type === "origin" && (item.delta_amount || item.delta_rate) ? formatDelta(item) : "";
       return `
         <article class="entry-card">
