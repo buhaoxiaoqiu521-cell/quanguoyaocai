@@ -2002,7 +2002,7 @@
         ? `<span class="${tagClass(tag)}">${escapeHtml(tag)}</span>`
         : "";
       const sectionBadge = options.sectionLabel ? `<span class="tag section-tag">${escapeHtml(options.sectionLabel)}</span>` : "";
-      const summaryText = item.summary || item.content_full || "";
+      const summaryText = item.content_full || item.summary || "";
       const summary = summaryText ? `<p class="entry-summary">${escapeHtml(summaryText)}</p>` : "";
       const price = "";
       const priceBreakdown = "";
