@@ -4,6 +4,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
+import time
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -53,6 +55,17 @@ def clean_text(value: Any) -> str:
     text = text.replace("\xa0", " ")
     text = re.sub(r"\s+", " ", text)
     return text.strip()
+
+
+def normalize_published_at(value: str, fallback_date: str) -> str:
+    text = clean_text(value)
+    if not text:
+        return f"{clean_text(fallback_date)} 00:00:00" if clean_text(fallback_date) else ""
+    if " " in text:
+        return text
+    if re.fullmatch(r"20\d{2}-\d{2}-\d{2}", text):
+        return f"{text} 00:00:00"
+    return text
 
 
 def normalize_detail_text(text: str) -> str:
@@ -186,17 +199,29 @@ def normalize_market(value: str) -> str:
 
 
 def ensure_yt_verified(session: requests.Session, target_path: str = "/ytw/second/marketMgr/query.jsp") -> None:
-    verify_response = session.post(
-        YT_VERIFY_URL,
-        data={"url": target_path},
-        timeout=20,
-    )
-    verify_response.raise_for_status()
-    payload = verify_response.json()
-    uuid = clean_text(payload.get("uuid"))
-    if not uuid:
-        raise RuntimeError("药通网验证未返回 uuid。")
-    session.cookies.set(YT_VERIFY_COOKIE, uuid, domain="www.yt1998.com", path="/")
+    last_error = ""
+    for attempt in range(4):
+        verify_response = session.post(
+            YT_VERIFY_URL,
+            data={"url": target_path},
+            timeout=20,
+        )
+        verify_response.raise_for_status()
+        uuid = ""
+        try:
+            payload = verify_response.json()
+            uuid = clean_text(payload.get("uuid"))
+        except Exception:
+            match = re.search(r'"uuid"\s*:\s*"([^"]+)"', verify_response.text)
+            if match:
+                uuid = clean_text(match.group(1))
+            else:
+                last_error = clean_text(verify_response.text[:120])
+        if uuid:
+            session.cookies.set(YT_VERIFY_COOKIE, uuid, domain="www.yt1998.com", path="/")
+            return
+        time.sleep(0.6 * (attempt + 1))
+    raise RuntimeError(f"药通网验证未返回 uuid。响应片段：{last_error or 'empty'}")
 
 
 def choose_target_dates(items: list[dict[str, Any]], target_date: str) -> list[str]:
@@ -211,23 +236,36 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
         session.headers.update(UA)
         ensure_yt_verified(session)
         for page in range(max_pages):
-            response = session.post(
-                url,
-                data={
-                    "scid": scid,
-                    "lmid": "3",
-                    "ycnam": "",
-                    "times": scid,
-                    "pageIndex": page,
-                    "pageSize": page_size,
-                },
-                timeout=20,
-            )
-            response.raise_for_status()
-            try:
-                data = response.json().get("data", [])
-            except Exception as exc:
-                raise RuntimeError(f"药通网市场接口返回了非 JSON 内容（scid={scid}, page={page}）。") from exc
+            data = None
+            last_error: Exception | None = None
+            for attempt in range(3):
+                response = session.post(
+                    url,
+                    data={
+                        "scid": scid,
+                        "lmid": "3",
+                        "ycnam": "",
+                        "times": scid,
+                        "pageIndex": page,
+                        "pageSize": page_size,
+                    },
+                    timeout=20,
+                )
+                response.raise_for_status()
+                try:
+                    data = response.json().get("data", [])
+                    break
+                except Exception as exc:
+                    last_error = exc
+                    ensure_yt_verified(session)
+            if data is None:
+                if payload_items:
+                    print(
+                        f"[warn] 药通网市场接口异常，保留已抓到的数据（scid={scid}, page={page}）：{last_error}",
+                        file=sys.stderr,
+                    )
+                    break
+                raise RuntimeError(f"药通网市场接口返回了非 JSON 内容（scid={scid}, page={page}）。") from last_error
             if not data:
                 break
             payload_items.extend(data)
@@ -251,6 +289,7 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
         records.append(
             {
                 "date": item_date,
+                "published_at": normalize_published_at(item.get("dtm", ""), item_date),
                 "herb": clean_text(item.get("ycnam")),
                 "spec": "",
                 "unit": "元/kg",
@@ -279,8 +318,25 @@ def fetch_zy_market(target_date: str, max_pages: int = 20) -> tuple[dict[str, li
         session.headers.update(ZY_HEADERS)
         for page in range(1, max_pages + 1):
             url = "https://www.zyctd.com/zixun/200-1.html" if page == 1 else f"https://www.zyctd.com/zixun/200-{page}.html"
-            response = session.get(url, timeout=20)
-            response.raise_for_status()
+            response = None
+            last_error: Exception | None = None
+            for attempt in range(3):
+                try:
+                    response = session.get(url, timeout=20)
+                    response.raise_for_status()
+                    break
+                except Exception as exc:
+                    last_error = exc
+                    if attempt < 2:
+                        time.sleep(1.5 * (attempt + 1))
+            if response is None:
+                if parsed_items:
+                    print(
+                        f"[warn] 中药材天地网市场列表异常，保留已抓到的数据（page={page}）：{last_error}",
+                        file=sys.stderr,
+                    )
+                    break
+                raise RuntimeError(f"中药材天地网市场列表抓取失败（page={page}）。") from last_error
             soup = BeautifulSoup(response.text, "html.parser")
             boxes = soup.select("div.zixun-item-box")
             if not boxes:
@@ -312,6 +368,7 @@ def fetch_zy_market(target_date: str, max_pages: int = 20) -> tuple[dict[str, li
                 parsed_items.append(
                     {
                         "date": published_date or date,
+                        "published_at": normalize_published_at(published_date, published_date or date),
                         "herb": clean_text(herb_match.group(1) if herb_match else ""),
                         "spec": "",
                         "unit": "元/kg",
@@ -362,7 +419,15 @@ def dedupe_records(records: list[dict[str, str]]) -> list[dict[str, str]]:
             continue
         seen.add(key)
         output.append(item)
-    output.sort(key=lambda item: (item["date"], item["market"], item["herb"]), reverse=True)
+    output.sort(
+        key=lambda item: (
+            normalize_published_at(item.get("published_at", ""), item.get("date", "")),
+            clean_text(item.get("date")),
+            clean_text(item.get("market")),
+            clean_text(item.get("herb")),
+        ),
+        reverse=True,
+    )
     return output
 
 
@@ -399,12 +464,29 @@ def main() -> None:
 
     yt_records: list[dict[str, str]] = []
     yt_dates: dict[str, list[str]] = {}
+    yt_source_ok = False
     for scid, market_name in MARKET_TARGETS.items():
-        chosen_dates, records = fetch_yt_market(scid, args.target_date)
-        yt_dates[market_name] = chosen_dates
-        yt_records.extend(records)
+        try:
+            chosen_dates, records = fetch_yt_market(scid, args.target_date)
+            yt_dates[market_name] = chosen_dates
+            yt_records.extend(records)
+            yt_source_ok = True
+        except Exception as exc:
+            yt_dates[market_name] = []
+            print(f"[warn] 药通网市场抓取失败（{market_name}）：{exc}", file=sys.stderr)
 
-    zy_dates, zy_records = fetch_zy_market(args.target_date)
+    zy_source_ok = False
+    zy_dates: dict[str, list[str]] = {market: [] for market in MARKET_TARGETS.values()}
+    zy_records: list[dict[str, str]] = []
+    try:
+        zy_dates, zy_records = fetch_zy_market(args.target_date)
+        zy_source_ok = True
+    except Exception as exc:
+        print(f"[warn] 中药材天地网市场抓取失败：{exc}", file=sys.stderr)
+
+    if not yt_source_ok and not zy_source_ok:
+        raise RuntimeError("市场源站全部抓取失败。")
+
     output_path = Path(args.output).expanduser().resolve()
     existing_records = [] if args.replace_output else load_existing_records(output_path)
     new_records = dedupe_records(yt_records + zy_records)
