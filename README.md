@@ -33,7 +33,7 @@ python3 scripts/build_dashboard_data.py
 如果要把 OpenClaw 的抓取结果并入 `产地行情`，可以直接运行：
 
 ```bash
-python3 scripts/update_from_openclaw.py --workspace /Users/bohao/.openclaw/workspace
+python3 scripts/update_from_openclaw.py --workspace /Users/bohao/.codex/automations/qgyc/workspace
 ```
 
 这条命令会自动：
@@ -59,7 +59,7 @@ python3 scripts/fetch_market_updates.py
 如果要继续自动发布到 GitHub，可以运行：
 
 ```bash
-python3 scripts/publish_openclaw_update.py --workspace /Users/bohao/.openclaw/workspace
+python3 scripts/publish_openclaw_update.py --workspace /Users/bohao/.codex/automations/qgyc/workspace
 ```
 
 这条命令会在数据变化时只提交：

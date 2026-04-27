@@ -57,7 +57,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="重抓近 N 日产地行情并生成网站产地 JSON")
     parser.add_argument("--days", type=int, default=5, help="抓取近几日，默认 5")
     parser.add_argument("--end-date", default=datetime.now().strftime("%Y-%m-%d"), help="结束日期，默认今天")
-    parser.add_argument("--workspace", default="/Users/bohao/.openclaw/workspace", help="OpenClaw 工作目录")
+    parser.add_argument("--workspace", default="/Users/bohao/.codex/automations/qgyc/workspace", help="Codex 自动化工作目录")
     parser.add_argument("--output", default="content/openclaw_origin.json", help="输出路径")
     parser.add_argument("--yt-pages", type=int, default=4, help="药通网分页深度")
     parser.add_argument("--zy-pages", type=int, default=28, help="天地网分页深度")

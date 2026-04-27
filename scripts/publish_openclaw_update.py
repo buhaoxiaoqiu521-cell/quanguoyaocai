@@ -34,8 +34,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="从 OpenClaw 更新产地行情并发布到 GitHub")
     parser.add_argument(
         "--workspace",
-        default="/Users/bohao/.openclaw/workspace",
-        help="OpenClaw 工作目录",
+        default="/Users/bohao/.codex/automations/qgyc/workspace",
+        help="Codex 自动化工作目录",
     )
     parser.add_argument(
         "--input",

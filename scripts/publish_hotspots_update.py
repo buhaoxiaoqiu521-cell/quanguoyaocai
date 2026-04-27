@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -44,7 +45,37 @@ def stage_and_publish(root: Path, files: list[str], message: str, remote: str, b
     if has_staged_changes(root, files):
         run(["git", "commit", "-m", message], cwd=root)
     if push:
-        run(["git", "push", remote, branch], cwd=root)
+        push_with_retry(root, remote, branch)
+
+
+def push_with_retry(root: Path, remote: str, branch: str) -> None:
+    attempts = [
+        ["git", "push", remote, branch],
+        ["git", "-c", "http.version=HTTP/1.1", "push", remote, branch],
+        [
+            "git",
+            "-c",
+            "http.version=HTTP/1.1",
+            "-c",
+            "http.lowSpeedTime=90",
+            "-c",
+            "http.lowSpeedLimit=1",
+            "push",
+            remote,
+            branch,
+        ],
+    ]
+    last_error: subprocess.CalledProcessError | None = None
+    for index, cmd in enumerate(attempts, start=1):
+        try:
+            run(cmd, cwd=root)
+            return
+        except subprocess.CalledProcessError as exc:
+            last_error = exc
+            if index < len(attempts):
+                time.sleep(10)
+    if last_error is not None:
+        raise last_error
 
 
 def main() -> None:

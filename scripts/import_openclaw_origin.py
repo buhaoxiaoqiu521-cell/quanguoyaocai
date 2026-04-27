@@ -732,8 +732,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="把 OpenClaw 的中药材抓取 JSON 转成网站可用的产地行情 JSON")
     parser.add_argument(
         "--workspace",
-        default="/Users/bohao/.openclaw/workspace",
-        help="OpenClaw 工作目录，默认读取 herb_market_brief_*.json / tmp_herb_*.json",
+        default="/Users/bohao/.codex/automations/qgyc/workspace",
+        help="Codex 自动化工作目录，默认读取 herb_market_brief_*.json / tmp_herb_*.json",
     )
     parser.add_argument(
         "--input",

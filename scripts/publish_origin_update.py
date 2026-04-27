@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -44,13 +45,43 @@ def stage_and_publish(root: Path, files: list[str], message: str, remote: str, b
     if has_staged_changes(root, files):
         run(["git", "commit", "-m", message], cwd=root)
     if push:
-        run(["git", "push", remote, branch], cwd=root)
+        push_with_retry(root, remote, branch)
+
+
+def push_with_retry(root: Path, remote: str, branch: str) -> None:
+    attempts = [
+        ["git", "push", remote, branch],
+        ["git", "-c", "http.version=HTTP/1.1", "push", remote, branch],
+        [
+            "git",
+            "-c",
+            "http.version=HTTP/1.1",
+            "-c",
+            "http.lowSpeedTime=90",
+            "-c",
+            "http.lowSpeedLimit=1",
+            "push",
+            remote,
+            branch,
+        ],
+    ]
+    last_error: subprocess.CalledProcessError | None = None
+    for index, cmd in enumerate(attempts, start=1):
+        try:
+            run(cmd, cwd=root)
+            return
+        except subprocess.CalledProcessError as exc:
+            last_error = exc
+            if index < len(attempts):
+                time.sleep(10)
+    if last_error is not None:
+        raise last_error
 
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description="发布产地行情更新到 GitHub")
-    parser.add_argument("--workspace", default="/Users/bohao/.openclaw/workspace", help="OpenClaw 工作目录")
+    parser.add_argument("--workspace", default="/Users/bohao/.codex/automations/qgyc/workspace", help="Codex 自动化工作目录")
     parser.add_argument("--input", default=None, help="指定单个 OpenClaw JSON 文件；不传则自动选择最新文件")
     parser.add_argument("--remote", default="origin", help="git remote 名称")
     parser.add_argument("--branch", default="main", help="git 分支名称")
