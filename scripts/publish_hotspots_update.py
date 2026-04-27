@@ -100,13 +100,27 @@ def main() -> None:
         "public/data/unit-audit.json",
     ]
 
-    run([sys.executable, str(hotspot_fetcher), "--limit", str(args.limit)], cwd=root)
+    fetch_ok = True
+    try:
+        result = run([sys.executable, str(hotspot_fetcher), "--limit", str(args.limit)], cwd=root, capture=True)
+        if result.stdout:
+            print(result.stdout, end="")
+    except subprocess.CalledProcessError as exc:
+        fetch_ok = False
+        if not (root / hotspot_file).exists():
+            raise
+        detail_lines = (exc.stderr or exc.stdout or "").strip().splitlines()
+        detail = detail_lines[-1] if detail_lines else "source request failed"
+        print(f"Hotspot source unavailable ({detail}); kept existing hotspot data.")
 
     content_changed = has_relevant_changes(root, [hotspot_file])
     pending_push = has_pending_local_commits(root, args.remote, args.branch)
 
     if not content_changed and not pending_push:
-        print("No hotspot changes found. Nothing to publish.")
+        if fetch_ok:
+            print("No hotspot changes found. Nothing to publish.")
+        else:
+            print("No hotspot changes published. Nothing to publish.")
         return
 
     if content_changed:
