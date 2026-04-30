@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-30 12:03:05",
+    "generated_at": "2026-04-30 17:01:41",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-04-30",
     "available_dates": [
@@ -300,8 +300,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 8405,
-    "origin_records": 2631,
+    "total_records": 8406,
+    "origin_records": 2632,
     "market_records": 5774,
     "source_count": 2,
     "herb_count": 878,
@@ -317,15 +317,15 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：8405 条",
-      "产地：2631 条",
+      "总记录：8406 条",
+      "产地：2632 条",
       "市场：5774 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-04-30",
-    "latest_count": 24,
+    "latest_count": 25,
     "top_herbs": [
       {
         "name": "猫爪草",
@@ -344,14 +344,14 @@
         "count": 2
       },
       {
-        "name": "连翘",
-        "count": 1
+        "name": "土鳖虫",
+        "count": 2
       }
     ],
     "sources": [
       {
         "name": "药通网",
-        "count": 5773
+        "count": 5774
       },
       {
         "name": "中药材天地网",
@@ -1127,14 +1127,14 @@
         "spec": "",
         "location": "河南省南阳市桐柏县",
         "market": "产地",
-        "price": "",
-        "price_value": null,
+        "price": "5 元/kg",
+        "price_value": 5.0,
         "unit": "元/kg",
         "delta_amount": "",
         "delta_rate": "",
         "tag": "",
-        "summary": "泽兰前期受异常天气影响，田间出现死苗、长势偏弱现象，或将对后期总产量形成一定压制，具体情况仍有待进一步观察，近期产地有部分商家前来寻货，货源小批量走动为主，价格暂稳，现统货售",
-        "content_full": "泽兰前期受异常天气影响，田间出现死苗、长势偏弱现象，或将对后期总产量形成一定压制，具体情况仍有待进一步观察，近期产地有部分商家前来寻货，货源小批量走动为主，价格暂稳，现统货售",
+        "summary": "泽兰前期受异常天气影响，田间出现死苗、长势偏弱现象，或将对后期总产量形成一定压制，具体情况仍有待进一步观察，近期产地有部分商家前来寻货，货源小批量走动为主，价格暂稳，现统货售价5元上下",
+        "content_full": "泽兰前期受异常天气影响，田间出现死苗、长势偏弱现象，或将对后期总产量形成一定压制，具体情况仍有待进一步观察，近期产地有部分商家前来寻货，货源小批量走动为主，价格暂稳，现统货售价5元上下",
         "source": "药通网",
         "url": "",
         "source_links": [
@@ -1143,7 +1143,19 @@
             "url": "https://www.yt1998.com/scdt/1se3O73v.html"
           }
         ],
-        "price_points": []
+        "price_points": [
+          {
+            "label": "统货",
+            "price": "5 元/kg",
+            "unit": "元/kg",
+            "price_min": 5.0,
+            "price_max": 5.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
       },
       {
         "date": "2026-04-30",
