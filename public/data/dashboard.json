@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-05-21 17:16:41",
+    "generated_at": "2026-05-21 18:06:08",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-05-21",
     "available_dates": [
@@ -321,9 +321,9 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 10051,
+    "total_records": 10052,
     "origin_records": 3524,
-    "market_records": 6527,
+    "market_records": 6528,
     "source_count": 2,
     "herb_count": 899,
     "market_targets": [
@@ -338,15 +338,15 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：10051 条",
+      "总记录：10052 条",
       "产地：3524 条",
-      "市场：6527 条",
+      "市场：6528 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-05-21",
-    "latest_count": 96,
+    "latest_count": 97,
     "top_herbs": [
       {
         "name": "茯神",
@@ -376,7 +376,7 @@
       },
       {
         "name": "中药材天地网",
-        "count": 3443
+        "count": 3444
       }
     ]
   },
@@ -9709,19 +9709,19 @@
       "玉林"
     ],
     "total": 200,
-    "all_total": 6527,
+    "all_total": 6528,
     "latest_date": "2026-05-21",
-    "latest_count": 63,
+    "latest_count": 64,
     "covered_count": 3,
     "extra_market_count": 0,
     "groups": [
       {
         "name": "亳州",
-        "count": 72,
+        "count": 73,
         "latest_date": "2026-05-21",
         "sources": [
           "药通网 42 条",
-          "中药材天地网 30 条"
+          "中药材天地网 31 条"
         ],
         "items": [
           {
@@ -10207,6 +10207,51 @@
                 "unit": "元/kg",
                 "price_min": 25.0,
                 "price_max": 40.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-05-21",
+            "published_at": "2026-05-21 00:00:00",
+            "herb": "石韦",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "16-18 元/kg",
+            "price_value": 16.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "石韦，近日产地走动好于市场，但价格变化有限，目前亳州市场一般统货要价在14元左右，好统货多要价在16-18元之间不等，几乎不带根的货报价在20元以上25元左右。",
+            "content_full": "石韦，近日产地走动好于市场，但价格变化有限，目前亳州市场一般统货要价在14元左右，好统货多要价在16-18元之间不等，几乎不带根的货报价在20元以上25元左右。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1110440.html",
+            "price_points": [
+              {
+                "label": "好统货",
+                "price": "16-18 元/kg",
+                "unit": "元/kg",
+                "price_min": 16.0,
+                "price_max": 18.0
+              },
+              {
+                "label": "一般统货",
+                "price": "14 元/kg",
+                "unit": "元/kg",
+                "price_min": 14.0,
+                "price_max": 14.0
+              },
+              {
+                "label": "几乎不带根的货",
+                "price": "20 元/kg",
+                "unit": "元/kg",
+                "price_min": 20.0,
+                "price_max": 20.0
               }
             ],
             "units": [
@@ -12345,11 +12390,11 @@
       },
       {
         "name": "安国",
-        "count": 73,
+        "count": 72,
         "latest_date": "2026-05-21",
         "sources": [
           "药通网 40 条",
-          "中药材天地网 33 条"
+          "中药材天地网 32 条"
         ],
         "items": [
           {
@@ -14843,37 +14888,6 @@
                 "unit": "元/kg",
                 "price_min": 5500.0,
                 "price_max": 5500.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-18",
-            "published_at": "2026-05-18 00:00:00",
-            "herb": "海金沙",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "115 元/kg",
-            "price_value": 115.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "海金沙，近期市场商家关注力度不高，货源走销不快，持货者喊价与前期保持平稳，现市场海金沙净货多报价在115元上下，继续关注后期货源走销情况。",
-            "content_full": "海金沙，近期市场商家关注力度不高，货源走销不快，持货者喊价与前期保持平稳，现市场海金沙净货多报价在115元上下，继续关注后期货源走销情况。",
-            "source": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/200/1110081.html",
-            "price_points": [
-              {
-                "label": "海金沙净货多",
-                "price": "115 元/kg",
-                "unit": "元/kg",
-                "price_min": 115.0,
-                "price_max": 115.0
               }
             ],
             "units": [
