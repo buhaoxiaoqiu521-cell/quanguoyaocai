@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-05-22 12:37:36",
+    "generated_at": "2026-05-22 17:34:33",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-05-22",
     "available_dates": [
@@ -322,8 +322,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 10089,
-    "origin_records": 3561,
+    "total_records": 10091,
+    "origin_records": 3563,
     "market_records": 6528,
     "source_count": 2,
     "herb_count": 899,
@@ -339,18 +339,22 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：10089 条",
-      "产地：3561 条",
+      "总记录：10091 条",
+      "产地：3563 条",
       "市场：6528 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-05-22",
-    "latest_count": 19,
+    "latest_count": 21,
     "top_herbs": [
       {
         "name": "蜈蚣",
+        "count": 2
+      },
+      {
+        "name": "麦冬",
         "count": 2
       },
       {
@@ -358,22 +362,18 @@
         "count": 2
       },
       {
-        "name": "木香",
+        "name": "柴胡",
         "count": 1
       },
       {
         "name": "金银花",
-        "count": 1
-      },
-      {
-        "name": "黄芩",
         "count": 1
       }
     ],
     "sources": [
       {
         "name": "药通网",
-        "count": 6629
+        "count": 6631
       },
       {
         "name": "中药材天地网",
@@ -383,9 +383,9 @@
   },
   "origin": {
     "total": 200,
-    "all_total": 3424,
+    "all_total": 3425,
     "latest_date": "2026-05-22",
-    "latest_count": 19,
+    "latest_count": 20,
     "date_options": [
       "2026-05-22",
       "2026-05-21",
@@ -712,6 +712,122 @@
     "items": [
       {
         "date": "2026-05-22",
+        "published_at": "2026-05-22 15:06:55",
+        "herb": "柴胡",
+        "spec": "",
+        "location": "山西运城闻喜县薛店镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "柴胡近期有药厂人员前来寻货，货源走动良好，目前库存剩余有量，持货商家售货态度积极，行情基本保持稳定，现药厂货售价62元左右，软切货售价70-75元，硬切货售价80-85元之间，去年产新当地连续降雨，部分地块死苗，造成好货不多",
+        "content_full": "柴胡近期有药厂人员前来寻货，货源走动良好，目前库存剩余有量，持货商家售货态度积极，行情基本保持稳定，现药厂货售价62元左右，软切货售价70-75元，硬切货售价80-85元之间，去年产新当地连续降雨，部分地块死苗，造成好货不多",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/G8Jz0CY1.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "软切货",
+            "price": "70-75 元/kg",
+            "unit": "元/kg",
+            "price_min": 70.0,
+            "price_max": 75.0
+          },
+          {
+            "label": "药厂货",
+            "price": "62 元/kg",
+            "unit": "元/kg",
+            "price_min": 62.0,
+            "price_max": 62.0
+          },
+          {
+            "label": "硬切货",
+            "price": "80-85 元/kg",
+            "unit": "元/kg",
+            "price_min": 80.0,
+            "price_max": 85.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-05-22",
+        "published_at": "2026-05-22 15:06:41",
+        "herb": "金银花",
+        "spec": "",
+        "location": "山东省平邑县流峪镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/单斤",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "金银花当地正在大量采收中，青花鲜货收购价10元左右/单斤，白花6-7元/单斤，折干率4.8-5:1，干货小批量加工应市，近阶段商家多持观望态度，货源走销偏缓，价格暂保持稳定，现白花选装货售价98元上下，一级货88元左右，药厂投料货因质量不等在60-80元之间...",
+        "content_full": "金银花当地正在大量采收中，青花鲜货收购价10元左右/单斤，白花6-7元/单斤，折干率4.8-5:1，干货小批量加工应市，近阶段商家多持观望态度，货源走销偏缓，价格暂保持稳定，现白花选装货售价98元上下，一级货88元左右，药厂投料货因质量不等在60-80元之间，饮料花价格稳定在45-55元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/bSAwVPMx.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "白花",
+            "price": "6-7 元/单斤",
+            "unit": "元/单斤",
+            "price_min": 6.0,
+            "price_max": 7.0
+          },
+          {
+            "label": "白花选装货",
+            "price": "98 元/单斤",
+            "unit": "元/单斤",
+            "price_min": 98.0,
+            "price_max": 98.0
+          },
+          {
+            "label": "一级货",
+            "price": "88 元/单斤",
+            "unit": "元/单斤",
+            "price_min": 88.0,
+            "price_max": 88.0
+          },
+          {
+            "label": "药厂投料货因质量不等在",
+            "price": "60-80 元/单斤",
+            "unit": "元/单斤",
+            "price_min": 60.0,
+            "price_max": 80.0
+          },
+          {
+            "label": "饮料花价格稳定在",
+            "price": "45-55 元/单斤",
+            "unit": "元/单斤",
+            "price_min": 45.0,
+            "price_max": 55.0
+          }
+        ],
+        "units": [
+          "元/单斤"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-05-22",
         "published_at": "2026-05-22 11:03:29",
         "herb": "蜈蚣",
         "spec": "",
@@ -781,71 +897,6 @@
       },
       {
         "date": "2026-05-22",
-        "published_at": "2026-05-22 10:59:51",
-        "herb": "金银花",
-        "spec": "",
-        "location": "山东省平邑县流峪镇",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/单斤",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "金银花当地正在大量采收中，青花鲜货收购价10元左右/单斤，白花6-7元/单斤，折干率4.8-5:1，干货小批量加工应市，近阶段商家多持观望态度，货源走销偏缓，价格暂保持稳定，现白花选装货售价98元上下，一级货88元左右，药厂投料货因质量不等在60-80元之间...",
-        "content_full": "金银花当地正在大量采收中，青花鲜货收购价10元左右/单斤，白花6-7元/单斤，折干率4.8-5:1，干货小批量加工应市，近阶段商家多持观望态度，货源走销偏缓，价格暂保持稳定，现白花选装货售价98元上下，一级货88元左右，药厂投料货因质量不等在60-80元之间，饮料花价格稳定在45-55元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/bSAwVPMx.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "白花",
-            "price": "6-7 元/单斤",
-            "unit": "元/单斤",
-            "price_min": 6.0,
-            "price_max": 7.0
-          },
-          {
-            "label": "白花选装货",
-            "price": "98 元/单斤",
-            "unit": "元/单斤",
-            "price_min": 98.0,
-            "price_max": 98.0
-          },
-          {
-            "label": "一级货",
-            "price": "88 元/单斤",
-            "unit": "元/单斤",
-            "price_min": 88.0,
-            "price_max": 88.0
-          },
-          {
-            "label": "药厂投料货因质量不等在",
-            "price": "60-80 元/单斤",
-            "unit": "元/单斤",
-            "price_min": 60.0,
-            "price_max": 80.0
-          },
-          {
-            "label": "饮料花价格稳定在",
-            "price": "45-55 元/单斤",
-            "unit": "元/单斤",
-            "price_min": 45.0,
-            "price_max": 55.0
-          }
-        ],
-        "units": [
-          "元/单斤"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-05-22",
         "published_at": "2026-05-22 10:58:52",
         "herb": "黄芩",
         "spec": "",
@@ -897,57 +948,6 @@
       },
       {
         "date": "2026-05-22",
-        "published_at": "2026-05-22 10:58:38",
-        "herb": "柴胡",
-        "spec": "",
-        "location": "山西运城闻喜县薛店镇",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "柴胡近期有药厂人员前来寻货，货源走动良好，目前库存剩余有量，持货商家售货态度积极，行情基本保持稳定，现药厂货售价62元左右，软切货售价70-75元，硬切货售价80-85元之间，去年产新当地连续降雨，部分地块死苗，造成好货不多",
-        "content_full": "柴胡近期有药厂人员前来寻货，货源走动良好，目前库存剩余有量，持货商家售货态度积极，行情基本保持稳定，现药厂货售价62元左右，软切货售价70-75元，硬切货售价80-85元之间，去年产新当地连续降雨，部分地块死苗，造成好货不多",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/G8Jz0CY1.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "软切货",
-            "price": "70-75 元/kg",
-            "unit": "元/kg",
-            "price_min": 70.0,
-            "price_max": 75.0
-          },
-          {
-            "label": "药厂货",
-            "price": "62 元/kg",
-            "unit": "元/kg",
-            "price_min": 62.0,
-            "price_max": 62.0
-          },
-          {
-            "label": "硬切货",
-            "price": "80-85 元/kg",
-            "unit": "元/kg",
-            "price_min": 80.0,
-            "price_max": 85.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-05-22",
         "published_at": "2026-05-22 10:58:25",
         "herb": "麦冬",
         "spec": "",
@@ -959,8 +959,8 @@
         "delta_amount": "",
         "delta_rate": "",
         "tag": "",
-        "summary": "麦冬当地正值产新，寻货暂未大量应市，目前交易仍以陈货为主，近期寻货商家不多，货源走动不快，现统装货售价65-70元之间",
-        "content_full": "麦冬当地正值产新，寻货暂未大量应市，目前交易仍以陈货为主，近期寻货商家不多，货源走动不快，现统装货售价65-70元之间",
+        "summary": "麦冬当地正值产新，新货暂未大量应市，目前交易仍以陈货为主，近期寻货商家不多，货源走动不快，现统装货售价65-70元之间",
+        "content_full": "麦冬当地正值产新，新货暂未大量应市，目前交易仍以陈货为主，近期寻货商家不多，货源走动不快，现统装货售价65-70元之间",
         "source": "药通网",
         "url": "",
         "source_links": [
@@ -1550,6 +1550,57 @@
             "unit": "元/kg",
             "price_min": 70.0,
             "price_max": 75.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-05-22",
+        "published_at": "2026-05-22 10:55:35",
+        "herb": "干姜",
+        "spec": "",
+        "location": "云南省曲靖市罗平县板桥镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "干姜产地种植基本结束，由于今年价位相对不高，预计今年种植面积较去年减少30%；产地库存尚且充裕，近阶段市场商家及厂家采购力度不强，多以出口订单为主，货源正常交易，优质货行情保持稳定，质量次货价格窄幅下调，个子与片价格悬殊不大，现饮片货价格在15元左右，统货14元，药厂货13元",
+        "content_full": "干姜产地种植基本结束，由于今年价位相对不高，预计今年种植面积较去年减少30%；产地库存尚且充裕，近阶段市场商家及厂家采购力度不强，多以出口订单为主，货源正常交易，优质货行情保持稳定，质量次货价格窄幅下调，个子与片价格悬殊不大，现饮片货价格在15元左右，统货14元，药厂货13元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/cg3LTR35.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "饮片货",
+            "price": "15 元/kg",
+            "unit": "元/kg",
+            "price_min": 15.0,
+            "price_max": 15.0
+          },
+          {
+            "label": "统货",
+            "price": "14 元/kg",
+            "unit": "元/kg",
+            "price_min": 14.0,
+            "price_max": 14.0
+          },
+          {
+            "label": "药厂货",
+            "price": "13 元/kg",
+            "unit": "元/kg",
+            "price_min": 13.0,
+            "price_max": 13.0
           }
         ],
         "units": [
@@ -9709,50 +9760,6 @@
             "unit": "元/kg",
             "price_min": 50.0,
             "price_max": 50.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-05-18",
-        "published_at": "2026-05-18 00:00:00",
-        "herb": "徐长卿",
-        "spec": "",
-        "location": "山东省泰安市新泰市",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "山东省泰安市新泰市产地徐长卿小批量走动，机选饮片货36元左右，纯中心段价格稍高，在41元左右",
-        "content_full": "山东省泰安市新泰市产地徐长卿小批量走动，机选饮片货36元左右，纯中心段价格稍高，在41元左右",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1110159.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "机选饮片货",
-            "price": "36 元/kg",
-            "unit": "元/kg",
-            "price_min": 36.0,
-            "price_max": 36.0
-          },
-          {
-            "label": "在",
-            "price": "41 元/kg",
-            "unit": "元/kg",
-            "price_min": 41.0,
-            "price_max": 41.0
           }
         ],
         "units": [
