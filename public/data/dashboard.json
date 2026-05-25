@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-05-25 17:02:11",
+    "generated_at": "2026-05-25 20:02:24",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-05-25",
     "available_dates": [
@@ -325,8 +325,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 10273,
-    "origin_records": 3647,
+    "total_records": 10276,
+    "origin_records": 3650,
     "market_records": 6626,
     "source_count": 2,
     "herb_count": 904,
@@ -342,15 +342,15 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：10273 条",
-      "产地：3647 条",
+      "总记录：10276 条",
+      "产地：3650 条",
       "市场：6626 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-05-25",
-    "latest_count": 93,
+    "latest_count": 96,
     "top_herbs": [
       {
         "name": "元胡",
@@ -380,15 +380,15 @@
       },
       {
         "name": "中药材天地网",
-        "count": 3506
+        "count": 3509
       }
     ]
   },
   "origin": {
     "total": 200,
-    "all_total": 3505,
+    "all_total": 3508,
     "latest_date": "2026-05-25",
-    "latest_count": 42,
+    "latest_count": 45,
     "date_options": [
       "2026-05-25",
       "2026-05-24",
@@ -2056,6 +2056,50 @@
       {
         "date": "2026-05-25",
         "published_at": "2026-05-25 00:00:00",
+        "herb": "覆盆子",
+        "spec": "",
+        "location": "浙江磐安集镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "覆盆子产新基本结束，昨天磐安集镇上货量有量，且货源保持畅销，行情继续小涨，统货价格在72元左右，包检货由90-95元升至目前的100元左右",
+        "content_full": "覆盆子产新基本结束，昨天磐安集镇上货量有量，且货源保持畅销，行情继续小涨，统货价格在72元左右，包检货由90-95元升至目前的100元左右",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1110711.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "统货",
+            "price": "72 元/kg",
+            "unit": "元/kg",
+            "price_min": 72.0,
+            "price_max": 72.0
+          },
+          {
+            "label": "包检货由",
+            "price": "90-95 元/kg",
+            "unit": "元/kg",
+            "price_min": 90.0,
+            "price_max": 95.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-05-25",
+        "published_at": "2026-05-25 00:00:00",
         "herb": "菊苣根",
         "spec": "",
         "location": "新疆乌鲁木齐市沙依巴克区",
@@ -2447,6 +2491,43 @@
       {
         "date": "2026-05-25",
         "published_at": "2026-05-25 00:00:00",
+        "herb": "浙贝母",
+        "spec": "",
+        "location": "浙江磐安集镇",
+        "market": "产地",
+        "price": "135-140 元/kg",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "浙贝母产区采挖继续，昨天磐安集镇依然保持畅销，无硫统片对外售价在135-140元之间不等，其走动情况仍为商家持续关注",
+        "content_full": "浙贝母产区采挖继续，昨天磐安集镇依然保持畅销，无硫统片对外售价在135-140元之间不等，其走动情况仍为商家持续关注",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1110710.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "无硫统片对外售",
+            "price": "135-140 元/kg",
+            "unit": "元/kg",
+            "price_min": 135.0,
+            "price_max": 140.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-05-25",
+        "published_at": "2026-05-25 00:00:00",
         "herb": "水菖蒲",
         "spec": "",
         "location": "河南省信阳市商城县",
@@ -2474,6 +2555,43 @@
             "unit": "元/kg",
             "price_min": 8.0,
             "price_max": 8.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-05-25",
+        "published_at": "2026-05-25 00:00:00",
+        "herb": "延胡索",
+        "spec": "",
+        "location": "浙江磐安集镇",
+        "market": "产地",
+        "price": "70-75 元/kg",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "延胡索产区采挖中，昨天磐安集镇有商问价，但货源少有交易，价格与上集基本持平，本地所产的统货价格维持在70-75元之间",
+        "content_full": "延胡索产区采挖中，昨天磐安集镇有商问价，但货源少有交易，价格与上集基本持平，本地所产的统货价格维持在70-75元之间",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1110709.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "统货",
+            "price": "70-75 元/kg",
+            "unit": "元/kg",
+            "price_min": 70.0,
+            "price_max": 75.0
           }
         ],
         "units": [
@@ -9640,112 +9758,6 @@
             "unit": "元/kg",
             "price_min": 36.0,
             "price_max": 36.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-05-19",
-        "published_at": "2026-05-19 00:00:00",
-        "herb": "覆盆子",
-        "spec": "",
-        "location": "浙江磐安集镇",
-        "market": "产地",
-        "price": "65 元/kg",
-        "price_value": 65.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "昨天磐安集镇逢集，覆盆子新货上货量不大，但购货商家增加，货源走动显畅，且价格略涨，本地所产的统货价格在65元左右",
-        "content_full": "昨天磐安集镇逢集，覆盆子新货上货量不大，但购货商家增加，货源走动显畅，且价格略涨，本地所产的统货价格在65元左右",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1110222.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统货",
-            "price": "65 元/kg",
-            "unit": "元/kg",
-            "price_min": 65.0,
-            "price_max": 65.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-05-19",
-        "published_at": "2026-05-19 00:00:00",
-        "herb": "胡椒",
-        "spec": "",
-        "location": "越南产区黑",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "越南产区黑胡椒近期出口订单减少，同时受收获季后供应集中释放的影响，压力增加，今天行情出现明显的回落，每公斤下跌2000-3000越南盾，现价在139000-142000越南盾之间，后期依然要看国际环境的变化",
-        "content_full": "越南产区黑胡椒近期出口订单减少，同时受收获季后供应集中释放的影响，压力增加，今天行情出现明显的回落，每公斤下跌2000-3000越南盾，现价在139000-142000越南盾之间，后期依然要看国际环境的变化",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1110240.html"
-          }
-        ],
-        "price_points": []
-      },
-      {
-        "date": "2026-05-19",
-        "published_at": "2026-05-19 00:00:00",
-        "herb": "肉桂",
-        "spec": "",
-        "location": "广东省德庆县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "广东省德庆县肉桂产新快要结束了，最近产地依然很少商家要货，货源走动很慢，行情前期因干度不高价格在9-9.5元左右，近来的货源干度有所提高，价格也升至10.2元上下，商家多是按订单采购",
-        "content_full": "广东省德庆县肉桂产新快要结束了，最近产地依然很少商家要货，货源走动很慢，行情前期因干度不高价格在9-9.5元左右，近来的货源干度有所提高，价格也升至10.2元上下，商家多是按订单采购",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1110242.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "行情前期因干度不高",
-            "price": "9-9.5 元/kg",
-            "unit": "元/kg",
-            "price_min": 9.0,
-            "price_max": 9.5
-          },
-          {
-            "label": "价格也升至",
-            "price": "10.2 元/kg",
-            "unit": "元/kg",
-            "price_min": 10.2,
-            "price_max": 10.2
           }
         ],
         "units": [
