@@ -1,9 +1,22 @@
 {
   "meta": {
-    "total": 22,
-    "review_count": 22
+    "total": 23,
+    "review_count": 23
   },
   "items": [
+    {
+      "type": "mixed_units",
+      "level": "review",
+      "date": "2026-05-26",
+      "herb": "三七",
+      "location": "云南省文山市",
+      "top_unit": "元/kg",
+      "point_units": [
+        "元/kg",
+        "元/斤"
+      ],
+      "message": "同一条记录同时包含多种计价单位，已保留 price_points 单位，但建议人工复核。"
+    },
     {
       "type": "mixed_units",
       "level": "review",
