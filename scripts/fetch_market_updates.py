@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 import re
 import sys
 import time
@@ -16,16 +17,24 @@ from bs4 import BeautifulSoup
 
 
 UA = {
-    "User-Agent": "Mozilla/5.0",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.7",
+    "Connection": "close",
     "Referer": "https://www.yt1998.com/marketInfo--3.html",
     "X-Requested-With": "XMLHttpRequest",
 }
 ZY_HEADERS = {
-    "User-Agent": "Mozilla/5.0",
+    "User-Agent": UA["User-Agent"],
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.7",
+    "Connection": "close",
     "Referer": "https://www.zyctd.com/",
 }
 YT_VERIFY_URL = "https://www.yt1998.com/ytw/yanzheng/yy.jsp"
 YT_VERIFY_COOKIE = "zshcookiename"
+REQUEST_TIMEOUT = (10, 35)
+RETRY_DELAYS = (1.5, 4.0, 8.0, 14.0)
 MARKET_TARGETS = {
     "1": "亳州",
     "2": "安国",
@@ -48,6 +57,41 @@ ENUMERATION_SPLIT_RE = re.compile(r"(?=[①②③④⑤⑥⑦⑧⑨⑩])")
 LIST_MARKER_RE = re.compile(r"^[①②③④⑤⑥⑦⑧⑨⑩\d]+[\.、\)]?\s*")
 DETAIL_SELECTORS = ("div.info-content", ".zx-info-detail .info-content")
 PREVIEW_LIMIT = 140
+
+
+def sleep_before_retry(attempt: int) -> None:
+    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
+    time.sleep(delay + random.uniform(0, 0.8))
+
+
+def request_with_retry(
+    session: requests.Session,
+    method: str,
+    url: str,
+    *,
+    allow_http_fallback: bool = False,
+    **kwargs: Any,
+) -> requests.Response:
+    urls = [url]
+    if allow_http_fallback and url.startswith("https://"):
+        urls.append("http://" + url[len("https://") :])
+
+    last_error: Exception | None = None
+    for current_url in urls:
+        for attempt in range(len(RETRY_DELAYS)):
+            try:
+                response = session.request(method, current_url, timeout=REQUEST_TIMEOUT, **kwargs)
+                response.raise_for_status()
+                return response
+            except requests.RequestException as exc:
+                last_error = exc
+                if attempt < len(RETRY_DELAYS) - 1:
+                    sleep_before_retry(attempt)
+        if last_error and not isinstance(last_error, (requests.exceptions.SSLError, requests.exceptions.ConnectionError)):
+            break
+    if last_error is not None:
+        raise last_error
+    raise RuntimeError(f"请求失败：{url}")
 
 
 def clean_text(value: Any) -> str:
@@ -96,8 +140,12 @@ def extract_zy_detail_payload(session: requests.Session, url: str) -> tuple[str,
     if not href:
         return ("", "")
     try:
-        response = session.get(href, timeout=20)
-        response.raise_for_status()
+        response = request_with_retry(
+            session,
+            "GET",
+            href,
+            allow_http_fallback=href.startswith("https://www.zyctd.com/"),
+        )
     except Exception:
         return ("", "")
     soup = BeautifulSoup(response.text, "html.parser")
@@ -201,12 +249,12 @@ def normalize_market(value: str) -> str:
 def ensure_yt_verified(session: requests.Session, target_path: str = "/ytw/second/marketMgr/query.jsp") -> None:
     last_error = ""
     for attempt in range(4):
-        verify_response = session.post(
+        verify_response = request_with_retry(
+            session,
+            "POST",
             YT_VERIFY_URL,
             data={"url": target_path},
-            timeout=20,
         )
-        verify_response.raise_for_status()
         uuid = ""
         try:
             payload = verify_response.json()
@@ -220,7 +268,7 @@ def ensure_yt_verified(session: requests.Session, target_path: str = "/ytw/secon
         if uuid:
             session.cookies.set(YT_VERIFY_COOKIE, uuid, domain="www.yt1998.com", path="/")
             return
-        time.sleep(0.6 * (attempt + 1))
+        sleep_before_retry(attempt)
     raise RuntimeError(f"药通网验证未返回 uuid。响应片段：{last_error or 'empty'}")
 
 
@@ -239,7 +287,9 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
             data = None
             last_error: Exception | None = None
             for attempt in range(3):
-                response = session.post(
+                response = request_with_retry(
+                    session,
+                    "POST",
                     url,
                     data={
                         "scid": scid,
@@ -249,15 +299,14 @@ def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: 
                         "pageIndex": page,
                         "pageSize": page_size,
                     },
-                    timeout=20,
                 )
-                response.raise_for_status()
                 try:
                     data = response.json().get("data", [])
                     break
                 except Exception as exc:
                     last_error = exc
                     ensure_yt_verified(session)
+                    sleep_before_retry(attempt)
             if data is None:
                 if payload_items:
                     print(
@@ -322,13 +371,12 @@ def fetch_zy_market(target_date: str, max_pages: int = 20) -> tuple[dict[str, li
             last_error: Exception | None = None
             for attempt in range(3):
                 try:
-                    response = session.get(url, timeout=20)
-                    response.raise_for_status()
+                    response = request_with_retry(session, "GET", url, allow_http_fallback=True)
                     break
                 except Exception as exc:
                     last_error = exc
                     if attempt < 2:
-                        time.sleep(1.5 * (attempt + 1))
+                        sleep_before_retry(attempt)
             if response is None:
                 if parsed_items:
                     print(
