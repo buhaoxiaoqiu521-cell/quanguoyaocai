@@ -19,7 +19,7 @@ from zipfile import ZipFile
 
 SHEET_NAME = "报价录入"
 COLS = list("ABCDEFGHIJKLM")
-MARKET_TARGETS = ["亳州", "安国", "玉林"]
+MARKET_TARGETS = ["亳州", "安国", "玉林", "成都"]
 SECTION_DISPLAY_LIMIT = 200
 SEARCH_INDEX_SECTION_LIMIT = {"origin": 5000, "market": 8000, "hotspot": 1500}
 UP_KEYWORDS = ("上涨", "上扬", "走快", "畅快", "走畅", "上浮", "寻货", "走动良好", "偏强")
@@ -1527,7 +1527,7 @@ def build_dashboard(
         "hero": {
             "eyebrow": "产地行情 / 市场行情 / 行业热点",
             "title": "先把真实记录摊开，再做判断与趋势。",
-            "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林持续更新，行业热点单独维护，不和报价信息混在一起。",
+            "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林、成都持续更新，行业热点单独维护，不和报价信息混在一起。",
             "source_strip": [
                 f"总记录：{len(records)} 条",
                 f"产地：{len(origin_records)} 条",

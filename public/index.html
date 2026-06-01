@@ -2424,7 +2424,7 @@
 
     function renderMarketSection(dashboard) {
       const groups = dashboard.markets.groups || [];
-      const targetMarkets = ["亳州", "安国", "玉林"];
+      const targetMarkets = dashboard.markets.targets || ["亳州", "安国", "玉林", "成都"];
       const tabs = targetMarkets.map((name) => {
         const group = groups.find((item) => item.name === name);
         return {

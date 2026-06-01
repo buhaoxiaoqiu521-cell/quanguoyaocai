@@ -40,6 +40,12 @@ MARKET_TARGETS = {
     "2": "安国",
     "3": "玉林",
 }
+ZY_MARKET_TARGETS = {
+    "安国": "130699",
+    "亳州": "341699",
+    "玉林": "450999",
+    "成都": "510199",
+}
 PRICE_RANGE_RE = re.compile(
     r"(\d+(?:\.\d+)?)\s*(?:-|~|至|到)\s*(\d+(?:\.\d+)?)\s*(?:元|块)(?:/公斤|/千克|每公斤|每千克|左右|上下|之间)?"
 )
@@ -273,7 +279,10 @@ def ensure_yt_verified(session: requests.Session, target_path: str = "/ytw/secon
 
 
 def choose_target_dates(items: list[dict[str, Any]], target_date: str) -> list[str]:
-    return [target_date] if any(clean_text(item.get("date")) == target_date for item in items) else []
+    dates = [clean_text(item.get("date")) for item in items if clean_text(item.get("date"))]
+    if target_date in dates:
+        return [target_date]
+    return [dates[0]] if dates else []
 
 
 def fetch_yt_market(scid: str, target_date: str, max_pages: int = 5, page_size: int = 20) -> tuple[list[str], list[dict[str, str]]]:
@@ -365,82 +374,81 @@ def fetch_zy_market(target_date: str, max_pages: int = 20) -> tuple[dict[str, li
 
     with requests.Session() as session:
         session.headers.update(ZY_HEADERS)
-        for page in range(1, max_pages + 1):
-            url = "https://www.zyctd.com/zixun/200-1.html" if page == 1 else f"https://www.zyctd.com/zixun/200-{page}.html"
-            response = None
-            last_error: Exception | None = None
-            for attempt in range(3):
-                try:
-                    response = request_with_retry(session, "GET", url, allow_http_fallback=True)
+        for market_name, market_code in ZY_MARKET_TARGETS.items():
+            market_items_before = len(parsed_items)
+            for page in range(1, max_pages + 1):
+                url = f"https://www.zyctd.com/zixun/200/{market_code}-{page}.html"
+                response = None
+                last_error: Exception | None = None
+                for attempt in range(3):
+                    try:
+                        response = request_with_retry(session, "GET", url, allow_http_fallback=True)
+                        break
+                    except Exception as exc:
+                        last_error = exc
+                        if attempt < 2:
+                            sleep_before_retry(attempt)
+                if response is None:
+                    if len(parsed_items) > market_items_before:
+                        print(
+                            f"[warn] 中药材天地网{market_name}市场列表异常，保留已抓到的数据（page={page}）：{last_error}",
+                            file=sys.stderr,
+                        )
+                        break
+                    raise RuntimeError(f"中药材天地网{market_name}市场列表抓取失败（page={page}）。") from last_error
+                soup = BeautifulSoup(response.text, "html.parser")
+                boxes = soup.select("div.zixun-item-box")
+                if not boxes:
                     break
-                except Exception as exc:
-                    last_error = exc
-                    if attempt < 2:
-                        sleep_before_retry(attempt)
-            if response is None:
-                if parsed_items:
-                    print(
-                        f"[warn] 中药材天地网市场列表异常，保留已抓到的数据（page={page}）：{last_error}",
-                        file=sys.stderr,
+                box_dates: list[str] = []
+                for box in boxes:
+                    title_node = box.select_one("div.zixun-item-title")
+                    desc_node = box.select_one("div.zixun-item-desc")
+                    footer_node = box.select_one("div.zixun-item-footer")
+                    link_node = box.select_one("div.zixun-item-title a")
+                    summary = clean_text(desc_node.get_text(" ", strip=True) if desc_node else "")
+                    footer = clean_text(footer_node.get_text(" ", strip=True) if footer_node else "")
+                    href = clean_text(link_node.get("href", "") if link_node else "")
+                    if href.startswith("//"):
+                        href = "https:" + href
+                    elif href.startswith("/"):
+                        href = "https://www.zyctd.com" + href
+
+                    date = footer.split(" ")[0] if footer else ""
+                    if date:
+                        box_dates.append(date)
+                    herb_match = FOOTER_HERB_RE.search(footer)
+                    detail_text, published_date = extract_zy_detail_payload(session, href)
+                    content_text = detail_text or summary
+                    price_value, price_label = extract_price(content_text)
+                    price_points = extract_price_points(content_text)
+                    parsed_items.append(
+                        {
+                            "date": published_date or date,
+                            "published_at": normalize_published_at(published_date, published_date or date),
+                            "herb": clean_text(herb_match.group(1) if herb_match else ""),
+                            "spec": "",
+                            "unit": "元/kg",
+                            "market": market_name,
+                            "location": "",
+                            "today_price": price_value,
+                            "yesterday_price": "",
+                            "delta_amount": "",
+                            "delta_rate": "",
+                            "source": "中药材天地网",
+                            "url": href,
+                            "summary": build_preview_text(content_text, fallback=summary),
+                            "content_full": content_text,
+                            "price_label": price_label,
+                            "price_points": price_points,
+                        }
                     )
+
+                if box_dates and all(date < target_date for date in box_dates if date):
                     break
-                raise RuntimeError(f"中药材天地网市场列表抓取失败（page={page}）。") from last_error
-            soup = BeautifulSoup(response.text, "html.parser")
-            boxes = soup.select("div.zixun-item-box")
-            if not boxes:
-                break
-            for box in boxes:
-                title_node = box.select_one("div.zixun-item-title")
-                desc_node = box.select_one("div.zixun-item-desc")
-                footer_node = box.select_one("div.zixun-item-footer")
-                link_node = box.select_one("div.zixun-item-title a")
-                title = clean_text(title_node.get_text(" ", strip=True) if title_node else "")
-                summary = clean_text(desc_node.get_text(" ", strip=True) if desc_node else "")
-                footer = clean_text(footer_node.get_text(" ", strip=True) if footer_node else "")
-                href = clean_text(link_node.get("href", "") if link_node else "")
-                if href.startswith("//"):
-                    href = "https:" + href
-                elif href.startswith("/"):
-                    href = "https://www.zyctd.com" + href
-
-                date = footer.split(" ")[0] if footer else ""
-                market_match = FOOTER_MARKET_RE.search(footer)
-                herb_match = FOOTER_HERB_RE.search(footer)
-                market = normalize_market(market_match.group(1) if market_match else title)
-                if market not in MARKET_TARGETS.values():
-                    continue
-                detail_text, published_date = extract_zy_detail_payload(session, href)
-                content_text = detail_text or summary
-                price_value, price_label = extract_price(content_text)
-                price_points = extract_price_points(content_text)
-                parsed_items.append(
-                    {
-                        "date": published_date or date,
-                        "published_at": normalize_published_at(published_date, published_date or date),
-                        "herb": clean_text(herb_match.group(1) if herb_match else ""),
-                        "spec": "",
-                        "unit": "元/kg",
-                        "market": market,
-                        "location": "",
-                        "today_price": price_value,
-                        "yesterday_price": "",
-                        "delta_amount": "",
-                        "delta_rate": "",
-                        "source": "中药材天地网",
-                        "url": href,
-                        "summary": build_preview_text(content_text, fallback=summary),
-                        "content_full": content_text,
-                        "price_label": price_label,
-                        "price_points": price_points,
-                    }
-                )
-
-            box_dates = [clean_text(box.select_one("div.zixun-item-footer").get_text(" ", strip=True)).split(" ")[0] for box in boxes if box.select_one("div.zixun-item-footer")]
-            if box_dates and all(date < target_date for date in box_dates if date):
-                break
 
     chosen_dates: dict[str, list[str]] = {}
-    for market in MARKET_TARGETS.values():
+    for market in list(MARKET_TARGETS.values()) + [name for name in ZY_MARKET_TARGETS if name not in MARKET_TARGETS.values()]:
         items = [item for item in parsed_items if item["market"] == market]
         chosen_dates[market] = choose_target_dates(items, target_date)
 
@@ -544,12 +552,13 @@ def main() -> None:
 
     source_breakdown = Counter(item["source"] for item in new_records)
     market_breakdown = Counter(item["market"] for item in new_records)
+    summary_markets = list(MARKET_TARGETS.values()) + [name for name in ZY_MARKET_TARGETS if name not in MARKET_TARGETS.values()]
     summary = {
         "target_date": args.target_date,
         "output": str(output_path),
         "new_records": len(new_records),
         "records": len(records),
-        "markets": {market: market_breakdown.get(market, 0) for market in MARKET_TARGETS.values()},
+        "markets": {market: market_breakdown.get(market, 0) for market in summary_markets},
         "sources": dict(source_breakdown),
         "yt_dates": yt_dates,
         "zy_dates": zy_dates,
