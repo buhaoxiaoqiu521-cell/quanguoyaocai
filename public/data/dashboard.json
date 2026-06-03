@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-06-03 17:05:54",
+    "generated_at": "2026-06-03 17:16:17",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-06-03",
     "available_dates": [
@@ -334,9 +334,9 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 11098,
+    "total_records": 11135,
     "origin_records": 4083,
-    "market_records": 7015,
+    "market_records": 7052,
     "source_count": 2,
     "herb_count": 915,
     "market_targets": [
@@ -352,19 +352,27 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林、成都持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：11098 条",
+      "总记录：11135 条",
       "产地：4083 条",
-      "市场：7015 条",
+      "市场：7052 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-06-03",
-    "latest_count": 84,
+    "latest_count": 121,
     "top_herbs": [
+      {
+        "name": "薄荷",
+        "count": 3
+      },
       {
         "name": "浙贝母",
         "count": 3
+      },
+      {
+        "name": "百合",
+        "count": 2
       },
       {
         "name": "秦皮",
@@ -373,24 +381,16 @@
       {
         "name": "附子",
         "count": 2
-      },
-      {
-        "name": "车前子",
-        "count": 2
-      },
-      {
-        "name": "远志",
-        "count": 2
       }
     ],
     "sources": [
       {
         "name": "药通网",
-        "count": 7149
+        "count": 7159
       },
       {
         "name": "中药材天地网",
-        "count": 3949
+        "count": 3976
       }
     ]
   },
@@ -9652,21 +9652,121 @@
       "成都"
     ],
     "total": 200,
-    "all_total": 7015,
+    "all_total": 7052,
     "latest_date": "2026-06-03",
-    "latest_count": 17,
-    "covered_count": 4,
+    "latest_count": 54,
+    "covered_count": 3,
     "extra_market_count": 0,
     "groups": [
       {
         "name": "亳州",
-        "count": 73,
+        "count": 71,
         "latest_date": "2026-06-03",
         "sources": [
-          "药通网 47 条",
-          "中药材天地网 26 条"
+          "药通网 42 条",
+          "中药材天地网 29 条"
         ],
         "items": [
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 14:30:03",
+            "herb": "百合",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "50 元/kg",
+            "price_value": 50.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "百合临近产新，经营商恐慌性抛货导致价跌幅度较猛，近日行情有所转稳，现市场湖南统货价格在50元上下；选装货60-65元，后期随着产新期的到来，行情仍难平静。",
+            "content_full": "百合临近产新，经营商恐慌性抛货导致价跌幅度较猛，近日行情有所转稳，现市场湖南统货价格在50元上下；选装货60-65元，后期随着产新期的到来，行情仍难平静。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/YIWJIDf2_1.html",
+            "price_points": [
+              {
+                "label": "湖南统货",
+                "price": "50 元/kg",
+                "unit": "元/kg",
+                "price_min": 50.0,
+                "price_max": 50.0
+              },
+              {
+                "label": "选装货",
+                "price": "60-65 元/kg",
+                "unit": "元/kg",
+                "price_min": 60.0,
+                "price_max": 65.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 14:29:45",
+            "herb": "益智",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "70 元/kg",
+            "price_value": 70.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "益智随着新货陆续加工上市，行情持续下滑，市场人气低落，商家多观望对待，现海南货价格在70元上下，短期内行情仍难平静。",
+            "content_full": "益智随着新货陆续加工上市，行情持续下滑，市场人气低落，商家多观望对待，现海南货价格在70元上下，短期内行情仍难平静。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/Jy9jryhW_1.html",
+            "price_points": [
+              {
+                "label": "海南货",
+                "price": "70 元/kg",
+                "unit": "元/kg",
+                "price_min": 70.0,
+                "price_max": 70.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 14:29:23",
+            "herb": "王不留行",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "5.5 元/kg",
+            "price_value": 5.5,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "王不留行受低迷行情所致种植面积缩减，加之前阶段阴雨天气偏多导致质量下降，现陆续进入产新期，市场色选货价格在5.5元左右。",
+            "content_full": "王不留行受低迷行情所致种植面积缩减，加之前阶段阴雨天气偏多导致质量下降，现陆续进入产新期，市场色选货价格在5.5元左右。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/WC1f1yJm_1.html",
+            "price_points": [
+              {
+                "label": "色选货",
+                "price": "5.5 元/kg",
+                "unit": "元/kg",
+                "price_min": 5.5,
+                "price_max": 5.5
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
           {
             "date": "2026-06-03",
             "published_at": "2026-06-03 09:16:51",
@@ -9749,6 +9849,37 @@
             "delta_amount": "",
             "delta_rate": "",
             "tag": "",
+            "summary": "仙鹤草随着需求量的逐渐上升，市场货源小批量走销畅快，持货商对未来走势抱乐观态度，导致惜售心理进一步加强，行情稳步上升，现统片10元。",
+            "content_full": "仙鹤草随着需求量的逐渐上升，市场货源小批量走销畅快，持货商对未来走势抱乐观态度，导致惜售心理进一步加强，行情稳步上升，现统片10元。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/nosZcyCV_1.html",
+            "price_points": [
+              {
+                "label": "统片",
+                "price": "10 元/kg",
+                "unit": "元/kg",
+                "price_min": 10.0,
+                "price_max": 10.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 09:15:32",
+            "herb": "仙鹤草",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "10 元/kg",
+            "price_value": 10.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
             "summary": "仙鹤草随着需求量的逐渐上升，市场货源小批量走销畅快，持货商对未来走抱报乐观态度，导致惜售心理进一步加强，行情稳步上升，现统片10元。",
             "content_full": "仙鹤草随着需求量的逐渐上升，市场货源小批量走销畅快，持货商对未来走抱报乐观态度，导致惜售心理进一步加强，行情稳步上升，现统片10元。",
             "source": "药通网",
@@ -9798,6 +9929,44 @@
                 "unit": "元/kg",
                 "price_min": 11.0,
                 "price_max": 11.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 09:14:57",
+            "herb": "薄荷",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "4.5-5 元/kg",
+            "price_value": 4.5,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "薄荷子近日产地货源走销颇佳，价格保持坚挺；市场货源走销一直不及产地，经营商谨慎购货，多采取以销定购的方式来维持经营，价格暂趋于平稳，现头茬叶要价18元，全棵包检验货4.5-5元。",
+            "content_full": "薄荷子近日产地货源走销颇佳，价格保持坚挺；市场货源走销一直不及产地，经营商谨慎购货，多采取以销定购的方式来维持经营，价格暂趋于平稳，现头茬叶要价18元，全棵包检验货4.5-5元。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/cSpJxGzy_1.html",
+            "price_points": [
+              {
+                "label": "全棵包检验货",
+                "price": "4.5-5 元/kg",
+                "unit": "元/kg",
+                "price_min": 4.5,
+                "price_max": 5.0
+              },
+              {
+                "label": "头茬叶",
+                "price": "18 元/kg",
+                "unit": "元/kg",
+                "price_min": 18.0,
+                "price_max": 18.0
               }
             ],
             "units": [
@@ -9898,6 +10067,106 @@
                 "unit": "元/kg",
                 "price_min": 1500.0,
                 "price_max": 1500.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "蝼蛄",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "25 元/kg",
+            "price_value": 25.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "蝼蛄，平时一般为刚需走销，行情少商关注，最近价格一直稳定，目前亳州市场原包统货多要价在25元左右。",
+            "content_full": "蝼蛄，平时一般为刚需走销，行情少商关注，最近价格一直稳定，目前亳州市场原包统货多要价在25元左右。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111448.html",
+            "price_points": [
+              {
+                "label": "原包统货",
+                "price": "25 元/kg",
+                "unit": "元/kg",
+                "price_min": 25.0,
+                "price_max": 25.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "蚕茧",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "160-170 元/kg",
+            "price_value": 160.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "蚕茧，最近批量走动平稳，行情与上月基本持平，目前亳州市场多要价在160-170元之间不等，交易量不大。",
+            "content_full": "蚕茧，最近批量走动平稳，行情与上月基本持平，目前亳州市场多要价在160-170元之间不等，交易量不大。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111446.html",
+            "price_points": [
+              {
+                "label": "亳州市场",
+                "price": "160-170 元/kg",
+                "unit": "元/kg",
+                "price_min": 160.0,
+                "price_max": 170.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "九香虫",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "1100-1200 元/kg",
+            "price_value": 1100.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "九香虫，最近交易量不大，行情暂无明显变化，目前亳州市场一般货多要在850元左右，而全检货报价在1100-1200元之间不等。",
+            "content_full": "九香虫，最近交易量不大，行情暂无明显变化，目前亳州市场一般货多要在850元左右，而全检货报价在1100-1200元之间不等。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111447.html",
+            "price_points": [
+              {
+                "label": "而全检货",
+                "price": "1100-1200 元/kg",
+                "unit": "元/kg",
+                "price_min": 1100.0,
+                "price_max": 1200.0
+              },
+              {
+                "label": "一般货多要在",
+                "price": "850 元/kg",
+                "unit": "元/kg",
+                "price_min": 850.0,
+                "price_max": 850.0
               }
             ],
             "units": [
@@ -12109,438 +12378,16 @@
               "元/kg"
             ],
             "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 10:56:14",
-            "herb": "党参",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "40-45 元/kg",
-            "price_value": 40.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "党参持续走缓，商家多采取勤进快销的方式维持经营，市场药厂货价格在40-45元之间，中条货60-65元之间；过3号筛薄片售价70元，色选货77-78元，该品产地药农种植积极性不减，加之库存有量，短期内低迷行情仍难改观。",
-            "content_full": "党参持续走缓，商家多采取勤进快销的方式维持经营，市场药厂货价格在40-45元之间，中条货60-65元之间；过3号筛薄片售价70元，色选货77-78元，该品产地药农种植积极性不减，加之库存有量，短期内低迷行情仍难改观。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/FJd6xteR_1.html",
-            "price_points": [
-              {
-                "label": "药厂货",
-                "price": "40-45 元/kg",
-                "unit": "元/kg",
-                "price_min": 40.0,
-                "price_max": 45.0
-              },
-              {
-                "label": "中条货",
-                "price": "60-65 元/kg",
-                "unit": "元/kg",
-                "price_min": 60.0,
-                "price_max": 65.0
-              },
-              {
-                "label": "色选货",
-                "price": "77-78 元/kg",
-                "unit": "元/kg",
-                "price_min": 77.0,
-                "price_max": 78.0
-              },
-              {
-                "label": "过3号筛薄片",
-                "price": "70 元/kg",
-                "unit": "元/kg",
-                "price_min": 70.0,
-                "price_max": 70.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 10:55:52",
-            "herb": "白芍",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "3-4 元/kg",
-            "price_value": 3.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "白芍走势依然不见好转，行情疲软运行，生狗头片3-4元，熟狗头片5-7元；尾芍好统货价格在10-11元；三四级统货35-38元，好货40元以上。",
-            "content_full": "白芍走势依然不见好转，行情疲软运行，生狗头片3-4元，熟狗头片5-7元；尾芍好统货价格在10-11元；三四级统货35-38元，好货40元以上。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/4CYgQwRS_1.html",
-            "price_points": [
-              {
-                "label": "生狗头片",
-                "price": "3-4 元/kg",
-                "unit": "元/kg",
-                "price_min": 3.0,
-                "price_max": 4.0
-              },
-              {
-                "label": "熟狗头片",
-                "price": "5-7 元/kg",
-                "unit": "元/kg",
-                "price_min": 5.0,
-                "price_max": 7.0
-              },
-              {
-                "label": "尾芍好统货",
-                "price": "10-11 元/kg",
-                "unit": "元/kg",
-                "price_min": 10.0,
-                "price_max": 11.0
-              },
-              {
-                "label": "三四级统货",
-                "price": "35-38 元/kg",
-                "unit": "元/kg",
-                "price_min": 35.0,
-                "price_max": 38.0
-              },
-              {
-                "label": "好货",
-                "price": "40 元/kg",
-                "unit": "元/kg",
-                "price_min": 40.0,
-                "price_max": 40.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 10:54:44",
-            "herb": "知母",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "8-9 元/kg",
-            "price_value": 8.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "知母近阶段虽然走销情况不理想，但行情依然趋于平稳，亳州地产长片售价8-9元，圆片11-12元；河北货价格在15-16元。",
-            "content_full": "知母近阶段虽然走销情况不理想，但行情依然趋于平稳，亳州地产长片售价8-9元，圆片11-12元；河北货价格在15-16元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/rIrNKLLg_1.html",
-            "price_points": [
-              {
-                "label": "亳州地产长片",
-                "price": "8-9 元/kg",
-                "unit": "元/kg",
-                "price_min": 8.0,
-                "price_max": 9.0
-              },
-              {
-                "label": "圆片",
-                "price": "11-12 元/kg",
-                "unit": "元/kg",
-                "price_min": 11.0,
-                "price_max": 12.0
-              },
-              {
-                "label": "河北货",
-                "price": "15-16 元/kg",
-                "unit": "元/kg",
-                "price_min": 15.0,
-                "price_max": 16.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 08:59:39",
-            "herb": "地龙",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "190 元/kg",
-            "price_value": 190.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "地龙目前产地和市场均有不少货源待售，但近期走销转迟，受此影响行情继续保持低迷状态，现广西全开货价格在190元；沪地龙全开货在180元。",
-            "content_full": "地龙目前产地和市场均有不少货源待售，但近期走销转迟，受此影响行情继续保持低迷状态，现广西全开货价格在190元；沪地龙全开货在180元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/bsmbMwzS_1.html",
-            "price_points": [
-              {
-                "label": "广西全开货",
-                "price": "190 元/kg",
-                "unit": "元/kg",
-                "price_min": 190.0,
-                "price_max": 190.0
-              },
-              {
-                "label": "沪地龙全开货在",
-                "price": "180 元/kg",
-                "unit": "元/kg",
-                "price_min": 180.0,
-                "price_max": 180.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 08:59:29",
-            "herb": "蜈蚣",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "2.8 元/条",
-            "price_value": 2.8,
-            "unit": "元/条",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "蜈蚣继续产新中，近期市场来货有所增加，商家对其关注力度减弱，货源走销转缓，价格小幅下调，现市场15公分左右的大条售价2.8元/ 条；10公分的小条0.7-0.8元/条，蜈蚣直皮1600元。",
-            "content_full": "蜈蚣继续产新中，近期市场来货有所增加，商家对其关注力度减弱，货源走销转缓，价格小幅下调，现市场15公分左右的大条售价2.8元/ 条；10公分的小条0.7-0.8元/条，蜈蚣直皮1600元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/RMHX9l5h_1.html",
-            "price_points": [
-              {
-                "label": "15公分左右的大条",
-                "price": "2.8 元/条",
-                "unit": "元/条",
-                "price_min": 2.8,
-                "price_max": 2.8
-              },
-              {
-                "label": "10公分的小条",
-                "price": "0.7-0.8 元/条",
-                "unit": "元/条",
-                "price_min": 0.7,
-                "price_max": 0.8
-              },
-              {
-                "label": "蜈蚣直皮",
-                "price": "1600 元/条",
-                "unit": "元/条",
-                "price_min": 1600.0,
-                "price_max": 1600.0
-              }
-            ],
-            "units": [
-              "元/条"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 08:59:14",
-            "herb": "板蓝根",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "9 元/kg",
-            "price_value": 9.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "板蓝根近期市场寻货商家较前期有所增多，带动货源小批量走销畅快，价格转坚，现药厂东北货9元，甘肃、河南货9.5元；可切片货12元。",
-            "content_full": "板蓝根近期市场寻货商家较前期有所增多，带动货源小批量走销畅快，价格转坚，现药厂东北货9元，甘肃、河南货9.5元；可切片货12元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/xZ4Pr0kn_1.html",
-            "price_points": [
-              {
-                "label": "药厂东北货",
-                "price": "9 元/kg",
-                "unit": "元/kg",
-                "price_min": 9.0,
-                "price_max": 9.0
-              },
-              {
-                "label": "河南货",
-                "price": "9.5 元/kg",
-                "unit": "元/kg",
-                "price_min": 9.5,
-                "price_max": 9.5
-              },
-              {
-                "label": "可切片货",
-                "price": "12 元/kg",
-                "unit": "元/kg",
-                "price_min": 12.0,
-                "price_max": 12.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 08:59:01",
-            "herb": "土龙骨",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "260-270 元/kg",
-            "price_value": 260.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "土龙骨购货商家不减，市场货源小批量走销畅快，持货商对未来走势抱乐观态度导致惜售心理进一步加强，行情稳步上走，统货180元，水洗货260-270元。",
-            "content_full": "土龙骨购货商家不减，市场货源小批量走销畅快，持货商对未来走势抱乐观态度导致惜售心理进一步加强，行情稳步上走，统货180元，水洗货260-270元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/kaBBYmNY_1.html",
-            "price_points": [
-              {
-                "label": "水洗货",
-                "price": "260-270 元/kg",
-                "unit": "元/kg",
-                "price_min": 260.0,
-                "price_max": 270.0
-              },
-              {
-                "label": "统货",
-                "price": "180 元/kg",
-                "unit": "元/kg",
-                "price_min": 180.0,
-                "price_max": 180.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 08:58:49",
-            "herb": "大青叶",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "2.5-2.6 元/kg",
-            "price_value": 2.5,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "大青叶近期市场关注的力度一般，需求量较前期有所下降，货源走动开始放缓，行情略显疲软，现统货2.5-2.6元。",
-            "content_full": "大青叶近期市场关注的力度一般，需求量较前期有所下降，货源走动开始放缓，行情略显疲软，现统货2.5-2.6元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/q98MZIcR_1.html",
-            "price_points": [
-              {
-                "label": "统货",
-                "price": "2.5-2.6 元/kg",
-                "unit": "元/kg",
-                "price_min": 2.5,
-                "price_max": 2.6
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 08:58:38",
-            "herb": "小蓟",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "4-4.5 元/kg",
-            "price_value": 4.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "小蓟正值产新中，由于产地受到连续阴雨天气影响，新货上市量暂时不大，但该品种用量有限，价格转稳，现统个3元，片4-4.5元。",
-            "content_full": "小蓟正值产新中，由于产地受到连续阴雨天气影响，新货上市量暂时不大，但该品种用量有限，价格转稳，现统个3元，片4-4.5元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/MHM546f8_1.html",
-            "price_points": [
-              {
-                "label": "统个",
-                "price": "3 元/kg",
-                "unit": "元/kg",
-                "price_min": 3.0,
-                "price_max": 3.0
-              },
-              {
-                "label": "片",
-                "price": "4-4.5 元/kg",
-                "unit": "元/kg",
-                "price_min": 4.0,
-                "price_max": 4.5
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 08:58:16",
-            "herb": "广藿香",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "10-11 元/kg",
-            "price_value": 10.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "广藿香近阶段市场询问商家较前期增多，但实际入手购货者较少，价格也一直在小范围内波动，现含叶30%的饮片货10-11元。",
-            "content_full": "广藿香近阶段市场询问商家较前期增多，但实际入手购货者较少，价格也一直在小范围内波动，现含叶30%的饮片货10-11元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/dJH9qDGH_1.html",
-            "price_points": [
-              {
-                "label": "饮片货",
-                "price": "10-11 元/kg",
-                "unit": "元/kg",
-                "price_min": 10.0,
-                "price_max": 11.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
           }
         ]
       },
       {
         "name": "安国",
-        "count": 78,
+        "count": 71,
         "latest_date": "2026-06-03",
         "sources": [
-          "药通网 54 条",
-          "中药材天地网 24 条"
+          "中药材天地网 36 条",
+          "药通网 35 条"
         ],
         "items": [
           {
@@ -12846,6 +12693,413 @@
                 "unit": "元/kg",
                 "price_min": 50.0,
                 "price_max": 55.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "青风藤",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "5-6 元/kg",
+            "price_value": 5.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "青风藤，商家关注力度一般，货源正常购销，行情与前期继续保持平稳，现市场青风藤药厂货报价在5-6元之间，一般片多报价在7-8元之间。",
+            "content_full": "青风藤，商家关注力度一般，货源正常购销，行情与前期继续保持平稳，现市场青风藤药厂货报价在5-6元之间，一般片多报价在7-8元之间。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111423.html",
+            "price_points": [
+              {
+                "label": "青风藤药厂货",
+                "price": "5-6 元/kg",
+                "unit": "元/kg",
+                "price_min": 5.0,
+                "price_max": 6.0
+              },
+              {
+                "label": "一般片多",
+                "price": "7-8 元/kg",
+                "unit": "元/kg",
+                "price_min": 7.0,
+                "price_max": 8.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "青蒿",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "3-3.5 元/kg",
+            "price_value": 3.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "青蒿，可供货源充足，近期走销一般，行情在低迷中运行，现市场青蒿全棵切好的货报价在3-3.5元，预计短期内行情将会继续保持平稳。",
+            "content_full": "青蒿，可供货源充足，近期走销一般，行情在低迷中运行，现市场青蒿全棵切好的货报价在3-3.5元，预计短期内行情将会继续保持平稳。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111421.html",
+            "price_points": [
+              {
+                "label": "青蒿全棵切好的货",
+                "price": "3-3.5 元/kg",
+                "unit": "元/kg",
+                "price_min": 3.0,
+                "price_max": 3.5
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "青果",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "17 元/kg",
+            "price_value": 17.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "橄榄青果，因销量不大，商家关注力度不高，近期货源正常购销，行情与前期保持平稳，现市场橄榄青果多报价在17元上下，继续关注后期货源走销情况。",
+            "content_full": "橄榄青果，因销量不大，商家关注力度不高，近期货源正常购销，行情与前期保持平稳，现市场橄榄青果多报价在17元上下，继续关注后期货源走销情况。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111422.html",
+            "price_points": [
+              {
+                "label": "橄榄青果多",
+                "price": "17 元/kg",
+                "unit": "元/kg",
+                "price_min": 17.0,
+                "price_max": 17.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "蒲黄",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "25-30 元/kg",
+            "price_value": 25.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "蒲黄，进入产新期，由于需求不好，行情持续低迷，现市场蒲黄一般粗粉报价在25-30元，细粉报价在40元上下，精细粉报价在65元上下。",
+            "content_full": "蒲黄，进入产新期，由于需求不好，行情持续低迷，现市场蒲黄一般粗粉报价在25-30元，细粉报价在40元上下，精细粉报价在65元上下。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111419.html",
+            "price_points": [
+              {
+                "label": "蒲黄一般粗粉",
+                "price": "25-30 元/kg",
+                "unit": "元/kg",
+                "price_min": 25.0,
+                "price_max": 30.0
+              },
+              {
+                "label": "细粉",
+                "price": "40 元/kg",
+                "unit": "元/kg",
+                "price_min": 40.0,
+                "price_max": 40.0
+              },
+              {
+                "label": "精细粉",
+                "price": "65 元/kg",
+                "unit": "元/kg",
+                "price_min": 65.0,
+                "price_max": 65.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "草果",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "41-42 元/kg",
+            "price_value": 41.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "草果，本品库存有量，加上当前需求低迷，近期持货者出货意愿较强，整体行情有所回落，现市场草果多报价在41-42元，继续关注后期行情变化。",
+            "content_full": "草果，本品库存有量，加上当前需求低迷，近期持货者出货意愿较强，整体行情有所回落，现市场草果多报价在41-42元，继续关注后期行情变化。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111425.html",
+            "price_points": [
+              {
+                "label": "草果多",
+                "price": "41-42 元/kg",
+                "unit": "元/kg",
+                "price_min": 41.0,
+                "price_max": 42.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "砂仁",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "25-26 元/kg",
+            "price_value": 25.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "进口砂仁，因商家不看好后市，近期出货者较多，行情进一步调整，现市场进口砂仁多报价在25-26元，大货实际成交价低。",
+            "content_full": "进口砂仁，因商家不看好后市，近期出货者较多，行情进一步调整，现市场进口砂仁多报价在25-26元，大货实际成交价低。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111428.html",
+            "price_points": [
+              {
+                "label": "进口砂仁多",
+                "price": "25-26 元/kg",
+                "unit": "元/kg",
+                "price_min": 25.0,
+                "price_max": 26.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "水栀",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "20-25 元/kg",
+            "price_value": 20.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "水栀子，近期市场货源走销不快，商家关注力度不高，整体行情较前期下滑，持货者积极寻找销售途径，现市场水栀子多喊价在20-25元之间不等。",
+            "content_full": "水栀子，近期市场货源走销不快，商家关注力度不高，整体行情较前期下滑，持货者积极寻找销售途径，现市场水栀子多喊价在20-25元之间不等。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111424.html",
+            "price_points": [
+              {
+                "label": "水栀子多喊",
+                "price": "20-25 元/kg",
+                "unit": "元/kg",
+                "price_min": 20.0,
+                "price_max": 25.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "山柰",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "65 元/kg",
+            "price_value": 65.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "山柰，市场货源按需走动，商家关注力度减弱，行情小幅调整，现市场进口水洗无硫小圆片报价在65元；国产货报价在68元上下。",
+            "content_full": "山柰，市场货源按需走动，商家关注力度减弱，行情小幅调整，现市场进口水洗无硫小圆片报价在65元；国产货报价在68元上下。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111426.html",
+            "price_points": [
+              {
+                "label": "进口水洗无硫小圆片",
+                "price": "65 元/kg",
+                "unit": "元/kg",
+                "price_min": 65.0,
+                "price_max": 65.0
+              },
+              {
+                "label": "国产货",
+                "price": "68 元/kg",
+                "unit": "元/kg",
+                "price_min": 68.0,
+                "price_max": 68.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "孜然",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "17 元/kg",
+            "price_value": 17.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "孜然，受产新影响，市场商家多观望，入手者少，近期交易量不大，行情进一步走疲，现市场进口孜然多报价在17元上下，继续关注后期新货产出情况。",
+            "content_full": "孜然，受产新影响，市场商家多观望，入手者少，近期交易量不大，行情进一步走疲，现市场进口孜然多报价在17元上下，继续关注后期新货产出情况。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111418.html",
+            "price_points": [
+              {
+                "label": "进口孜然多",
+                "price": "17 元/kg",
+                "unit": "元/kg",
+                "price_min": 17.0,
+                "price_max": 17.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "千年健",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "27 元/kg",
+            "price_value": 27.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "千年健，可供货源有量，近期货源走销一般，行情在平稳中运行，目前市场千年健切好的片多报价在27元上下，继续关注后期货源走销情况。",
+            "content_full": "千年健，可供货源有量，近期货源走销一般，行情在平稳中运行，目前市场千年健切好的片多报价在27元上下，继续关注后期货源走销情况。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111420.html",
+            "price_points": [
+              {
+                "label": "片多",
+                "price": "27 元/kg",
+                "unit": "元/kg",
+                "price_min": 27.0,
+                "price_max": 27.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "八角茴香",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "29-35 元/kg",
+            "price_value": 29.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "八角茴香，近期商家关注力度不高，货源正常走销，行情小幅调整，现市场大红八角报价在29-35元之间不等，春花报价在25-26元之间。",
+            "content_full": "八角茴香，近期商家关注力度不高，货源正常走销，行情小幅调整，现市场大红八角报价在29-35元之间不等，春花报价在25-26元之间。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111429.html",
+            "price_points": [
+              {
+                "label": "大红八角",
+                "price": "29-35 元/kg",
+                "unit": "元/kg",
+                "price_min": 29.0,
+                "price_max": 35.0
+              },
+              {
+                "label": "春花",
+                "price": "25-26 元/kg",
+                "unit": "元/kg",
+                "price_min": 25.0,
+                "price_max": 26.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "丁香",
+            "spec": "",
+            "location": "待补产区",
+            "market": "安国",
+            "price": "52-54 元/kg",
+            "price_value": 52.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "丁香，近期行情表现不佳，大货走销不快，价回落，商家多根据需求购进，现市场丁香多报价在52-54元之间不等，继续关注后期货源走销情况。",
+            "content_full": "丁香，近期行情表现不佳，大货走销不快，价回落，商家多根据需求购进，现市场丁香多报价在52-54元之间不等，继续关注后期货源走销情况。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111427.html",
+            "price_points": [
+              {
+                "label": "丁香多",
+                "price": "52-54 元/kg",
+                "unit": "元/kg",
+                "price_min": 52.0,
+                "price_max": 54.0
               }
             ],
             "units": [
@@ -14455,31 +14709,42 @@
               "元/kg"
             ],
             "unit_mode": "single"
-          },
+          }
+        ]
+      },
+      {
+        "name": "玉林",
+        "count": 58,
+        "latest_date": "2026-06-03",
+        "sources": [
+          "中药材天地网 37 条",
+          "药通网 21 条"
+        ],
+        "items": [
           {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:54:14",
-            "herb": "木鳖子",
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 11:31:37",
+            "herb": "八角茴香",
             "spec": "",
             "location": "待补产区",
-            "market": "安国",
-            "price": "18 元/kg",
-            "price_value": 18.0,
+            "market": "玉林",
+            "price": "24-25 元/kg",
+            "price_value": 24.0,
             "unit": "元/kg",
             "delta_amount": "",
             "delta_rate": "",
             "tag": "",
-            "summary": "木鳖子近期市场寻货商家较少，货源走销多以按需购进为主，行情略显疲软，现广西统货价格在18元左右。",
-            "content_full": "木鳖子近期市场寻货商家较少，货源走销多以按需购进为主，行情略显疲软，现广西统货价格在18元左右。",
+            "summary": "八角茴香近期市场来货有所增加，商家对其关注力度减弱，货源走销缓慢，价格进一步显疲，现春果24-25元。",
+            "content_full": "八角茴香近期市场来货有所增加，商家对其关注力度减弱，货源走销缓慢，价格进一步显疲，现春果24-25元。",
             "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/Zgk76QzI_2.html",
+            "url": "https://www.yt1998.com/hqzx/DZQIlHZW_3.html",
             "price_points": [
               {
-                "label": "广西统货",
-                "price": "18 元/kg",
+                "label": "春果",
+                "price": "24-25 元/kg",
                 "unit": "元/kg",
-                "price_min": 18.0,
-                "price_max": 18.0
+                "price_min": 24.0,
+                "price_max": 25.0
               }
             ],
             "units": [
@@ -14488,36 +14753,36 @@
             "unit_mode": "single"
           },
           {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:54:01",
-            "herb": "狗脊",
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 11:31:20",
+            "herb": "茯苓",
             "spec": "",
             "location": "待补产区",
-            "market": "安国",
-            "price": "35-37 元/kg",
-            "price_value": 35.0,
+            "market": "玉林",
+            "price": "20 元/kg",
+            "price_value": 20.0,
             "unit": "元/kg",
             "delta_amount": "",
             "delta_rate": "",
             "tag": "",
-            "summary": "狗脊当前市场寻货商家较少，因国内多地禁挖野生狗脊，进口货源因口岸管制减少，市场可供货源量偏紧，持货商家惜售心理较强，行情保持坚挺，现广西厚片货价格在35-37元，薄片货价格在40元上下。",
-            "content_full": "狗脊当前市场寻货商家较少，因国内多地禁挖野生狗脊，进口货源因口岸管制减少，市场可供货源量偏紧，持货商家惜售心理较强，行情保持坚挺，现广西厚片货价格在35-37元，薄片货价格在40元上下。",
+            "summary": "茯苓市场库存依然较丰，而近期货源走销迟缓，持货者开始积极寻找销路，受此影响行情低迷运行，现云南统丁价格在20元左右，中心丁24元上下。",
+            "content_full": "茯苓市场库存依然较丰，而近期货源走销迟缓，持货者开始积极寻找销路，受此影响行情低迷运行，现云南统丁价格在20元左右，中心丁24元上下。",
             "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/6qK4JoYY_2.html",
+            "url": "https://www.yt1998.com/hqzx/GrKPXzji_3.html",
             "price_points": [
               {
-                "label": "广西厚片货",
-                "price": "35-37 元/kg",
+                "label": "云南统丁",
+                "price": "20 元/kg",
                 "unit": "元/kg",
-                "price_min": 35.0,
-                "price_max": 37.0
+                "price_min": 20.0,
+                "price_max": 20.0
               },
               {
-                "label": "薄片货",
-                "price": "40 元/kg",
+                "label": "中心丁",
+                "price": "24 元/kg",
                 "unit": "元/kg",
-                "price_min": 40.0,
-                "price_max": 40.0
+                "price_min": 24.0,
+                "price_max": 24.0
               }
             ],
             "units": [
@@ -14526,490 +14791,28 @@
             "unit_mode": "single"
           },
           {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:53:47",
-            "herb": "木瓜",
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 11:31:07",
+            "herb": "瓜蒌皮",
             "spec": "",
             "location": "待补产区",
-            "market": "安国",
-            "price": "10 元/kg",
-            "price_value": 10.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "木瓜当前市场商家关注力度一般，货源走销迟缓，市场可供货源量充足，终端需求疲软，价格较前期无明显波动，现湖北皱木瓜价格在10元左右。",
-            "content_full": "木瓜当前市场商家关注力度一般，货源走销迟缓，市场可供货源量充足，终端需求疲软，价格较前期无明显波动，现湖北皱木瓜价格在10元左右。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/MnOqJOsz_2.html",
-            "price_points": [
-              {
-                "label": "湖北皱木瓜",
-                "price": "10 元/kg",
-                "unit": "元/kg",
-                "price_min": 10.0,
-                "price_max": 10.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:53:31",
-            "herb": "马勃",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "75 元/kg",
-            "price_value": 75.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "马勃尚有库存待售，当前市场寻货商家不多，终端需求有限，市场可供货源量充足，行情略显疲软，现东北药厂货价格在75元上下。",
-            "content_full": "马勃尚有库存待售，当前市场寻货商家不多，终端需求有限，市场可供货源量充足，行情略显疲软，现东北药厂货价格在75元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/wrz9HRIo_2.html",
-            "price_points": [
-              {
-                "label": "东北药厂货",
-                "price": "75 元/kg",
-                "unit": "元/kg",
-                "price_min": 75.0,
-                "price_max": 75.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:53:10",
-            "herb": "金果榄",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "120-130 元/kg",
-            "price_value": 120.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "金果榄近日市场商家关注力度较弱，因缺乏实际需求拉动，货源走销迟缓，价格较前期有小幅下降，现云南家种货价格在120-130元。",
-            "content_full": "金果榄近日市场商家关注力度较弱，因缺乏实际需求拉动，货源走销迟缓，价格较前期有小幅下降，现云南家种货价格在120-130元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/IeS23pBU_2.html",
-            "price_points": [
-              {
-                "label": "云南家种货",
-                "price": "120-130 元/kg",
-                "unit": "元/kg",
-                "price_min": 120.0,
-                "price_max": 130.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:52:55",
-            "herb": "薏苡仁",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "7 元/kg",
-            "price_value": 7.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "薏苡仁当前市场寻货商家较少，市场可供货源量较丰，终端需求疲软，货源走销多以小批量走动为主，优质货源在日韩等地订单增多，国内市场多以消化库存为主，行情略显疲软，现贵州统货价格在7元上下。",
-            "content_full": "薏苡仁当前市场寻货商家较少，市场可供货源量较丰，终端需求疲软，货源走销多以小批量走动为主，优质货源在日韩等地订单增多，国内市场多以消化库存为主，行情略显疲软，现贵州统货价格在7元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/P5K10Fdi_2.html",
-            "price_points": [
-              {
-                "label": "贵州统货",
-                "price": "7 元/kg",
-                "unit": "元/kg",
-                "price_min": 7.0,
-                "price_max": 7.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:52:39",
-            "herb": "湖北贝母",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "28 元/kg",
-            "price_value": 28.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "湖北贝母正值产新，市场可供货源量充足，货源走销不快，购货商家多持观望态度，价格较前期有小幅下降，现湖北统货价格在28元左右。",
-            "content_full": "湖北贝母正值产新，市场可供货源量充足，货源走销不快，购货商家多持观望态度，价格较前期有小幅下降，现湖北统货价格在28元左右。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/heOI6VfH_2.html",
-            "price_points": [
-              {
-                "label": "湖北统货",
-                "price": "28 元/kg",
-                "unit": "元/kg",
-                "price_min": 28.0,
-                "price_max": 28.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:52:21",
-            "herb": "玄参",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "8 元/kg",
+            "market": "玉林",
+            "price": "8-9 元/kg",
             "price_value": 8.0,
             "unit": "元/kg",
             "delta_amount": "",
             "delta_rate": "",
             "tag": "",
-            "summary": "玄参尚有库存待售，近日市场寻货商家较少，货源走销多以按需购进为主，供求关系维持平稳，行情保持平稳，现湖北统货价格在8元左右，安徽统货价格在5元上下。",
-            "content_full": "玄参尚有库存待售，近日市场寻货商家较少，货源走销多以按需购进为主，供求关系维持平稳，行情保持平稳，现湖北统货价格在8元左右，安徽统货价格在5元上下。",
+            "summary": "瓜蒌皮前市场寻货商家多以按需购进为主，正值市场淡季货源走销一般，购货商家多持观望态度，行情保持平稳，，现统货价格在8-9元之间。",
+            "content_full": "瓜蒌皮前市场寻货商家多以按需购进为主，正值市场淡季货源走销一般，购货商家多持观望态度，行情保持平稳，，现统货价格在8-9元之间。",
             "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/u8IXO2W6_2.html",
+            "url": "https://www.yt1998.com/hqzx/KgT8Mbe0_3.html",
             "price_points": [
               {
-                "label": "湖北统货",
-                "price": "8 元/kg",
+                "label": "统货",
+                "price": "8-9 元/kg",
                 "unit": "元/kg",
                 "price_min": 8.0,
-                "price_max": 8.0
-              },
-              {
-                "label": "安徽统货",
-                "price": "5 元/kg",
-                "unit": "元/kg",
-                "price_min": 5.0,
-                "price_max": 5.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:52:01",
-            "herb": "天龙",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "2000 元/kg",
-            "price_value": 2000.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "天龙近期市场商家关注力度一般，野生资源受到保护，人工养殖品作为主要供货源，市场可供货源量充足，货源走销不快，价格无明显波动，现国产统货价格在2000元左右，进口统货价格在260元上下。",
-            "content_full": "天龙近期市场商家关注力度一般，野生资源受到保护，人工养殖品作为主要供货源，市场可供货源量充足，货源走销不快，价格无明显波动，现国产统货价格在2000元左右，进口统货价格在260元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/ehVjF2Ak_2.html",
-            "price_points": [
-              {
-                "label": "国产统货",
-                "price": "2000 元/kg",
-                "unit": "元/kg",
-                "price_min": 2000.0,
-                "price_max": 2000.0
-              },
-              {
-                "label": "进口统货",
-                "price": "260 元/kg",
-                "unit": "元/kg",
-                "price_min": 260.0,
-                "price_max": 260.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 11:01:05",
-            "herb": "大青叶",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "2.5 元/kg",
-            "price_value": 2.5,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "大青叶当前市场商家关注力度较弱，货源走销多以小批量走动为主，行情较前期保持平稳，现甘肃统货价格在2.5元上下。",
-            "content_full": "大青叶当前市场商家关注力度较弱，货源走销多以小批量走动为主，行情较前期保持平稳，现甘肃统货价格在2.5元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/4UfXhkG5_2.html",
-            "price_points": [
-              {
-                "label": "甘肃统货",
-                "price": "2.5 元/kg",
-                "unit": "元/kg",
-                "price_min": 2.5,
-                "price_max": 2.5
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:07:57",
-            "herb": "地肤子",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "10-15 元/kg",
-            "price_value": 10.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "地肤子当前市场商家关注力度一般，货源走销不快，持货商家出售意愿较强，价格较前期无明显波动，现东北五星货价格在10-15元。",
-            "content_full": "地肤子当前市场商家关注力度一般，货源走销不快，持货商家出售意愿较强，价格较前期无明显波动，现东北五星货价格在10-15元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/YucclSoq_2.html",
-            "price_points": [
-              {
-                "label": "东北五星货",
-                "price": "10-15 元/kg",
-                "unit": "元/kg",
-                "price_min": 10.0,
-                "price_max": 15.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:07:37",
-            "herb": "党参",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "55-65 元/kg",
-            "price_value": 55.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "党参近期有商寻货，市场可供货源量充足，库存消化缓慢，货源走销多以按需购进为主，行情较前期保持平稳，现甘肃中条货价格在55-65元。",
-            "content_full": "党参近期有商寻货，市场可供货源量充足，库存消化缓慢，货源走销多以按需购进为主，行情较前期保持平稳，现甘肃中条货价格在55-65元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/48dtJIWO_2.html",
-            "price_points": [
-              {
-                "label": "甘肃中条货",
-                "price": "55-65 元/kg",
-                "unit": "元/kg",
-                "price_min": 55.0,
-                "price_max": 65.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:07:21",
-            "herb": "当归",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "33 元/kg",
-            "price_value": 33.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "当归尚有库存待售，近日有商寻货，市场可供货源量充足，前期产区种植面积增加，产能扩大，终端需求放缓，价格较前期有小幅下降，现甘肃小条货价格在33元左右，中条货价格在38元上下。",
-            "content_full": "当归尚有库存待售，近日有商寻货，市场可供货源量充足，前期产区种植面积增加，产能扩大，终端需求放缓，价格较前期有小幅下降，现甘肃小条货价格在33元左右，中条货价格在38元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/anurAJ3q_2.html",
-            "price_points": [
-              {
-                "label": "甘肃小条货",
-                "price": "33 元/kg",
-                "unit": "元/kg",
-                "price_min": 33.0,
-                "price_max": 33.0
-              },
-              {
-                "label": "中条货",
-                "price": "38 元/kg",
-                "unit": "元/kg",
-                "price_min": 38.0,
-                "price_max": 38.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:07:09",
-            "herb": "猪牙皂",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "12 元/kg",
-            "price_value": 12.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "猪牙皂当前市场商家关注力度较弱，货源走销多以按需购进为主，供需维持平衡，价格无明显波动，现山东统货价格在12元上下。",
-            "content_full": "猪牙皂当前市场商家关注力度较弱，货源走销多以按需购进为主，供需维持平衡，价格无明显波动，现山东统货价格在12元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/x2uQ4eAS_2.html",
-            "price_points": [
-              {
-                "label": "山东统货",
-                "price": "12 元/kg",
-                "unit": "元/kg",
-                "price_min": 12.0,
-                "price_max": 12.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:06:53",
-            "herb": "合欢皮",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "10 元/kg",
-            "price_value": 10.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "合欢皮近日市场商家关注力度一般，市场可供货源量充足，人工种植规模有限，货源走销不快，行情保持平稳，现湖北统货价格在10元左右。",
-            "content_full": "合欢皮近日市场商家关注力度一般，市场可供货源量充足，人工种植规模有限，货源走销不快，行情保持平稳，现湖北统货价格在10元左右。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/NcsxXGHT_2.html",
-            "price_points": [
-              {
-                "label": "湖北统货",
-                "price": "10 元/kg",
-                "unit": "元/kg",
-                "price_min": 10.0,
-                "price_max": 10.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:06:41",
-            "herb": "续断",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "12 元/kg",
-            "price_value": 12.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "续断当前市场寻货商家较少，货源走销多以小批量走动为主，行情处于低迷状态，现四川统个货价格在12元上下。",
-            "content_full": "续断当前市场寻货商家较少，货源走销多以小批量走动为主，行情处于低迷状态，现四川统个货价格在12元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/OzZWShwI_2.html",
-            "price_points": [
-              {
-                "label": "四川统个货",
-                "price": "12 元/kg",
-                "unit": "元/kg",
-                "price_min": 12.0,
-                "price_max": 12.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:06:27",
-            "herb": "小茴香",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "11 元/kg",
-            "price_value": 11.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "小茴香近期市场商家关注力度较强，国产货种植面积增加，印度受极端天气影响，种植面积下降，出口量减少，终端需求增长，行情保持平稳，现国产统货价格在11元上下，进口货价格在9元左右。",
-            "content_full": "小茴香近期市场商家关注力度较强，国产货种植面积增加，印度受极端天气影响，种植面积下降，出口量减少，终端需求增长，行情保持平稳，现国产统货价格在11元上下，进口货价格在9元左右。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/79l31cf0_2.html",
-            "price_points": [
-              {
-                "label": "国产统货",
-                "price": "11 元/kg",
-                "unit": "元/kg",
-                "price_min": 11.0,
-                "price_max": 11.0
-              },
-              {
-                "label": "进口货",
-                "price": "9 元/kg",
-                "unit": "元/kg",
-                "price_min": 9.0,
                 "price_max": 9.0
               }
             ],
@@ -15019,29 +14822,36 @@
             "unit_mode": "single"
           },
           {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:06:12",
-            "herb": "皂角刺",
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 11:30:48",
+            "herb": "薄荷",
             "spec": "",
             "location": "待补产区",
-            "market": "安国",
-            "price": "20-23 元/kg",
-            "price_value": 20.0,
+            "market": "玉林",
+            "price": "18-20 元/kg",
+            "price_value": 18.0,
             "unit": "元/kg",
             "delta_amount": "",
             "delta_rate": "",
             "tag": "",
-            "summary": "皂角刺当前市场可供货源量充足，市场寻货商家较少，多采取随购随销的经营方式，价格较前期无明显波动，现河南统个货价格在20-23元。",
-            "content_full": "皂角刺当前市场可供货源量充足，市场寻货商家较少，多采取随购随销的经营方式，价格较前期无明显波动，现河南统个货价格在20-23元。",
+            "summary": "薄荷近期购货商较前期有所增加，带动货源小批量走销畅快，持货商惜售心理随之增加，价格保持坚挺，现头茬叶要价18-20元，全棵包检验货6元。",
+            "content_full": "薄荷近期购货商较前期有所增加，带动货源小批量走销畅快，持货商惜售心理随之增加，价格保持坚挺，现头茬叶要价18-20元，全棵包检验货6元。",
             "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/F9u1Lxdg_2.html",
+            "url": "https://www.yt1998.com/hqzx/XC17xXdA_3.html",
             "price_points": [
               {
-                "label": "河南统个货",
-                "price": "20-23 元/kg",
+                "label": "头茬叶",
+                "price": "18-20 元/kg",
                 "unit": "元/kg",
-                "price_min": 20.0,
-                "price_max": 23.0
+                "price_min": 18.0,
+                "price_max": 20.0
+              },
+              {
+                "label": "全棵包检验货",
+                "price": "6 元/kg",
+                "unit": "元/kg",
+                "price_min": 6.0,
+                "price_max": 6.0
               }
             ],
             "units": [
@@ -15050,47 +14860,436 @@
             "unit_mode": "single"
           },
           {
-            "date": "2026-05-28",
-            "published_at": "2026-05-28 14:06:01",
-            "herb": "郁金",
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 11:30:35",
+            "herb": "海桐皮",
             "spec": "",
             "location": "待补产区",
-            "market": "安国",
-            "price": "15 元/kg",
-            "price_value": 15.0,
+            "market": "玉林",
+            "price": "6-7 元/kg",
+            "price_value": 6.0,
             "unit": "元/kg",
             "delta_amount": "",
             "delta_rate": "",
             "tag": "",
-            "summary": "郁金近期市场寻货商家不多，货源走销多以按需购进为主，前期库存尚未得到很好的消化，终端需求平稳，行情较前期保持平稳，现广西统片货价格在15元左右。",
-            "content_full": "郁金近期市场寻货商家不多，货源走销多以按需购进为主，前期库存尚未得到很好的消化，终端需求平稳，行情较前期保持平稳，现广西统片货价格在15元左右。",
+            "summary": "海桐皮尚有库存待售，近日有商寻货，货源走销多以实销为主，价格较前期无明显波动，现统货6-7元。",
+            "content_full": "海桐皮尚有库存待售，近日有商寻货，货源走销多以实销为主，价格较前期无明显波动，现统货6-7元。",
             "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/e4NrHIqk_2.html",
+            "url": "https://www.yt1998.com/hqzx/KhRJ8aMP_3.html",
             "price_points": [
               {
-                "label": "广西统片货",
-                "price": "15 元/kg",
+                "label": "统货",
+                "price": "6-7 元/kg",
                 "unit": "元/kg",
-                "price_min": 15.0,
-                "price_max": 15.0
+                "price_min": 6.0,
+                "price_max": 7.0
               }
             ],
             "units": [
               "元/kg"
             ],
             "unit_mode": "single"
-          }
-        ]
-      },
-      {
-        "name": "玉林",
-        "count": 45,
-        "latest_date": "2026-06-02",
-        "sources": [
-          "中药材天地网 25 条",
-          "药通网 20 条"
-        ],
-        "items": [
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "黄连",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "370-380 元/kg",
+            "price_value": 370.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "黄连，行情继续在偏高位运行，由于产区价格继续波动，市场商家多是按需采购，近期交易量不大，现统货在370-380元之间。",
+            "content_full": "黄连，行情继续在偏高位运行，由于产区价格继续波动，市场商家多是按需采购，近期交易量不大，现统货在370-380元之间。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111408.html",
+            "price_points": [
+              {
+                "label": "统货",
+                "price": "370-380 元/kg",
+                "unit": "元/kg",
+                "price_min": 370.0,
+                "price_max": 380.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "黄芩",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "18-19 元/kg",
+            "price_value": 18.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "黄芩，商家手中库存有量，近段时间货源以实销为主，行情平稳运行，现个子价格在18-19元之间，较大片在30元上下。",
+            "content_full": "黄芩，商家手中库存有量，近段时间货源以实销为主，行情平稳运行，现个子价格在18-19元之间，较大片在30元上下。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111400.html",
+            "price_points": [
+              {
+                "label": "个子",
+                "price": "18-19 元/kg",
+                "unit": "元/kg",
+                "price_min": 18.0,
+                "price_max": 19.0
+              },
+              {
+                "label": "较大片在",
+                "price": "30 元/kg",
+                "unit": "元/kg",
+                "price_min": 30.0,
+                "price_max": 30.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "赤芍",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "31-33 元/kg",
+            "price_value": 31.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "赤芍，商家小批量采购，市场货源存量也不大，近期行情表现平稳，现家种货价格在31-33元之间，野生货少，价在48-50元，后市继续走稳。",
+            "content_full": "赤芍，商家小批量采购，市场货源存量也不大，近期行情表现平稳，现家种货价格在31-33元之间，野生货少，价在48-50元，后市继续走稳。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111403.html",
+            "price_points": [
+              {
+                "label": "家种货",
+                "price": "31-33 元/kg",
+                "unit": "元/kg",
+                "price_min": 31.0,
+                "price_max": 33.0
+              },
+              {
+                "label": "主流报价",
+                "price": "48-50 元/kg",
+                "unit": "元/kg",
+                "price_min": 48.0,
+                "price_max": 50.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "苍术",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "30-31 元/kg",
+            "price_value": 30.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "苍术，近期市场货源销势较淡，经营商家出售积极，行情较前期有所走疲，现家种货价格在30-31元之间，后市看平。",
+            "content_full": "苍术，近期市场货源销势较淡，经营商家出售积极，行情较前期有所走疲，现家种货价格在30-31元之间，后市看平。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111407.html",
+            "price_points": [
+              {
+                "label": "家种货",
+                "price": "30-31 元/kg",
+                "unit": "元/kg",
+                "price_min": 30.0,
+                "price_max": 31.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "百合",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "56-60 元/kg",
+            "price_value": 56.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "百合，近期由于行情回落幅度较大，关注的商家较多，目前市场货源主要是以正常需求走动为主，近日价格转稳，湖南一般统货目前在56-60元之间。",
+            "content_full": "百合，近期由于行情回落幅度较大，关注的商家较多，目前市场货源主要是以正常需求走动为主，近日价格转稳，湖南一般统货目前在56-60元之间。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111401.html",
+            "price_points": [
+              {
+                "label": "湖南一般统货目前在",
+                "price": "56-60 元/kg",
+                "unit": "元/kg",
+                "price_min": 56.0,
+                "price_max": 60.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "柴胡",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "80-85 元/kg",
+            "price_value": 80.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "柴胡，近段时间市场货源走势较弱，商家关注度有限，行情相对平淡运行，现一般货价格在80-85元之间，缺乏有效需求，后市利好有限。",
+            "content_full": "柴胡，近段时间市场货源走势较弱，商家关注度有限，行情相对平淡运行，现一般货价格在80-85元之间，缺乏有效需求，后市利好有限。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111404.html",
+            "price_points": [
+              {
+                "label": "一般货",
+                "price": "80-85 元/kg",
+                "unit": "元/kg",
+                "price_min": 80.0,
+                "price_max": 85.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "枸杞子",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "40-45 元/kg",
+            "price_value": 40.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "枸杞子，市场货源供应充足，目前不值销售旺季，货源走动一般，行情较前期没有变动，现一般货价格在40-45元之间，较好的50元以上。",
+            "content_full": "枸杞子，市场货源供应充足，目前不值销售旺季，货源走动一般，行情较前期没有变动，现一般货价格在40-45元之间，较好的50元以上。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111402.html",
+            "price_points": [
+              {
+                "label": "一般货",
+                "price": "40-45 元/kg",
+                "unit": "元/kg",
+                "price_min": 40.0,
+                "price_max": 45.0
+              },
+              {
+                "label": "较好的",
+                "price": "50 元/kg",
+                "unit": "元/kg",
+                "price_min": 50.0,
+                "price_max": 50.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "地龙",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "190 元/kg",
+            "price_value": 190.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "地龙，近期国内产新货源上市，进口货源存量也较足，市场淡季成交量有限，走动缓慢，行情不及前期，现广西全开货价格在190元左右。",
+            "content_full": "地龙，近期国内产新货源上市，进口货源存量也较足，市场淡季成交量有限，走动缓慢，行情不及前期，现广西全开货价格在190元左右。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111410.html",
+            "price_points": [
+              {
+                "label": "广西全开货",
+                "price": "190 元/kg",
+                "unit": "元/kg",
+                "price_min": 190.0,
+                "price_max": 190.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "党参",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "65 元/kg",
+            "price_value": 65.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "党参，近期产区上市量足，行情继续震荡，市场经营商家也多是按计划备货，目前由于销售淡季，货源走动平平，中条货现价在65元上下。",
+            "content_full": "党参，近期产区上市量足，行情继续震荡，市场经营商家也多是按计划备货，目前由于销售淡季，货源走动平平，中条货现价在65元上下。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111406.html",
+            "price_points": [
+              {
+                "label": "中条货现",
+                "price": "65 元/kg",
+                "unit": "元/kg",
+                "price_min": 65.0,
+                "price_max": 65.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "佛手",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "25-26 元/kg",
+            "price_value": 25.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "佛手，销售淡季，市场货源走动不乐观，目前经营商家手中货源充足，行情继续疲软运行，现进口货价格在25-26元之间，广西货28-30元。",
+            "content_full": "佛手，销售淡季，市场货源走动不乐观，目前经营商家手中货源充足，行情继续疲软运行，现进口货价格在25-26元之间，广西货28-30元。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111409.html",
+            "price_points": [
+              {
+                "label": "进口货",
+                "price": "25-26 元/kg",
+                "unit": "元/kg",
+                "price_min": 25.0,
+                "price_max": 26.0
+              },
+              {
+                "label": "广西货",
+                "price": "28-30 元/kg",
+                "unit": "元/kg",
+                "price_min": 28.0,
+                "price_max": 30.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "何首乌",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "24-25 元/kg",
+            "price_value": 24.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "何首乌，广东家种货产新已经结束，今年产量一般，市场近期来货量不大，商家正常采购，行情坚挺运行，现黑统片价格在24-25元之间。",
+            "content_full": "何首乌，广东家种货产新已经结束，今年产量一般，市场近期来货量不大，商家正常采购，行情坚挺运行，现黑统片价格在24-25元之间。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111398.html",
+            "price_points": [
+              {
+                "label": "黑统片",
+                "price": "24-25 元/kg",
+                "unit": "元/kg",
+                "price_min": 24.0,
+                "price_max": 25.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-03",
+            "published_at": "2026-06-03 00:00:00",
+            "herb": "丹参",
+            "spec": "",
+            "location": "待补产区",
+            "market": "玉林",
+            "price": "13-14 元/kg",
+            "price_value": 13.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "丹参，产区来货稳定，市场货源充足，近期商家随购随销，行情以平淡为主，现一般货价格在13-14元之间，后市以消化库存为主。",
+            "content_full": "丹参，产区来货稳定，市场货源充足，近期商家随购随销，行情以平淡为主，现一般货价格在13-14元之间，后市以消化库存为主。",
+            "source": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/200/1111399.html",
+            "price_points": [
+              {
+                "label": "一般货",
+                "price": "13-14 元/kg",
+                "unit": "元/kg",
+                "price_min": 13.0,
+                "price_max": 14.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
           {
             "date": "2026-06-02",
             "published_at": "2026-06-02 11:25:21",
@@ -16529,293 +16728,148 @@
               "元/kg"
             ],
             "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 15:34:49",
-            "herb": "五味子",
-            "spec": "",
-            "location": "待补产区",
-            "market": "玉林",
-            "price": "33-34 元/kg",
-            "price_value": 33.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "五味子尚有库存待售，近日市场寻货商家较少，货源走销多以按需购进为主，行情保持平稳，目前统货行情稳定在33-34元之间。",
-            "content_full": "五味子尚有库存待售，近日市场寻货商家较少，货源走销多以按需购进为主，行情保持平稳，目前统货行情稳定在33-34元之间。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/8t4Rliy7_3.html",
-            "price_points": [
-              {
-                "label": "统货行情稳定在",
-                "price": "33-34 元/kg",
-                "unit": "元/kg",
-                "price_min": 33.0,
-                "price_max": 34.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 15:34:33",
-            "herb": "川芎",
-            "spec": "",
-            "location": "待补产区",
-            "market": "玉林",
-            "price": "17-18 元/kg",
-            "price_value": 17.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "川芎当前市场商家关注力度较弱，货源走销多以小批量走动为主，行情较前期保持平稳，现个子价格在15元左右，片售价17-18元。",
-            "content_full": "川芎当前市场商家关注力度较弱，货源走销多以小批量走动为主，行情较前期保持平稳，现个子价格在15元左右，片售价17-18元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/vNssXoHZ_3.html",
-            "price_points": [
-              {
-                "label": "片",
-                "price": "17-18 元/kg",
-                "unit": "元/kg",
-                "price_min": 17.0,
-                "price_max": 18.0
-              },
-              {
-                "label": "个子",
-                "price": "15 元/kg",
-                "unit": "元/kg",
-                "price_min": 15.0,
-                "price_max": 15.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 15:34:17",
-            "herb": "薏苡仁",
-            "spec": "",
-            "location": "待补产区",
-            "market": "玉林",
-            "price": "10 元/kg",
-            "price_value": 10.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "薏苡仁商家多按需采购，市场库存较为充足，近期整体交易量有限，行情比较平静，现贵州货价格在10元上下。",
-            "content_full": "薏苡仁商家多按需采购，市场库存较为充足，近期整体交易量有限，行情比较平静，现贵州货价格在10元上下。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/jNz2Nq6f_3.html",
-            "price_points": [
-              {
-                "label": "贵州货",
-                "price": "10 元/kg",
-                "unit": "元/kg",
-                "price_min": 10.0,
-                "price_max": 10.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 15:34:02",
-            "herb": "大腹皮",
-            "spec": "",
-            "location": "待补产区",
-            "market": "玉林",
-            "price": "6-7 元/kg",
-            "price_value": 6.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "大腹皮目前正值销售淡季，商家偶有批量采购，市场经营商家手中货量偏大，行情暂无明显波动，现进口硬壳在6-7元之间。",
-            "content_full": "大腹皮目前正值销售淡季，商家偶有批量采购，市场经营商家手中货量偏大，行情暂无明显波动，现进口硬壳在6-7元之间。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/127SFy58_3.html",
-            "price_points": [
-              {
-                "label": "进口硬壳在",
-                "price": "6-7 元/kg",
-                "unit": "元/kg",
-                "price_min": 6.0,
-                "price_max": 7.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
           }
         ]
       },
       {
         "name": "成都",
-        "count": 4,
-        "latest_date": "2026-05-29",
-        "sources": [
-          "中药材天地网 4 条"
-        ],
-        "items": [
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 00:00:00",
-            "herb": "黄芩",
-            "spec": "",
-            "location": "待补产区",
-            "market": "成都",
-            "price": "14 元/kg",
-            "price_value": 14.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "四川成都荷花池市场黄芩货源走动较快，后期属上涨趋势，产地大宗货源不多，市场囤货较多，商家手上的黄芩为甘肃货源，价格在14元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "content_full": "四川成都荷花池市场黄芩货源走动较快，后期属上涨趋势，产地大宗货源不多，市场囤货较多，商家手上的黄芩为甘肃货源，价格在14元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "source": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/200/1111100.html",
-            "price_points": [
-              {
-                "label": "主流报价",
-                "price": "14 元/kg",
-                "unit": "元/kg",
-                "price_min": 14.0,
-                "price_max": 14.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 00:00:00",
-            "herb": "薄荷",
-            "spec": "",
-            "location": "待补产区",
-            "market": "成都",
-            "price": "4.5 元/kg",
-            "price_value": 4.5,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "四川成都荷花池市场薄荷货源充足，价格平稳，短期内价格稳定无变化，全草在4.5元左右，切片在7.5元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "content_full": "四川成都荷花池市场薄荷货源充足，价格平稳，短期内价格稳定无变化，全草在4.5元左右，切片在7.5元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "source": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/200/1111098.html",
-            "price_points": [
-              {
-                "label": "全草在",
-                "price": "4.5 元/kg",
-                "unit": "元/kg",
-                "price_min": 4.5,
-                "price_max": 4.5
-              },
-              {
-                "label": "切片在",
-                "price": "7.5 元/kg",
-                "unit": "元/kg",
-                "price_min": 7.5,
-                "price_max": 7.5
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 00:00:00",
-            "herb": "川木通",
-            "spec": "",
-            "location": "待补产区",
-            "market": "成都",
-            "price": "8.5 元/kg",
-            "price_value": 8.5,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "四川成都荷花池市场川木通走货量缓慢，货源零星，大货源不多，后期价格平稳，现统片在8.5元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "content_full": "四川成都荷花池市场川木通走货量缓慢，货源零星，大货源不多，后期价格平稳，现统片在8.5元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "source": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/200/1111101.html",
-            "price_points": [
-              {
-                "label": "统片在",
-                "price": "8.5 元/kg",
-                "unit": "元/kg",
-                "price_min": 8.5,
-                "price_max": 8.5
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-05-29",
-            "published_at": "2026-05-29 00:00:00",
-            "herb": "佛手",
-            "spec": "",
-            "location": "待补产区",
-            "market": "成都",
-            "price": "30 元/kg",
-            "price_value": 30.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "四川成都荷花池市场佛手处于青黄不接时期，价格仍属低价位，现在和后期价格预计小幅度上升，现佛手片在30元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "content_full": "四川成都荷花池市场佛手处于青黄不接时期，价格仍属低价位，现在和后期价格预计小幅度上升，现佛手片在30元左右。（本信息由成都荷花池市场 龚山勇 13981806562提供）",
-            "source": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/200/1111099.html",
-            "price_points": [
-              {
-                "label": "佛手片在",
-                "price": "30 元/kg",
-                "unit": "元/kg",
-                "price_min": 30.0,
-                "price_max": 30.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          }
-        ]
+        "count": 0,
+        "latest_date": "",
+        "sources": [],
+        "items": []
       }
     ],
     "empty_text": "当前市场行情记录还不完整，后续会继续补齐药通网市场行情。"
   },
   "hotspots": {
-    "total": 40,
-    "latest_date": "2026-06-01",
-    "latest_count": 4,
+    "total": 30,
+    "latest_date": "2026-06-03",
+    "latest_count": 8,
     "kind_options": [
       "产业观察",
       "政策解读"
     ],
     "items": [
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111376html",
+        "date": "2026-06-03",
+        "title": "饮片集采｜6月报价在即：饮片选货与统货报价解析",
+        "kind": "产业观察",
+        "summary": "【天地网讯】 全国中药饮片联盟采购（ZYYPLM-2026-1）将于2026年6月8日正式开启首轮报价。本次集采涵盖41个品种，严格按“选货”与“统货”分设评审组。",
+        "content_full": "【天地网讯】 全国中药饮片联盟采购（ZYYPLM-2026-1）将于2026年6月8日正式开启首轮报价。本次集采涵盖41个品种，严格按“选货”与“统货”分设评审组。值得注意的是，截止2026年5月26日公布的申报数据揭示了前所未有的竞争烈度：1140家申报企业中，申报品种数≥30个的企业共899家，占比79%。这种“巨头扎堆、全品类覆盖”的格局，彻底打破了单一维度的价格战逻辑。 广大参与企业面临的并非简单的“降价”任务，而是融合原料行情、品规筛选、批次一致性、仓储周转、商业配送、院端验收等多维度的系统性考验。​ 在高集中度的挤压下，市场分化为两条截然不同的赛道：一边是熟地黄、麸炒山药等大宗品种陷入同质化的“地板价”防守战，企业需在微利中保障供应；另一边是黄连片、人参、天麻等高价值品种转向“优质优价”的质量高地争夺。 本文将解析本轮集采“选货/统货”双轨制下的竞争逻辑。 一、统货：大宗品种的“地板价”博弈 统货 ，以满足《中国药典》最低标准为基准，临床替代性强。在本轮集采中，熟地黄、醋延胡索、麸炒枳壳、板蓝根、土茯苓等属于典型的大宗基础用药，年采购量巨大，供应成熟，市场呈现近似完全竞争态势。 1.1 集中度放大竞争 强度 在综合评审机制下，从申报数据看，头部品种申报企业高度集中，同质化竞争显著，导致熟地黄、板蓝根等单一品种的申报集中度极高。鉴于企业在GAP、追溯等质量维度上普遍分差微小，价格指标成为拉开分差的关键变量。 依据正式文件条款，拟中选资格主要取决于第二轮报价降幅≥15%，或入围药品第二轮报价≤“同评审组第二轮报价算术平均值向下浮动一个标准差”和“最低第二轮报价”二者中高值的1.2倍（第二轮报价最高的药品除外）。 该机制迫使企业在“低价入围”与“履约安全”之间进行综合权衡：根据官方规则，首轮报价以同评审组最低申报价为基准价，报价越低得分越高，价格指标满分为35分。在统货组质量分差较小的背景下，价格排名成为决定综合评审顺位的关键变量。企业实则是在微利甚至负利空间中寻求最优解，既要避免因报价过高导致综合分落后，又要严防击穿现金成本红线，陷入“中标即亏损”的履约泥潭。 1.2 大宗品种承压 以麸炒山药、莲子、芡实为代表的药食同源类，以及射干、黄柏、钩藤为代表的基础临床品种，曾出现报价紧贴“最高有效申报价”下限的情况。部分企业为换取市场准入（保份额），首轮报价可能触及甚至略低于变动成本线，依赖规模效应摊薄固定成本。 1.3 原料波动风险 醋香附、炒莱菔子等品种原料价格易受季节、产区气候影响，若报价过低，叠加“中选供应量≥报量80%”的考核要求，极易引发履约风险。 1.4 仓储周转压力 为保障中选后的足量供应，企业往往需维持高水位的安全库存。这不仅带来显性成本，还存在隐性资金的消耗：一方面，大宗品种（如麸炒山药、熟地黄）对温湿度敏感，需投入高额冷链与养护成本（防霉变、防虫蛀、防走油），直接影响企业的利润；另一方面，高库存导致大量营运资金被固化在仓库中，产生高昂的资金占用成本，且面临原料跌价风险。 【实操建议】 1. 精准卡位 ：鉴于多数企业选择多品种申报策略，中小企业可筛选1-3个具备原料产地优势（如自种、长期订单锁定）的品种，以“微利保量”策略入围。 2. 风险控制 ：锁定熟地黄等大宗品种的“现金成本”底线，拒绝负毛利；强化批次一致性管理，消除院端验收隐患。 3. 配送响应 ：与第三方物流或自建配送团队协同，确保大宗品种能高效响应配送，避免因物流延迟导致医院报量流失。 二、选货：高价值品种的“护城河” 选货 ，指性状、含量及杂质控制均严于《中国药典》标准的等级规格。本轮集采中，人参片、天麻、重楼、黄连片、蝉蜕、蜜紫菀等品种，均以选货为主战场。 与统货“成本定价”的逻辑不同，选货的核心在于“价值定价”——其价格不仅覆盖原料与加工成本，更要反映产品在道地性、临床疗效、品质稳定性等方面的差异化价值。 正因如此，选货品种的报价上限更高，也更容易获得医院的品质认可。而GAP基地、全过程追溯、道地药材认证等加分项，在选货身上扮演的正是“价值证明”的角色：它们不是拉高成本的负担，而是支撑高报价的“证据链”。 此外，选货规格有更高的准入门槛。头部企业凭借系统化的质量保障能力，更容易构建起完整的“证据链”，从而形成“高报价→高得分→高份额”的正向循环。对中小企业而言，理性的破局路径不在于盲目跟风全品类申报，而在于“差异化单品深耕”——聚焦1-2个具备产地优势的品种，在选货规格的合规与品质上做到极致，方能在高价值品种的细分领域建立起属于自己的价值壁垒。 【实操建议】 1.证据链前置 。 在报价前，企业务必完成人参片、红参片等选货品种的GAP符合性声明、溯源相关数据信息、第三方检测报告的上传与核验，确保质量分最大化。选货组的核心竞争逻辑在于：企业若能通过完整、可核验的“质量—溯源—道地证据链”拿到质量满分（或接近满分），评审时可用质量分抵消价格分的劣势，从而在报价上不必追逐最低价，甚至可报出高于统货均价的价格仍能中选。 2.院内准入联动 。 向目标医院清晰说明申报品种的质量层级（如道地产区、GAP基地、全程追溯等），争取纳入医院报量目录，利用“需求量分”对冲价格分压力。在选货品种上，医院对品质敏感度高，提前与医院沟通质量优势，有助于在勾量阶段获得更多倾斜。 3.规格筛选 。 针对医院报量偏好，提前筛选高规格选货产品（如片型规整、色泽均匀、杂质率低等），提升院端验收通过率。选货品种的验收标准严于统货，提前按医院常用规格备货，可减少后期退换货风险，保障履约顺畅。 总结： 从“价格战”转向“价值战” 随着集采常态化，单纯的低价策略已难以为继。企业应构建“统货保量、选货定利”的组合拳。统货是防御战：依靠供应链韧性，守住成本底线，防止断供违约。选货是进攻战：依靠技术壁垒，确立质量高地，实现优质优价。 温馨提示|《全国中药饮片采购联盟集中采购文件（ZYYPLM-2026-1）》全国第二批中药饮片联采的工作安排进程 今天是6月3日，报名和产品信息填报阶段均已截止，接下来请重点关注 6月8日首轮报价 和 CA证书有效性 ，确保能正常登录系统加密报价。",
+        "source": "中药材天地网",
+        "url": "https://www.zyctd.com/zixun/204/1111376.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111405html",
+        "date": "2026-06-03",
+        "title": "陕西：赋能中医院产业转型 助力县域经济发展",
+        "kind": "产业观察",
+        "summary": "5月28日，陕西省人民政府新闻办公室举办新闻发布会，陕西省卫生健康委员会党组成员、省中医药管理局局长雷颖，陕西省中医药研究院（省中医医院）副院长闫小宁，陕西省中医药管理局副局长李斌...",
+        "content_full": "5月28日，陕西省人民政府新闻办公室举办新闻发布会，陕西省卫生健康委员会党组成员、省中医药管理局局长雷颖，陕西省中医药研究院（省中医医院）副院长闫小宁，陕西省中医药管理局副局长李斌，陕西省工业和信息化厅消费品工业处处长李洁，陕西省商务厅服务贸易处处长解娟，西安市卫生健康委员会党委委员、副主任丁力出席，介绍陕西省中医药健康消费情况，并回答记者提问。 陕西是中医药重要发祥地之一，素有“秦地无闲草，自古多良医”的美誉，秦岭被誉为“中华生物基因库”，医祖岐伯在这里传医布道、药王孙思邈在这里著书立说。 据雷颖介绍，陕西省委、省政府高度重视中医药产业发展，省上在清理议事协调机构的时候，专门保留了中医药工作联席会议制度，立足秦医秦药资源禀赋，以实现生态、产业、民生“三赢”发展为目标，全链条发力推动中医药产业提质增效，助力县域经济发展。 据农业农村部门统计，截至2025年底，全省中药材面积628.02万亩，其中野生抚育135.72万亩，人工种植492.3万亩、同比增长2.44%，产量140万吨、同比增长7.28%，产值214亿元、同比增长11.7%，其中林麝存栏5.6万只，产值29.4亿元。产业规模持续扩大，有效带动陕南秦巴山区、陕北黄土高原等重点区域群众增收。 在产业转型升级方面，重点构建“种植+加工+流通”一体化全产业链，带动上下游协同发展。打造“秦医秦药”公用品牌，搭建中药材和产品展示、招商平台，扩大秦医秦药影响力。同时，打造一批中医药康养旅游线路，推动“游、养、医、购”一体化发展，吸引游客体验陕西中医药养生服务。 坚持科技创新与人才培育双轮驱动，助力中医药产业发展。一方面，建设国家中医药传承创新中心2个、省级中医药科研创新平台50个。支持中药大品种二次开发，已将秦医方剂转化为726个院内制剂。另一方面，遴选培育中医药科研创新团队50个、人才100名。开展基层种植、加工技术培训，培训1万名中医药基层人才，为产业长效发展筑牢人才保障。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "中国网丝路中国",
+        "url": "https://www.zyctd.com/zixun/204/1111405.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111412html",
+        "date": "2026-06-03",
+        "title": "虫草出滇第一关：新螺蛳湾的“排排坐”刷草大军",
+        "kind": "产业观察",
+        "summary": "清晨七点半的昆明，俊发新螺蛳湾中药材茶叶市场（云品馆）内（以下简称：云品馆），商户们排排坐在小板凳上，一条特殊的“流水线”已经悄然启动，他们手持软毛刷细细拂过虫草，用毛巾轻轻擦拭缝隙，这不仅是云品馆每年虫草季独有的风景...",
+        "content_full": "清晨七点半的昆明，俊发新螺蛳湾中药材茶叶市场（云品馆）内（以下简称：云品馆），商户们排排坐在小板凳上，一条特殊的“流水线”已经悄然启动，他们手持软毛刷细细拂过虫草，用毛巾轻轻擦拭缝隙，这不仅是云品馆每年虫草季独有的风景，更是虫草出滇的第一道质量密码。 从泥土到云端：传统手艺的现代蜕变 “别小看这把刷子，这是我们虫草出滇的第一道‘安检’。”商户们手里的刷子上下翻飞，虫体腹面的泥土簌簌落下，虫身与子座逐渐显露出来。商户们说，刷草不仅是去土，更是验货、分级、定价的过程——泥刷得干净不伤虫体，是基本功。 据市场方提供的数据，在云品馆，除5%的商户专营虫草外，另有80%的商户经营虫草品类。每年五至七月新草下山，这里就成了云南虫草集散地之一。从青海、西藏、四川到云南本地的迪庆，新鲜采挖的虫草裹着原产地的泥土，搭乘冷链车直奔昆明，刚到云品馆，第一件事便是“排队等着刷”。 在云品馆，刷草全程公开透明——泥土去除程度、虫体完整度、子座长短比例均清晰可见，行家一眼就能分辨品质高低。商户们采用“硬刷+软拂”的两段式工艺：先用硬毛刷剔除大块黏土，再以软毛刷清理虫体腹部的细尘，既能避免损伤虫体，又能让虫草卖相格外清爽。 “虫草的长相、颜色不一样，吃起来味道也不同。”高原珍草负责人马建国说道。他是云品馆里规模最大的野生虫草专营商，算下来深耕虫草行业已有近30年，最早在深圳入行经营，后来辗转来到昆明发展。“虫草的产区差异直接体现在外形、颜色和味道上，鉴别核心看外形特征。人工虫草和天然虫草区别明显：人工虫草色泽偏黄，没有日晒痕迹，表面胶质模糊不突出。” “刷干净了才好走直播。”高原珍草的直播间里，马雪晨将手机支架架在刷草队伍旁，评论区“你的虫草是不是那曲的”“这个尾巴短不短”的提问不断刷屏。传统“排排坐”正与数字化新零售发生化学反应，新螺蛳湾的刷草现场成了真实的“源头直播场景”。 “直播业务是前年启动的，我们还制作了‘水洗vs干刷’‘正品vs仿品’的对比样品，把专业标准转化为消费者易懂的语言。”马雪晨边说边展示直播间的专属鉴别标识，这些可视化内容正是建立信任的关键。经过多方深耕运营，高原珍草直播间的日均销量从最初的1万根攀升至2万根，野生虫草销往上海、浙江、福建、北京等地，鲜草线上销售占比达60%，整体线上业务已步入稳定发展轨道。 五道关卡与五大机制：质量守门人的双重保险 “质量一定是这个市场生存的根本。”云品馆项目总经理高昕宇介绍，在新螺蛳湾，虫草从泥土里到消费者手中，需经历钢刷去土、毛刷精清、毛巾擦缝、称重分级、冷链包装的五道工序。而“五大保障机制”更是构建起质量护城河：省、市、区三级年度评价性抽检（去年21批次）、国家药监局委派的临时抽检、市场内设公平秤强制计量监管、日常巡查管理、市场监管局驻场专职抽检，并叠加商会双向监督及商户年度承诺制，确保药材品质可追溯、可公示、可信赖。 近年来，随着消费者养生意识的显著提升，虫草销售模式已从传统的礼盒批发，转向以健康功效为核心价值的精准消费，质量标准与品牌建设成为驱动增长的新引擎。 贵仁堂董事长燕勤芳对此深有体会：“针对不同的客户群体，我们会定制化的销售，明确标注虫草的产区，普通藏草、青海虫草或人工虫草也会如实说明。如今，云南省中药产业协会和市场平台为商户提供了品牌展示的窗口，有效提升了品牌知名度，让更多人认识并了解我们。” 为更好地服务商户，每逢虫草上市季节，新螺蛳湾便会启动线上销售支持机制。该机制不仅包含夜间直播所需的物业保障、合规话术指导及商家资质材料完备准备，更整合了五家快递公司的全链条服务配套体系。正如高昕宇所强调的，云品馆不仅是交易平台，更是质量过滤器和品牌放大器。从“排排坐”刷草这种看似原始的手工筛选，到专业检测、冷链物流、直播电商、跨境贸易，这里建立了一套“传统经验+现代标准”的云品出滇闭环。 从集散地到价值枢纽：云品出滇的破局之道 云品馆总建筑面积27万平方米，涵盖中药材与茶叶两大核心业态。这里的前身是昆明市菊花园中药材专业市场，1996年经国家多部委联合验收后，成为全国仅保留的17家中药材专业市场之一，也是云南省唯一的一家。目前，入驻商户1300多户，经营中药材品类超过3000种，据不完全统计，去年交易额约27亿元。 面对青海、西藏的虫草核心产区优势，新螺蛳湾另辟蹊径。“云南市场的核心竞争力在于文旅融合。”高昕宇说，依托旅游客流，将虫草等特色药材转化为伴手礼和体验式消费载体，形成“旅游引流+药材出滇”的联动模式。未来，还将围绕松茸、鲜虫草、鲜人参、石斛等“一口鲜”的时令特性开展主题化营销，强化产品的稀缺性与体验感。此外，南博会大健康馆的专题展区，也成为对接国际需求的重要窗口。今年，新螺蛳湾将组织商户成团参展，不仅统一带队对接供需双方、推动现场业务落地，还将为商户提供展台入驻机会。 下一步，新螺蛳湾将围绕树品牌、提品质、强进出口、做文旅四大方向，重点打造“十大云药”标签。并推动茶与药的深度融合，推出“品茶识药、亲手压制茶饼”等一站式文旅体验，让消费者在感受茶香的同时，领略云药的魅力。 正午的交易高峰时段，商户们手中的刷子仍在沙沙作响。“草刷得越干净，走出去的路就越顺。”这句朴素的话，道出了新螺蛳湾商户的坚守。从排排坐的手工筛选到数字化新零售，从区域集散地到跨境贸易枢纽，这里正在书写高原珍品从深山到世界的“出滇进化论”。（马琛） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "中国网",
+        "url": "https://www.zyctd.com/zixun/204/1111412.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111394html",
+        "date": "2026-06-03",
+        "title": "新泰：特色产业铺就富民路",
+        "kind": "产业观察",
+        "summary": "近年来，新泰市把产业振兴当成头号工程，逐步形成了以优质粮油、高端畜禽、高效蔬菜、生态林果四大产业为主导，中药材（丹参）、菊花、山楂等特色产业为补充的发展格局。 近日，在新泰市谷里镇后麻峪村，60多亩露天黑木耳迎来了丰收。",
+        "content_full": "近年来，新泰市把产业振兴当成头号工程，逐步形成了以优质粮油、高端畜禽、高效蔬菜、生态林果四大产业为主导，中药材（丹参）、菊花、山楂等特色产业为补充的发展格局。 近日，在新泰市谷里镇后麻峪村，60多亩露天黑木耳迎来了丰收。走近基地，只见一排排菌棒整齐地码在地里，黑木耳肥厚透亮，密密匝匝地挤在一起，菌香混着泥土的气息扑面而来。 “今天来了80多个工人，都忙不过来。”基地负责人范树华蹲在地头，随手拿起一根菌棒，上面的木耳已经长到硬币大小。他笑着介绍，“今年比往年增产一到两成，60亩地、60万个菌包，干品能收8万斤。按一斤25到30块算，年收入差不多200万。” 工人们大多是本村和周边的妇女、老人。他们手底下不停，一边摘木耳一边聊家常，一天能挣七八十块。 同样的丰收景象，也出现在新汶街道大洛沟社区的高标准大棚里。种植户王玉明承包了八九个大棚，分别种的草莓、蓝莓和小番茄。他引进的蓝莓盆栽技术颇为讲究——基质是从北欧进口的泥炭，配上椰糠、椰蓉、珍珠岩，科学配比，彻底告别了土传病害。棚里还装上了水肥一体化系统，连灌溉用水都要先净化处理。 “一亩地能收入四五万块钱。”王玉明算起账来很实在。他的蓝莓还没摘完，旁边的“爱马柿”小番茄又红了。这种番茄皮薄汁多，酸甜适口，市场上很抢手。藤蔓上挂着一串串红绿相间的小果子，游客拎着篮子钻进棚里，边摘边吃，棚里笑声不断。 大洛沟社区靠着这些精品果蔬，走出了“采摘经济”的路子。社区党委副书记刘志介绍，现在周末来采摘的市民越来越多，村里的农产品也不用愁销路了。 除了木耳和精品果蔬，中药材种植也为新泰的富民产业增添了另一抹亮色。在翟镇兴隆屯村，满坡的金银花开得正盛。“金银花讲究‘清晨采、含苞摘’，上午十点前的花蕾养分最足、香气最浓。”为城家庭种植农场的场主徐瑜站在地头，正给准备采摘的农户讲解要领。 他给采摘定了死规矩：所有鲜花必须在五个小时内送进烘干房。“要是堆久了，花蕾发热发黑，药效就打了折扣。”他的烘干房里有三台智能烘干设备，全程自动化控温控时——先42度低温烘8小时，锁住水分和营养；再升到55度恒温烘5小时，彻底蒸发残留水分；最后调至70度高温定型。整套工序23个小时，不用人守着。 “五斤鲜花出一斤优质干花，市场价每斤35到45块。”徐瑜说，盛花期每天能收3500多斤鲜花，持续20天左右。如今，新泰市的金银花种植规模稳步扩大，从种植到加工再到销售，产业链条越来越完整。全市年产优质干花800多吨，年产值超过6700万元，带动了数千名农村劳动力在家门口就业。 新泰地处鲁中腹地、泰山东麓，土地形态多样，农业资源丰富，一直是山东的粮油、蔬菜、肉类和瓜果重要产区。这些年，当地把产业振兴当成头号工程，逐步形成了以优质粮油、高端畜禽、高效蔬菜、生态林果四大产业为主导，中药材（丹参）、菊花、山楂等特色产业为补充的发展格局。 截止目前，全市蔬菜种植面积26.7万亩，林果26.3万亩，高端设施农业园区150处。楼德镇成了全国农业产业强镇，小协镇、汶南镇、西张庄镇、龙廷镇被评为省级农业产业强镇，还培育出54个省级乡土产业名村、2个全国一村一品示范镇（村）。今年一季度，新泰市农林牧渔业总产值同比增长5.2%。（新泰市委宣传部供图） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "新泰市委宣传部",
+        "url": "https://www.zyctd.com/zixun/204/1111394.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111433html",
+        "date": "2026-06-03",
+        "title": "关于开展全国中药饮片联盟集中采购模拟报价及解密操作的通知",
+        "kind": "产业观察",
+        "summary": "各申报企业： 为保障全国中药饮片联盟集中采购工作顺利开展，现就模拟报价及解密操作事项通知如下，正式报价等有关工作事项将另行通知。",
+        "content_full": "各申报企业： 为保障全国中药饮片联盟集中采购工作顺利开展，现就模拟报价及解密操作事项通知如下，正式报价等有关工作事项将另行通知。 一、模拟操作路径 在模拟报价及模拟解密时间内，登录山东省药品和医用耗材招采管理子系统（https://ypjc.ybj.shandong.gov.cn），进入中药饮片招标管理“招标项目列表”-“模拟报价管理”： 1.“企业报价”- 对每个申报药品输入“申报价（元）”-“提交报价”（报价成功后，输入框变成只读并显示“***”，报价状态显示“已报价”，报价时间段内可撤销报价并再次报价）。 2.“解密报价”- 解密前申报价显示“***”，解密状态显示“未解密”-选中需解密的数据点击“解密报价”，并输入CA“口令”点击确定（解密成功后，申报价会显示报价时输入的价格，解密状态显示“已解密”，解密后无法再次解密或修改）。多条需解密的数据可批量操作一起解密，也可以分条分次操作。 二、第一次模拟报价解密时间 模拟报价时间：2026年6月3日14:00—16:00 模拟解密时间：2026年6月3日16:00—17:00 三、第二次模拟报价解密时间 模拟报价时间：2026年6月4日8:30—10:30 模拟解密时间：2026年6月4日10:30—11:30 四、其他事项 请各企业高度重视模拟报价及解密工作，指定专人负责，确保完成相关工作并妥善保管CA数字证书UKey、PIN码。具体操作见附件《全国中药饮片联盟集中采购报价解密用户手册》。在第二次模拟报价期间，可登录招采子系统查询各品种等级最高有效申报价。 五、联系电话 0531-51778826（招采子系统技术支持）； 13256777350、13001717570（CA技术支持）。 服务时间：9:00-12:00、14:00-17:00。 附件：全国中药饮片联盟集中采购报价解密用户手册 全国中药饮片联盟采购办公室 2026年6月2日 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "全国中药饮片联盟采购办公室",
+        "url": "https://www.zyctd.com/zixun/204/1111433.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111411html",
+        "date": "2026-06-03",
+        "title": "丹凤县龙驹寨街道因地制宜培育发展特色产业——筑牢乡村振兴硬支撑",
+        "kind": "产业观察",
+        "summary": "初夏时节，陕西省商洛市丹凤县龙驹寨街道满目青翠、生机盎然。资峪河畔层峦叠翠，特色产业基地硕果初绽，标准化养殖车间机器轰鸣，特色民宿村落烟火氤氲。",
+        "content_full": "初夏时节，陕西省商洛市丹凤县龙驹寨街道满目青翠、生机盎然。资峪河畔层峦叠翠，特色产业基地硕果初绽，标准化养殖车间机器轰鸣，特色民宿村落烟火氤氲。近年来，龙驹寨街道始终锚定乡村振兴战略目标，坚持党建引领、产业筑基，以特色产业培育为抓手，因地制宜布局多元产业，精准发力补齐发展短板，不断增强区域经济硬实力，走出了一条产业兴、百姓富、乡村美的特色振兴之路。 产业兴则乡村兴，产业稳则百姓稳。立足辖区资源禀赋，龙驹寨街道摒弃传统单一、粗放的发展模式，精准谋划、多点布局，聚力打造中药材种植、特色畜禽养殖、优质水杂果培育、农文旅深度融合四大特色产业板块，构建起多元化、规模化、特色化的乡村产业体系，为全域乡村振兴注入源源不断的发展动能。 5月15日，在麻地湾村的100亩五味子基地里，一串串青果挂在翠绿的藤蔓上，村干部和村民正忙着除草、管护。据了解，该基地自2020年由村集体经济牵头建成，2023年正式挂果，年利润20多万元。同时，村里的光伏发电项目平稳运行，年均创收8万元，持续壮大村集体经济，基地常年吸纳30多名村民就近务工，叠加土地流转收益，让群众在家门口实现稳定增收。 作为丹凤县山茱萸传统主产区，龙驹寨街道把山茱萸产业作为优势主导产业来抓，创新推行“三个三”发展思路，推动这一传统产业焕发生机、提质增效。街道以山茱萸产业链联合党委为核心，专门安排科级领导牵头负责，选聘懂技术、有经验的退休干部、致富带头人，组建招商服务队、技术推广队、产品销售队3支专业队伍，建成山茱萸加工厂1个，开展技术培训9场次，覆盖群众1500多人次，主动对接外地客商20多人次，让抱团发展、品质取胜的理念深入人心。 在产业提质上，龙驹寨街道牢牢抓住科技赋能、技术推广、品牌打造3个关键抓手，为山茱萸产业发展注入强劲动能。今年以来，街道筹资购置2台植保无人机，采购8万多元的低残留防虫药、杀菌药和专用肥，聘请专职操作人员，对月日片区8000多亩集中连片山茱萸林开展飞防作业，有效防治了各类病虫害，大幅提升了管护效率。邀请县林业局、陕西农林学院专家走进田间地头，开展科管技术培训，发放1万多份宣传资料，让群众熟练掌握施肥、修枝、防虫等核心技术。 马炉村作为老牌山茱萸种植专业村，2024年建成600亩标准化科管示范基地，投入4万元完善管护配套设施，引入专业团队实施精细化管护。通过田间讲堂、现场实操、示范带动等模式，带动全村400多户群众提升标准化种植水平，实现山茱萸产量同比增长40%，有效巩固拓展脱贫攻坚成果。目前，街道山茱萸种植面积2万多亩，“南山山茱萸”品牌影响力持续扩大，产业链条不断延伸，真正让绿水青山变成群众增收致富的“绿色银行”。 庭院虽小，却藏着乡村振兴的大梦想。龙驹寨街道积极响应全县特色农业高质量发展要求，大力发展庭院经济，引导农户利用房前屋后闲置土地，种植天麻、连翘等中药材，开辟群众增收新渠道。街道组建工作专班，联合县级部门争取扶持政策，为农户提供种苗、技术培训、保底收购等全方位保障，打消群众发展顾虑。目前，街道在丹峦路沿线4个村栽植连翘10万株，建成3处连翘种植基地。普及天麻栽培新技术，发展庭院经济120户，筐栽天麻2万筐。让方寸庭院变成群众增收“钱袋子”，既盘活了闲置资源，又留住了乡村烟火气，成为乡村振兴的新亮点。 除了中药材产业，特色养殖、水杂果等产业也在龙驹寨街道遍地开花，成为群众增收的重要支撑。罗家社区党支部书记雷勇娃牵头成立永胜牧业公司，深耕蛋鸡养殖产业10多年，从最初的小型养鸡场，到如今投资900多万元建成现代化自动化鸡舍，养殖规模从3万只扩大到6万只，年产出优质鸡蛋1000多吨，转化有机肥1200多吨，实现销售收入600多万元，带动周边村民务工增收，让小小鸡蛋成为富民大产业。 资峪沟村、贺家社区立足自身禀赋，打造差异化特色产业。资峪沟村2018年建成50亩冬枣大棚，持续做大做强水杂果产业，目前村集体经济积累已突破70万元；同时培育三里栈民宿新业态，推动产业多元发展。贺家社区依托丹凤葡萄酒发源地独特资源，推行“党支部+基地+农户+企业”发展模式，流转荒山发展350亩酿酒葡萄种植，培育摩尔多瓦、夏黑等优质品种，让群众通过土地流转、基地务工获得双重稳定收益，切实感受到产业发展带来的幸福感与获得感。 在特色农业蓬勃发展的基础上，龙驹寨街道坚持以产促旅、以旅兴农，深化农文旅融合发展模式，按照“南药北菌东养殖”全域产业布局，持续擦亮山茱萸、冬枣、生态蛋鸡等特色农业品牌，培育壮大七大特色产业集群，建成3个10万只标准化蛋鸡养殖区，“九谷艾草”特色品牌影响力持续提升。 乡村文旅业态不断丰富，马炉红色乡村游、资峪沟翁窑文化康养体验基地成为辖区乡村旅游新热点。其中，资峪沟村依托康养文旅资源，精心打造5家精品民宿、3家特色农家乐和1000多平方米网红打卡点位，配套建设陶艺体验区，沉浸式展现乡土风情，让游客望得见山、看得见水、记得住乡愁。农文旅双向赋能、深度融合，不仅延伸了产业链、提升了价值链，更全面提档升级乡村振兴整体质量。 如今的龙驹寨街道，特色产业遍地开花，集体经济持续壮大，群众收入稳步提升，中药材种植突破1万亩，规模养殖总量保持在300万只（头）以上，袋料香菇、冬枣、葡萄等特色种植规模不断扩大，一幅产业兴旺、生态宜居、生活富裕的乡村振兴壮美画卷正徐徐展开。（丹凤县林业局供稿） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "丹凤县林业局",
+        "url": "https://www.zyctd.com/zixun/204/1111411.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111415html",
+        "date": "2026-06-03",
+        "title": "中成药并购变奏：东阿阿胶、康美药业向上游要增量？",
+        "kind": "产业观察",
+        "summary": "春夏之交的中成药板块，资本动作密集。 先是年初东阿阿胶，耗资约3500万元控股吉林东丰马记药业70%股权，拿下梅花鹿鹿茸深加工核心产能；",
+        "content_full": "春夏之交的中成药板块，资本动作密集。 先是年初东阿阿胶，耗资约3500万元控股吉林东丰马记药业70%股权，拿下梅花鹿鹿茸深加工核心产能；5月26日，这家老字号再度公告，拟以自有资金1.04亿元收购蜀中药业（吉林）有限公司80%股权，并同比例增资1.04亿元，合计出资约2.08亿元现金，与吉林东丰县国资平台——东丰鹿业投资发展（集团）有限公司联手将蜀中吉林完全收入囊中，使其成为东阿阿胶控股子公司并纳入合并报表。 隔日，曾经历重整的康美药业跟进出牌，5月27日公告拟在现有经营范围中新增“食用农产品初加工”和“药品委托生产”，向上游原料初加工与下游产能协作两端延伸触角。 两则公告，指向同一幅行业图景，在医保控费常态化、中药新药获批难度犹存、消费类滋补品市场回暖的三重因素影响下，中成药企业正集体抛弃“守成等涨”的旧剧本，转而通过产业链纵向并购、横向批文收购和经营范围重构，抢夺下一轮增长的门票。 东阿阿胶“养鹿” 东阿阿胶此番连续出手，战略意图明显。 用半年时间，把“阿胶单核驱动”改写为阿胶、鹿茸、肉苁蓉、特色中药的多元化滋补矩阵，而其中一块拼图，是押注吉林东丰县的梅花鹿产业带。 今年1月控股的东丰马记药业，主要负责鹿茸及鹿系列中药饮片的精深加工，年可处理梅花鹿鹿茸20吨、鹿系列饮片30吨，是东阿阿胶高端男士滋补品牌“皇家围场1619”的产能底座。 而本次拟控股的蜀中吉林，同样坐落在“中国梅花鹿之乡”东丰县，手握165个药品批准文号，其中四子填精胶囊、复方高山红景天口服液、鹿茸口服液等为独家或类独家品种，具备胶囊30亿粒/年、片剂15亿片/年、酒剂1000万瓶/年的制剂产能。 对东阿阿胶而言，这笔交易买的不仅是GMP车间，更是直接进入男性补肾抗疲劳OTC赛道的通行证，中药新品审批周期漫长且不确定性高，通过并购获取成熟独家批文，是当下扩充产品线最快也最稳妥的路径。 更深层考量在于稀缺资源的排他性绑定。 国内梅花鹿养殖高度集中于吉林东丰、双阳等地，优质鹿茸资源受养殖周期和产地限制，掌控核心产区加工企业等于在上游筑起原料壁垒。 东阿阿胶管理层在此前沟通中透露，男士滋补业务（含鹿茸系列、肉苁蓉系列）营收已从2024年的约2亿元增至2025年的近4亿元，增速远超阿胶主业，公司目标将其打造为第二增长曲线。 此前2025年年末，东阿阿胶还以约6000万元收购内蒙古阿拉善苁蓉集团80%股权并增资2800万元，锁定肉苁蓉道地药材资源。三笔并购连起来看，从西北荒漠（苁蓉）到东北鹿乡（鹿茸），再到阿胶原产地（山东东阿），一张覆盖核心滋补原料带的版图已然成形。 此外也有中医药行业从业者向21世纪经济报道记者直言，当然风险亦不容回避。阿胶品类曾因渠道囤货透支经历长达数年的调整阵痛，鹿茸及男士滋补品能否避开类似陷阱，取决于东阿阿胶对终端动销节奏和渠道库存的管控能力。此外蜀中吉林具体盈利数据公告尚未详尽披露，后续整合效果需持续跟踪。 行业变局：全产业链卡位战 若将视线拉宽，东阿阿胶与康美药业的近期动作只是中成药行业新一轮整合潮的缩影。 不同于2010年代“大鱼吃小鱼”式的渠道并购或批文套利，此轮扩张呈现鲜明特征。 首先是国资与龙头双向驱动，并购规模与精度同步提升。华润系是最具代表性的推手，2024年华润三九宣布斥资约62.12亿元收购天士力28%股份并取得控制权，补齐心脑血管处方药及生物创新药管线；此前华润三九还通过昆药集团收购华润圣火51%股权，强化三七产业链与慢病管理布局。 云南白药2025年宣布拟出资50亿元参与设立云南省中医药大健康创新基金，并以6.6亿元收购安国聚药堂强化中药材集散能力；片仔癀通过产业基金布局上下游，试图平抑天然牛黄等原料价格波动。地方国资入主九芝堂、佛慈制药等案例亦接连落地，纾困与产业整合并行。 其次是并购标的从“有文号就行”进阶为“有特色资源和有独家品种”。中药行业现存的大量同质化低水平药品批准文号并无商业价值。头部企业如今更在意标的是否握有独家/类独家品种、是否占据道地药材核心产区、是否具备可放大的OTC品牌运作空间。东阿阿胶选中蜀中吉林，正是因为其四子填精胶囊等品种功效指向明确、适合连锁药店与电商渠道，且与东阿阿胶既有终端网络重叠度高。 再者经营范围重构折射全链条运营思维。 康美药业新增“食用农产品初加工”，意味着可从中药材产地初加工环节介入，减少中间贸易商加价并更好把控农残、重金属等质量关键点；新增“药品委托生产”则可在产能闲置时承接CMO业务、在自有产能紧张时外协代工，提升供应链弹性。 这与中药配方颗粒、饮片企业向上游种植基地延伸、向下游智慧药房渗透的趋势一脉相承。当集采压缩中成药中游制造环节利润时，谁能控制上游成本、谁能贴近终端服务，谁才留得住净利率。 中康CMH及上市药企财报显示，2025—2026年中药工业整体增速呈低个位数徘徊的态势，但细分赛道分化剧烈：安宫牛黄丸、片仔癀等强品牌消费中药维持双位数增长，滋补助眠类OTC随老龄化加速复苏，而部分普药和中低端中药注射剂仍在下滑。这种分化倒逼企业要么做深品牌消费品类，例如东阿阿胶、同仁堂、广誉远等，要么做大处方终端覆盖，例如华润三九、天士力，要么把控全产业链成本，例如康美、中国中药等。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "21世纪经济报道",
+        "url": "https://www.zyctd.com/zixun/204/1111415.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111393html",
+        "date": "2026-06-03",
+        "title": "《埃博拉病毒病诊疗方案（2026年版）》印发",
+        "kind": "产业观察",
+        "summary": "《埃博拉病毒病诊疗方案（2026年版）》印发 明确中医药分阶段治疗内容 本报讯 （记者 王青云 ）日前，国家卫生健康委办公厅、国家中医药局综合司印发《埃博拉病毒病诊疗方案（2026年版）》...",
+        "content_full": "《埃博拉病毒病诊疗方案（2026年版）》印发 明确中医药分阶段治疗内容 本报讯 （记者 王青云 ）日前，国家卫生健康委办公厅、国家中医药局综合司印发《埃博拉病毒病诊疗方案（2026年版）》，其中明确了中医药分阶段治疗内容。 根据《诊疗方案》，埃博拉病毒病属中医“瘟疫”范畴。病因为外感疫毒之邪，病机以热、毒、湿为核心。本病发病急骤、传变迅速，具有由表及里的传变特点，危重者可出现动血、动风、闭窍、厥脱的证候。 结合温病卫气营血辨证，《诊疗方案》确定了分阶段治疗内容。针对初期（疫毒袭表证）、极期（气营两燔证）、恢复期（气阴两虚证）分别明确了临床表现、病机、治法、推荐方药和中成药。 埃博拉病毒病是由埃博拉病毒感染引起的具有高致病性和高病死率的急性传染病，主要通过直接接触患者、死者或受感染动物的血液、体液、分泌物、排泄物及其污染的物品等而感染。临床表现主要为突发发热、极度乏力、头痛、肌痛、频繁呕吐、严重腹泻，可伴出血和多器官功能障碍。主要流行于非洲撒哈拉以南地区，我国尚无本土及输入性病例报告。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "中国中医药",
+        "url": "https://www.zyctd.com/zixun/204/1111393.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111342html",
+        "date": "2026-06-02",
+        "title": "中医药行业一周药谈（6.1）",
+        "kind": "产业观察",
+        "summary": "中药材天地网中医药一周药谈（6.1）",
+        "content_full": "中药材天地网中医药一周药谈（6.1）",
+        "source": "中药材天地网",
+        "url": "https://www.zyctd.com/zixun/204/1111342.html",
+        "herb": "",
+        "location": ""
+      },
+      {
+        "id": "hotspot-httpswwwzyctdcomzixun2041111281html",
+        "date": "2026-06-02",
+        "title": "2026年成都中医药全产业链高质量发展暨区域合作大会举行",
+        "kind": "产业观察",
+        "summary": "5月28日，由四川省中医药管理局、重庆市中医药管理局指导，成都市卫生健康委员会（成都市中医管理局）等七部门主办的2026年成都中医药全产业链高质量发展暨区域合作大会在彭州天府中药城举行。",
+        "content_full": "5月28日，由四川省中医药管理局、重庆市中医药管理局指导，成都市卫生健康委员会（成都市中医管理局）等七部门主办的2026年成都中医药全产业链高质量发展暨区域合作大会在彭州天府中药城举行。 本次大会以“区域协同聚链成势 产研融合创新赋能”为主题，汇聚川渝及粤港澳中医药领域政、企、研、医多方资源，搭建跨省域、全链条、深层次的交流合作平台。旨在打破卫生行业传统壁垒、树立产业思维、强化市级部门联动，推动中医药全产业链融合创新。 活动现场，《成都中医药产业支持政策清单（3.0版）》和《川渝、粤港澳中医药产业供需清单》正式发布。 “此次清单的制定与发布，由我们牵头，联合多个部门共同参与。各部门立足自身职能，从不同维度精准发力，助力中医药全产业链高质量发展。”成都市卫生健康委员会（成都市中医管理局）相关负责人说。 成都市卫生健康委员会（成都市中医管理局）相关负责人介绍，此次会议不仅为成都中医药企业对接国际规则、拓展海外市场提供了清晰的路径指引与平台支撑，更标志着成都中医药从“产品走出去”向“标准走出去、品牌走出去、服务走出去”的系统升级。 据悉，今年，成都市还将牵头联合多部门，统筹整合全市诊疗、康养、餐饮、文旅、体育等优质资源，制作多语言中医药健康消费电子地图，持续提升成都中医药产业的综合实力与国际影响力。 来源：新华网、央视新闻 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
+        "source": "新华网",
+        "url": "https://www.zyctd.com/zixun/204/1111281.html",
+        "herb": "",
+        "location": ""
+      },
       {
         "id": "hotspot-httpswwwzyctdcomzixun2041111150html",
         "date": "2026-06-01",
@@ -16877,42 +16931,6 @@
         "location": ""
       },
       {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110892html",
-        "date": "2026-05-27",
-        "title": "鲁甸县独蒜兰开出“致富花”",
-        "kind": "产业观察",
-        "summary": "眼下，走进海拔2200米的昭通市鲁甸县水磨镇独蒜兰繁育基地，工人正在有序开展育苗工作。不远处林下种植基地内，800亩独蒜兰绿意盎然，长势喜人。",
-        "content_full": "眼下，走进海拔2200米的昭通市鲁甸县水磨镇独蒜兰繁育基地，工人正在有序开展育苗工作。不远处林下种植基地内，800亩独蒜兰绿意盎然，长势喜人。独蒜兰产业的蓬勃发展不仅扮靓了乡村，还走出了一条规模化、科技化、生态化的中药材产业发展之路。 鲁甸县独蒜兰产业的培育者是水磨镇退役军人杨玉凡。2015年，外出打拼多年的杨玉凡发现家乡后山分布有野生独蒜兰，虽药用价值高，却因人工繁育难度大，始终藏在深山无人识。看着乡亲们守着“宝贝”却难以增收，身为镇人大代表的他暗下决心，要让这株珍稀兰花成为带动乡亲增收的“致富花”。 为破解独蒜兰人工繁育难题，杨玉凡积极对接科研资源，牵头搭建“产学研用”合作平台，带领团队与中国科学院昆植所、昭通市农科院等科研机构深度合作，建成独蒜兰种子种苗繁育和规模化种植示范基地。经过3年攻坚，成功突破“无菌萌发”“规模化驯化”等核心技术，种苗成活率从自然条件下的5%提升至85%以上，培育出“宝芸”“宝苼”两个云南省林木良种。 “我们构建‘公司+科研院所+合作社+基地+农户’的联农带农机制，以低于市场价25%的价格供应独蒜兰种苗，以不低于市场价10%的价格兜底收购”。杨玉凡介绍，公司组建了10人的技术团队，编写《独蒜兰标准化种植手册》，为种植户免费开展种植技术培训。 杨玉凡牵头成立“名家工作室”，创建昭通市退役军人就业创业实训基地，免费为周边县区培训技术骨干助力更多群众掌握致富技能。在龙头山镇八宝村，他推广林下种植独蒜兰200亩，带动村集体年增收20万元。公司联合科研机构建立野生独蒜兰种群监测点，种植基地连续3年通过有机种植认证，实现生态保护与产业发展双赢。 面对2024年独蒜兰鲜货价格飙升、企业高价买断种苗的诱惑，杨玉凡信守承诺保障农户种苗供应，同时投入资金培育药用与观赏兼用新品种，实现“一兰双用”，进一步拓宽增收渠道。目前，公司800亩独蒜兰种植基地提供就业岗位400余个，日均工资120元，让乡亲们在家门口就近就业增收。 截至目前，鲁甸县独蒜兰产业已带动546户农户参与种植，其中脱贫群众134户，带动400余名群众就业。杨玉凡建成集中连片独蒜兰示范种植基地800余亩，示范带动群众种植各类中药材3000余亩，2025年公司实现销售额2100万元。 云南网记者 沈迅 通讯员 李娇 周振兴 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "云南网",
-        "url": "https://www.zyctd.com/zixun/204/1110892.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110897html",
-        "date": "2026-05-27",
-        "title": "镇雄芒部480亩毛慈菇长势旺",
-        "kind": "产业观察",
-        "summary": "近年来，镇雄县芒部镇坚持生态优先、绿色发展理念，立足当地气候、土壤等资源优势，规模化推进毛慈菇标准化种植。",
-        "content_full": "近年来，镇雄县芒部镇坚持生态优先、绿色发展理念，立足当地气候、土壤等资源优势，规模化推进毛慈菇标准化种植。眼下，全镇480亩毛慈菇种植基地植株长势旺盛，当地农户抢抓农时开展田间作业，小小中药材成为赋能农业增效、农民增收、乡村振兴的富民产业。 走进芒部镇关口村毛慈菇种植基地，笔者看到，田间已有少量植株成熟，农户们正趁着好时节，将成熟的块茎挖出，按照“采大留小、翻种移栽”的方式，一边精心采收，一边翻耕松土、及时追肥，为下一茬生长蓄足后劲。 据镇雄县众人中药材种植农民专业合作社负责人汪伍军介绍，合作社去年种植130亩，今年扩种至480亩，后续还将根据市场情况陆续扩建。预计今年每亩出苗可达15万—20万株，亩产值在30万—40万元之间。 为增强产业带动能力，合作社为有意向自主种植的村民提供从“种苗培育到成品销售”的全链条指导。目前已有8户农户参与种植，带动更多村民从“务工增收”迈向“自主创业”。 农户刘安静今年尝试种植了5亩，看着田间长势喜人的毛慈菇，他满心欢喜地算起了增收账：“以前在外打工一年仅有几万元收入，现在种植中药材年收入提升至几十万元，在家门口就能安稳致富，日子越过越有盼头。” 特色中药材产业的发展，也为群众提供了就近就业机会。据了解，该基地农忙时用工超150人，有效拓宽了群众增收渠道。村民郎学美长期在基地务工，说起这份工作，她满脸笑意：“在这里干活不仅离家近，还能照顾家庭。每天收入130元，工资按月结算，收入稳定，我很知足。”如今，不少当地群众都到基地务工，慢慢成了管护中药材的“行家里手”，在家门口就能稳稳增加家庭收入。 产业兴则乡村兴。如今，芒部镇以毛慈菇为代表的特色中药材产业，正逐步走出一条“产业发展、农民增收、乡村振兴”的良性循环之路。（程芳 黄润） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "昭通日报",
-        "url": "https://www.zyctd.com/zixun/204/1110897.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110893html",
-        "date": "2026-05-27",
-        "title": "第九届枸杞产业博览会将在宁夏中宁县举办",
-        "kind": "产业观察",
-        "summary": "央视网消息 5月25日，记者从第九届枸杞产业博览会新闻发布会了解到，第九届枸杞产业博览会将于6月21日至22日在宁夏回族自治区中卫市中宁县举办，博览会以“杞福天下 共享健康”为主题，聚焦现代枸杞产业高质量发展...",
-        "content_full": "央视网消息 5月25日，记者从第九届枸杞产业博览会新闻发布会了解到，第九届枸杞产业博览会将于6月21日至22日在宁夏回族自治区中卫市中宁县举办，博览会以“杞福天下 共享健康”为主题，聚焦现代枸杞产业高质量发展，搭建产业交流、产品展示、商贸洽谈与文旅融合的平台。 本届博览会期间，共设有13项活动。其中，前期活动包括“杞润杞乡”线上促销系列活动、百家媒体宁夏枸杞行活动、宁夏枸杞开园仪式、杞博会预热宣介活动等。展会期间将举办开幕式、主旨演讲、“宁夏枸杞”“中宁枸杞”推介启动仪式、枸杞文化旅游推介、“杞领新质”新品发布、杞遇康宁枸杞采购订单对接等8项活动。 本届博览会展区将聚焦全产业链展示与沉浸式互动，高标准打造线下实体展区，全景呈现枸杞标准化种植、精深加工、科研创新、品牌培育、文旅康养全链条成果，集中展示区内外优质枸杞产品、前沿科研成果、特色文创及道地中药材制品。同时，创新推出“实体展览+实地研学”模式，串联绿色种植基地、现代化加工园区、枸杞文化场馆，打造精品探访线路，推动农文旅深度融合、展销游一体发展。 此外，博览会紧扣“优质优价赋能枸杞产业转型发展”这一核心主题，聚焦精深加工、道地药材提质、大健康产业融合等核心方向，交流先进发展经验，研讨行业前沿理念，助力枸杞产业高质量提质升级、创新迭代发展。同步开展短视频挑战赛、电商直播，联动网络达人开展线上推广，持续拓宽传播边界、扩大品牌影响力。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "央视网",
-        "url": "https://www.zyctd.com/zixun/204/1110893.html",
-        "herb": "",
-        "location": ""
-      },
-      {
         "id": "hotspot-httpswwwzyctdcomzixun2041110899html",
         "date": "2026-05-27",
         "title": "海兴农场600亩蛇床子丰收在望——盐碱地上种出“中药材宝库”",
@@ -16921,150 +16939,6 @@
         "content_full": "初夏时节，海兴农场中药材种植基地内绿意盎然，600亩蛇床子植株挺拔、长势喜人，预计6月中旬进入收割期，按当前长势测算，每亩产量350斤左右，为农场特色农业发展再添新成果。 海兴农场中药材种植基地内绿意盎然 海兴农场所在区域为传统盐碱地分布区，近年来，农场积极转变发展思路，将生态劣势转化为产业优势，大力发展特色农业。农场因地制宜，高标准打造中药材种植基地，目前已建成盐碱地种植区610亩、林下种植区1050亩，成功引种蛇床子、药用柽柳、酸枣等十余个高附加值品种，构建起多元化中药材种植体系。 海兴农场中药材种植基地内绿意盎然 科技赋能为盐碱地中药材种植提供了坚实支撑，海兴农场与河北省农林科学院等科研机构深度合作，建立“盐碱地中草药种质资源圃”，持续开展耐盐碱中草药品种的引种与筛选研究。与此同时，农场还与华北理工大学深化校地合作，共建盐碱地综合利用技术研究院，着力打造盐碱地中药材生态种植示范应用场景。通过发挥高校人才与技术优势，海兴农场正推动更多优质资源向沧州集聚，为盐碱地综合利用注入持续动力。 在做强种植端的同时，海兴农场积极谋划产业链延伸，下一步，农场计划对接上下游企业，探索中药材深加工路径，提升产品附加值，努力实现经济效益与生态效益双赢。 此次600亩蛇床子丰收在望，是海兴农场盐碱地特色种植的又一次成功实践，展现了特色农业兼具经济与生态价值的巨大潜力。未来，农场将持续扩大盐碱地高品质中药材种植规模，深化校地协同创新，完善“科研—种植—加工—销售”全链条体系，做好盐碱地特色农业这篇大文章，为乡村振兴注入新动能。（文/图 周晓青） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
         "source": "央广网",
         "url": "https://www.zyctd.com/zixun/204/1110899.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110849html",
-        "date": "2026-05-27",
-        "title": "关于第一批国家级非物质文化遗产代表性传承人传承活动评估的公示",
-        "kind": "产业观察",
-        "summary": "根据文化和旅游部《国家级非物质文化遗产代表性传承人认定与管理办法》有关要求，我会组织开展了中国中药协会作为保护单位的两个第一批国家级非物质文化遗产代表性传承项目传承人传承活动的评估工作，现将评估结果予以公示。",
-        "content_full": "根据文化和旅游部《国家级非物质文化遗产代表性传承人认定与管理办法》有关要求，我会组织开展了中国中药协会作为保护单位的两个第一批国家级非物质文化遗产代表性传承项目传承人传承活动的评估工作，现将评估结果予以公示。公示期为：2026年5月25日—5月29日。 公示期内，如对评估结果有异议，请以书面形式实名向中国中药协会反映，并提供有效联系方式及相关证明材料。 联系方式如下： 地址：北京市东城区夕照寺街东玖大厦B座3层 电话：综合办公室：010-64060498 标准与项目部：010-87194974 附件：第一批国家级非物质文化遗产代表性传承人传承活动评估结果 中国中药协会 2026年5月25日 （扫码下载附件） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "中国中药协会",
-        "url": "https://www.zyctd.com/zixun/204/1110849.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110851html",
-        "date": "2026-05-27",
-        "title": "中国中药协会关于4项团体标准征求意见的通知(快检系列）",
-        "kind": "产业观察",
-        "summary": "各有关单位： 按照《中国中药协会团体标准管理办法》要求，四项快检系列团体标准已完成起草工作，为保证标准的科学性、实用性及可操作性，现面向社会公开征求意见，征求意见稿见附件1—4。",
-        "content_full": "各有关单位： 按照《中国中药协会团体标准管理办法》要求，四项快检系列团体标准已完成起草工作，为保证标准的科学性、实用性及可操作性，现面向社会公开征求意见，征求意见稿见附件1—4。 有关意见反馈，请填写征求意见反馈表(附件5)并于2026年6月28日前发送至邮箱( bpx1@catcm.org.cn), 逾期未回复按无异议处理。感谢对协会标准化工作的关注和支持！ 附件：1.《枸杞子中克百威等6种农药残留的快速检测胶 体金免疫层析法》(征求意见稿) 2.《陈皮中有机磷和氨基甲酸酯类农药的快速检测酶抑制法》(征求意见稿) 3.《根茎类中药材中多效唑的快速检测胶体金免疫层析法》(征求意见稿) 4.《果实类中药材及饮片中农药多残留测定法液相色谱- 高分辨质谱法》(征求意见稿) 5.中国中药协会团体标准征求意见反馈表 中国中药协会 2026年5月25日 （扫码下载附件） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "中国中药协会",
-        "url": "https://www.zyctd.com/zixun/204/1110851.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110821html",
-        "date": "2026-05-27",
-        "title": "中医药行业一周药谈（5.25）",
-        "kind": "产业观察",
-        "summary": "中医药行业一周药谈（5.25）.......",
-        "content_full": "中医药行业一周药谈（5.25）.......",
-        "source": "中药材天地网",
-        "url": "https://www.zyctd.com/zixun/204/1110821.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110795html",
-        "date": "2026-05-26",
-        "title": "饮片集采｜1143家企业疯抢，这7省区为何更显“淡定”？",
-        "kind": "产业观察",
-        "summary": "【天地网讯】 ——解码饮片集采低参与度背后的产业真相与保供隐忧 2026年5月21日，全国中药饮片联盟采购办公室公示了第二批集采报名结果。1143家企业蜂拥而至，将集采的热度推向高潮。",
-        "content_full": "【天地网讯】 ——解码饮片集采低参与度背后的产业真相与保供隐忧 2026年5月21日，全国中药饮片联盟采购办公室公示了第二批集采报名结果。1143家企业蜂拥而至，将集采的热度推向高潮。然而，在这片喧嚣之下，一张“东热西冷、南聚北散”的版图正悄然浮现。 它更像揭示了繁荣背后的结构性差异：广东、云南、内蒙古、吉林、辽宁、青海、西藏等地的企业申报比例显著低于全国平均水平，其中青海仅为5%，西藏更是交出了“0申报”的白卷。这种“摆手”并非对政策红利视而不见，而是一笔现实的账怎么也算不过来。本文将穿透数据，还原这场“审慎观望”背后的产业逻辑与保供焦虑。 一、 全国饮片集采企业报名 数据全景：谁在“冷场”？ 我们将申报比例低于30%的地区定义为“低参与度区域”。透过下表可以看出，这些地区并非没有产业基础，而是呈现出不同程度的“结构性错位”——有的以原料输出为主，精深加工能力尚在培育；有的以零售终端见长，与集采主渠道存在定位差异。 表：第二批中药饮片集采低参与度地区数据统计： 地区 省内饮片企业数 申报企业数 参与度 核心特征 代表性品种 广东 ​ 199 54 27% ​ 消费大省，产业发达 广藿香、陈皮、化橘红、砂仁、巴戟天、益智、香附等 云南 ​ 121 29 24% ​ 原料大省，加工外流 三七、滇重楼、茯苓、秦艽、云木香、云当归、天麻、红花 内蒙古 ​ 37 10 27% ​ 道地产区，特色鲜明 黄芪、防风、赤芍、菟丝子、北沙参 吉林 ​ 98 12 12% ​ 资源大省，转型缓慢 人参、鹿茸、五味子 辽宁 ​ 44 11 25% ​ 老工业基地，活力不足 细辛、龙胆、蛤蟆油 青海 ​ 19 1 5% ​ 企业稀少，物流受限 大黄、冬虫夏草 西藏 ​ 15 0 0% ​ 产业起步晚，标准缺失 藏红花、冬虫夏草、雪莲花、红景天 二、四大现实门槛 让 7省区在全国饮片集采时踌躇不前 需要说明的是，各地企业参与度的高低，并非能力高低的简单评判，而是产业发展阶段、资源禀赋、市场定位与集采规则之间匹配度的客观反映。以下四个维度的分析，旨在呈现不同区域企业面临的实际考量，而非否定任何一地企业的努力与实力。 产业定位差异：资源型产区与加工型产区的分工现实 典型代表： 云南（24%）、吉林（12%） 云南和吉林是我国重要的中药材资源大省，在种植端积累了深厚优势。然而，中药饮片集采的申报主体是“饮片生产企业”，而非种植或初加工主体。这并非两地企业“能力不足”，而是长期形成的产业分工使然。 客观来看，两省大量优质药材采收后，基于历史形成的市场路径，流向安徽亳州、河北安国等传统加工集散地进行精深加工。这种“产地初加工+销区精加工”的分工格局，是多年市场自发选择的结果，有其经济合理性。两省本地饮片企业多集中于产地初加工环节，在GMP车间建设、全链条追溯体系、GAP基地认证等方面，与集采的硬性门槛存在一定差距。这反映的是产业升级的阶段性特征，而非企业意愿或能力的缺失。 市场定位差异：零售终端与公立医院的双轨并行 典型代表： 广东（27%） 广东是全国中药消费大省，其市场结构呈现出鲜明的“零售主导”特征。这与当地深厚的药食同源文化、发达的中医馆网络、活跃的凉茶和煲汤消费传统密切相关。这些终端市场对小包装、精致饮片的需求，与集采服务于公立医院的大包装、统货需求形成差异。 当地饮片企业在长期发展中，形成了适配零售市场的产线配置和产品标准。这并非“不愿参与集采”，而是企业基于自身市场定位做出的理性选择。事实上，深耕零售市场的策略为广东企业带来了稳定的利润空间和品牌积累。对于这些企业而言，改造成本与预期收益之间的权衡，是任何市场主体都会进行的正常商业判断。 客观条件制约：地理区位与基础设施的现实挑战 典型代表： 青海（5%）、内蒙古（27%）、辽宁（25%） 西北、东北部分省份的企业参与度偏低，与当地的地理区位、产业基础、物流条件等客观因素密切相关，不应简单归因于企业“不积极”或“能力弱”。 首先，集采评审中GAP基地和追溯体系的高分值要求，对于地处偏远、产业集中度低的地区企业而言，意味着更高的建设和认证成本。这是区域发展不平衡的现实投射。 其次，参与全国饮片集采的企业更大的顾虑在于履约风险。集采要求中选企业必须具备满足约定采购量2倍的供应能力，而西北、东北地区配送半径大、冬季严寒，物流成本和运输损耗远高于内地。2025年9月，已有3家企业因“无法满足全部有协议采购量的医疗机构需求”被列入违规名单，暂停申报资格长达18个月；青海省甚至对44家饮片企业因配送不达标评定为“失信”。企业担心中标后因物流中断或成本倒挂导致断供，进而面临严厉的信用惩戒，自然不敢轻易入场。 战略重心差异：差异化赛道与集采主渠道的主动取舍 典型代表： 福建（15%）、广西（34%） 部分省份企业参与度低，反映的是差异化竞争战略下的主动取舍，而非能力欠缺。 以福建为例，片仔癀等龙头企业构建了强大的品牌护城河和院外销售网络，对集采依赖度极低。省内中小企业在龙头带动下，形成了围绕本地市场、特色品种的配套体系。广西企业则聚焦罗汉果、肉桂等特色单品种的深度开发，走“小而精”的差异化路线。这些战略选择与集采“以量换价”的主渠道模式存在差异，但同样具有市场竞争力和生存空间。企业选择在自己擅长的赛道上深耕，是符合商业逻辑的理性行为。 三、 小结 总体而言，各地企业在第二批饮片集采中参与度的差异，是产业发展阶段、区域资源禀赋、市场定位选择与集采规则之间复杂互动的结果，不宜简单解读为“积极性高低”或“能力强弱”。 从更宏观的视角看，这种差异化参与恰恰表明：集采制度在持续推进的同时，也为不同区域、不同类型的企业留下了多元化的生存和发展空间。对于企业而言，关键在于找准自身定位——是在集采主渠道中争取份额，还是在细分市场中深耕细作，都是值得尊重的战略选择。",
-        "source": "中药材天地网",
-        "url": "https://www.zyctd.com/zixun/204/1110795.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110739html",
-        "date": "2026-05-26",
-        "title": "甘肃出台轻工业高质量发展三年行动计划，2028年总产值力争突破2000亿元",
-        "kind": "产业观察",
-        "summary": "新甘肃客户端讯 （新甘肃·奔流新闻记者 张艾萍）近日，甘肃省政府办公厅印发《甘肃省轻工业高质量发展三年行动计划（2026—2028年）》，以“增品种、提品质、创品牌”为主线，统筹扩内需和供给侧结构性改革...",
-        "content_full": "新甘肃客户端讯 （新甘肃·奔流新闻记者 张艾萍）近日，甘肃省政府办公厅印发《甘肃省轻工业高质量发展三年行动计划（2026—2028年）》，以“增品种、提品质、创品牌”为主线，统筹扩内需和供给侧结构性改革，明确到2028年，全省轻工业总产值突破2000亿元，建成品质化、智能化、绿色化现代轻工产业体系。 根据该《计划》，甘肃将构建梯次清晰的轻工产业格局，重点培育千亿级食品产业、五百亿级生物制药产业、五百亿级特色轻工和纺织产业三大板块，同步推动各类轻工业态多元发展。 食品产业依托“甘味”品牌优势，深耕小杂粮、畜产品、油橄榄、道地食药精深加工，贴合便携、控量、细分消费新需求丰富产品品类。引导食品小作坊向“精特美”转型，完善仓储保鲜、冷链物流配套，前瞻布局特医食品、药食同源功能食品，做实“农头工尾、粮头食尾”产业链。 生物制药产业将完善生物药、现代中药、化学药、医疗器械协同发展格局，重点发展生物制品、高端体外诊断试剂等产品，健全中药材质量追溯体系，壮大高端原料药产业，推动兰州生物医药产业集群冲刺国家级梯队。 纺织服装产业聚焦延链补链，建设兰州新区、广河等5个轻纺工业承接区，补齐织造、印染、辅料等产业链短板，引导企业从贴牌代工向自主品牌转型，争创国家级纺织特色产业集聚区。同时，甘肃将分层培育橡塑、家具日化、文创工艺等轻工行业，丰富产品供给，适配个性化、定制化消费市场。 我省将做强11个省级轻工产业集群，持续引育头部企业，依托“揭榜挂帅”加速科技成果转化，培育单项冠军和专精特新企业。推进产业数字化升级，培育一批智能工厂和数字化标杆企业，以人工智能赋能生产研发。 甘肃将做强“甘味”“陇药”区域品牌，依托线上线下多元渠道拓宽国内市场，借助跨境电商推动“甘品出海”，并强化财政、金融政策协同保障，全面助推轻工产业提质增效、扩容升级，拉动全省工业经济稳步增长。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "新甘肃",
-        "url": "https://www.zyctd.com/zixun/204/1110739.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110741html",
-        "date": "2026-05-26",
-        "title": "河南固始：村民种植中药材的“增收账”",
-        "kind": "产业观察",
-        "summary": "中新网河南新闻5月25日电 “去年试着种了一亩，足足增收1930元！今年我又扩种了两亩。”5月22日，在河南省信阳市固始县段集镇乐道冲村，村民汪生基一边麻利地栽种幼苗，一边喜滋滋地算起“增收账”。",
-        "content_full": "中新网河南新闻5月25日电 “去年试着种了一亩，足足增收1930元！今年我又扩种了两亩。”5月22日，在河南省信阳市固始县段集镇乐道冲村，村民汪生基一边麻利地栽种幼苗，一边喜滋滋地算起“增收账”。 图为村民在栽种野菊花种苗。 在段集镇，像汪生基这样尝到增收甜头的村民不在少数。村民们从段集镇野菊花种苗基地免费领取野菊花种苗，趁着雨后湿润天气抓紧栽种，房前屋后、山间坡地都成了村民的“聚宝盆”。 据了解，野菊花属传统中药材，市场需求稳定。近年来，信阳农林学院药学院利用驻村帮扶契机，充分发挥专业优势，通过反复试验种植，成功摸索出适配本地水土气候的野菊花种植模式。 “去年我们免费发放800多万株种苗，带动全镇种植野菊花近5000亩。今年育苗基地扩建至138亩，可供应种苗1000万株。”信阳农林学院药学院党委书记、驻段集镇乐道冲村第一书记魏宗烽介绍说。 在科技赋能的同时，段集镇创新推行“公司+基地+农户”模式，构建起集育苗、种植、收购、加工于一体的全产业链。“2026年全镇种植总面积将达6400亩，预计带动群众累计增收900万元以上。”段集镇平安建设办公室主任杨洋信心满满。 一花兴则百业旺，一域活则全局兴。段集镇的成功探索，为固始县特色产业发展提供了生动样本。固始县顺势而为，联动药企、科研院所搭建合作平台，为农户和合作社提供种植、收购、销售“一站式”服务，全力打通产销堵点。“去年全县野菊花种植面积5000多亩，今年已辐射推广至全县12个乡镇，种植面积将突破1万亩，预计实现户均增收2500元以上。”固始城市运营管理有限公司野菊花项目负责人戴昕宇说。 如今，在固始县，这朵小小的野菊花，不仅绿了山坡、美了乡村，更鼓了群众的“钱袋子”，实现了生态、经济与社会效益的同频共振，在固始大地上绘就了一幅产业兴旺、乡村振兴的壮美画卷。(徐纯 陈杰/文 龚爱琳/图) 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "中新网",
-        "url": "https://www.zyctd.com/zixun/204/1110741.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110742html",
-        "date": "2026-05-26",
-        "title": "河南原阳：金银花开铺就乡村致富路",
-        "kind": "产业观察",
-        "summary": "中新网河南新闻5月24日电 眼下，河南省新乡市原阳县的金银花迎来采摘旺季。",
-        "content_full": "中新网河南新闻5月24日电 眼下，河南省新乡市原阳县的金银花迎来采摘旺季。原阳县齐街、大宾、靳堂等乡镇的1000余亩金银花进入盛花期，小小的金色花蕾缀满枝头，不仅装点了乡野大地，更成为带动当地农户稳增收、促致富的“金色引擎”。 图为原阳县齐街镇瓜李村的大田金银花已进入盛花期。 5月22日清晨，原阳县齐街镇瓜李村的金银花种植基地里，连片花海随风起伏。数十名村民腰挎竹篮、手持采筐，指尖翻飞间，饱满的花蕾轻轻落入篮中。“一天能摘20多斤，在家门口就能挣百十来块，还能活动筋骨，比闲着强多了。”70岁的村民董占香笑着说。 从晨光微露到暮色四合，原阳金银花产业的全链条高效运转。采摘、分拣、烘干、销售各环节无缝衔接、有序推进，居家老人、农村妇女成为田间务工的主力军。一朵朵小巧的金银花，串联起当地群众的“增收梦”“康养梦”。 图为原阳县齐街镇金辉合作社负责人正在刘文寨村查看金银花长势。 “以前种传统农作物，一亩地收入不到千元；改种金银花后，盛产期亩均收益超8000元，还能带动周边村民就业。”齐街镇瓜李村党支部书记介绍，当地通过“合作社+基地+农户”模式，统一提供种苗、技术指导和销售渠道，让小农户也能融入大产业。 如今，原阳县已形成“种植—加工—销售”一体化产业链：新鲜采摘的金银花经分拣后，一部分直接供应药企，一部分送入烘干车间制成干花，附加值提升30%以上。今年，全县金银花鲜货产量预计突破600吨，带动900余户农户年均增收超5000元。 图为村民正在采摘大田金银花。 金银花耐旱耐瘠薄，适合在沙质土壤中生长，既能固土保水，又能减少化肥使用，是典型的生态友好型作物。 “种金银花不仅鼓了钱袋子，还绿了山坡子。”靳堂乡一名种植户表示，曾经闲置荒芜的废弃地块，如今变身增收致富的“聚宝盆”，不仅盘活了闲置土地资源，更让乡村田间生态环境得到显著改善，实现了生态效益与经济效益双向共赢。 近年来，原阳县锚定“农业增效、农民增收、产品安全、环境友好”目标，以金银花、设施蔬菜等特色产业为抓手，拉长农业产业链条。目前，该县已培育金银花种植专业合作社12家，产品远销山东、河北等地，生态“绿”正转化为实实在在的发展“金”。(朱新国/文 张文杰 卢明/图) 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "中新网河南",
-        "url": "https://www.zyctd.com/zixun/204/1110742.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110738html",
-        "date": "2026-05-26",
-        "title": "徽县大河店镇：野菊移栽垄间忙 增色添财富民花",
-        "kind": "产业观察",
-        "summary": "初夏时节，万物并秀，田间土壤墒情适宜，正是中药材移栽定植的黄金时段。连日来，徽县大河店镇各村田间地块一派繁忙景象，当地群众抢抓有利天气，全面推进野菊花规模化移栽定植工作，一株株花苗扎根沃土，为初夏乡野增添了勃勃生机。",
-        "content_full": "初夏时节，万物并秀，田间土壤墒情适宜，正是中药材移栽定植的黄金时段。连日来，徽县大河店镇各村田间地块一派繁忙景象，当地群众抢抓有利天气，全面推进野菊花规模化移栽定植工作，一株株花苗扎根沃土，为初夏乡野增添了勃勃生机。 在各个移栽现场，经过前期深耕、除草、起垄的田块平整疏松，农户们三五一组、分工协作，严格按照种植技术标准，精准把控行距株距，依次完成取苗、挖坑、定植、覆土、压实、浇灌定根水等全套作业流程。大家趁着晴好天气加快移栽进度，细致做好种苗定植管护，结合初夏气候特点做好保墒防护，全力提升花苗移栽后的成活率。 与此同时，现场同步开展技术指导，围绕移栽操作规范、苗期日常管护、缓苗水肥管理、病虫害简易防控等内容，面对面开展实操讲解，及时解答种植过程中遇到的问题，帮助种植人员规范作业、科学管护，保障野菊花种苗稳健生长。 此次全镇规模化移栽野菊花410亩，其中村集体集中打造种植基地247亩，带动农户自主种植163亩，目前，辖区内野菊花夏季移栽工作正有序推进，一株株新栽的种苗整齐排列，在夏日暖风里展露生机，为后续花期生长、特色产业提质打下扎实基础。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "徽县融媒体中心",
-        "url": "https://www.zyctd.com/zixun/204/1110738.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110705html",
-        "date": "2026-05-25",
-        "title": "江永：深耕中药材产业 特色莪术种植促振兴",
-        "kind": "产业观察",
-        "summary": "红网时刻新闻5月25日讯 （通讯员 欧阳文）初夏时节，农事正酣。在江永县潇浦镇的田间地头，中药材种植工作有序推进，一派繁忙劳作景象。",
-        "content_full": "红网时刻新闻5月25日讯 （通讯员 欧阳文）初夏时节，农事正酣。在江永县潇浦镇的田间地头，中药材种植工作有序推进，一派繁忙劳作景象。当地立足优越的自然禀赋与气候优势，大力发展特色中药材产业，盘活闲置土地资源，持续优化农业产业结构，为瑶乡群众稳定增收开出产业新“药方”。 走进潇浦镇白龙溪村中药材莪术种植基地，田间地头一派热火朝天的劳作景象，十几名工人分工协作、抢抓农时，忙着翻土、起垄、栽苗、覆土，全力推进莪术规范化种植工作。 莪术是应用广泛的传统中药材，别名青姜、姜黄，属多年生宿根草本植物，药用价值突出，具备行气解郁、破瘀止痛等功效，目前已广泛应用于医药制品生产，市场需求稳固。 基地标准化种植50余亩，从种茎筛选、土地整理到科学栽种都严格按照农技标准操作。为抢抓最佳种植窗口期，基地组织十几名务工人员集中进行栽种，既保障了种植进度，也为周边村民提供了就近务工、家门口增收的好渠道。 近年来，江永县持续深耕特色中药材发展，创新推行“合作社+基地+农户”产业发展模式，依托山地资源优势，大力培育黄精、玉竹、莪术等中药材种植产业，全县中药材种植总面积已突破4万亩。通过持续培育特色新产业、拓宽产品销售渠道，不断激活乡村产业发展动能，有力推动农业提质增效、群众稳步增收，为乡村全面振兴注入坚实动力。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "红网",
-        "url": "https://www.zyctd.com/zixun/204/1110705.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110704html",
-        "date": "2026-05-25",
-        "title": "强降雨来袭 湖南中药材专家发布灾后恢复技术指导意见",
-        "kind": "产业观察",
-        "summary": "红网时刻新闻5月22日讯（通讯员 肖深根 宋荣 谢红旗）近日，湖南进入降雨集中期。受新一轮强降雨天气影响，5月18日8时起，湖南省已启动防汛和自然灾害救助四级应急响应。",
-        "content_full": "红网时刻新闻5月22日讯（通讯员 肖深根 宋荣 谢红旗）近日，湖南进入降雨集中期。受新一轮强降雨天气影响，5月18日8时起，湖南省已启动防汛和自然灾害救助四级应急响应。当前季节正值大多数中药材旺盛生长时期，为应对持续强降雨天气对中药材生产的影响，湖南省中药材产业技术体系专家提出以下技术指导意见。 提前做好雨季汛期生产应急预案 及时关注天气预报与雨季汛期暴雨预警，做好中药材生产应急预案。提前疏通并加固中药材种植基地沟渠排灌系统，对易积水地块要特别注意开深排水沟，保证雨停水走。在暴雨来临前，检查修复基地保护地设施，及时放下并压实顶膜与四周裙膜。提前断开基地主干渠进水口，对基地内部蓄水池提前降低水位以备蓄水。排查易出现塌方险情的路段、地块并进行加固。 组织人力第一时间现场巡查抢排水 减少水淹及水淹时间是预防雨季汛期水涝灾害对中药材生长影响的关键，下雨天气，特别是暴雨期间，要安排专人值守，及时发现并通报险情。在安全的情况下，要组织力量第一时间去现场巡查，进行疏通抢排水。要及时引导水流通过沟渠系统排水，避免水流在基地地表、道路系统没有方向的大水横流漫溢。 及时做好雨季汛期生产灾后恢复 加强灾后基地排水。及时疏通基地排水系统，确保畦面、畦沟不积水；对排灌系统遭破坏导致严重积水的基地，要在四周开深排水沟，在地块中央每隔一定距离开一条深排水沟，同时在地块内开若干小的排水沟，要求大小排水沟之间沟沟相连，排水通畅；对低洼、排水难度大的地方应及时采取机械排水，尽快排出田间积水。 尽早清理受灾基地。抓紧在晴好天气土壤较干时，及早清理受灾基地；清除机械折断或明显坏死的植株地上枝叶，注意保留切口呈外斜面，切忌用手强掰、强扯；整株死亡的要将植株根部全部挖出，并在根穴四周撒施生石灰或托布津、多菌灵等药粉进行土壤消毒；断枝枯叶需搬出基地进行集中深埋或销毁；及时清除外来冲积砂土；有明显设施破坏或塌方的，要先进行简单清理和保持通畅。 加强基地病虫害防治。雨季洪涝受灾之后，马上进入高温季节，高温高湿最容易诱发各种病害，要加强灾后病虫害防治，特别是对该药材常发病虫害，更要提前加强预防，做到早发现早防治，控制病虫害扩散蔓延。根腐病可用适乐时 1500～2000 倍液加 20%噻菌铜悬浮液 500～600 倍液进行灌根，炭疽病可用 325g/升苯醚甲环唑·嘧菌酯悬浮剂 45～50 毫升/亩（制剂量）喷雾，枯萎病可用烯肟菌胺·苯醚甲环唑悬浮剂 30～40 毫升/亩（制剂量）喷雾，叶斑病可用 40%苯醚甲环唑·吡唑醚菌酯悬浮剂 2000～3000 倍液喷雾；受灾后夜蛾类害虫等虫害易发生，可用物理防治结合生物农药防治，必要时可进行化学防治。有条件的基地，可结合受灾基地清理，全园撒施一次生石灰或托布津、多菌灵等药粉进行土壤消毒处理。 分类制定基地恢复生产方案。对于轻度受灾的，抢晴天对基地进行 1 次全面中耕松土，结合中耕，追施一次速效性专用肥。对于即将进入采收期的药材，可适当提早采收，及时干燥加工，鼓励有条件的大中型企业通过租用、代为干燥等多种方式为药农提供干燥加工服务。对于多次采收的药材，抢收后迅速开展消毒、中耕、追肥，促进植株生长恢复，保证下季产量。对于受损较轻的中药材种苗繁育基地或新移栽基地，可以通过补播、补栽、补插等方式，及时查苗补蔸。对于受灾十分严重，确实很难恢复的中药材品种和基地，可以深翻改土，按照轮作原则，改种其他药材或作物。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "红网",
-        "url": "https://www.zyctd.com/zixun/204/1110704.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110517html",
-        "date": "2026-05-22",
-        "title": "云南永德中药材赋能乡村振兴 农户最高年增收5万元多方共赢",
-        "kind": "产业观察",
-        "summary": "依托得天独厚的生态资源禀赋，云南永德县将中药材产业打造成为富民强县的特色产业。 统筹推进产业规模化、全域化发展，既能有效盘活闲置土地资源，持续拓宽群众增收渠道，更为全面推进乡村振兴积蓄坚实动能。",
-        "content_full": "依托得天独厚的生态资源禀赋，云南永德县将中药材产业打造成为富民强县的特色产业。 统筹推进产业规模化、全域化发展，既能有效盘活闲置土地资源，持续拓宽群众增收渠道，更为全面推进乡村振兴积蓄坚实动能。 时下，永德县德党镇牛火塘村中药材种植基地里农事正忙，文山顶融中药材种植有限公司聘请当地50余名群众给滇黄精除草、追肥，田间处处呈现出热火朝天的农耕劳作景象。 走进牛火塘村中药材种植基地，连片的滇黄精破土而出、茁壮成长，肥厚的翠绿叶片间嫩芽萌发，长势喜人。基地里，当地务工群众分工明确，有的弯腰拔草，有的撒肥追肥，动作娴熟。 “农闲务工、农忙顾田，一天工钱90元，一年能挣2万多元，既方便又安心。”务工人员马小妹的话语里满是喜悦，家门口就业让她实现了增收与顾家两不误。 作为省级“云药之乡”，永德县科学优化种植结构，形成以红花为主导，三七、滇黄精等二十余种中药材协同发展的格局。 目前，全县已建成标准化种植示范基地5个、良种繁育基地4个，年育苗能力达6000万株，培育经营企业7家、专业合作社5个，构建起“企业+合作社+基地+农户”的产业化体系。 “这里的水土气候适宜中药材生长，现有滇黄精1300亩，后续计划新增800至1000亩，并试种灵香草、重楼等品种。”基地负责人徐永进介绍，基地年均吸纳务工1.4万人次，全年发放薪酬120万元至140万元，带动周边群众共享发展成果。 产业兴则农民富。永德县通过发展中药材种植，盘活大量山区撂荒地，土地亩均产值较传统农作物提高5倍至8倍。 目前，产业直接带动308户农户参与，户均年增收1.2万元，最高达5万元；累计发放土地流转、务工收益400余万元，助力村集体经济年均增收10万元以上，实现产业、农民、集体三方共赢。 永德县持续深挖道地药材潜力，延伸精深加工产业链，打造本土特色品牌，推动产业与康养文旅融合；同时强化技术人才培育，健全风险防控和联农带农机制。 “2025年全县中药材种植面积7.82万亩、产值1.15亿元，2026年力争种植面积突破7.84万亩、产值超1.17亿元。”永德县地方产业发展服务中心副主任鲁有军表示，将持续以政策、科技赋能，推动产业提质、助力群众增收。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "长江商报",
-        "url": "https://www.zyctd.com/zixun/204/1110517.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2041110518html",
-        "date": "2026-05-22",
-        "title": "云南大关：做强中药材产业 赋能乡村振兴",
-        "kind": "产业观察",
-        "summary": "近日，走进云南省昭通市大关县靖安镇碧凹村的中药材种苗基地，120亩标准化药田绿意葱茏，黄精、百合、淫羊藿等中药材种苗长势喜人，水肥一体化设施高效运转，农户们穿梭田间施肥、锄草，一派繁忙生产景象。",
-        "content_full": "近日，走进云南省昭通市大关县靖安镇碧凹村的中药材种苗基地，120亩标准化药田绿意葱茏，黄精、百合、淫羊藿等中药材种苗长势喜人，水肥一体化设施高效运转，农户们穿梭田间施肥、锄草，一派繁忙生产景象。 碧凹村的中药材种苗基地（5月14日摄）。 近年来，大关县将中药材产业作为推进乡村振兴的支柱产业，聚焦黄柏、天麻、当归三大品种，推动滇黄精、党参等特色品种扩面提质。目前，大关县中药材种植面积超27万亩，年产量突破7000吨。 为夯实产业根基、凝聚发展合力，大关县统筹农业、林业等部门资源，推行“党支部+公司+新型农业经营主体+农户”的联农带农机制，整合各类资源，规划建设标准化良种繁育基地，筑牢产业源头支撑。目前，大关县中药材经营主体超500个，产业规模化、组织化水平持续提升，有效带动当地群众在家门口实现就业增收。 在产业链构建上，大关县持续补短板、延链条，建成县级专业集散中心与20余个基层集散点，配套加工点和销售点，打通生产、加工、流通、销售全链条，有效降低损耗、提升综合效益。 此外，大关县深化校地合作、推动产学研融合，邀请高校科研团队下沉一线，围绕良种选育、绿色防控、规范化种植等开展技术指导，破解种植难题、培育本土农技人才，为中药材产业发展注入科技动能。（完）（杨杰） 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "昭通市融媒体中心",
-        "url": "https://www.zyctd.com/zixun/204/1110518.html",
         "herb": "",
         "location": ""
       },
@@ -17233,66 +17107,6 @@
         "content_full": "一、《中医药继续教育管理办法(试行)》制定的背景和意义是什么? 中医药继续教育起步较早，自上世纪90年代，国家中医药局紧跟国家关于专业技术人员继续教育工作的要求，逐步建立健全中医药继续教育管理制度。1997年，印发实施《中医药继续教育暂行规定》;2000年，发布《中医药继续教育登记办法(试行)》;2002年，颁发了《中医药继续教育规定》《中医药继续教育学分授予办法》《国家级中医药继续教育项目申报、认可办法》《国家中医药管理局中医药继续教育基地管理办法》等一系列中医药继续教育规范性文件;2006—2007年，根据形势变化和中医药继续教育实际要求对中医药继续教育文件进行了系统修订，印发《中医药继续教育规定》《中医药继续教育登记办法》《中医药继续教育学分管理办法》《中医药继续教育基地管理办法》以及《国家级中医药继续教育项目管理办法》等。一系列文件对于健全中医药继续教育制度，推动中医药继续教育工作，提升中医药专业技术人员的能力素质发挥了积极作用。进入新时代，随着经济社会和中医药进一步发展，中医药继续教育相关规范性文件已不适应当前新形势新要求，亟待进一步完善健全。 2024年，国家卫生健康委会同国家中医药局和国家疾控局启动了继续医学教育相关规范性文件的修订工作，联合印发《继续医学教育管理规定(试行)》。在此基础上，国家中医药局启动了中医药继续教育规范性文件的修订工作，将《中医药继续教育规定》等中医药继续教育相关文件合并修订为《中医药继续教育管理办法(试行)》。 二、《管理办法》的主要内容是什么? 《管理办法》共6章22条，主要内容包括： 第一章(第1～4条)总则。 明确《管理办法》的制定依据、目标任务、工作原则和适用对象。 第二章(第5～6条)中医药继续教育内容。 明确中医药继续教育内容的重点和分级分类培训的原则。在分类上，以岗位胜任力为核心，将医务人员应知应会的法律法规、医学人文、从业行为规范、突发公共卫生事件应急处理等必备内容纳入公需科目，将各类中医药专业知识、医学科技创新前沿知识等纳入专业科目。在分级上，提出初级、中级、高级职称中医药专业技术人员以及中医(专长)医师、乡村医生学习的重点和应当掌握的知识技能。 第三章(第7～13条)学分授予。 在延续学分制基础上进一步丰富中医药继续教育活动内涵，拓宽学分获取途径。不再设置Ⅰ、Ⅱ类学分分类;国家和省级中医药主管部门公布的中医药继续教育项目按统一标准授予学分;保留“自下而上”申报方式设置推荐项目，同时“自上而下”设置推广项目;将省级及以上中医药主管部门组织实施的人才培养专项、师承教育、进修学习、政府指令性医疗卫生任务、在职学历(学位)教育、有组织的中医药继续教育实践活动、有计划的自学等方式均纳入可获得学分的继续教育活动;中医学类、中西医结合类、临床医学类、口腔医学类、公共卫生与预防医学类等专业间学分互认。 第四章(第14～16条)学分登记。 明确中医药专业技术人员接受中医药继续教育并获得学分实行信息登记制度，规定中医药继续教育信息登记的内容等。 第五章(第17～19条)管理监督。 强化中医药继续教育监管，重点对中医药继续教育项目和学分授予提出监管要求。 第六章(第20～22条)附则。 明确基层医疗卫生机构(乡镇卫生院、社区卫生服务机构、村卫生室)中医药专业技术人员的学分授予具体要求由省级中医药主管部门结合本地实际制定。明确《管理办法》自印发之日起施行，同时废止既往其他中医药继续教育相关管理文件。 三、《管理办法》的改革创新点体现在哪些方面? 现行《继续医学教育管理规定(试行)》由“一委两局”印发，共性要求已经明确，故《中医药继续教育管理办法(试行)》不再重复表述中医药继续教育的组织管理、经费管理、责任追究等内容，重在明确中医药继续教育学习内容、学分授予、项目管理等相关内容要求。相较以往中医药继续教育相关文件，《管理办法》主要聚焦以下5个方面进行修订完善。 一是拓宽学分获取渠道。 在原有获取学分方式(中医药继续教育项目、中医药人才培养专项、有组织的中医药继续教育实践活动等)基础上，将师承教育、政府指令性医疗卫生任务、在职学历(学位)教育等新增纳入中医药继续教育学分授予范畴。其中，中医药继续教育项目由原先单一的自下而上推荐遴选的产生方式，增设自上而下的中医药继续教育推广项目方式。 二是优化学分授予标准。 不再设置I类、Ⅱ类学分分类，统一国家和省级中医药主管部门公布的中医药继续教育项目学分授予标准。明确提出中医学类、中西医结合类、临床医学类、口腔医学类、公共卫生与预防医学类等专业间学分互认。 三是突出中医药继续教育特色。 在中医药继续教育内容方面，将中医药专业技术人员应当重点强化的职业素养教育、政策法规教育以及公共卫生知识等纳入公需科目，将体现中医药学特点的中医药经典理论、名老中医药专家学术经验传承等内容纳入专业科目;强化各级中医药专业技术人员的中医思维培养和提升，明确中医(专长)医师的学习要求。在学分授予方面，将《中医药专业技术人员师承教育管理办法》规定的师承教育作为学分获取的渠道之一并明确学分授予标准;围绕中医药传承创新发展需求，明确中医药继续教育推荐项目和推广项目学习重点。 四是加强中医药继续教育管理。 单设管理监督一章，明确各级中医药主管部门对中医药继续教育的监管责任，按照“谁申报、谁举办、谁负责”原则加强中医药继续教育项目的全流程管理，提出对异地举办中医药继续教育项目的管理举措，加强学分授予监管。 五是落实为基层减负。 基层医疗卫生机构(乡镇卫生院、社区卫生服务机构、村卫生室)中医药专业技术人员的学分授予途径和标准的具体要求，由各省级中医药主管部门结合实际情况自行制定。 四、如何更好推动《管理办法》落实? 一是加强业务指导。 国家中医药局将加强对中医药继续教育工作的统筹，指导各地按照《管理办法》要求结合实际抓好贯彻落实，推动中医药继续教育规范有序开展。 二是加强监督管理。 以中医药继续教育学分为抓手，强化监督管理，特别要加强对中医药继续教育项目的监管和学分授予的监管。 三是加强宣传引导。 鼓励省级中医药主管部门采取多种形式加强对《管理办法》的宣传，营造更加积极的终生学习氛围。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
         "source": "国家中医药管理局",
         "url": "https://www.zyctd.com/zixun/223/1103597.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2231103521html",
-        "date": "2026-02-26",
-        "title": "《福建省规范中药材产地加工（趁鲜切制）指导意见》政策解读",
-        "kind": "政策解读",
-        "summary": "一、文件修订的背景和目的是什么？ 中药材产地加工（趁鲜切制）（以下简称产地趁鲜切制）是中药材产地加工的方式之一，是按照传统加工方法将采收的新鲜中药材切制成片、块、段、瓣等，虽改变了中药材形态，但未改变中药材性质...",
-        "content_full": "一、文件修订的背景和目的是什么？ 中药材产地加工（趁鲜切制）（以下简称产地趁鲜切制）是中药材产地加工的方式之一，是按照传统加工方法将采收的新鲜中药材切制成片、块、段、瓣等，虽改变了中药材形态，但未改变中药材性质，且减少了中药材经干燥、浸润、切制、再干燥的加工环节，一定程度上有利于保障中药材质量。允许中药生产企业采购产地趁鲜切制药材作为原料，即符合中药生产实际，也有助于提高生产效率和产品质量。 2021年6月，国家药监局以《关于中药饮片生产企业采购产地加工（趁鲜切制）中药材有关问题的复函》（药监综药管函〔2021〕367 号）形式明确了中药饮片生产企业可以采购使用产地趁鲜切制中药材的相关政策要求。2025年8月，国家药监局发布《中药生产监督管理专门规定》，进一步明确了中药品种上市许可持有人及中成药、中药配方颗粒生产企业均可以采购产地趁鲜切制中药材，扩大了原国家局复函的适用范围。 2022年省药监局根据《关于中药饮片生产企业采购产地加工（趁鲜切制）中药材有关问题的复函》精神制定了《福建省规范中药材产地趁鲜加工指导意见（试行）》（以下简称《指导意见》），试行以来初步建立了福建省中药材产地趁鲜加工的管理制度。根据《中药生产监督管理专门规定》最新精神，综合前期试行情况，省药监局在充分调研听取行业及相关方面意见基础上，组织对《指导意见》进行修订，增扩适用范围、优化管理要求、出台支持政策，以期更好地推动我省中药材产地趁鲜切制行业高质量发展。 二、文件的主要修订内容有哪些？ 修订后的《指导意见》包括适用范围、工作措施、工作要求三个部分内容，其中工作措施包括制定鲜切药材品种目录、建立鲜切药材质量标准、推动鲜切药材规范化种植、规范中药材产地趁鲜切制、规范鲜切药材采购使用、推进鲜切药材追溯体系建设、支持我省中药材产地趁鲜切制发展等7项内容，此外保留《鲜切药材质量标准编制要求》、《中药材产地趁鲜切制质量管理指南》2个附件。修订内容主要有： （ 一 ）扩大适用 对象 范围 根据《中药生产监督管理专门规定》，修订后的《指导意见》将适用对象范围从中药饮片生产企业扩展到所有中药生产企业（含中药品种上市许可持有人及中成药、中药饮片、中药配方颗粒生产企业）。 （ 二 ） 优化企业 质量标准 制定要求 修订后的《指导意见》明确使用鲜切药材的中药生产企业、产地加工企业制定鲜切药材企业质量标准可参考《鲜切药材质量标准编制要求》具体要求，也可引用已公开发布的行业标准或团体标准，更符合工作实际。 （ 三 ） 简化事前报告等管理要求 将原《指导意见》关于将省内开展自收自制的产地趁鲜加工活动要求纳入许可管理，委托加工的要求事前报告并提交材料的要求，修改简化为事后在药品年度报告中说明，并删去中药材产地趁鲜加工报告清单附件。 （四）建立延伸检查和公告机制 参照中药材GAP做法，修订后的《指导意见》明确，省药监局可根据监管需要或依企业申请，按照《中药材产地趁鲜切制质量管理指南》等文件要求组织对产地加工企业开展延伸检查，并在政务网站公开检查结果，有利于监督保障中药源头质量，同时扩大产地加工企业影响力，提高企业开展趁鲜切制活动的积极性。 （五）加大产业帮扶指导力度 修订后的《指导意见》增加了关于鼓励支持中药材产地趁鲜切制发展的工作举措，包括对各地药品监管部门、中药生产企业、相关行业协会推荐的中药材主产区的产地趁鲜切制企业建设项目，纳入服务发展项目给予重点帮扶指导，以期加快培育产地趁鲜切制示范单位，形成示范带动效应，推动产地趁鲜切制加快发展。 （ 六 ） 其他修订内容 一是对原《指导意见》的一些文字表述进行了精简整合。二是根据行业反馈意见，删去原《指导意见》关于推动规范化种植的相关要求。三是对《中药材产地趁鲜切制质量管理指南》（《指导意见》附件2）进行了微调，如删去质量管理和技术人员从业年限和数量要求，允许前处理车间作为趁鲜切制场所等。 三、产地趁鲜切制品种目录怎么制定？ 《指导意见》规定，产地趁鲜切制品种应当是本省一定区域内有较大规模种植，且适宜趁鲜切制并有依据支持趁鲜切制对质量无不良影响的优势品种。省药监局已于2022年发布了第一批产地趁鲜切制品种目录〔《关于发布福建省第一批产地趁鲜加工药材品种目录的通告》（2022年第1号）〕，目前继续有效。近期省药监局还将通过公开征求意见等方式，征集关于制定第二批产地趁鲜切制品种的目录的意见建议，对品种目录进行动态调整。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "福建省药监局药品生产监督处",
-        "url": "https://www.zyctd.com/zixun/223/1103521.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2231103095html",
-        "date": "2026-02-05",
-        "title": "利好来了！刚刚，八部门重磅发布！",
-        "kind": "政策解读",
-        "summary": "2月5日下午消息，工信部等八部门印发《中药工业高质量发展实施方案（2026—2030年）》（以下简称“实施方案”）。其中提到，到2030年，培育一批引领带动能力突出的中药工业领航企业，培育60个高标准中药原料生产基地。",
-        "content_full": "2月5日下午消息，工信部等八部门印发《中药工业高质量发展实施方案（2026—2030年）》（以下简称“实施方案”）。其中提到，到2030年，培育一批引领带动能力突出的中药工业领航企业，培育60个高标准中药原料生产基地。推动一批中药创新药获批上市，新培育10个中成药大品种，推动一批医疗机构中药制剂转化为中药创新药。 实施方案提到，引导中药工业龙头企业聚焦重点原料品种，充分发挥资金、技术、渠道等优势，在主产区因地制宜建设一批高标准中药原料生产基地；加强中药领域科技成果转化和推广应用，培育壮大中药工业新质生产力；运用人工智能、大数据等新一代信息技术，构建经典名方、名老中医经验方等特色方剂知识图谱和图神经网络；提升中药饮片集约化生产水平，加快制定实施全国中药饮片炮制规范、配方颗粒国家标准，持续完善饮片 质量标准体系 ；支持临床机构开展中药新药临床试验，构建中药新药研发开放式协作体系，加速新药发现和创新，缩短研发周期，降低研发成本。 工信部等八部门重磅发布 工信部等八部门印发《中药工业高质量发展实施方案（2026—2030年）》，目标到2030年，中药工业全产业链协同发展体系初步形成，重点中药原料持续稳定供应能力进一步增强，数智化、绿色化水平明显提升，一批关键技术取得突破，产业协同创新水平显著提高。发展质量明显提高，中药工业规模效益稳步提升，产业集约化程度明显提高，质量管理水平显著提升，培育一批引领带动能力突出的中药工业领航企业，培育60个高标准中药原料生产基地。 协同体系更加健全，中药材种植加工、中药研发生产、流通服务等上下游各环节协同更加紧密，建设5个中药工业守正创新中心。创新产品持续涌现，推动一批中药创新药获批上市，新培育10个中成药大品种，推动一批医疗机构中药制剂转化为中药创新药。数智化、绿色化转型升级取得突破，制修订10项中药工业数智技术相关行业标准，推动建设一批数智化创新载体和公共服务平台，支持企业开展数智化改造提升，发布20个数智化转型升级典型案例，建设20个智能工厂、培育10个绿色工厂。 重点任务方面，实施方案提到，建设高标准中药原料生产基地。引导中药工业龙头企业聚焦重点原料品种，充分发挥资金、技术、渠道等优势，在主产区因地制宜建设一批高标准中药原料生产基地，地方政府、金融机构等强化要素配套保障，创新基地建设和运行模式，举办高水平中药产业对接活动。支持科研院所、种业企业等发展 中药材现代种业 ，推广应用优质种子种苗。支持中药材流通企业等打造中药材智能流通仓储管理体系，进一步强化中药材供应监测信息服务平台公共服务功能，促进产需有效衔接，保障中药原料生产供应持续稳定。 支持中药工业龙头企业在高标准中药原料生产基地配套建设产地初加工（含趁鲜切制）工厂，建设推广自动化生产线，打造标准化、规模化、柔性化“ 共享车间 ”样板。支持科研院所、中药材种植加工企业和农机装备生产企业联合开展相关装备研发和规范应用，有效提升中药原料生产加工质量控制水平，降低生产成本，增强市场竞争力。 加快制修订中药材生产加工关键环节生产技术规范和质量标准，并在适宜地区推广应用。鼓励地方聚焦本区域优势中药材品种，设立良种选育、种植（养殖）、采收加工等技术攻关专项。支持相关单位开展珍稀中药材野生抚育、人工繁育、替代品研究及产业转化，有效缓解珍稀中药材资源短缺困境。发挥国家卓越工程师实践基地作用，定制化培养中药工业技能人才和产业急需复合型人才。 培育壮大中药工业新质生产力 实施方案提到，加强中药领域科技成果转化和推广应用，培育壮大中药工业新质生产力。整合集聚创新资源，组织中药工业企业、医疗机构、高校、科研机构等联合建设一批中药工业守正创新中心，聚焦现代临床前沿需求，围绕中药新药研发、医疗机构中药制剂转化，以及中药材种植加工、有效成分提取分离、中药制剂生产与质量控制、中药材资源循环利用等产业技术瓶颈开展协同攻关，打造“名医、名院、名校、名企”合作模式。支持普通高校、职业学校加强相关学科专业建设，促进多学科交叉创新人才、团队培养。引导地方试点建设区域医疗机构制剂中心，为有需求的医疗机构开展委托加工、统一配送等服务。支持借助现代信息技术建设智慧药房，提升终端供应能力。加强人用经验数据收集分析，促进医疗机构中药制剂转化。 深度赋能中药新药研发。运用人工智能、大数据等新一代信息技术，构建经典名方、名老中医经验方等特色方剂知识图谱和图神经网络。加强中药领域基础研究，大力发展中药监管科学。强化中药药理研究技术支撑，构建多组学联合分析平台，完善体内外评价技术体系，提升研究精准度与时效性。加强中药新药创制关键技术攻关，发挥国家制造业创新中心、产业技术基础公共服务平台、制造业中试平台等公共服务平台的作用，从临床病证和功效药性出发，加快突破中药功效组分辨识、组方优化、成药性评价、剂型及工艺设计等技术瓶颈。鼓励对已上市中成药创新改良，促进疗效提升。鼓励开展中药材“传统非药用部位”开发利用研究，提升中药材资源综合利用水平。支持临床机构开展中药新药临床试验，构建中药新药研发开放式协作体系，加速新药发现和创新，缩短研发周期，降低研发成本。 提升中药饮片集约化生产水平。加快制定实施全国中药饮片炮制规范、配方颗粒国家标准，持续完善饮片质量标准体系。加强中药炮制技术传承基地建设，推动炮制技术传承创新，促进先进技术装备研发应用，提升专业化、规模化生产水平，促进饮片生产提质降本增效。支持企业扩大优势品种生产，差异化打造优质饮片大品种。 大力发掘民族药资源。围绕少数民族药物独特疗效和经验传承，整理特色炮制技术、方剂配伍和用药规范，制定符合民族医药理论和治疗特点的药材、饮片质量标准，建立完善质量控制体系。支持企业和科研机构针对供应紧缺的民族药原料开展专项攻关，开发和推广应用种植（养殖）关键技术，保障市场稳定供应和临床需求。 加快民族药产业现代化转型。鼓励民族药主产区制定民族药产业中长期发展规划和支持政策，统筹推进少数民族医药学理论整理发掘、保护、传承和药用资源的综合利用开发，开展民族药标准提高专项工作。聚焦少数民族医学特色和优势病种，开发优势民族药新产品，培育民族药名品。鼓励搭建民族药产业合作交流平台，支持医药工业龙头企业、科研机构、投融资机构等走进民族药主产区，从管理、销售、技术、资金等方面为当地发展民族药产业赋能。 打造优质中成药名品。加大对老字号商标、品牌以及传统工艺的知识产权保护力度。引导企业不断改进已上市中成药生产工艺和制剂技术，提升用药依从性与易用性，全方位推动中成药产品临床价值和市场价值双提升。分批次挖掘具有突出临床价值的中成药潜力品种，培育一批新的中成药大单品。鼓励中药工业企业与电商平台、媒体等合作，通过多种方式为患者提供便捷高效的购药体验。依托中国消费名品名单等载体，有序打造中药名品方阵。 打造中药饮片优势单品。强化道地药材应用，支持企业申报地理标志保护产品认证，精准定位核心单品，凸显产地属性和品质优势。鼓励使用符合GAP要求中药材的中药生产企业在中药标签中标示“药材符合GAP要求”。顺应集中带量采购趋势，构建统一规范的中药饮片市场，推动形成优质优价、保质保供饮片市场格局。 推动中药大健康产品创新发展。促进中医药与相关产业链深度融合，支持企业、研究机构等开展消费者画像研究，聚焦细分市场制定差异化产品策略，开发保健食品、天然化妆品、特色日化品等产品，以“中药+”促进产业链向高附加值环节延伸。结合消费者多元化、个性化健康需求，不断丰富产品品类，创新消费场景，扩大消费群体。 梯度培育卓越企业。营造公平竞争市场环境，激发广大中药工业企业发展潜力和创新活力，推动中药工业大中小企业融通发展。支持中药工业龙头企业设立中药产业发展基金，支持金融机构为中药工业企业提供保险、贷款等金融服务。培育并公布一批具有生态主导力和核心竞争力的领航企业，鼓励其通过全产业链布局带动上下游协同发展，并牵头组建创新联合体开展中药科技创新攻关。开展中药领域优质中小企业梯度培育，打造独特竞争优势，不断提升产业现代化水平。加大中药工业企业上市培育力度，推动企业完善现代企业制度，健全公司治理结构。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "券商政策",
-        "url": "https://www.zyctd.com/zixun/223/1103095.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2231102883html",
-        "date": "2026-02-04",
-        "title": "财政部 税务总局关于增值税征税具体范围有关事项的公告",
-        "kind": "政策解读",
-        "summary": "根据《中华人民共和国增值税法》、《中华人民共和国增值税法实施条例》有关规定，延续现行政策和做法，现将《适用9%增值税税率货物范围注释》、《销售服务、无形资产、不动产注释》予以公布。 本公告自2026年1月1日起施行。",
-        "content_full": "根据《中华人民共和国增值税法》、《中华人民共和国增值税法实施条例》有关规定，延续现行政策和做法，现将《适用9%增值税税率货物范围注释》、《销售服务、无形资产、不动产注释》予以公布。 本公告自2026年1月1日起施行。本公告所列的国家标准、行业标准，如在执行过程中有更新、替换，统一按新的国家标准、行业标准执行。此前规定与本公告规定不一致的，以本公告为准。 特此公告。 附件：1. 适用9增值税税率货物范围注释 2. 销售服务、无形资产、不动产注释 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "财政部",
-        "url": "https://www.zyctd.com/zixun/223/1102883.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2231102859html",
-        "date": "2026-02-03",
-        "title": "新修订的《中华人民共和国药品管理法实施条例》公布5月15日起施行",
-        "kind": "政策解读",
-        "summary": "中华人民共和国药品管理法实施条例 （2002年8月4日中华人民共和国国务院令第360号公布 根据2016年2月6日《国务院关于修改部分行政法规的决定》第一次修订...",
-        "content_full": "中华人民共和国药品管理法实施条例 （2002年8月4日中华人民共和国国务院令第360号公布 根据2016年2月6日《国务院关于修改部分行政法规的决定》第一次修订 根据2019年3月2日《国务院关于修改部分行政法规的决定》第二次修订 根据2024年12月6日《国务院关于修改和废止部分行政法规的决定》第三次修订 2026年1月16日中华人民共和国国务院令第828号第四次修订） 第一章 总 则 第一条 根据《中华人民共和国药品管理法》（以下简称药品管理法），制定本条例。 第二条 从事药品研制、生产、经营、使用和监督管理活动，应当坚持以人民健康为中心，遵循科学规律和伦理原则，全面防控风险。 第三条 国家完善药品创新体系，支持以临床价值为导向的药品研制和创新，鼓励研究和创制新药，支持新药临床推广和使用；促进中药传承创新，充分发挥中药在预防、医疗和保健中的作用；促进仿制药研发创新，提升仿制药质量和疗效。 第四条 县级以上人民政府承担药品监督管理职责的部门（以下称药品监督管理部门）负责药品监督管理工作。县级以上人民政府其他有关部门在各自职责范围内负责与药品有关的监督管理工作。 第五条 国务院工业和信息化主管部门、国务院商务主管部门等按照职责分工，根据国民经济和社会发展规划、药品产业发展情况制定国家药品生产、流通等行业发展相关规划和产业政策，推动药品产业结构调整和技术创新，提升产业链韧性和安全水平，促进药品产业高质量发展。国务院药品监督管理部门配合国务院工业和信息化主管部门、国务院商务主管部门等，执行国家药品行业发展相关规划和产业政策。 第二章 药品研制和注册 第六条 从事药品研制活动，应当遵守药物非临床研究质量管理规范、药物临床试验质量管理规范，保证记录和数据真实、准确、完整和可追溯。 第七条 以申请药品注册为目的开展药物非临床安全性评价研究活动的，应当由经过资格认定的药物非临床安全性评价研究机构实施。申请药物非临床安全性评价研究机构资格认定应当向国务院药品监督管理部门提出申请，提交证明其符合药物非临床研究质量管理规范的资料。国务院药品监督管理部门应当组织开展审查，并自受理申请之日起20个工作日内作出决定。对符合规定条件的，准予许可并发给资格证书；对不符合规定条件的，不予许可并书面说明理由。 药物非临床安全性评价研究机构资格证书有效期为5年。有效期届满，需要继续实施药物非临床安全性评价研究的，应当申请重新核发资格证书。 第八条 药物临床试验申办者应当选择具备相应能力的药物临床试验机构和研究者，并履行受试者保护、临床试验用药品管理、临床试验数据管理、风险管理等责任。 临床试验用药品的制备，应当符合药品生产质量管理规范的有关要求。 药物临床试验申办者、药物临床试验机构不得向受试者收取与临床试验有关的费用。 第九条 依照药品管理法第十九条第一款规定批准开展的药物临床试验变更申办者的，应当向国务院药品监督管理部门提出申请。国务院药品监督管理部门应当自受理申请之日起20个工作日内进行审查并作出决定。 第十条 以申请药品注册为目的在境外开展药品研制活动的，应当遵守药品管理法、本条例等法律、法规、规章、标准和规范的有关规定；在境外取得的研究数据，符合国务院药品监督管理部门有关规定的，可以用于申请药品注册。 第十一条 以申请药品注册为目的进口研制或者检验所需的对照药品、样品的，应当经国务院药品监督管理部门批准；但是，药物临床试验批准证明文件载明的临床试验用药品可以凭批准证明文件进口。国务院药品监督管理部门应当自受理申请之日起20个工作日内进行审查并作出决定。 第十二条 研制化学仿制药应当按照国务院药品监督管理部门制定的技术要求，科学选择对照药品进行对比研究；有经国务院药品监督管理部门确定的参比制剂的，应当选择参比制剂作为对照药品进行对比研究。 第十三条 研制中药应当以中医药理论为指导，根据中医药理论、中药人用经验、临床试验数据等综合评价中药的安全性、有效性。评价中药的有效性应当与其临床定位相适应，体现中药的特点。 第十四条 研制、生产中药应当保障中药材来源、质量的稳定性和资源的可持续利用，避免对生态环境产生不利影响；涉及野生动物、植物的，应当符合国家有关规定。 第十五条 对申请注册的药品，国务院药品监督管理部门依照药品管理法第二十五条规定进行审评审批。 为支持以临床价值为导向的药品研制和创新，国务院药品监督管理部门可以对符合条件的药品注册申请采用突破性治疗药物程序、附条件批准程序、优先审评审批程序、特别审批程序等，加快药品上市。 国务院药品监督管理部门建立健全符合中药特点的审评审批、检查检验和标准管理制度。 第十六条 国务院药品监督管理部门在审批药品时，对化学原料药一并审评审批；符合条件的，对药品颁发药品注册证书，对化学原料药颁发化学原料药批准证书。仿制已注册药品使用的化学原料药的，也可以直接向国务院药品监督管理部门提出审评审批申请；符合条件的，颁发化学原料药批准证书。国务院药品监督管理部门在审评审批化学原料药时，对化学原料药的质量标准、生产工艺、标签一并核准。 转让药品注册证书、化学原料药批准证书的，应当向国务院药品监督管理部门提出申请。国务院药品监督管理部门应当自受理申请之日起20个工作日内进行审查并作出决定。 第十七条 药品注册证书、化学原料药批准证书有效期为5年。有效期届满，需要继续上市的，应当申请再注册。 药品上市许可持有人、化学原料药生产企业应当向所在地省级人民政府药品监督管理部门申请再注册；药品上市许可持有人、化学原料药生产企业为境外企业的，应当向国务院药品监督管理部门申请再注册。 第十八条 符合国务院药品监督管理部门规定的 非处方药 注册情形的，药品注册申请人可以直接提出非处方药注册申请。 已注册的处方药，药品上市许可持有人认为适宜作为非处方药管理的，可以向国务院药品监督管理部门申请转换为非处方药。已注册的非处方药，药品上市许可持有人根据不良反应监测和上市后评价结果认为不适宜作为非处方药管理的，应当向国务院药品监督管理部门申请转换为处方药。国务院药品监督管理部门组织开展评价后认为符合要求的，决定将处方药转换为非处方药或者将非处方药转换为处方药，并向社会公告。 国务院药品监督管理部门根据保障公众用药安全的需要，组织开展评价后可以决定将非处方药转换为处方药。 第十九条 国家推动提高药品标准，持续提升药品质量水平。 经国务院药品监督管理部门核准的药品质量标准，为药品注册标准。药品注册标准应当符合《 中华人民共和国药典 》的通用技术要求，并且不得低于相应的国家药品标准。药品上市许可持有人应当根据国家药品标准的制定和修订情况，对药品注册标准进行评估，需要修订的，及时修订并按照国务院药品监督管理部门的规定提出变更申请或者进行备案、报告。 第二十条 研制药品、申请药品注册应当使用国家药品标准品、对照品。没有国家药品标准品、对照品的，药品注册申请人应当向国务院药品监督管理部门设置或者指定的药品检验机构报送药品质量标准研究所使用的原料及相关技术资料，药品检验机构应当依法研制、标定国家药品标准品、对照品。 国务院药品监督管理部门设置或者指定的药品检验机构应当加强国家药品标准品、对照品的研制能力，保障国家药品标准品、对照品的供应。 第二十一条 国家支持儿童用药品、罕见病治疗用药品的研制和创新。 对儿童用药品新品种、采用新剂型或者新规格的儿童用药品、增加儿童适应症的药品，符合条件的，给予不超过2年的市场独占期。 对符合条件的罕见病治疗用药品，药品上市许可持有人承诺保障药品供应的，给予不超过7年的市场独占期。药品上市许可持有人不履行保障药品供应承诺的，市场独占期终止。 给予市场独占期的具体条件和办法，由国务院药品监督管理部门制定。 第二十二条 国家对含有新型化学成份的药品以及符合条件的其他药品的上市许可持有人提交的自行取得且未披露的试验数据和其他数据实施保护，任何人不得对该未披露的试验数据和其他数据进行不正当的商业利用。 前款规定的数据的保护期限自药品注册之日起不超过6年。在保护期限内，其他申请人未经药品上市许可持有人同意，使用前款规定的数据申请药品注册的，不予许可；但是，其他申请人提交自行取得数据的除外。 除下列情形外，药品监督管理部门不得披露本条第一款规定的数据： （一）公共利益需要； （二）已采取措施确保该类数据不会被不正当地进行商业利用。 本条第一款规定的数据的具体保护办法，由国务院药品监督管理部门制定。 第三章 药品上市许可持有人 第二十三条 药品上市许可持有人应当建立健全药品质量保证体系，设立独立的质量管理部门，配备生产负责人、质量负责人、质量受权人。质量受权人应当独立履行药品上市放行职责。 第二十四条 药品上市许可持有人应当遵守药物警戒质量管理规范，建立健全药物警戒体系，对药品不良反应及其他与用药有关的有害反应进行监测，建立风险识别、评估和控制机制。药品经营企业、医疗机构应当配合药品上市许可持有人开展药物警戒工作。 药物警戒质量管理规范由国务院药品监督管理部门制定。 第二十五条 药品上市许可持有人为境外企业的，其依照药品管理法第三十八条规定指定的中国境内企业法人应当具备相应的质量管理能力和风险控制能力，设立相应的管理部门、配备相应的人员；被指定的中国境内企业法人的相关信息应当在药品说明书中载明。 第二十六条 药品上市许可持有人应当按照国务院药品监督管理部门的规定，提供语音、大字、盲文或者电子等无障碍格式版本的药品标签、说明书，方便残疾人、老年人用药。 电子版本药品说明书内容应当与国务院药品监督管理部门核准的药品说明书内容一致，与纸质版本药品说明书具有同等效力；语音、盲文版本药品标签、说明书供参考。 第二十七条 药品上市许可持有人应当全面评估、验证药品生产过程中的变更对药品安全性、有效性和质量可控性的影响，按照国务院药品监督管理部门的规定提出变更申请或者进行备案、报告。 药品监督管理部门应当加强对药品生产过程中变更的监督管理，发现药品上市许可持有人已备案或者报告变更的评估、验证不足以证明该变更科学、合理、风险可控，或者发现药品上市许可持有人选择的变更管理类别不当的，应当责令其改正、采取相应的风险控制措施，并依法予以处理。 第二十八条 药品上市许可持有人应当持续考察已注册药品的质量、疗效和不良反应。 药品上市许可持有人应当对已注册药品定期开展上市后评价，对药品的风险和获益进行综合分析评估，根据上市后评价结果，采取修订说明书、提高质量标准、完善生产工艺、暂停生产和销售、实施药品召回、申请注销药品注册证书等措施。必要时，国务院药品监督管理部门可以责令药品上市许可持有人开展上市后评价或者直接组织开展上市后评价。 药品上市许可持有人未按照规定持续考察已注册药品质量、疗效和不良反应，或者未按照国务院药品监督管理部门要求开展上市后评价的，药品注册证书有效期届满后不予再注册。 第二十九条 中药饮片生产企业、中药配方颗粒生产企业履行药品上市许可持有人的相关义务，对中药饮片、中药配方颗粒生产、销售实行全过程管理，建立中药饮片、中药配方颗粒追溯体系，保证中药饮片、中药配方颗粒安全、有效、可追溯。 第四章 药品生产 第三十条 从事药品生产活动，应当向所在地省级人民政府药品监督管理部门提出申请，提交证明其符合药品管理法第四十二条规定条件的资料；从事疫苗生产活动，还应当提交证明其符合《中华人民共和国疫苗管理法》（以下简称疫苗管理法）第二十二条第三款规定条件的资料。省级人民政府药品监督管理部门应当组织开展审查，并自受理申请之日起30个工作日内作出决定。对符合规定条件的，准予许可并发给药品生产许可证；对不符合规定条件的，不予许可并书面说明理由。 药品生产企业变更药品生产许可证许可事项的，应当向原发证部门提出申请。原发证部门应当自受理申请之日起15个工作日内进行审查并作出决定。 药品生产许可证有效期为5年。有效期届满，需要继续生产药品的，应当申请重新核发药品生产许可证。 第三十一条 药品上市许可持有人自行生产药品的，应当取得药品生产许可证。 药品上市许可持有人委托生产药品的，应当委托符合条件的药品生产企业。药品上市许可持有人应当履行供应商审核、药品生产过程中的变更管理、药品上市放行等责任，对受托生产企业进行监督，保证药品生产全过程持续符合法定要求。受托生产企业应当按照药品生产质量管理规范组织生产，不得再次委托生产。 血液制品、麻醉药品、精神药品、医疗用毒性药品、药品类易制毒化学品以及含有麻醉药品、精神药品、药品类易制毒化学品成份的药品不得委托生产；但是，国务院药品监督管理部门另有规定的除外。 第三十二条 药品上市许可持有人确有需要的，可以委托符合条件的药品生产企业分段生产下列药品： （一）生产工艺、设施设备有特殊要求的创新药； （二）国务院有关部门提出的临床急需的药品、应对突发公共卫生事件急需的药品或者储备需要的药品； （三）国务院药品监督管理部门规定的其他药品。 药品上市许可持有人委托分段生产药品的，应当建立覆盖药品生产全过程和全部生产场地的统一质量保证体系，保证药品生产全过程持续符合法定要求。 第三十三条 有下列情形之一，超出疫苗上市许可持有人生产能力的，经国务院药品监督管理部门批准，疫苗上市许可持有人可以委托符合条件的疫苗生产企业生产或者分段生产疫苗： （一）生产多联多价疫苗； （二）国务院有关部门提出疾病预防、控制急需或者储备需要； （三）国务院药品监督管理部门规定的其他情形。 第三十四条 生产疫苗、血液制品等生物制品，应当按照规定采用信息化手段如实记录生产、检验过程中形成的所有数据。 第三十五条 在中国境内上市的药品在境外生产的，其生产活动应当符合药品管理法、本条例等法律、法规、规章、标准和规范的有关要求。境外生产的药品在境内分包装的，药品上市许可持有人向国务院药品监督管理部门备案后，实施分包装的药品生产企业可以向药品经营企业、医疗机构销售其分包装的药品。 第三十六条 取得药品批准证明文件前生产的下列药品，符合药品上市放行要求的，在取得药品批准证明文件后，可以上市销售： （一）通过相应药品生产质量管理规范符合性检查的商业规模批次产品； （二）属于新药、罕见病治疗用药品、短缺药品以及其他临床急需的药品的，在通过相应药品生产质量管理规范符合性检查之后生产的商业规模批次产品。 药品上市许可持有人应当加强对依照前款规定上市销售药品的风险管理。 第三十七条 国家鼓励发展中药材规范化种植养殖，鼓励使用道地中药材。省级人民政府根据当地实际制定相关规划，鼓励实施中药材生产质量管理规范，推动中药材规范化种植养殖。 根据中药材特点，可以对中药材进行产地加工。省级人民政府药品监督管理部门应当根据中药材生产质量管理规范，结合当地中药材资源分布、传统种植养殖历史和道地中药材特性等，制定中药材产地加工指导原则。 第三十八条 生产药品使用的中药材应当符合国家药品标准、药品注册标准。没有国家药品标准、药品注册标准的，应当符合省级人民政府药品监督管理部门制定的地区性民间习用药材标准。 首次进口中药材应当经国务院药品监督管理部门批准。国务院药品监督管理部门应当自受理申请之日起20个工作日内进行审查并作出决定。 第三十九条 中药饮片生产企业应当自行炮制中药饮片，不得委托炮制中药饮片。 中药饮片应当按照国家药品标准炮制；国家药品标准没有规定的，应当按照省级人民政府药品监督管理部门制定的炮制规范炮制。 按照省级人民政府药品监督管理部门制定的炮制规范炮制的中药饮片可以跨省级行政区域销售、使用。其中，炮制方法、用药特点存在地区性差异且易导致临床用药混淆的中药饮片跨省级行政区域销售的，中药饮片生产企业应当在中药饮片标签上标明临床用药提示信息并向购进、使用地省级人民政府药品监督管理部门备案；医疗机构应当加强采购管理和合理用药监测，防止临床用药混淆。具体办法由国务院药品监督管理部门制定。 中药饮片的标签应当注明产品属性、品名、规格、中药材产地、生产企业、产品批号、生产日期、装量、保质期、执行标准、贮藏条件等；实施审批管理的中药饮片，还应当注明药品批准文号。 第四十条 中药配方颗粒生产企业应当将所生产的中药配方颗粒品种向所在地省级人民政府药品监督管理部门备案。 中药配方颗粒生产企业应当自行炮制用于中药配方颗粒生产的中药饮片、自行生产中药配方颗粒，不得使用购进的中药饮片生产中药配方颗粒，不得委托生产中药配方颗粒。 中药配方颗粒应当按照国家药品标准生产；国家药品标准没有规定的，应当按照省级人民政府药品监督管理部门制定的中药配方颗粒标准生产。 按照省级人民政府药品监督管理部门制定的中药配方颗粒标准生产的中药配方颗粒可以跨省级行政区域销售、使用；中药配方颗粒跨省级行政区域销售的，中药配方颗粒生产企业应当向购进、使用地省级人民政府药品监督管理部门备案。 中药配方颗粒的标签应当注明品名、规格、生产企业、产品批号、生产日期、保质期、执行标准、贮藏条件、备案号等。 药品经营企业不得经营中药配方颗粒。 第四十一条 从事辅料、直接接触药品的包装材料和容器生产活动，应当遵守药品生产质量管理规范的有关规定，建立健全生产质量管理体系，保证生产全过程持续符合法定要求。 禁止使用国家已淘汰的辅料、直接接触药品的包装材料和容器生产药品。 第五章 药品经营 第四十二条 从事药品经营活动，应当向所在地县级以上地方人民政府药品监督管理部门提出申请，提交证明其符合药品管理法第五十二条规定条件的资料。县级以上地方人民政府药品监督管理部门应当组织开展审查，并自受理申请之日起20个工作日内作出决定。对符合规定条件的，准予许可并发给药品经营许可证；对不符合规定条件的，不予许可并书面说明理由。 药品经营企业变更药品经营许可证许可事项的，应当向原发证部门提出申请。原发证部门应当自受理申请之日起15个工作日内进行审查并作出决定。 药品经营许可证有效期为5年。有效期届满，需要继续经营药品的，应当申请重新核发药品经营许可证。 第四十三条 药品经营企业应当配备与其经营范围、规模相适应的依法经过资格认定的药师或者其他药学技术人员；但是，只经营乙类非处方药的药品零售企业，可以按照国务院药品监督管理部门的规定配备药学技术人员。 药品零售企业应当凭处方销售处方药。 第四十四条 药品上市许可持有人、药品生产企业、药品经营企业储存、运输药品，应当根据药品的包装、质量特性、温度控制要求等采取有效措施，保证储存、运输过程中的药品质量。药品上市许可持有人、药品生产企业、药品经营企业委托储存、运输药品的，应当选择具备相应能力的受托方，并对受托方进行监督。受托方应当加强药品储存、运输过程管理，采取有效措施保证药品质量。 药品零售企业向患者配送的药品应当有独立包装和显著标识。 第四十五条 药品网络交易第三方平台提供者应当建立健全药品网络销售质量管理体系，设立相应的管理部门、配备药学技术人员等相关专业人员，制定并实施药品质量管理、配送管理等制度。药品网络交易第三方平台提供者应当对申请进入平台经营的药品上市许可持有人、药品经营企业的资质等进行审核，对平台展示的药品信息进行检查，对发生在平台的药品经营行为进行管理。药品网络交易第三方平台提供者应当按照规定保存审核、检查记录以及平台展示的药品信息。 药品网络交易第三方平台提供者、药品上市许可持有人、药品经营企业为其他药品网络交易第三方平台提供者、药品上市许可持有人、药品经营企业通过网络销售药品提供信息展示、链接跳转等服务的，应当遵守国务院药品监督管理部门的规定。 第四十六条 疫苗、血液制品、麻醉药品、精神药品、医疗用毒性药品、放射性药品、药品类易制毒化学品等国家实行特殊管理的药品不得通过网络销售；其他用药风险较高的药品，不得通过网络零售。具体目录由国务院药品监督管理部门制定。 第四十七条 对医疗机构提出的因临床急需进口少量药品的申请，国务院药品监督管理部门应当征求国务院卫生健康主管部门的意见，及时进行审查并作出决定。国务院授权省级人民政府实施审批的，被授权的省级人民政府应当结合当地实际制定具体审批办法。 第四十八条 个人携带、邮寄少量药品进境的，应当以合理自用数量为限，遵守国家关于个人物品进境管理的规定。 第六章 医疗机构药事管理 第四十九条 医疗机构应当制定并实施药品进货检查验收、保管、使用等管理制度，设立相应的管理部门或者指定人员负责药品质量管理工作。 第五十条 医疗机构应当加强对处方开具、审核和调配的管理，提高医师合理用药水平。 第五十一条 医师在网络诊疗活动中不得开具本条例第四十六条规定的药品的处方。 第五十二条 医疗机构应当向患者提供符合国务院卫生健康主管部门规定的处方，患者可以选择凭处方向药品零售企业购买药品。 鼓励通过信息化手段实现医疗机构和药品零售企业之间的处方流转。 第五十三条 对正在开展临床试验的用于治疗严重危及生命且尚无有效治疗手段的疾病的药物，经医学观察可能获益，并且符合伦理原则的，经伦理委员会审查同意、患者或者其监护人签署知情同意书后，可以在开展临床试验的机构内用于其他病情相同但无法参加临床试验的患者。 第五十四条 医疗机构配制制剂，应当向所在地省级人民政府药品监督管理部门提出申请，提交证明其符合药品管理法第七十五条第一款规定条件的资料。省级人民政府药品监督管理部门应当组织开展审查，并自受理申请之日起30个工作日内作出决定。对符合规定条件的，准予许可并发给医疗机构制剂许可证；对不符合规定条件的，不予许可并书面说明理由。 医疗机构变更医疗机构制剂许可证许可事项的，应当向原发证部门提出申请。原发证部门应当自受理申请之日起15个工作日内进行审查并作出决定。 医疗机构制剂许可证有效期为5年。有效期届满，需要继续配制制剂的，应当申请重新核发医疗机构制剂许可证。 第五十五条 医疗机构应当向所在地省级人民政府药品监督管理部门报送拟配制制剂的数据、资料和样品，经审评审批取得医疗机构制剂注册证书后，方可配制；但是，仅应用传统工艺配制的中药制剂，医疗机构向所在地省级人民政府药品监督管理部门备案后即可配制。 省级人民政府药品监督管理部门审批医疗机构制剂注册申请时，对制剂的质量标准、配制工艺、标签和说明书一并核准。 医疗机构制剂注册证书有效期为3年。有效期届满，需要继续配制的，应当申请再注册。 第五十六条 临床确有需要的儿童用药品，市场上没有供应或者没有供儿童使用的剂型、规格的，由国务院卫生健康主管部门会同国务院药品监督管理部门纳入儿童常用医疗机构制剂清单，支持医疗机构配制、使用，满足儿童患者临床用药需求。 第五十七条 下列药品不得作为医疗机构制剂： （一）含有尚未用于已注册药品的活性成份的化学药； （二）已注册药品的活性成份用于新适应症的化学药； （三）中药和化学药组成的复方制剂； （四）中药注射剂； （五）医疗用毒性药品； （六）除变态反应原以外的生物制品； （七）国务院药品监督管理部门规定的其他药品。 第五十八条 医疗机构配制制剂，应当遵守医疗机构制剂配制质量管理规范，建立健全制剂配制质量管理体系，保证制剂配制全过程持续符合法定要求。医疗机构制剂配制质量管理规范由国务院药品监督管理部门制定。 医疗机构的法定代表人、主要负责人对本医疗机构的制剂配制活动全面负责。 第五十九条 医疗机构制剂只能凭医师处方在本医疗机构使用，不得在市场上销售或者变相销售，不得发布医疗机构制剂广告。 发生灾情、疫情以及其他突发事件或者临床急需而市场上没有供应时，经省级人民政府药品监督管理部门批准，在规定期限内，医疗机构制剂可以在指定的医疗机构之间调剂使用；但是，调剂使用国务院药品监督管理部门规定的特殊医疗机构制剂以及跨省级行政区域调剂使用医疗机构制剂的，应当经国务院药品监督管理部门批准。省级以上人民政府药品监督管理部门应当自受理申请之日起5个工作日内进行审查并作出决定。 第六十条 医疗机构发现疑似药品不良反应，应当按照规定及时报告药品监督管理部门和卫生健康主管部门。 医疗机构发现疑似药品不良反应聚集性事件，应当及时对患者进行救治、采取措施控制风险，并按照规定及时报告药品监督管理部门和卫生健康主管部门。药品监督管理部门和卫生健康主管部门接到报告后，应当及时调查处理。 第六十一条 医疗机构发现购进、使用的药品存在质量问题，应当立即采取措施控制风险，及时告知供货单位和药品上市许可持有人，并向所在地县级人民政府药品监督管理部门报告。 药品上市许可持有人、供货单位应当提供或者公布电子邮件地址、电话、传真等，方便医疗机构告知相关信息。 第六十二条 药品监督管理部门和卫生健康主管部门依据各自职责，分别对药品使用环节的药品质量和药品使用行为进行监督管理。 第七章 监督管理 第六十三条 药品监督管理部门实施监督检查，可以采取下列措施： （一）进入药品研制、生产、经营、使用等活动场所以及为药品研制、生产、经营、使用提供相关产品或者服务的场所，实施现场检查、抽取样品； （二）查阅、复制有关文件、记录、票据、凭证、电子数据等资料，对可能被转移、隐匿或者损毁的资料予以查封、扣押； （三）查封、扣押有证据证明可能危害人体健康的药品及其有关原料、辅料、直接接触药品的包装材料和容器； （四）查封、扣押有证据证明可能用于违法活动的工具、设施设备、场所。 药品监督管理部门进行监督检查时，执法人员不得少于两人，并应当出示执法证件。有关单位和个人对监督检查应当予以配合，不得拒绝、阻挠。 第六十四条 国务院药品监督管理部门应当制定统一的药品追溯标准和规范。药品上市许可持有人、药品生产企业应当按照规定在药品包装上赋予追溯标识。药品上市许可持有人、药品生产企业、药品经营企业和医疗机构应当按照规定提供追溯信息，保证药品可追溯。 第六十五条 国务院药品监督管理部门按照程序设置国家药品专业技术机构。省级人民政府药品监督管理部门可以根据当地药品产业发展情况和监督管理工作需要，按照程序设置地方药品专业技术机构。国家药品专业技术机构应当加强对地方药品专业技术机构的技术指导。 省级以上人民政府药品监督管理部门根据药品监督管理工作需要，可以指定符合条件的机构承担相关专业技术工作。 第六十六条 药品质量抽查检验应当遵循科学、规范、公正原则。 药品监督管理部门应当根据药品监督管理工作需要，制定并实施药品质量抽查检验计划。 药品质量抽查检验中，药品抽样应当由两名以上抽样人员按照国务院药品监督管理部门的规定实施。被抽样单位应当配合抽样人员进行抽样。被抽样单位没有正当理由不予配合的，药品监督管理部门可以责令被抽样单位暂停销售、使用被抽样药品。 根据药品监督管理工作需要，药品监督管理部门可以对辅料、直接接触药品的包装材料和容器质量进行抽查检验。 第六十七条 当事人对药品检验机构的检验结果有异议的，可以自收到药品检验结果之日起7日内申请复验。 申请复验的，应当按照规定向复验机构预先支付复验检验费用。复验检验结论与原检验结论不一致的，复验检验费用由原药品检验机构承担。 国家药品标准规定不予复验的检验项目，或者有国务院药品监督管理部门规定的其他不予复验的情形的，不予复验。 第六十八条 省级以上人民政府药品监督管理部门公告的药品质量抽查检验结果应当包括被抽检药品的品名、样品来源、标示的药品上市许可持有人和生产企业或者标示的医疗机构、产品批号、规格、检验机构、检验依据、检验结论、不符合规定项目等内容。药品质量抽查检验结果公告不当的，发布部门应当自确认不当之日起5个工作日内，在原公告范围内予以更正。 第六十九条 对可能掺杂、掺假的药品，按照国家药品标准、药品注册标准规定的检验项目和检验方法无法检验的，药品检验机构可以使用国务院药品监督管理部门批准的补充检验项目和检验方法进行检验。使用补充检验项目和检验方法得出的检验结果，可以作为认定药品质量的依据。 第七十条 药品监督管理部门依照药品管理法第九十九条第三款规定采取暂停生产、销售、使用、进口等风险控制措施的，药品上市许可持有人、药品生产企业、药品经营企业、医疗机构应当进行整改，消除安全隐患。药品监督管理部门评估认为符合相关要求的，应当解除已采取的风险控制措施。 在省以上人民政府药品监督管理部门采取前款规定的风险控制措施期间，不得发布相关药品的广告；已经发布的，应当立即停止。 第七十一条 下列情形属于药品管理法第九十八条第二款第二项规定的假药： （一）不具备疾病预防、治疗、诊断功能的物质或者成份不明的物质，在标签、说明书上宣称具有疾病预防、治疗、诊断功能冒充药品的 （二）使用其他药品的名称或者批准文号，在标签、说明书上标注不具有的适应症或者功能主治的； （三）药品成份与其在标签、说明书上标注的成份不符的； （四）标注虚假的药品批准文号、药品上市许可持有人的； （五）其他以非药品冒充药品或者以他种药品冒充此种药品的情形。 第七十二条 依照药品管理法第九十八条第二款第四项规定认定假药，以及依照药品管理法第九十八条第三款第三项至第五项规定认定劣药，不需要进行药品检验。依照药品管理法第九十八条第二款、第三款的其他规定认定假药或者劣药，应当进行药品检验；但是，原料、辅料的采购和使用记录等证据能够充分证明属于假药或者劣药的，可以不进行药品检验。 第七十三条 发生药品安全事件的单位应当立即采取措施防止危害扩大，并立即报告事件发生地县级人民政府药品监督管理部门。 医疗机构发现发生药品安全事件，应当立即报告事件发生地县级人民政府药品监督管理部门和卫生健康主管部门。 药品监督管理部门接到报告后，应当按照规定立即报告本级人民政府、上级人民政府药品监督管理部门。 县级以上人民政府应当按照药品安全事件应急预案，组织开展应对工作。 第七十四条 国家加强药品储备，实行中央和地方两级储备。具体办法由国务院工业和信息化主管部门会同国务院有关部门制定。 第七十五条 国务院卫生健康主管部门会同国务院有关部门制定国家药物政策和国家基本药物制度，完善国家基本药物目录管理机制。 第七十六条 市场监督管理部门加强药品生产、经营中的反垄断和反不正当竞争监督管理，依法查处垄断、不正当竞争违法行为，维护公平竞争秩序。 第七十七条 药品监督管理等部门在监督管理中发现公职人员涉嫌职务违法或者职务犯罪的问题线索，应当及时移送监察机关。 第七十八条 进行药品注册、实施药品注册检验和强制性检验，可以收取费用。具体收费项目、收费标准分别由国务院财政部门、国务院发展改革部门按照国家有关规定制定。 第八章 法律责任 第七十九条 有下列情形之一的，由县级以上地方人民政府药品监督管理部门责令限期改正，没收违法生产、销售的药品和违法所得，并处违法生产、销售的药品货值金额10倍以上20倍以下的罚款，违法生产、批发的药品货值金额不足10万元的，按10万元计算，违法零售的药品货值金额不足1万元的，按1万元计算；情节严重的，还应当责令停产停业整顿直至由原发证部门吊销药品生产许可证、药品经营许可证： （一）药品上市许可持有人违反本条例第三十六条规定销售取得药品批准证明文件前生产的商业规模批次产品； （二）中药饮片生产企业委托炮制中药饮片或者中药配方颗粒生产企业委托生产中药配方颗粒； （三）药品经营企业经营中药配方颗粒、医疗机构制剂； （四）违反本条例第四十六条规定通过网络销售药品。 第八十条 有下列情形之一的，由省级人民政府药品监督管理部门责令限期改正，给予警告；逾期不改正的，处10万元以上50万元以下的罚款： （一）中药饮片生产企业、中药配方颗粒生产企业跨省级行政区域销售中药饮片、中药配方颗粒未依照本条例第三十九条第三款、第四十条第四款规定备案； （二）中药配方颗粒生产企业生产中药配方颗粒未依照本条例第四十条第一款规定备案。 第八十一条 医疗机构未经批准使用其他医疗机构配制的制剂的，依照药品管理法第一百二十九条、第一百三十九条规定予以处罚。 医疗机构有下列情形之一的，由县级以上地方人民政府药品监督管理部门责令限期改正；逾期不改正的，处1万元以上10万元以下的罚款： （一）未按照规定制定并实施药品进货检查验收、保管、使用等管理制度； （二）发现购进、使用的药品存在质量问题，未按照规定采取措施或者报告。 第八十二条 申请药物非临床安全性评价研究机构资格、药物临床试验许可、药品生产许可、药品经营许可、医疗机构制剂许可、药品注册等许可，提供虚假证明、数据、资料、样品或者采取其他欺骗手段的，县级以上人民政府药品监督管理部门不予受理或者不予许可，10年内不受理其相应申请，并处50万元以上500万元以下的罚款；情节严重的，还应当对法定代表人、主要负责人、直接负责的主管人员和其他责任人员处2万元以上20万元以下的罚款，禁止其10年内从事药品生产经营活动。 申请人提交的虚假证明、数据、资料、样品是药物非临床安全性评价研究机构、药物临床试验机构或者其他接受委托开展药品研制相关活动的机构伪造或者编造的，由省级以上人民政府药品监督管理部门依照药品管理法第一百二十六条规定对药物非临床安全性评价研究机构、药物临床试验机构或者其他接受委托开展药品研制相关活动的机构予以处罚。 第八十三条 已办理备案的药物临床试验机构不符合备案条件的，由省级以上人民政府药品监督管理部门责令限期改正；逾期仍不符合备案条件的，取消相关药物临床试验专业备案或者药物临床试验机构备案，禁止其1年内开展相关专业药物临床试验或者禁止其1年内开展药物临床试验。 办理药物临床试验机构备案时提供虚假证明的，由省级以上人民政府药品监督管理部门取消相关药物临床试验专业备案或者药物临床试验机构备案，禁止其3年内开展相关专业药物临床试验或者禁止其3年内开展药物临床试验，没收违法所得，并处10万元以上50万元以下的罚款，相关临床试验数据不得用于申请药品注册。 第八十四条 药品网络交易第三方平台提供者未按照规定建立健全药品网络销售质量管理体系的，由省级人民政府药品监督管理部门责令限期改正，给予警告；逾期不改正的，处10万元以上50万元以下的罚款；情节严重的，处50万元以上200万元以下的罚款。 药品网络交易第三方平台提供者、药品上市许可持有人、药品经营企业为其他药品网络交易第三方平台提供者、药品上市许可持有人、药品经营企业通过网络销售药品提供信息展示、链接跳转等服务，违反国务院药品监督管理部门规定的，由省级人民政府药品监督管理部门责令限期改正，给予警告；逾期不改正的，没收违法所得，并处10万元以上50万元以下的罚款；情节严重的，没收违法所得，并处50万元以上200万元以下的罚款。 第八十五条 拒不执行药品监督管理部门依法采取的暂停生产、销售、使用、进口等风险控制措施的，由县级以上人民政府药品监督管理部门处违法生产、销售、使用、进口药品货值金额5倍以上10倍以下的罚款，货值金额不足1万元的，按1万元计算；情节严重的，还应当责令停产停业整顿直至由原发证部门吊销药品批准证明文件、药品生产许可证、药品经营许可证、医疗机构制剂许可证，对法定代表人、主要负责人、直接负责的主管人员和其他责任人员处2万元以上20万元以下的罚款。 违反药品管理法、疫苗管理法、本条例规定，拒绝、阻挠监督检查的，由县级以上人民政府药品监督管理部门责令限期改正，处5万元以下的罚款；情节严重的，责令停产停业整顿。 第八十六条 药品经营企业、医疗机构履行了药品管理法、疫苗管理法、本条例规定的进货检查验收等义务，有充分证据证明其不知道所销售或者使用的药品是假药、劣药的，免予处罚，但应当收缴其销售或者使用的假药、劣药；造成人身、财产或者其他损害的，依法承担赔偿责任。 第八十七条 药品监督管理部门及其工作人员违反本条例规定，泄露药品上市许可持有人未披露的试验数据或者其他数据，造成药品上市许可持有人损失的，由药品监督管理部门依法承担赔偿责任；药品监督管理部门赔偿损失后，应当责令故意或者有重大过失的工作人员承担部分或者全部赔偿费用，并对负有责任的领导人员和直接责任人员依法给予处分。 第九章 附 则 第八十八条 药品注册审评所需时间以及药物非临床安全性评价研究机构资格申请、药品生产许可申请、药品经营许可申请、医疗机构制剂许可申请审查中涉及的技术审核所需时间不计入药品监督管理部门实施行政许可的期限。 第八十九条 本条例自2026年5月15日起施行。 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "中央人民政府",
-        "url": "https://www.zyctd.com/zixun/223/1102859.html",
-        "herb": "",
-        "location": ""
-      },
-      {
-        "id": "hotspot-httpswwwzyctdcomzixun2231102271html",
-        "date": "2026-01-28",
-        "title": "《中华人民共和国药品管理法实施条例》专家解读",
-        "kind": "政策解读",
-        "summary": "近日，新修订的《中华人民共和国药品管理法实施条例》（以下简称《条例》）公布。",
-        "content_full": "近日，新修订的《中华人民共和国药品管理法实施条例》（以下简称《条例》）公布。《条例》贯彻落实党中央、国务院决策部署，充分吸纳近年来药品监管改革实践中行之有效的做法，细化《药品管理法》规定，针对性地补充制度措施，织密药品安全法治网，促进药品高水平安全，护航医药产业高质量发展。 一、坚持以人民为中心，突出患者权益保障 药品直接关系每个人的身体健康和生命安全。《条例》坚持以人民为中心，支持以临床价值为导向的药品研制和创新，切实推动我国从模仿创新向原始创新、从制药大国向制药强国跨越。 一是《条例》在总则中开宗明义，要求从事药品研制、生产、经营、使用和监督管理活动，应当坚持以人民健康为中心，遵循科学规律和伦理原则。科学和伦理是全世界共同遵守的药品监管最基本原则。药品管理是一项专业性、技术性很强的活动，需要运用科学技术和方法，尊重客观规律，并以科学证据作为决策基础。药品的安全性、有效性，应当通过严格设计的临床试验进行验证；在申请药品注册时，申请人应当提供真实、充分、可靠的数据、资料和样品进行证明；药品上市后，药品上市许可持有人（以下简称“持有人”）应当根据科学进步情况，主动开展药品上市后研究，做进一步的确证。生产、经营药品，应当遵守药品生产、经营质量管理规范，确保全过程持续合规、药品质量稳定可控。伦理原则是评价医疗行为和医学研究是否符合道德的标准，是不可逾越的底线，涵盖生命健康优先、公平可及、知情同意、诚信透明等多个维度，是平衡药品安全、产业利益、公众利益的关键价值准则。 二是《条例》多措并举，鼓励新药好药加快研发上市。明确国家完善药品创新体系，将突破性治疗药物程序、特别审批程序上升到行政法规要求的层面，缩短药品研制和注册进程。加大创新支持力度，对符合条件的药品实施药品试验数据保护。在中药传承创新方面，明确建立健全符合中药特点的审评审批、检查检验和标准管理制度，将中医药理论、中药人用经验和临床试验数据“三结合”的中药注册审评证据体系首次写入法规，为中药新药研发提供坚实的法治基础。明确要求促进仿制药研发创新，提升仿制药质量和疗效，规定研制化学仿制药，应当按照国家药监局制定的技术要求，科学选择对照药品进行对比研究。 三是关注罕见病患者、儿童、老年人等特殊群体用药。《条例》明确给予符合条件的罕见病治疗用药品、儿童用药品市场独占期。市场独占期制度是国际通行做法，是为保障患者能够公平地获得健康权而采取的必要政策倾斜，通过排他性权利重新调整分配相关利益，激励产品研发，保证市场供给。聚焦临床实践中儿童用药品种、剂型、规格缺乏等痛点，《条例》明确由国家卫生健康委和国家药监局制定儿童常用医疗机构制剂清单，支持医疗机构配制、使用。为方便老年人、残疾人用药，要求持有人应当按规定提供语音、大字、盲文或者电子等无障碍版本标签、说明书。 二、坚持问题导向，破解监管实践中重点难点问题 《条例》聚焦医药产业发展和药品监管实践面临的关键性、突出性难题，有针对性地细化补充制度措施，着力破解难点堵点，积极回应行业关切。 一是为更好规范中药饮片跨省销售管理，《条例》明确按照省级炮制规范炮制的中药饮片可以跨省销售，促进全国统一大市场构建。同时，对于炮制方法和用药特点存在地区性差异且易导致临床用药混淆的中药饮片，要求跨省销售时应当按规定备案，并在标签上标明临床用药提示信息，有效防控用药安全风险。 二是强化持有人委托生产药品管理。《条例》针对性完善药品委托生产管理制度，明晰委托方、受托方责任划分，规定持有人应当委托符合条件的生产企业，履行供应商审核、生产过程中的变更管理、药品上市放行等责任，并对受托生产企业进行监督；明确受托生产企业应当按照药品生产质量管理规范组织生产，不得再次委托生产。 三、明晰各方主体责任，细化全过程管理规范 《条例》坚持“四个最严”要求，细化各方主体责任，严格药品研制、生产、经营、使用全过程管理规范，加强监督管理，细化法律责任，全方位筑牢药品安全防护底线。 一是《条例》在《药品管理法》等上位法基础上，细化、夯实药物临床试验申办者、持有人、药品生产企业、药品经营企业、医疗机构、药品网络交易第三方平台提供者等主体的责任，同时明确药品监管、卫生健康、工业和信息化、商务、市场监管等部门的职责分工，为市场主体合规生产经营和监管部门依法履职提供坚实法律依据。 二是在研制环节，《条例》细化药物临床试验管理、化学仿制药研制、处方药与非处方药转换要求等。在生产环节，严格药品委托生产管理，细化中药材、中药饮片、中药配方颗粒、辅料和包材生产管理。在经营环节，细化储存、运输管理要求，完善药品网络销售管理，明确禁止网络销售的药品范围。在使用环节，加强医疗机构药事管理，细化医疗机构制剂配制和调剂管理等。 三是结合药品监管实践情况，《条例》完善药品监管措施，细化药品追溯管理、药品质量抽查检验及复验管理、药品安全事件管理等规定，进一步提高药品监管科学化、规范化水平。同时，按照“最严厉的处罚”要求，综合运用多种处罚措施，强化责任追究，针对义务条款，相应设定严格的法律责任，有效遏制药品违法违规行为。 《条例》的修订出台，以立法固化医药领域改革成果，以法治框架筑牢民生健康防线，进一步夯实药品监管法治保障基础，将进一步促进药品高水平安全和医药产业高质量发展，切实保障公众用药安全和合法权益！ 近日，新修订的《中华人民共和国药品管理法实施条例》（以下简称《条例》）公布。《条例》贯彻药品安全监管“四个最严”要求，落实新修订的《药品管理法》，全面总结药品审评审批制度改革成果，集中体现我国当前药品监管的改革方向，进一步健全鼓励创新与严格监管并重、兼顾中西药特色、强调全生命周期管理的现代化药品管理体系。《条例》的出台，是应对医药产业新发展、满足人民健康新期盼的关键举措，对全面加强药品监管能力建设，满足人民群众用药需求起着重要作用。 一、以临床需求为导向，构建鼓励创新的制度体系 《条例》的核心亮点之一，是将近年来药品审评审批制度改革中行之有效的政策措施制度化、法治化，确立了以临床价值为导向的高效审评审批路径。通过一系列制度设计，为医药产业创新营造了良好的政策环境，旨在持续推动我国从制药大国向制药强国转变。 一是构建符合中药特点的研制管理制度。《条例》明确研制中药应当以中医药理论为指导，评价中药的有效性应当与预期临床定位相适应，体现中药的特点。推动中药高质量发展，核心要义是强调“守正创新”。既要深入挖掘和传承中医药经典理论、名方验方、人用经验，确保其独特的理论体系和实践经验的延续，也要运用现代临床试验数据等手段来综合评价中药的安全性、有效性，阐明中药的作用机理，提升中药的质量标准，开发出更适合现代临床使用的中药新药。 二是系统整合并固化药品加快上市注册机制。《条例》明确了突破性治疗药物、特别审批等药品加快上市注册机制。通过构建一个以临床价值为核心、多通道加速的现代化药品审评审批体系，为临床急需的创新药提供明确的加快上市路径，缩短创新研发成果向临床应用的转化时间，既激发企业的创新动力，也有利于患者能尽早享受前沿医药科技的转化成果。 二、加强制度设计，优化药品创新生态环境 《条例》通过完善和引入药品试验数据保护和市场独占期制度，平衡创新与仿制的关系，营造健康有序的市场竞争环境。 一是完善药品试验数据保护制度。药品试验数据保护制度是对专利保护的有效补充，不仅有利于增强企业对创新药研发的信心，也平衡了创新与仿制的利益。一方面，创新药企业不必再担心因提交数据而面临被不当利用的风险，另一方面，在保护期限届满后，仿制药可以简化申请上市，促进竞争，降低药价，惠及公众。药品试验数据保护制度通过对药品上市许可持有人（以下简称“持有人”）自行取得且未披露的试验数据和其他数据实施保护，向企业发出了明确的积极信号，将切实鼓励企业研发创新。 二是建立儿童用药、罕见病治疗用药市场独占期制度。《条例》精准靶向儿童用药和罕见病治疗用药两大研发“洼地”。由于研发难度大、成本高、受众小、商业回报低，有的儿童患者、罕见病患者面临“无药可研、无药可用”的困境。为儿童用药设置不超过2年的独占期、罕见病治疗用药设置不超过7年的独占期，是运用政策性工具进行精准干预。同时，《条例》明确持有人不履行保障供应承诺的，市场独占期终止，是将市场独占“权利”与保障供应“责任”进行强绑定，确保患者能用上药这一公共政策目标的最终实现，体现了精细化的监管智慧。市场独占期制度将解决“用药难”问题，从单纯依靠企业的社会责任感，转变为通过稳定的、可预期的商业利益进行引导，体现了对弱势群体健康权益的深切关注和制度保障。 三、细化药品研制管理要求，夯实药品注册主体责任 《条例》进一步落实全过程管理理念，细化药品研制管理要求，将持有人的质量主体责任贯穿于药品全生命周期。 一是完善药品研制管理要求。《条例》明确从事药品研制活动，应当遵守药物非临床研究质量管理规范和药物临床试验质量管理规范，细化临床试验申办者的受试者保护和临床试验数据管理、风险管理等责任。针对品种特点，分别明确研制化学仿制药应当科学选择对照药品，研制中药应当以中医药理论为指导。同时，规定推动提高药品标准，强化药品标准品、对照品管理，保障药品质量水平提升。 二是深化持有人主体责任。《条例》进一步要求持有人建立健全药品质量保证体系、药物警戒体系，全面评估生产过程中的变更对药品质量的影响。持有人应当定期进行药品上市后评价，监测药品的风险和获益平衡情况，并根据上市后评价结果及时采取更新药品说明书等措施。这些规定将药品的安全有效责任牢牢锁定在持有人身上，充分体现持有人主体责任。 《条例》关于药品注册管理的系列规定，构建了一个更加科学、透明、高效的现代化药品注册管理体系。通过优化药品审评审批流程为创新注入了强劲动力，通过强化全生命周期管理压实了持有人主体责任，进一步优化产业竞争生态。 展望未来，随着《条例》的深入实施，将进一步提升我国药品审评审批的质量和效率，加速安全有效的创新药和临床急需药上市，更将提升药品研发质量和强化企业主体责任意识，从而推动中国从制药大国向制药强国稳步迈进，最终惠及亿万患者，切实保障公众健康。 近日，《中华人民共和国药品管理法实施条例》（以下简称《条例》）审议出台，这是进一步强化我国药品监管制度的重要举措。随着医药产业的快速发展，在满足群众高品质健康需求的同时，对药品监管也提出了更高要求。《条例》是《药品管理法》的重要配套行政法规，其修订顺应产业发展新形势、药品监管新要求，对药品全链条、各环节监管作了进一步细化规定，切实反映了我国医药产业高质量发展的实践经验和内在需求。《条例》将为医药产业规范发展和监管水平提升进一步提供坚实依据，为公众用药安全筑牢坚实防线。 一、《条例》深化医药监管机制改革，推动产业结构优化和转型升级 《条例》为构建责任清晰、创新驱动、良性竞争的药品监管新生态提供了制度保障，通过引导和监管来激发产业活力，促进医药产业高质量发展。 一是积极支持产业新业态发展，稳妥推进药品委托分段生产。随着医药产业的迅猛发展，特别是创新药市场新产品不断涌现，对生产模式提出新的差异化、专业化需求。如抗体偶联药物（ADC，通常由抗体、连接子、细胞毒性药物组成），各组成部分生产工艺复杂，药品上市许可持有人（以下简称“持有人”）可能短时间内不能具备商业化生产所有组成部分的能力，为推动产品尽快上市、保证药品质量，持有人需要将产品的不同生产环节委托给专业的企业分别开展。对于临床急需药品、应对突发公共卫生事件的短缺药品等，需要在极短时间内足量供应，这也需要允许专业企业分工合作，尽最大可能扩大生产能力，迅速满足供应保障需求。 《条例》关于分段生产药品的规定，在坚守药品质量安全底线的同时，将进一步激发行业创新发展活力，促进产业优化资源配置，增强我国医药产业的韧性与竞争力，有效保障临床用药的可及性，有力服务产业高质量发展大局。 二是优化上市流程设计，促进医药创新成果落地。在《药品管理法》框架下，对于通过相应药品生产质量管理规范符合性检查以及检查之后生产的商业规模批次产品，《条例》允许在取得药品批准证明文件后上市销售。在当前医药产业创新进程加快、临床需求愈发多元背景下，考虑到取得药品批准证明文件前生产的商业规模批次产品，质量标准、生产工艺满足上市条件，生产过程符合质量管理体系要求，在质量确有保障的前提下，允许其在取得药品批准证明文件后上市销售，既加快创新成果惠及患者进程，减少患者的等待周期，也降低了企业运营成本。 《条例》直面产业发展中的需求，在严格保障药品质量安全的前提下，通过优化监管流程，为特定药品构建“获批即上市”的快速通道。将“审批等待期”与“生产准备期”相统筹，力求缩短创新药以及其他临床急需药品从获批到实际上市的时间差，使患者能够更快受益，有助于提升企业研发投入的回报效率，增强其创新动力及应对市场不确定性能力，也是推动医药产业高质量发展的重要制度创新。 三是规范发展中药材种植与养殖，促进中药质量源头提升。中药材的质量稳定性直接关系中药疗效与安全，是中医药传承创新的重要基础。《条例》首次从法规层面明确“鼓励实施中药材生产质量管理规范”，为中药材全链条规范化发展提供了法治支撑，有利于解决中药材质量不稳定等问题，有效回应中药企业对规范化生产的现实需求。 回应行业诉求，《条例》明确规定根据中药材特点，可以对中药材进行产地加工，并要求省级药品监督管理局制定中药材产地加工指导原则。既有利于通过规范的产地加工推进中药材规模化发展，强化供给侧和需求端的有机衔接，也有利于引导中药生产企业将质量管理体系延伸到中药材产地，强化质量管控闭环。 二、《条例》完善流通使用监管要求，筑牢药品安全底线 药品事关人民群众生命健康，药品安全责任重于泰山。《条例》以体系建设为基础筑牢药品安全的全方位屏障，完善药品安全监管责任体系，切实防范药品安全风险。 一是构建处方药全链条监管体系，守护用药安全。国家对处方药与非处方药实施分类管理。《条例》规范从“合规处方生成”到“专业审核调剂”的完整闭环，通过压实医疗机构、药品经营企业等各方责任，最大程度防范处方药滥用和误用风险，促进科学合理用药，保障人民群众用药安全。在源头环节，《条例》要求医疗机构应当加强对处方开具、审核和调配的管理，提高医师合理用药水平，防止用药安全事故。在流通环节，《条例》强调药品零售企业坚守“凭处方销售处方药”红线。在监管政策方面，要求药品经营企业应当配备与其经营相适应的依法经过资格认定的药师或者其他药学技术人员，但仅经营乙类非处方药的，可以按规定配备药学技术人员，体现了监管政策的精准性和科学性。 二是规范药品网络销售，压实平台主体责任。近年来，我国药品网络销售规模不断扩大，规范性和可及性不断提升。在总结《药品管理法》实施情况的基础上，《条例》要求药品网络交易第三方平台建立药品网络销售质量管理体系，明确各方法定责任，构建“企业主责、平台把关、全程管控”的监管体系。《条例》强化平台管理责任，要求平台建立质量管理体系，设立管理部门、配备专业人员，审核入驻企业资质、检查药品信息、管理经营行为等，为平台完善治理提供制度遵循。《条例》兼顾药品网络销售便利性与安全性，通过一系列规定强化各方主体责任，要求树立安全风险和质量安全意识，做到持续守法合规，促进行业健康规范发展。 三是完善医疗机构药事管理，强化使用环节药品安全。医疗机构是药品使用的主要场所。《条例》严格医疗机构药品管理，要求医疗机构制定并实施药品进货检查验收、保管、使用管理制度，要求医疗机构及时报告疑似药品不良反应，发现疑似药品不良反应聚集性事件的，应当及时对患者进行救治、采取措施控制风险，切实保障患者生命健康。同时，《条例》细化医疗机构制剂注册、调剂和使用等管理要求，并明确不得作为医疗机构制剂的具体情形，进一步保障医疗机构制剂用药安全。 《条例》结合当前药品安全领域新形势，对药品研制、生产、经营、使用及监督管理等各环节进行了全面规范，不仅强化了持有人的主体责任，更对药品质量管理提出更高要求。《条例》的修订出台，将以改革推动产业结构优化升级，全方位保障药品高水平安全，对贯彻健康优先发展战略，促进医药产业高质量发展，必将产生重要且深远的影响！ 声 明：转载此文是出于传递更多信息之目的。若有来源标注错误或侵犯了您的合法权益，请作者持权属证明与本网联系，我们将及时更正、删除，谢谢。",
-        "source": "中国现代中药",
-        "url": "https://www.zyctd.com/zixun/223/1102271.html",
         "herb": "",
         "location": ""
       }
