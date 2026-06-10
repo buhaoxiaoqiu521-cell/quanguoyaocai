@@ -1,9 +1,22 @@
 {
   "meta": {
-    "total": 27,
-    "review_count": 27
+    "total": 28,
+    "review_count": 28
   },
   "items": [
+    {
+      "type": "mixed_units",
+      "level": "review",
+      "date": "2026-06-10",
+      "herb": "升麻",
+      "location": "辽宁",
+      "top_unit": "元/kg",
+      "point_units": [
+        "元/斤",
+        "元/kg"
+      ],
+      "message": "同一条记录同时包含多种计价单位，已保留 price_points 单位，但建议人工复核。"
+    },
     {
       "type": "mixed_units",
       "level": "review",
