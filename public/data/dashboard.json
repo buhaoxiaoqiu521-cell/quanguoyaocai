@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-06-12 17:10:23",
+    "generated_at": "2026-06-12 20:01:19",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-06-12",
     "available_dates": [
@@ -343,8 +343,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 12034,
-    "origin_records": 4540,
+    "total_records": 12041,
+    "origin_records": 4547,
     "market_records": 7494,
     "source_count": 2,
     "herb_count": 925,
@@ -361,16 +361,20 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林、成都持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：12034 条",
-      "产地：4540 条",
+      "总记录：12041 条",
+      "产地：4547 条",
       "市场：7494 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-06-12",
-    "latest_count": 121,
+    "latest_count": 128,
     "top_herbs": [
+      {
+        "name": "九节菖蒲",
+        "count": 4
+      },
       {
         "name": "柴胡",
         "count": 3
@@ -381,10 +385,6 @@
       },
       {
         "name": "瓜蒌",
-        "count": 3
-      },
-      {
-        "name": "九节菖蒲",
         "count": 3
       },
       {
@@ -399,15 +399,15 @@
       },
       {
         "name": "中药材天地网",
-        "count": 4488
+        "count": 4495
       }
     ]
   },
   "origin": {
     "total": 200,
-    "all_total": 4357,
+    "all_total": 4362,
     "latest_date": "2026-06-12",
-    "latest_count": 62,
+    "latest_count": 67,
     "date_options": [
       "2026-06-12",
       "2026-06-11",
@@ -1784,6 +1784,50 @@
       {
         "date": "2026-06-12",
         "published_at": "2026-06-12 00:00:00",
+        "herb": "薤白",
+        "spec": "",
+        "location": "陕西西安市户县",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "陕西西安市户县薤白可供货源有量，近期商家关注力度一般，行情较前期回落，现本地统货售价在35元，饮片报价在38-40元之间",
+        "content_full": "陕西西安市户县薤白可供货源有量，近期商家关注力度一般，行情较前期回落，现本地统货售价在35元，饮片报价在38-40元之间",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1112248.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "饮片",
+            "price": "38-40 元/kg",
+            "unit": "元/kg",
+            "price_min": 38.0,
+            "price_max": 40.0
+          },
+          {
+            "label": "本地统",
+            "price": "35 元/kg",
+            "unit": "元/kg",
+            "price_min": 35.0,
+            "price_max": 35.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-12",
+        "published_at": "2026-06-12 00:00:00",
         "herb": "蔓荆子",
         "spec": "",
         "location": "江西省抚州市黎川县",
@@ -1818,6 +1862,50 @@
             "unit": "元/kg",
             "price_min": 47.0,
             "price_max": 48.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-12",
+        "published_at": "2026-06-12 00:00:00",
+        "herb": "葶苈子",
+        "spec": "",
+        "location": "陕西西安市户县",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "陕西西安市户县葶苈子目前产新结束，今年新货产出有量，近期商家关注力度一般，货源正常购销，行情在平稳中运行，现本地统货价格在6.5元，净货售价在8元",
+        "content_full": "陕西西安市户县葶苈子目前产新结束，今年新货产出有量，近期商家关注力度一般，货源正常购销，行情在平稳中运行，现本地统货价格在6.5元，净货售价在8元",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1112247.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "统货",
+            "price": "6.5 元/kg",
+            "unit": "元/kg",
+            "price_min": 6.5,
+            "price_max": 6.5
+          },
+          {
+            "label": "净",
+            "price": "8 元/kg",
+            "unit": "元/kg",
+            "price_min": 8.0,
+            "price_max": 8.0
           }
         ],
         "units": [
@@ -2926,10 +3014,31 @@
         "source_links": [
           {
             "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1112164.html"
+            "url": "https://www.zyctd.com/zixun/201/1112253.html"
           }
         ],
         "price_points": [
+          {
+            "label": "无硫片",
+            "price": "46 元/kg",
+            "unit": "元/kg",
+            "price_min": 46.0,
+            "price_max": 46.0
+          },
+          {
+            "label": "1.2-1.5的圆片",
+            "price": "25 元/kg",
+            "unit": "元/kg",
+            "price_min": 25.0,
+            "price_max": 25.0
+          },
+          {
+            "label": "1.5-2.0的圆片",
+            "price": "35 元/kg",
+            "unit": "元/kg",
+            "price_min": 35.0,
+            "price_max": 35.0
+          },
           {
             "label": "山药圆片0.8-1.2的",
             "price": "21 元/kg",
@@ -3034,6 +3143,50 @@
       {
         "date": "2026-06-12",
         "published_at": "2026-06-12 00:00:00",
+        "herb": "女贞子",
+        "spec": "",
+        "location": "陕西西安市户县",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "陕西西安市户县女贞子可供货源充足，近期走销不快，整体行情较前期疲软，现本地圆粒净货价格在2元上下，统货价格在1.6-1.7元",
+        "content_full": "陕西西安市户县女贞子可供货源充足，近期走销不快，整体行情较前期疲软，现本地圆粒净货价格在2元上下，统货价格在1.6-1.7元",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1112250.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "统货",
+            "price": "1.6-1.7 元/kg",
+            "unit": "元/kg",
+            "price_min": 1.6,
+            "price_max": 1.7
+          },
+          {
+            "label": "圆粒净货",
+            "price": "2 元/kg",
+            "unit": "元/kg",
+            "price_min": 2.0,
+            "price_max": 2.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-12",
+        "published_at": "2026-06-12 00:00:00",
         "herb": "夏枯草",
         "spec": "",
         "location": "河南省南阳市桐柏县",
@@ -3108,7 +3261,7 @@
         "price_points": [
           {
             "label": "地黄混等统",
-            "price": "12.5-13 元/kg",
+            "price": "12.5-13 元/kg / 13.5 元/kg",
             "unit": "元/kg",
             "price_min": 12.5,
             "price_max": 13.0
@@ -3133,6 +3286,13 @@
             "unit": "元/kg",
             "price_min": 32.0,
             "price_max": 32.0
+          },
+          {
+            "label": "三级货",
+            "price": "14 元/kg",
+            "unit": "元/kg",
+            "price_min": 14.0,
+            "price_max": 14.0
           }
         ],
         "units": [
@@ -3224,6 +3384,50 @@
       {
         "date": "2026-06-12",
         "published_at": "2026-06-12 00:00:00",
+        "herb": "南五味子",
+        "spec": "",
+        "location": "陕西西安市户县",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "陕西西安市户县南五味子距离产新还有一段时间，现当地可供货源有量，近期货源走销一般，行情表现低迷，目前本地含量净货报价在35元上下，不够含量的货报价在29-30元之间",
+        "content_full": "陕西西安市户县南五味子距离产新还有一段时间，现当地可供货源有量，近期货源走销一般，行情表现低迷，目前本地含量净货报价在35元上下，不够含量的货报价在29-30元之间",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1112249.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "不够含量的货",
+            "price": "29-30 元/kg",
+            "unit": "元/kg",
+            "price_min": 29.0,
+            "price_max": 30.0
+          },
+          {
+            "label": "含量净货",
+            "price": "35 元/kg",
+            "unit": "元/kg",
+            "price_min": 35.0,
+            "price_max": 35.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-12",
+        "published_at": "2026-06-12 00:00:00",
         "herb": "半枝莲",
         "spec": "",
         "location": "河南省南阳市桐柏县",
@@ -3251,6 +3455,50 @@
             "unit": "元/kg",
             "price_min": 6.0,
             "price_max": 6.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-12",
+        "published_at": "2026-06-12 00:00:00",
+        "herb": "九节菖蒲",
+        "spec": "",
+        "location": "陕西西安市户县",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "陕西西安市户县九节菖蒲目前产新结束，今年新货产出量不大，产新后货源交易顺畅，行情表现坚挺，现本地九节菖蒲一般报价在280元，水洗货报价在290-310元之间",
+        "content_full": "陕西西安市户县九节菖蒲目前产新结束，今年新货产出量不大，产新后货源交易顺畅，行情表现坚挺，现本地九节菖蒲一般报价在280元，水洗货报价在290-310元之间",
+        "source": "中药材天地网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "中药材天地网",
+            "url": "https://www.zyctd.com/zixun/201/1112246.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "水洗货",
+            "price": "290-310 元/kg",
+            "unit": "元/kg",
+            "price_min": 290.0,
+            "price_max": 310.0
+          },
+          {
+            "label": "九节菖蒲一般",
+            "price": "280 元/kg",
+            "unit": "元/kg",
+            "price_min": 280.0,
+            "price_max": 280.0
           }
         ],
         "units": [
@@ -9420,247 +9668,6 @@
             "unit": "元/kg",
             "price_min": 620.0,
             "price_max": 620.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-09",
-        "published_at": "2026-06-09 00:00:00",
-        "herb": "龙骨",
-        "spec": "",
-        "location": "宁夏",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "宁夏中卫龙骨货源产出量少，货源走销顺畅，行情在坚挺中运行，目前本地硬货报价在180-190元，软质货报价在240-250元之间。（该信息由宁夏中卫产地商家马先生18195535116提供）",
-        "content_full": "宁夏中卫龙骨货源产出量少，货源走销顺畅，行情在坚挺中运行，目前本地硬货报价在180-190元，软质货报价在240-250元之间。（该信息由宁夏中卫产地商家马先生18195535116提供）",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1111856.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "硬货",
-            "price": "180-190 元/kg",
-            "unit": "元/kg",
-            "price_min": 180.0,
-            "price_max": 190.0
-          },
-          {
-            "label": "软质货",
-            "price": "240-250 元/kg",
-            "unit": "元/kg",
-            "price_min": 240.0,
-            "price_max": 250.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-09",
-        "published_at": "2026-06-09 00:00:00",
-        "herb": "黄芩",
-        "spec": "",
-        "location": "陕西省商洛市商州区",
-        "market": "产地",
-        "price": "14 元/kg",
-        "price_value": 14.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "陕西省商洛市商州区黄芩走动平稳，行情保持稳定，产地货源有量，黄芩药厂货价格在14元左右",
-        "content_full": "陕西省商洛市商州区黄芩走动平稳，行情保持稳定，产地货源有量，黄芩药厂货价格在14元左右",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1111865.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "黄芩药厂货",
-            "price": "14 元/kg",
-            "unit": "元/kg",
-            "price_min": 14.0,
-            "price_max": 14.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-09",
-        "published_at": "2026-06-09 00:00:00",
-        "herb": "黄芩",
-        "spec": "",
-        "location": "甘肃省定西市陇西县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "今日行情，甘肃省定西市陇西县，黄芩（甘肃两年个子（杂质大））价格为12元/公斤，（甘肃三年个子（杂质大））价格为13元/公斤，（0.3以上统片）价格为16元/公斤，（沫子）价格为3元/公斤，（二仓）价格为4.5元/公斤，走势缓慢，货源充足。 稳定",
-        "content_full": "今日行情，甘肃省定西市陇西县，黄芩（甘肃两年个子（杂质大））价格为12元/公斤，（甘肃三年个子（杂质大））价格为13元/公斤，（0.3以上统片）价格为16元/公斤，（沫子）价格为3元/公斤，（二仓）价格为4.5元/公斤，走势缓慢，货源充足。 稳定",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1111834.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "黄芩（甘肃两年个子（杂质大",
-            "price": "12 元/kg",
-            "unit": "元/kg",
-            "price_min": 12.0,
-            "price_max": 12.0
-          },
-          {
-            "label": "甘肃三年个子（杂质大",
-            "price": "13 元/kg",
-            "unit": "元/kg",
-            "price_min": 13.0,
-            "price_max": 13.0
-          },
-          {
-            "label": "0.3以上统片",
-            "price": "16 元/kg",
-            "unit": "元/kg",
-            "price_min": 16.0,
-            "price_max": 16.0
-          },
-          {
-            "label": "沫子",
-            "price": "3 元/kg",
-            "unit": "元/kg",
-            "price_min": 3.0,
-            "price_max": 3.0
-          },
-          {
-            "label": "二仓",
-            "price": "4.5 元/kg",
-            "unit": "元/kg",
-            "price_min": 4.5,
-            "price_max": 4.5
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-09",
-        "published_at": "2026-06-09 00:00:00",
-        "herb": "黄精",
-        "spec": "",
-        "location": "四川省南充市高坪区",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "四川省南充市高坪区黄精走货畅快，今年产地货源销售一直较好，产区现所剩货源不多，价格稳定，精选中个货在85元左右，九蒸九晒小个100元，中个120元",
-        "content_full": "四川省南充市高坪区黄精走货畅快，今年产地货源销售一直较好，产区现所剩货源不多，价格稳定，精选中个货在85元左右，九蒸九晒小个100元，中个120元",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1111927.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "精选中个货在",
-            "price": "85 元/kg",
-            "unit": "元/kg",
-            "price_min": 85.0,
-            "price_max": 85.0
-          },
-          {
-            "label": "九蒸九晒小个",
-            "price": "100 元/kg",
-            "unit": "元/kg",
-            "price_min": 100.0,
-            "price_max": 100.0
-          },
-          {
-            "label": "中个",
-            "price": "120 元/kg",
-            "unit": "元/kg",
-            "price_min": 120.0,
-            "price_max": 120.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-09",
-        "published_at": "2026-06-09 00:00:00",
-        "herb": "麻黄",
-        "spec": "",
-        "location": "内蒙古赤峰市翁牛特旗",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "内蒙古赤峰市翁牛特旗麻黄，受淡季影响，货源走销一般，行情保持稳定，本地全草价格在17元，切好的货在21元左右",
-        "content_full": "内蒙古赤峰市翁牛特旗麻黄，受淡季影响，货源走销一般，行情保持稳定，本地全草价格在17元，切好的货在21元左右",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1111858.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "全草",
-            "price": "17 元/kg",
-            "unit": "元/kg",
-            "price_min": 17.0,
-            "price_max": 17.0
-          },
-          {
-            "label": "货在",
-            "price": "21 元/kg",
-            "unit": "元/kg",
-            "price_min": 21.0,
-            "price_max": 21.0
           }
         ],
         "units": [
