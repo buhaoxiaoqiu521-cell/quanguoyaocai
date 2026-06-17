@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-06-17 12:05:15",
+    "generated_at": "2026-06-17 17:05:26",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-06-17",
     "available_dates": [
@@ -348,9 +348,9 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 12416,
+    "total_records": 12419,
     "origin_records": 4743,
-    "market_records": 7673,
+    "market_records": 7676,
     "source_count": 2,
     "herb_count": 929,
     "market_targets": [
@@ -366,15 +366,15 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林、成都持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：12416 条",
+      "总记录：12419 条",
       "产地：4743 条",
-      "市场：7673 条",
+      "市场：7676 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-06-17",
-    "latest_count": 37,
+    "latest_count": 40,
     "top_herbs": [
       {
         "name": "连翘",
@@ -389,18 +389,18 @@
         "count": 2
       },
       {
-        "name": "薤白",
+        "name": "草果",
         "count": 1
       },
       {
-        "name": "徐长卿",
+        "name": "孜然",
         "count": 1
       }
     ],
     "sources": [
       {
         "name": "药通网",
-        "count": 7739
+        "count": 7742
       },
       {
         "name": "中药材天地网",
@@ -9905,21 +9905,128 @@
       "成都"
     ],
     "total": 200,
-    "all_total": 7673,
+    "all_total": 7676,
     "latest_date": "2026-06-17",
-    "latest_count": 17,
+    "latest_count": 20,
     "covered_count": 3,
     "extra_market_count": 0,
     "groups": [
       {
         "name": "亳州",
-        "count": 74,
+        "count": 76,
         "latest_date": "2026-06-17",
         "sources": [
-          "药通网 47 条",
+          "药通网 49 条",
           "中药材天地网 27 条"
         ],
         "items": [
+          {
+            "date": "2026-06-17",
+            "published_at": "2026-06-17 14:10:51",
+            "herb": "草果",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "40-41 元/kg",
+            "price_value": 40.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "草果货源持续走缓，持货商家出售意愿较强，造成行情逐步下行调整，现云南货价格在40-41元；越南货38-39元，短期内低迷行情恐难改观。",
+            "content_full": "草果货源持续走缓，持货商家出售意愿较强，造成行情逐步下行调整，现云南货价格在40-41元；越南货38-39元，短期内低迷行情恐难改观。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/XHGN2IgR_1.html",
+            "price_points": [
+              {
+                "label": "云南货",
+                "price": "40-41 元/kg",
+                "unit": "元/kg",
+                "price_min": 40.0,
+                "price_max": 41.0
+              },
+              {
+                "label": "越南货",
+                "price": "38-39 元/kg",
+                "unit": "元/kg",
+                "price_min": 38.0,
+                "price_max": 39.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-17",
+            "published_at": "2026-06-17 14:10:32",
+            "herb": "孜然",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "17-18 元/kg",
+            "price_value": 17.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "新疆孜然产新进入中期，价格逐步下滑，商家继续持观望态度，现新疆货价格暂维持在17-18元，进口货16-17元，货源走动缓慢，短期内行情仍处震荡中。",
+            "content_full": "新疆孜然产新进入中期，价格逐步下滑，商家继续持观望态度，现新疆货价格暂维持在17-18元，进口货16-17元，货源走动缓慢，短期内行情仍处震荡中。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/SKxwnj0i_1.html",
+            "price_points": [
+              {
+                "label": "新疆货价格暂维持在",
+                "price": "17-18 元/kg",
+                "unit": "元/kg",
+                "price_min": 17.0,
+                "price_max": 18.0
+              },
+              {
+                "label": "进口货",
+                "price": "16-17 元/kg",
+                "unit": "元/kg",
+                "price_min": 16.0,
+                "price_max": 17.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
+          {
+            "date": "2026-06-17",
+            "published_at": "2026-06-17 14:10:07",
+            "herb": "益智",
+            "spec": "",
+            "location": "待补产区",
+            "market": "亳州",
+            "price": "65-68 元/kg",
+            "price_value": 65.0,
+            "unit": "元/kg",
+            "delta_amount": "",
+            "delta_rate": "",
+            "tag": "",
+            "summary": "益智广东、广西地区新货陆续产出，行情依然呈小幅下滑的趋势，当前市场人气低落，整体需求下降，商家多不敢贸然购进，现市场海南货价格在65-68元之间。",
+            "content_full": "益智广东、广西地区新货陆续产出，行情依然呈小幅下滑的趋势，当前市场人气低落，整体需求下降，商家多不敢贸然购进，现市场海南货价格在65-68元之间。",
+            "source": "药通网",
+            "url": "https://www.yt1998.com/hqzx/GcFYArbW_1.html",
+            "price_points": [
+              {
+                "label": "海南货",
+                "price": "65-68 元/kg",
+                "unit": "元/kg",
+                "price_min": 65.0,
+                "price_max": 68.0
+              }
+            ],
+            "units": [
+              "元/kg"
+            ],
+            "unit_mode": "single"
+          },
           {
             "date": "2026-06-17",
             "published_at": "2026-06-17 09:45:53",
@@ -12532,54 +12639,16 @@
               "元/kg"
             ],
             "unit_mode": "single"
-          },
-          {
-            "date": "2026-06-12",
-            "published_at": "2026-06-12 09:44:34",
-            "herb": "木通",
-            "spec": "",
-            "location": "待补产区",
-            "market": "亳州",
-            "price": "10-11 元/kg",
-            "price_value": 10.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "木通近期市场关注的力度一般，需求量较前期有所下降，货源走动开始放缓，行情暂时保持稳定，现川木通10-11元，三叶木通6-7元。",
-            "content_full": "木通近期市场关注的力度一般，需求量较前期有所下降，货源走动开始放缓，行情暂时保持稳定，现川木通10-11元，三叶木通6-7元。",
-            "source": "药通网",
-            "url": "https://www.yt1998.com/hqzx/xulW13Wm_1.html",
-            "price_points": [
-              {
-                "label": "川木通",
-                "price": "10-11 元/kg",
-                "unit": "元/kg",
-                "price_min": 10.0,
-                "price_max": 11.0
-              },
-              {
-                "label": "三叶木通",
-                "price": "6-7 元/kg",
-                "unit": "元/kg",
-                "price_min": 6.0,
-                "price_max": 7.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
           }
         ]
       },
       {
         "name": "安国",
-        "count": 77,
+        "count": 75,
         "latest_date": "2026-06-17",
         "sources": [
           "药通网 50 条",
-          "中药材天地网 27 条"
+          "中药材天地网 25 条"
         ],
         "items": [
           {
@@ -15019,82 +15088,6 @@
                 "unit": "元/kg",
                 "price_min": 125.0,
                 "price_max": 125.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-06-12",
-            "published_at": "2026-06-12 00:00:00",
-            "herb": "龙齿",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "580-600 元/kg",
-            "price_value": 580.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "龙齿，可供货源量不大，货源走销也一般，近期行情与前期无明显调整，现市场龙齿统货报价在580-600元之间，条齿选货报价在800元。",
-            "content_full": "龙齿，可供货源量不大，货源走销也一般，近期行情与前期无明显调整，现市场龙齿统货报价在580-600元之间，条齿选货报价在800元。",
-            "source": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/200/1112162.html",
-            "price_points": [
-              {
-                "label": "龙齿统货",
-                "price": "580-600 元/kg",
-                "unit": "元/kg",
-                "price_min": 580.0,
-                "price_max": 600.0
-              },
-              {
-                "label": "条齿选货",
-                "price": "800 元/kg",
-                "unit": "元/kg",
-                "price_min": 800.0,
-                "price_max": 800.0
-              }
-            ],
-            "units": [
-              "元/kg"
-            ],
-            "unit_mode": "single"
-          },
-          {
-            "date": "2026-06-12",
-            "published_at": "2026-06-12 00:00:00",
-            "herb": "龙骨",
-            "spec": "",
-            "location": "待补产区",
-            "market": "安国",
-            "price": "260-280 元/kg",
-            "price_value": 260.0,
-            "unit": "元/kg",
-            "delta_amount": "",
-            "delta_rate": "",
-            "tag": "",
-            "summary": "龙骨，为资源性品种，近期商家有关注力度，货源有批量走动，持货者喊价较为坚挺，现市场龙骨统货报价在260-280元，选货价在300元上下。",
-            "content_full": "龙骨，为资源性品种，近期商家有关注力度，货源有批量走动，持货者喊价较为坚挺，现市场龙骨统货报价在260-280元，选货价在300元上下。",
-            "source": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/200/1112159.html",
-            "price_points": [
-              {
-                "label": "龙骨统货",
-                "price": "260-280 元/kg",
-                "unit": "元/kg",
-                "price_min": 260.0,
-                "price_max": 280.0
-              },
-              {
-                "label": "选货",
-                "price": "300 元/kg",
-                "unit": "元/kg",
-                "price_min": 300.0,
-                "price_max": 300.0
               }
             ],
             "units": [
