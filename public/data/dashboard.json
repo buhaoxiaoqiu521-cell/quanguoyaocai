@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-06-18 12:04:57",
+    "generated_at": "2026-06-18 12:06:24",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-06-18",
     "available_dates": [
@@ -349,8 +349,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 12446,
-    "origin_records": 4755,
+    "total_records": 12464,
+    "origin_records": 4773,
     "market_records": 7691,
     "source_count": 2,
     "herb_count": 929,
@@ -367,16 +367,20 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林、成都持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：12446 条",
-      "产地：4755 条",
+      "总记录：12464 条",
+      "产地：4773 条",
       "市场：7691 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-06-18",
-    "latest_count": 15,
+    "latest_count": 33,
     "top_herbs": [
+      {
+        "name": "合欢皮",
+        "count": 1
+      },
       {
         "name": "酸枣仁",
         "count": 1
@@ -390,18 +394,14 @@
         "count": 1
       },
       {
-        "name": "黄柏",
-        "count": 1
-      },
-      {
-        "name": "桂圆肉",
+        "name": "桔梗",
         "count": 1
       }
     ],
     "sources": [
       {
         "name": "药通网",
-        "count": 7769
+        "count": 7787
       },
       {
         "name": "中药材天地网",
@@ -411,9 +411,9 @@
   },
   "origin": {
     "total": 200,
-    "all_total": 4549,
-    "latest_date": "2026-06-17",
-    "latest_count": 30,
+    "all_total": 4567,
+    "latest_date": "2026-06-18",
+    "latest_count": 18,
     "date_options": [
       "2026-06-18",
       "2026-06-17",
@@ -765,6 +765,805 @@
       "药通网"
     ],
     "items": [
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:54:46",
+        "herb": "合欢皮",
+        "spec": "",
+        "location": "湖北省恩施鹤峰县容美镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "合欢皮正值产新中期，近期该品关注商家不少，但多为观望，货源实际交易量有限，价格平稳，现个子价格在9元，饮片丝11元",
+        "content_full": "合欢皮正值产新中期，近期该品关注商家不少，但多为观望，货源实际交易量有限，价格平稳，现个子价格在9元，饮片丝11元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/07nzspLS.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "个子",
+            "price": "9 元/kg",
+            "unit": "元/kg",
+            "price_min": 9.0,
+            "price_max": 9.0
+          },
+          {
+            "label": "饮片丝",
+            "price": "11 元/kg",
+            "unit": "元/kg",
+            "price_min": 11.0,
+            "price_max": 11.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:29:39",
+        "herb": "桔梗",
+        "spec": "",
+        "location": "内蒙古赤峰市喀喇沁旗牛家营子镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "桔梗随着淡季到来，商家关注力度也随之下降，货源交易不及前期顺畅，持货商家出售意愿不一，行情暂保持平稳运行，因质量不等，现皮干价格在10-11元；带皮斜片二年生12-14元，三年生13-15元；去皮个子20-26元",
+        "content_full": "桔梗随着淡季到来，商家关注力度也随之下降，货源交易不及前期顺畅，持货商家出售意愿不一，行情暂保持平稳运行，因质量不等，现皮干价格在10-11元；带皮斜片二年生12-14元，三年生13-15元；去皮个子20-26元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/9l8W29uu.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "皮干",
+            "price": "10-11 元/kg",
+            "unit": "元/kg",
+            "price_min": 10.0,
+            "price_max": 11.0
+          },
+          {
+            "label": "带皮斜片二年生",
+            "price": "12-14 元/kg",
+            "unit": "元/kg",
+            "price_min": 12.0,
+            "price_max": 14.0
+          },
+          {
+            "label": "三年生",
+            "price": "13-15 元/kg",
+            "unit": "元/kg",
+            "price_min": 13.0,
+            "price_max": 15.0
+          },
+          {
+            "label": "去皮个子",
+            "price": "20-26 元/kg",
+            "unit": "元/kg",
+            "price_min": 20.0,
+            "price_max": 26.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:29:08",
+        "herb": "枳实",
+        "spec": "",
+        "location": "四川省成都市蒲江县大兴镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "枳实当地产新进入收尾阶段，新货干品已经应市，近期有商家采购，货源小批量交易良好，行情波动不大，现甜橙大果（1.6-2.0）价格在4-4.5元，中果（1.2-1.6）价格在7元；过4号筛大果片8.8元，中果片13元左右",
+        "content_full": "枳实当地产新进入收尾阶段，新货干品已经应市，近期有商家采购，货源小批量交易良好，行情波动不大，现甜橙大果（1.6-2.0）价格在4-4.5元，中果（1.2-1.6）价格在7元；过4号筛大果片8.8元，中果片13元左右",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/2eLdn3fY.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "甜橙大果（1.6-2.0",
+            "price": "4-4.5 元/kg",
+            "unit": "元/kg",
+            "price_min": 4.0,
+            "price_max": 4.5
+          },
+          {
+            "label": "中果（1.2-1.6",
+            "price": "7 元/kg",
+            "unit": "元/kg",
+            "price_min": 7.0,
+            "price_max": 7.0
+          },
+          {
+            "label": "过4号筛大果片",
+            "price": "8.8 元/kg",
+            "unit": "元/kg",
+            "price_min": 8.8,
+            "price_max": 8.8
+          },
+          {
+            "label": "中果片",
+            "price": "13 元/kg",
+            "unit": "元/kg",
+            "price_min": 13.0,
+            "price_max": 13.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:27:53",
+        "herb": "砂仁",
+        "spec": "",
+        "location": "云南省德宏州瑞丽市",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "进口砂仁口岸货源有量，近期商家关注力度不强，货源交易稍显迟缓，行情不温不火；受市场部分商家恐慌抛售库存影响，当前维持倒挂局面，现圆果价格在25-27元，长果24-26元",
+        "content_full": "进口砂仁口岸货源有量，近期商家关注力度不强，货源交易稍显迟缓，行情不温不火；受市场部分商家恐慌抛售库存影响，当前维持倒挂局面，现圆果价格在25-27元，长果24-26元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/MOMJPpX5.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "圆果",
+            "price": "25-27 元/kg",
+            "unit": "元/kg",
+            "price_min": 25.0,
+            "price_max": 27.0
+          },
+          {
+            "label": "长果",
+            "price": "24-26 元/kg",
+            "unit": "元/kg",
+            "price_min": 24.0,
+            "price_max": 26.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:27:34",
+        "herb": "防风",
+        "spec": "",
+        "location": "内蒙古赤峰市喀喇沁旗牛家营子镇",
+        "market": "产地",
+        "price": "13-15 元/kg",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "家种防风产地货源充裕，因缺乏较大的实际需求拉动，市场商家及厂家采购力度较弱，货源交易不畅，行情随之下滑，现籽播货售价在13-15元",
+        "content_full": "家种防风产地货源充裕，因缺乏较大的实际需求拉动，市场商家及厂家采购力度较弱，货源交易不畅，行情随之下滑，现籽播货售价在13-15元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/CbDdRPjJ.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "籽播",
+            "price": "13-15 元/kg",
+            "unit": "元/kg",
+            "price_min": 13.0,
+            "price_max": 15.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:27:18",
+        "herb": "北沙参",
+        "spec": "",
+        "location": "内蒙古赤峰市喀喇沁旗牛家营子镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "北沙参近阶段关注度不高，货源以食用走销为主，药用交易相对迟缓，整体行情较前期显疲，现去头去皮货45-50元，去皮统货价格在30元，带皮个子7-8元",
+        "content_full": "北沙参近阶段关注度不高，货源以食用走销为主，药用交易相对迟缓，整体行情较前期显疲，现去头去皮货45-50元，去皮统货价格在30元，带皮个子7-8元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/onVy2wXH.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "去头去皮货",
+            "price": "45-50 元/kg",
+            "unit": "元/kg",
+            "price_min": 45.0,
+            "price_max": 50.0
+          },
+          {
+            "label": "去皮统货",
+            "price": "30 元/kg",
+            "unit": "元/kg",
+            "price_min": 30.0,
+            "price_max": 30.0
+          },
+          {
+            "label": "带皮个子",
+            "price": "7-8 元/kg",
+            "unit": "元/kg",
+            "price_min": 7.0,
+            "price_max": 8.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:27:01",
+        "herb": "山银花",
+        "spec": "",
+        "location": "湖北省十堰市房县",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "野生山银花产新已经结束，受近年价位不高，新货产出量减少，但库存充裕；近阶段虽商家关注度较前期稍有上升，但货源实际走销量依然偏少，行情不温不火，现统货价格在45元，好统货50元左右",
+        "content_full": "野生山银花产新已经结束，受近年价位不高，新货产出量减少，但库存充裕；近阶段虽商家关注度较前期稍有上升，但货源实际走销量依然偏少，行情不温不火，现统货价格在45元，好统货50元左右",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/fg6Akr62.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "统货",
+            "price": "45 元/kg",
+            "unit": "元/kg",
+            "price_min": 45.0,
+            "price_max": 45.0
+          },
+          {
+            "label": "好统货",
+            "price": "50 元/kg",
+            "unit": "元/kg",
+            "price_min": 50.0,
+            "price_max": 50.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:26:36",
+        "herb": "陈皮",
+        "spec": "",
+        "location": "四川省成都市蒲江县大兴镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "陈皮产新已经结束，当地个子多被商家订购，目前可供货源以炕丝为主，近阶段购货商家按需采购，持货商家售货态度相对积极，价格平稳，现过色选精品炕丝价格在9.5-10元，厚丝投料货5元左右",
+        "content_full": "陈皮产新已经结束，当地个子多被商家订购，目前可供货源以炕丝为主，近阶段购货商家按需采购，持货商家售货态度相对积极，价格平稳，现过色选精品炕丝价格在9.5-10元，厚丝投料货5元左右",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/1UMokl02.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "过色选精品炕丝",
+            "price": "9.5-10 元/kg",
+            "unit": "元/kg",
+            "price_min": 9.5,
+            "price_max": 10.0
+          },
+          {
+            "label": "厚丝投料货",
+            "price": "5 元/kg",
+            "unit": "元/kg",
+            "price_min": 5.0,
+            "price_max": 5.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:26:22",
+        "herb": "木蝴蝶",
+        "spec": "",
+        "location": "云南省德宏州瑞丽市",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "进口木蝴蝶随着口岸的不断外销，当前剩余库存不丰，持货商家惜售心理较前期增加，要价略有上浮，寻货商家按需采购，现缅甸货价格在31-32元，泰国货36-37元",
+        "content_full": "进口木蝴蝶随着口岸的不断外销，当前剩余库存不丰，持货商家惜售心理较前期增加，要价略有上浮，寻货商家按需采购，现缅甸货价格在31-32元，泰国货36-37元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/ku5ee12I.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "缅甸货",
+            "price": "31-32 元/kg",
+            "unit": "元/kg",
+            "price_min": 31.0,
+            "price_max": 32.0
+          },
+          {
+            "label": "泰国货",
+            "price": "36-37 元/kg",
+            "unit": "元/kg",
+            "price_min": 36.0,
+            "price_max": 37.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:25:56",
+        "herb": "玄参",
+        "spec": "",
+        "location": "湖北省恩施鹤峰县容美镇",
+        "market": "产地",
+        "price": "11 元/kg",
+        "price_value": 11.0,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "玄参尚有少量货源供应，近期该品商家采购力度不强，货源走动相对偏缓，持货商家售货意愿也一般，现直径2公分以上去头选货价格在11元上下",
+        "content_full": "玄参尚有少量货源供应，近期该品商家采购力度不强，货源走动相对偏缓，持货商家售货意愿也一般，现直径2公分以上去头选货价格在11元上下",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/YdptsvPb.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "直径2公分以上去头选货",
+            "price": "11 元/kg",
+            "unit": "元/kg",
+            "price_min": 11.0,
+            "price_max": 11.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:25:43",
+        "herb": "鸡血藤",
+        "spec": "",
+        "location": "云南省德宏州瑞丽市",
+        "market": "产地",
+        "price": "8.5 元/kg",
+        "price_value": 8.5,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "进口鸡血藤购货商家较前期减少，货源走动也随之放缓，受成本影响，持货商家售货态度一般，行情暂稳，现河口价格在8.5元上下",
+        "content_full": "进口鸡血藤购货商家较前期减少，货源走动也随之放缓，受成本影响，持货商家售货态度一般，行情暂稳，现河口价格在8.5元上下",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/RXpRXwpS.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "河口",
+            "price": "8.5 元/kg",
+            "unit": "元/kg",
+            "price_min": 8.5,
+            "price_max": 8.5
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 11:25:27",
+        "herb": "湖北贝母",
+        "spec": "",
+        "location": "湖北省恩施鹤峰县容美镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "湖北贝母产新进入后期，现鲜货价格在8.6-9元，新货干品已经大量应市，近阶段前来购货的商家不多，货源以按需走销为主，行情波动不明显，现过6号筛片价格在33-35元",
+        "content_full": "湖北贝母产新进入后期，现鲜货价格在8.6-9元，新货干品已经大量应市，近阶段前来购货的商家不多，货源以按需走销为主，行情波动不明显，现过6号筛片价格在33-35元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/skqNeXqv.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "鲜货",
+            "price": "8.6-9 元/kg",
+            "unit": "元/kg",
+            "price_min": 8.6,
+            "price_max": 9.0
+          },
+          {
+            "label": "过6号筛片",
+            "price": "33-35 元/kg",
+            "unit": "元/kg",
+            "price_min": 33.0,
+            "price_max": 35.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 09:24:58",
+        "herb": "远志",
+        "spec": "",
+        "location": "山西运城闻喜县薛店镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "远志近两年受天气影响，好货不多，造成3-5mm的货库存薄弱，近期不断有商前来寻货，带动价格上扬现交易价在310元左右，2-4mm的货库存有量，交易价在210-220元，统装货售价180元，走动一般",
+        "content_full": "远志近两年受天气影响，好货不多，造成3-5mm的货库存薄弱，近期不断有商前来寻货，带动价格上扬现交易价在310元左右，2-4mm的货库存有量，交易价在210-220元，统装货售价180元，走动一般",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/aEA1pjbd.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "交易",
+            "price": "210-220 元/kg",
+            "unit": "元/kg",
+            "price_min": 210.0,
+            "price_max": 220.0
+          },
+          {
+            "label": "统装货",
+            "price": "180 元/kg",
+            "unit": "元/kg",
+            "price_min": 180.0,
+            "price_max": 180.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 09:24:39",
+        "herb": "锁阳",
+        "spec": "",
+        "location": "内蒙古阿拉善盟阿拉善左旗巴彦浩特镇",
+        "market": "产地",
+        "price": "37-40 元/kg",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "锁阳目前正值产新，但新货尚不全干，商家不敢贸然入手，目前交易以小批量成交为主，现大统货售价37-40元",
+        "content_full": "锁阳目前正值产新，但新货尚不全干，商家不敢贸然入手，目前交易以小批量成交为主，现大统货售价37-40元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/W3G3Bt3o.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "大统货",
+            "price": "37-40 元/kg",
+            "unit": "元/kg",
+            "price_min": 37.0,
+            "price_max": 40.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 09:24:20",
+        "herb": "肉苁蓉",
+        "spec": "",
+        "location": "内蒙古阿拉善盟阿拉善左旗巴彦浩特镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "肉苁蓉因当地货质量较好，持货商家要价较高，近期前来寻货的商家依然较少，货源交易以商家按需购买为主，行情基本保持稳定，现小统货售价30-35元，大条售价100-150元之间",
+        "content_full": "肉苁蓉因当地货质量较好，持货商家要价较高，近期前来寻货的商家依然较少，货源交易以商家按需购买为主，行情基本保持稳定，现小统货售价30-35元，大条售价100-150元之间",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/5BaDT5XJ.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "小统货",
+            "price": "30-35 元/kg",
+            "unit": "元/kg",
+            "price_min": 30.0,
+            "price_max": 35.0
+          },
+          {
+            "label": "大条",
+            "price": "100-150 元/kg",
+            "unit": "元/kg",
+            "price_min": 100.0,
+            "price_max": 150.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 09:23:50",
+        "herb": "杜仲",
+        "spec": "",
+        "location": "湖南省邵东市廉桥镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "杜仲当地产新继续，新货陆续补充库存，近期前来寻货的商家不多，交易以药厂人员购货为主，行情基本保持稳定，现1*1的小方块要价在18-20元，统装个子售价12-13元",
+        "content_full": "杜仲当地产新继续，新货陆续补充库存，近期前来寻货的商家不多，交易以药厂人员购货为主，行情基本保持稳定，现1*1的小方块要价在18-20元，统装个子售价12-13元",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/0AXKEhAf.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "1*1的小方块",
+            "price": "18-20 元/kg",
+            "unit": "元/kg",
+            "price_min": 18.0,
+            "price_max": 20.0
+          },
+          {
+            "label": "统装个子",
+            "price": "12-13 元/kg",
+            "unit": "元/kg",
+            "price_min": 12.0,
+            "price_max": 13.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 09:23:24",
+        "herb": "厚朴",
+        "spec": "",
+        "location": "湖南省邵东市廉桥镇",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "厚朴预计产新还能持续一个多月，新货陆续补充库存，近期关注商家依然不多，货源走动不快，但价格较低，持货商家售货态度一般，现统装货售价9元左右，统装丝手机11元，刮皮丝售价16元上下",
+        "content_full": "厚朴预计产新还能持续一个多月，新货陆续补充库存，近期关注商家依然不多，货源走动不快，但价格较低，持货商家售货态度一般，现统装货售价9元左右，统装丝手机11元，刮皮丝售价16元上下",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/EhX9w0yU.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "统装货",
+            "price": "9 元/kg",
+            "unit": "元/kg",
+            "price_min": 9.0,
+            "price_max": 9.0
+          },
+          {
+            "label": "统装丝手机",
+            "price": "11 元/kg",
+            "unit": "元/kg",
+            "price_min": 11.0,
+            "price_max": 11.0
+          },
+          {
+            "label": "刮皮丝",
+            "price": "16 元/kg",
+            "unit": "元/kg",
+            "price_min": 16.0,
+            "price_max": 16.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
+      {
+        "date": "2026-06-18",
+        "published_at": "2026-06-18 09:23:09",
+        "herb": "吴茱萸",
+        "spec": "",
+        "location": "湖南省邵东市廉桥镇",
+        "market": "产地",
+        "price": "25-28 元/kg",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "吴茱萸距离产新还有一个多月的时间，目前货源剩余有量，近期依然少商寻货，交易以小批量走动为主，行情暂无明显变化，现统装货售价25-28元上下",
+        "content_full": "吴茱萸距离产新还有一个多月的时间，目前货源剩余有量，近期依然少商寻货，交易以小批量走动为主，行情暂无明显变化，现统装货售价25-28元上下",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/yLZUsalO.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "统装货",
+            "price": "25-28 元/kg",
+            "unit": "元/kg",
+            "price_min": 25.0,
+            "price_max": 28.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
       {
         "date": "2026-06-17",
         "published_at": "2026-06-17 11:19:55",
@@ -9073,861 +9872,6 @@
             "unit": "元/kg",
             "price_min": 7.3,
             "price_max": 7.3
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-13",
-        "published_at": "2026-06-13 00:00:00",
-        "herb": "天葵子",
-        "spec": "",
-        "location": "河南省信阳市商城县",
-        "market": "产地",
-        "price": "55 元/kg",
-        "price_value": 55.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "今日行情，河南省信阳市商城县，天葵子（精选货）价格为55元/公斤，走势稳定，货源充足",
-        "content_full": "今日行情，河南省信阳市商城县，天葵子（精选货）价格为55元/公斤，走势稳定，货源充足",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1112287.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "精选货",
-            "price": "55 元/kg",
-            "unit": "元/kg",
-            "price_min": 55.0,
-            "price_max": 55.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-13",
-        "published_at": "2026-06-13 00:00:00",
-        "herb": "天冬",
-        "spec": "",
-        "location": "四川省泸州市古蔺县",
-        "market": "产地",
-        "price": "82 元/kg",
-        "price_value": 82.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "四川省泸州市古蔺县野生天冬经过消化，现产地货源已经不多，近期价格比较坚挺，现统货价格在82元左右",
-        "content_full": "四川省泸州市古蔺县野生天冬经过消化，现产地货源已经不多，近期价格比较坚挺，现统货价格在82元左右",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1112282.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统货",
-            "price": "82 元/kg",
-            "unit": "元/kg",
-            "price_min": 82.0,
-            "price_max": 82.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-13",
-        "published_at": "2026-06-13 00:00:00",
-        "herb": "合欢花",
-        "spec": "",
-        "location": "山东省滨州市市",
-        "market": "产地",
-        "price": "20-24 元/kg",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "今日行情，山东省滨州市市辖区，合欢花， 合欢花已产新至中期，目前几乎无上货量，咨询附近城市产地商家也是几乎无上货量，目前产地收购价格开始上涨，从20～24元/公斤涨至25元～26元/公斤，今年大减产已成定局，原因有多方面，1.一直断断续续下雨，2.刚好收割小麦与玉米播种...",
-        "content_full": "今日行情，山东省滨州市市辖区，合欢花， 合欢花已产新至中期，目前几乎无上货量，咨询附近城市产地商家也是几乎无上货量，目前产地收购价格开始上涨，从20～24元/公斤涨至25元～26元/公斤，今年大减产已成定局，原因有多方面，1.一直断断续续下雨，2.刚好收割小麦与玉米播种，3.价格太低，无人去捡花，再加上去年一直的行情与产量分析，今年会有一段时间上涨行情，此信息由山东滨州赵龙邦商家提供13792255553",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1112268.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "从",
-            "price": "20-24 元/kg",
-            "unit": "元/kg",
-            "price_min": 20.0,
-            "price_max": 24.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-13",
-        "published_at": "2026-06-13 00:00:00",
-        "herb": "丹参",
-        "spec": "",
-        "location": "山东省临沂市平邑县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "今日行情，山东省临沂市平邑县，丹参， 丹参价格约11元左右/公斤毛货，打粉颗粒价在9.5元左右，异性片约11.5元左右，还有现货20吨，3-6色选片16.5元左右，4-8色选20元左右，精品价格在14元上下。",
-        "content_full": "今日行情，山东省临沂市平邑县，丹参， 丹参价格约11元左右/公斤毛货，打粉颗粒价在9.5元左右，异性片约11.5元左右，还有现货20吨，3-6色选片16.5元左右，4-8色选20元左右，精品价格在14元上下。其中，丹参打粉小条干净无杂，货源充足，走势平稳，其精品规格无杂质、无芦头，适宜颗粒投料（如需鲜货请提前联系），另供应0.3筛至1.0筛的色选饮片",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1112273.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "打粉颗粒",
-            "price": "9.5 元/kg",
-            "unit": "元/kg",
-            "price_min": 9.5,
-            "price_max": 9.5
-          },
-          {
-            "label": "异性片约",
-            "price": "11.5 元/kg",
-            "unit": "元/kg",
-            "price_min": 11.5,
-            "price_max": 11.5
-          },
-          {
-            "label": "3-6色选片",
-            "price": "16.5 元/kg",
-            "unit": "元/kg",
-            "price_min": 16.5,
-            "price_max": 16.5
-          },
-          {
-            "label": "4-8色选",
-            "price": "20 元/kg",
-            "unit": "元/kg",
-            "price_min": 20.0,
-            "price_max": 20.0
-          },
-          {
-            "label": "精品",
-            "price": "14 元/kg",
-            "unit": "元/kg",
-            "price_min": 14.0,
-            "price_max": 14.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-13",
-        "published_at": "2026-06-13 00:00:00",
-        "herb": "三七",
-        "spec": "",
-        "location": "文山",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/斤",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "交易区情况：早晨9点半 人流量少，成交量少，成交率低，成交组量约200-400斤，无大货成交。 实时成交价： 滑头32头61元/斤，未水洗滑头38头58元/斤，滑头60头55元/斤。 温馨提示： 干度和七形是影响价格的重要因素，80%的货，达不到打粉要求",
-        "content_full": "交易区情况：早晨9点半 人流量少，成交量少，成交率低，成交组量约200-400斤，无大货成交。 实时成交价： 滑头32头61元/斤，未水洗滑头38头58元/斤，滑头60头55元/斤。 温馨提示： 干度和七形是影响价格的重要因素，80%的货，达不到打粉要求",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1112288.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "滑头32头",
-            "price": "61 元/斤",
-            "unit": "元/斤",
-            "price_min": 61.0,
-            "price_max": 61.0
-          },
-          {
-            "label": "未水洗滑头38头",
-            "price": "58 元/斤",
-            "unit": "元/斤",
-            "price_min": 58.0,
-            "price_max": 58.0
-          },
-          {
-            "label": "滑头60头",
-            "price": "55 元/斤",
-            "unit": "元/斤",
-            "price_min": 55.0,
-            "price_max": 55.0
-          }
-        ],
-        "units": [
-          "元/斤"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 11:06:40",
-        "herb": "苍术",
-        "spec": "",
-        "location": "辽宁省葫芦岛市绥中县加碑岩乡",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "苍术随着气温升高，仓储保管难度加大，农户与商贩售货意愿增强，行情出现小幅回调，现家种带朱砂点长条货售价26-27.5元，圆形个子货28-29元，家种白茬货20-22.5元；野生白茬货55-60元，带朱砂点货80-105元",
-        "content_full": "苍术随着气温升高，仓储保管难度加大，农户与商贩售货意愿增强，行情出现小幅回调，现家种带朱砂点长条货售价26-27.5元，圆形个子货28-29元，家种白茬货20-22.5元；野生白茬货55-60元，带朱砂点货80-105元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/py5MJczw.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "家种带朱砂点长条货",
-            "price": "26-27.5 元/kg",
-            "unit": "元/kg",
-            "price_min": 26.0,
-            "price_max": 27.5
-          },
-          {
-            "label": "圆形个子货",
-            "price": "28-29 元/kg",
-            "unit": "元/kg",
-            "price_min": 28.0,
-            "price_max": 29.0
-          },
-          {
-            "label": "家种白茬货",
-            "price": "20-22.5 元/kg",
-            "unit": "元/kg",
-            "price_min": 20.0,
-            "price_max": 22.5
-          },
-          {
-            "label": "野生白茬货",
-            "price": "55-60 元/kg",
-            "unit": "元/kg",
-            "price_min": 55.0,
-            "price_max": 60.0
-          },
-          {
-            "label": "带朱砂点货",
-            "price": "80-105 元/kg",
-            "unit": "元/kg",
-            "price_min": 80.0,
-            "price_max": 105.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 11:01:57",
-        "herb": "知母",
-        "spec": "",
-        "location": "辽宁省葫芦岛市绥中县加碑岩乡",
-        "market": "产地",
-        "price": "48-52 元/kg",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "知母肉目前进入产新阶段，因野生资源的日益减少且采挖及加工难度大，新货整体产量不多，近期有部分商家前来购货，货源走动良好，带动价格稳中有升，现产地统货售价48-52元",
-        "content_full": "知母肉目前进入产新阶段，因野生资源的日益减少且采挖及加工难度大，新货整体产量不多，近期有部分商家前来购货，货源走动良好，带动价格稳中有升，现产地统货售价48-52元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/f9f0t3Ji.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统货",
-            "price": "48-52 元/kg",
-            "unit": "元/kg",
-            "price_min": 48.0,
-            "price_max": 52.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 11:01:32",
-        "herb": "黄芩",
-        "spec": "",
-        "location": "陕西省澄城县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "黄芩近阶段市场商家和厂家多是按需采购，货源处于平稳消化阶段，行情平稳运行，现统货售价15元，无芦头货17元上下，大条选货25元左右",
-        "content_full": "黄芩近阶段市场商家和厂家多是按需采购，货源处于平稳消化阶段，行情平稳运行，现统货售价15元，无芦头货17元上下，大条选货25元左右",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/1fjMES41.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统货",
-            "price": "15 元/kg",
-            "unit": "元/kg",
-            "price_min": 15.0,
-            "price_max": 15.0
-          },
-          {
-            "label": "无芦头货",
-            "price": "17 元/kg",
-            "unit": "元/kg",
-            "price_min": 17.0,
-            "price_max": 17.0
-          },
-          {
-            "label": "大条选货",
-            "price": "25 元/kg",
-            "unit": "元/kg",
-            "price_min": 25.0,
-            "price_max": 25.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 11:01:03",
-        "herb": "柴胡",
-        "spec": "",
-        "location": "陕西省澄城县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "柴胡因缺乏实际消化，产地货源走动情况依然迟缓，致使行情有所下滑，现药厂货（1cm左右的芦头）55元左右，软切货交易价60元，切片货交易价75元上下",
-        "content_full": "柴胡因缺乏实际消化，产地货源走动情况依然迟缓，致使行情有所下滑，现药厂货（1cm左右的芦头）55元左右，软切货交易价60元，切片货交易价75元上下",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/cxPayH7G.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "1cm左右的芦头",
-            "price": "55 元/kg",
-            "unit": "元/kg",
-            "price_min": 55.0,
-            "price_max": 55.0
-          },
-          {
-            "label": "软切货交易价",
-            "price": "60 元/kg",
-            "unit": "元/kg",
-            "price_min": 60.0,
-            "price_max": 60.0
-          },
-          {
-            "label": "切片货交易价",
-            "price": "75 元/kg",
-            "unit": "元/kg",
-            "price_min": 75.0,
-            "price_max": 75.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 11:00:41",
-        "herb": "附子",
-        "spec": "",
-        "location": "陕西汉中城固县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "附子近期商家关注度不高，且购货意愿较弱，货源交易较为缓慢，持货商出售意愿较为积极，现黑顺片统货（过6号筛）44元，大片价格在50元左右",
-        "content_full": "附子近期商家关注度不高，且购货意愿较弱，货源交易较为缓慢，持货商出售意愿较为积极，现黑顺片统货（过6号筛）44元，大片价格在50元左右",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/JGFQlVOY.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "黑顺片统货（过6号筛",
-            "price": "44 元/kg",
-            "unit": "元/kg",
-            "price_min": 44.0,
-            "price_max": 44.0
-          },
-          {
-            "label": "大片",
-            "price": "50 元/kg",
-            "unit": "元/kg",
-            "price_min": 50.0,
-            "price_max": 50.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 11:00:19",
-        "herb": "淫羊藿",
-        "spec": "",
-        "location": "四川省绵阳市平武县龙安镇",
-        "market": "产地",
-        "price": "80 元/kg",
-        "price_value": 80.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "野生箭叶淫羊藿产新中，当地属小产区，产量不丰，新货开始应市，近阶段商家购货力度不强，货源交易情况偏弱，现统货售价在80元左右",
-        "content_full": "野生箭叶淫羊藿产新中，当地属小产区，产量不丰，新货开始应市，近阶段商家购货力度不强，货源交易情况偏弱，现统货售价在80元左右",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/5TYePtwf.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统",
-            "price": "80 元/kg",
-            "unit": "元/kg",
-            "price_min": 80.0,
-            "price_max": 80.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 10:50:43",
-        "herb": "瓜蒌",
-        "spec": "",
-        "location": "河北省安国市祁州镇",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "瓜蒌产地可供货源有量，近阶段有少数商家关注并购进，货源按需走销，行情较前期变动不大，现全瓜蒌售价22-24元，统丝20元，小选丝23-24元，大选丝26-27元",
-        "content_full": "瓜蒌产地可供货源有量，近阶段有少数商家关注并购进，货源按需走销，行情较前期变动不大，现全瓜蒌售价22-24元，统丝20元，小选丝23-24元，大选丝26-27元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/EpzGKpu4.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "全瓜蒌",
-            "price": "22-24 元/kg",
-            "unit": "元/kg",
-            "price_min": 22.0,
-            "price_max": 24.0
-          },
-          {
-            "label": "统丝",
-            "price": "20 元/kg",
-            "unit": "元/kg",
-            "price_min": 20.0,
-            "price_max": 20.0
-          },
-          {
-            "label": "小选丝",
-            "price": "23-24 元/kg",
-            "unit": "元/kg",
-            "price_min": 23.0,
-            "price_max": 24.0
-          },
-          {
-            "label": "大选丝",
-            "price": "26-27 元/kg",
-            "unit": "元/kg",
-            "price_min": 26.0,
-            "price_max": 27.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 10:50:21",
-        "herb": "天麻",
-        "spec": "",
-        "location": "陕西汉中城固县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "天麻近阶段前来寻货的商家不多，货源成交情况一般，持货商家出售意愿较为积极，现一二级片售价170-175元，三四级片106元左右",
-        "content_full": "天麻近阶段前来寻货的商家不多，货源成交情况一般，持货商家出售意愿较为积极，现一二级片售价170-175元，三四级片106元左右",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/xXbniLeM.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "一二级片",
-            "price": "170-175 元/kg",
-            "unit": "元/kg",
-            "price_min": 170.0,
-            "price_max": 175.0
-          },
-          {
-            "label": "三四级片",
-            "price": "106 元/kg",
-            "unit": "元/kg",
-            "price_min": 106.0,
-            "price_max": 106.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 10:50:03",
-        "herb": "杜仲",
-        "spec": "",
-        "location": "四川省绵阳市平武县龙安镇",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "杜仲当地产新继续，现鲜货收购价在6元左右（质量较好），新货干品已大量上市，近阶段商家关注度一般，货源交易量有限，行情暂保持平稳，现板皮价格在15-16元，优质货售价18元；3mm以上带皮丝18元，优质去皮丝22元",
-        "content_full": "杜仲当地产新继续，现鲜货收购价在6元左右（质量较好），新货干品已大量上市，近阶段商家关注度一般，货源交易量有限，行情暂保持平稳，现板皮价格在15-16元，优质货售价18元；3mm以上带皮丝18元，优质去皮丝22元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/mpITmCVo.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "板皮",
-            "price": "15-16 元/kg",
-            "unit": "元/kg",
-            "price_min": 15.0,
-            "price_max": 16.0
-          },
-          {
-            "label": "鲜货收购",
-            "price": "6 元/kg",
-            "unit": "元/kg",
-            "price_min": 6.0,
-            "price_max": 6.0
-          },
-          {
-            "label": "优质货",
-            "price": "18 元/kg",
-            "unit": "元/kg",
-            "price_min": 18.0,
-            "price_max": 18.0
-          },
-          {
-            "label": "3mm以上带皮丝",
-            "price": "18 元/kg",
-            "unit": "元/kg",
-            "price_min": 18.0,
-            "price_max": 18.0
-          },
-          {
-            "label": "优质去皮丝",
-            "price": "22 元/kg",
-            "unit": "元/kg",
-            "price_min": 22.0,
-            "price_max": 22.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 10:49:58",
-        "herb": "远志",
-        "spec": "",
-        "location": "陕西省澄城县",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "野生远志开始少量采挖，产地鲜货收购价40元左右，新货暂未加工应市，目前库存仍以家种货为主，近期货源处于平稳消化状态，行情暂时波动不大，现家种远志筒统货售价170元上下，选货在235-240元之间",
-        "content_full": "野生远志开始少量采挖，产地鲜货收购价40元左右，新货暂未加工应市，目前库存仍以家种货为主，近期货源处于平稳消化状态，行情暂时波动不大，现家种远志筒统货售价170元上下，选货在235-240元之间",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/Vyv6jVly.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "选货在",
-            "price": "235-240 元/kg",
-            "unit": "元/kg",
-            "price_min": 235.0,
-            "price_max": 240.0
-          },
-          {
-            "label": "鲜货",
-            "price": "40 元/kg",
-            "unit": "元/kg",
-            "price_min": 40.0,
-            "price_max": 40.0
-          },
-          {
-            "label": "家种远志筒统货",
-            "price": "170 元/kg",
-            "unit": "元/kg",
-            "price_min": 170.0,
-            "price_max": 170.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 10:49:35",
-        "herb": "地丁",
-        "spec": "",
-        "location": "山东省临沂市沂水县杨庄镇",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "地丁当地产新继续，新货陆续加工应市，近期商家多持观望态度，采购谨慎，货源走销不快，行情小幅下调，现紫花地丁售价5元左右，萝卜地丁6元",
-        "content_full": "地丁当地产新继续，新货陆续加工应市，近期商家多持观望态度，采购谨慎，货源走销不快，行情小幅下调，现紫花地丁售价5元左右，萝卜地丁6元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/yHDrqx1K.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "紫花地丁",
-            "price": "5 元/kg",
-            "unit": "元/kg",
-            "price_min": 5.0,
-            "price_max": 5.0
-          },
-          {
-            "label": "萝卜地丁",
-            "price": "6 元/kg",
-            "unit": "元/kg",
-            "price_min": 6.0,
-            "price_max": 6.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 10:49:10",
-        "herb": "娑罗子",
-        "spec": "",
-        "location": "陕西汉中城固县",
-        "market": "产地",
-        "price": "5 元/kg",
-        "price_value": 5.0,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "娑罗子产地货源有量，近阶段依然少商寻货，货源走动暂不理想，持货商家售货心切，价格有所下调，现统货售价5元左右",
-        "content_full": "娑罗子产地货源有量，近阶段依然少商寻货，货源走动暂不理想，持货商家售货心切，价格有所下调，现统货售价5元左右",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/hGp12zvr.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统货",
-            "price": "5 元/kg",
-            "unit": "元/kg",
-            "price_min": 5.0,
-            "price_max": 5.0
-          }
-        ],
-        "units": [
-          "元/kg"
-        ],
-        "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-12",
-        "published_at": "2026-06-12 10:48:42",
-        "herb": "北沙参",
-        "spec": "",
-        "location": "河北省安国市祁州镇",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "北沙参近期购货商家不多，交易以当地经销商按订单发货为主，行情较为稳定，现统货售价16-20元，统片20-25元",
-        "content_full": "北沙参近期购货商家不多，交易以当地经销商按订单发货为主，行情较为稳定，现统货售价16-20元，统片20-25元",
-        "source": "药通网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "药通网",
-            "url": "https://www.yt1998.com/scdt/DggOUvPz.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "统货",
-            "price": "16-20 元/kg",
-            "unit": "元/kg",
-            "price_min": 16.0,
-            "price_max": 20.0
-          },
-          {
-            "label": "统片",
-            "price": "20-25 元/kg",
-            "unit": "元/kg",
-            "price_min": 20.0,
-            "price_max": 25.0
           }
         ],
         "units": [
