@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-06-21 17:07:13",
+    "generated_at": "2026-06-21 17:08:40",
     "source_file": "latest.xlsx + openclaw_origin.json + market_updates.json",
     "latest_date": "2026-06-21",
     "available_dates": [
@@ -352,8 +352,8 @@
       "2025-06-18",
       "2025-06-17"
     ],
-    "total_records": 12643,
-    "origin_records": 4868,
+    "total_records": 12644,
+    "origin_records": 4869,
     "market_records": 7775,
     "source_count": 2,
     "herb_count": 929,
@@ -370,18 +370,22 @@
     "title": "先把真实记录摊开，再做判断与趋势。",
     "lead": "首页围绕中药材真实记录来搭建：产地行情完整铺开，市场行情围绕亳州、安国、玉林、成都持续更新，行业热点单独维护，不和报价信息混在一起。",
     "source_strip": [
-      "总记录：12643 条",
-      "产地：4868 条",
+      "总记录：12644 条",
+      "产地：4869 条",
       "市场：7775 条",
       "来源站点：2 个"
     ]
   },
   "snapshot": {
     "latest_date": "2026-06-21",
-    "latest_count": 32,
+    "latest_count": 33,
     "top_herbs": [
       {
         "name": "蒲公英",
+        "count": 2
+      },
+      {
+        "name": "丹参",
         "count": 2
       },
       {
@@ -395,16 +399,12 @@
       {
         "name": "板蓝根",
         "count": 1
-      },
-      {
-        "name": "络石藤",
-        "count": 1
       }
     ],
     "sources": [
       {
         "name": "药通网",
-        "count": 7888
+        "count": 7889
       },
       {
         "name": "中药材天地网",
@@ -414,9 +414,9 @@
   },
   "origin": {
     "total": 200,
-    "all_total": 4655,
+    "all_total": 4656,
     "latest_date": "2026-06-21",
-    "latest_count": 17,
+    "latest_count": 18,
     "date_options": [
       "2026-06-21",
       "2026-06-20",
@@ -771,6 +771,50 @@
       "药通网"
     ],
     "items": [
+      {
+        "date": "2026-06-21",
+        "published_at": "2026-06-21 14:19:39",
+        "herb": "丹参",
+        "spec": "",
+        "location": "河南省宜阳县",
+        "market": "产地",
+        "price": "",
+        "price_value": null,
+        "unit": "元/kg",
+        "delta_amount": "",
+        "delta_rate": "",
+        "tag": "",
+        "summary": "目前天气炎热，丹参进入销售淡季，交易以小批量成交为主，因价位较低，持货商家售货态度一般，行情暂无明显变化，现药厂小统货售价12元左右，选货要价24元上下",
+        "content_full": "目前天气炎热，丹参进入销售淡季，交易以小批量成交为主，因价位较低，持货商家售货态度一般，行情暂无明显变化，现药厂小统货售价12元左右，选货要价24元上下",
+        "source": "药通网",
+        "url": "",
+        "source_links": [
+          {
+            "label": "药通网",
+            "url": "https://www.yt1998.com/scdt/DLB0b83e.html"
+          }
+        ],
+        "price_points": [
+          {
+            "label": "药厂小统货",
+            "price": "12 元/kg",
+            "unit": "元/kg",
+            "price_min": 12.0,
+            "price_max": 12.0
+          },
+          {
+            "label": "选货",
+            "price": "24 元/kg",
+            "unit": "元/kg",
+            "price_min": 24.0,
+            "price_max": 24.0
+          }
+        ],
+        "units": [
+          "元/kg"
+        ],
+        "unit_mode": "single"
+      },
       {
         "date": "2026-06-21",
         "published_at": "2026-06-21 10:56:51",
@@ -9782,72 +9826,6 @@
           "元/kg"
         ],
         "unit_mode": "single"
-      },
-      {
-        "date": "2026-06-16",
-        "published_at": "2026-06-16 00:00:00",
-        "herb": "三七",
-        "spec": "",
-        "location": "云南省文山市三七市",
-        "market": "产地",
-        "price": "",
-        "price_value": null,
-        "unit": "元/kg",
-        "delta_amount": "",
-        "delta_rate": "",
-        "tag": "",
-        "summary": "云南省文山市三七市场近期淡季，货源走动一般，因销势不畅价格又低，持货者出售的积极性不高，所以近期市场每天的上货量都不大，行情继续平淡运行，现120头的价格在104-106元之间，60头的106-108元，剪口160-170元，库存较丰",
-        "content_full": "云南省文山市三七市场近期淡季，货源走动一般，因销势不畅价格又低，持货者出售的积极性不高，所以近期市场每天的上货量都不大，行情继续平淡运行，现120头的价格在104-106元之间，60头的106-108元，剪口160-170元，库存较丰",
-        "source": "中药材天地网",
-        "url": "",
-        "source_links": [
-          {
-            "label": "中药材天地网",
-            "url": "https://www.zyctd.com/zixun/201/1112474.html"
-          }
-        ],
-        "price_points": [
-          {
-            "label": "120头的",
-            "price": "104-106 元/kg",
-            "unit": "元/kg",
-            "price_min": 104.0,
-            "price_max": 106.0
-          },
-          {
-            "label": "60头的",
-            "price": "106-108 元/kg",
-            "unit": "元/kg",
-            "price_min": 106.0,
-            "price_max": 108.0
-          },
-          {
-            "label": "剪口",
-            "price": "160-170 元/kg",
-            "unit": "元/kg",
-            "price_min": 160.0,
-            "price_max": 170.0
-          },
-          {
-            "label": "滑头22头",
-            "price": "78 元/斤",
-            "unit": "元/斤",
-            "price_min": 78.0,
-            "price_max": 78.0
-          },
-          {
-            "label": "滑头80头",
-            "price": "56 元/斤",
-            "unit": "元/斤",
-            "price_min": 56.0,
-            "price_max": 56.0
-          }
-        ],
-        "units": [
-          "元/kg",
-          "元/斤"
-        ],
-        "unit_mode": "mixed"
       }
     ],
     "empty_text": "当前还没有产地行情记录。"
